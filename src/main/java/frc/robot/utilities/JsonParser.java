@@ -69,12 +69,12 @@ public final class JsonParser
 		return null;
 	}
 
-	private static String readFile(File filename)
+	private static String readFile(File fileurl)
 	{
 		String result = "";
 		try
 		{
-			BufferedReader br = new BufferedReader(new FileReader(filename));
+			BufferedReader br = new BufferedReader(new FileReader(fileurl));
 			StringBuilder sb = new StringBuilder();
 			String line = br.readLine();
 			while (line != null)

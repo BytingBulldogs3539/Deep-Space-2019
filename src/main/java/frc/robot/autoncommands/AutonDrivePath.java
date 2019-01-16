@@ -5,38 +5,44 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.autoncommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.utilities.*;
 
-public class DriveCommand extends Command
+public class AutonDrivePath extends Command
 {
-  public DriveCommand()
+  String fileName;
+  String fullURL;
+  boolean useIsFinished;
+
+  public AutonDrivePath(String fileName, boolean useIsFinished)
   {
-    // Use requires() here to declare subsystem dependencies
     requires(Robot.drivetrain);
+    this.fileName = fileName;
+    this.useIsFinished = useIsFinished;
+
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize()
   {
-
+    Robot.drivetrain.startMotionProfile(MotionProfiling.initBuffer(fileName));
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute()
   {
-    Robot.drivetrain.driveArcade(Robot.oi.driver.getLeftStickY(), Robot.oi.driver.getRightStickX());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished()
   {
-    return false;
+    return Robot.drivetrain.isMotionProfileFinished();
   }
 
   // Called once after isFinished returns true

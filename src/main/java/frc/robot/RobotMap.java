@@ -18,12 +18,12 @@ import frc.robot.utilities.*;
 public class RobotMap
 {
   // List of Motor Controller numbers
-  public static int FRTalon = 1;
-  public static int FLTalon = 2;
-  public static int MRTalon = 3;
-  public static int MLTalon = 4;
-  public static int BRTalon = 5;
-  public static int BLTalon = 6;
+  public static int FRTalon = 4;
+  public static int FLTalon = 9;
+  public static int MRTalon = 2;
+  public static int MLTalon = 10;
+  public static int BRTalon = 1;
+  public static int BLTalon = 18;
 
   // Amount of ticks in a mag encoder
   public final static int kSensorUnitsPerRot = 4096;
@@ -48,5 +48,13 @@ public class RobotMap
 
   public final static int kPrimaryPIDSlot = 0; // any slot [0,3]
   public final static int kAuxPIDSlot = 1; // any slot [0,3]
+  /*
+   * Chassis Bot public static int fr = 4; public static int mr = 2; public static
+   * int br = 1;
+   * 
+   * public static int fl = 9; public static int ml = 10; public static int bl =
+   * 18;
+   * 
+   */
 
 }

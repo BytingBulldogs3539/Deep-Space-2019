@@ -7,10 +7,8 @@
 
 package frc.robot.utilities;
 
-import com.ctre.phoenix.motorcontrol.*;
-import com.ctre.phoenix.motorcontrol.can.*;
-import com.ctre.phoenix.platform.can.AutocacheState;
-import com.ctre.phoenix.sensors.PigeonIMU;
+import java.io.File;
+
 import com.ctre.phoenix.motion.*;
 
 import frc.robot.RobotMap;
@@ -20,8 +18,10 @@ import frc.robot.RobotMap;
  */
 public class MotionProfiling
 {
-    public BufferedTrajectoryPointStream initBuffer(double[][] profile, int totalCnt, double finalTurnDeg)
+    public static BufferedTrajectoryPointStream initBuffer(String fileName)
     {
+        String fullURL = "/home/lvuser/Motion_Profiles/" + fileName;
+        double[][] profile = JsonParser.RetrieveProfileData(new File(fullURL));
         BufferedTrajectoryPointStream _bufferedStream = new BufferedTrajectoryPointStream();
 
         boolean forward = true; // set to false to drive in opposite direction of profile (not really needed
@@ -31,7 +31,7 @@ public class MotionProfiling
                                                        // automatically, you can alloc just one
 
         /* Insert every point into buffer, no limit on size */
-        for (int i = 0; i < totalCnt; ++i)
+        for (int i = 0; i < profile.length; ++i)
         {
 
             double direction = forward ? +1 : -1;
@@ -39,12 +39,7 @@ public class MotionProfiling
             double positionRot = profile[i][0];
             double velocityRPM = profile[i][1];
             int durationMilliseconds = (int) profile[i][2];
-
-            /*
-             * to get the turn target, lets just scale from 0 deg to caller's final deg
-             * linearizly
-             */
-            double targetTurnDeg = finalTurnDeg * (i + 1) / totalCnt;
+            double targetTurnDeg = profile[i][3];
 
             /* for each point, fill our structure and pass it to API */
             point.timeDur = durationMilliseconds;
@@ -62,7 +57,7 @@ public class MotionProfiling
             point.profileSlotSelect0 = RobotMap.kPrimaryPIDSlot; /* which set of gains would you like to use [0,3]? */
             point.profileSlotSelect1 = RobotMap.kAuxPIDSlot; /* auxiliary PID [0,1], leave zero */
             point.zeroPos = false; /* don't reset sensor, this is done elsewhere since we have multiple sensors */
-            point.isLastPoint = ((i + 1) == totalCnt); /* set this to true on the last point */
+            point.isLastPoint = ((i + 1) == profile.length); /* set this to true on the last point */
             point.useAuxPID = true; /* tell MPB that we are using both pids */
 
             _bufferedStream.Write(point);
