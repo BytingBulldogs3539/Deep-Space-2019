@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.autoncommands.AutonDrivePath;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -38,7 +39,7 @@ public class Robot extends TimedRobot
   {
     drivetrain = new DriveTrain();
     oi = new OI();
-    chooser.setDefaultOption("Default Auto", null);
+    chooser.setDefaultOption("Default Auto", new AutonDrivePath("AUSA.json", true));
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
   }
