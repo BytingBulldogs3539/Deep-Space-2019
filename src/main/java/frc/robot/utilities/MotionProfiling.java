@@ -33,33 +33,37 @@ public class MotionProfiling
         /* Insert every point into buffer, no limit on size */
         for (int i = 0; i < profile.length; ++i)
         {
-            // This might need to be changed
-            double direction = 1;
+
+            double direction = forward ? +1 : -1;
+            /* use the generated profile to figure out the forward arc path (translation) */
             double positionRot = profile[i][0];
             double velocityRPM = profile[i][1];
-            double heading = profile[i][3];
+            int durationMilliseconds = (int) profile[i][2];
+
+            /*
+             * to get the turn target, lets just scale from 0 deg to caller's final deg
+             * linearizly
+             */
+            double targetTurnDeg = profile[i][3];
 
             /* for each point, fill our structure and pass it to API */
-            point.position = direction * positionRot * RobotMap.kSensorUnitsPerRotation * 2; // Convert
-                                                                                             // Revolutions
-                                                                                             // to Units
-            point.velocity = direction * velocityRPM * RobotMap.kSensorUnitsPerRotation / 600.0; // Convert
-                                                                                                 // RPM
-                                                                                                 // to
-                                                                                                 // Units/100ms
-            point.auxiliaryPos = heading * 10; /* scaled such that 3600 => 360 deg */
-            point.profileSlotSelect0 = RobotMap.kSlot_MotProf; /*
-                                                                * which set of gains would you like to use [0,3]?
-                                                                */
-            point.profileSlotSelect1 = RobotMap.kSlot_Turning; /* auxiliary PID [0,1], leave zero */
-            point.timeDur = (int) profile[i][2];
-            point.zeroPos = false;
-            if (i == 0)
-                point.zeroPos = true; /* set this to true on the first point */
+            point.timeDur = durationMilliseconds;
 
-            point.isLastPoint = false;
-            if ((i + 1) == profile.length)
-                point.isLastPoint = true; /* set this to true on the last point */
+            /* drive part */
+            point.position = direction * positionRot * RobotMap.kSensorUnitsPerRot; // Rotations => sensor units
+            point.velocity = direction * velocityRPM * RobotMap.kSensorUnitsPerRot / 600.0; // RPM => units per 100ms
+            point.arbFeedFwd = 0; // good place for kS, kV, kA, etc...
+
+            /* turn part */
+            point.auxiliaryPos = targetTurnDeg * RobotMap.kTurnUnitsPerDeg; // Convert deg to remote sensor units
+            point.auxiliaryVel = 0; // advanced teams can also provide the target velocity
+            point.auxiliaryArbFeedFwd = 0; // good place for kS, kV, kA, etc...
+
+            point.profileSlotSelect0 = RobotMap.kPrimaryPIDSlot; /* which set of gains would you like to use [0,3]? */
+            point.profileSlotSelect1 = RobotMap.kAuxPIDSlot; /* auxiliary PID [0,1], leave zero */
+            point.zeroPos = false; /* don't reset sensor, this is done elsewhere since we have multiple sensors */
+            point.isLastPoint = ((i + 1) == profile.length); /* set this to true on the last point */
+            point.useAuxPID = true; /* tell MPB that we are using both pids */
 
             _bufferedStream.Write(point);
         }
