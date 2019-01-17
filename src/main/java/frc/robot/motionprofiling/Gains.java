@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.utilities;
+package frc.robot.motionprofiling;
 
 /**
  * Class that organizes gains used when assigning values to slots
