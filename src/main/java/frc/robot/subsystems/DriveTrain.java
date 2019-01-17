@@ -19,7 +19,6 @@ import frc.robot.utilities.*;
 import com.ctre.phoenix.ParamEnum;
 
 import frc.robot.RobotMap;
-import frc.robot.motionprofiling.*;
 
 public class DriveTrain extends Subsystem
 {
@@ -100,39 +99,35 @@ public class DriveTrain extends Subsystem
 
   public void initMotionProfile()
   {
-    zeroEncoders();
-
     fr.set(ControlMode.PercentOutput, 0);
 
     // ------------ talons -----------------//
 
     // ------------ setup filters -----------------//
     /* other side is quad */
-    fl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, MotionConstants.PID_PRIMARY,
-        MotionConstants.kTimeoutMs);
+    fl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
 
     /* Remote 0 will be the other side's Talon */
-    fr.configRemoteFeedbackFilter(fl.getDeviceID(), RemoteSensorSource.TalonSRX_SelectedSensor,
-        MotionConstants.REMOTE_0, MotionConstants.kTimeoutMs);
+    fr.configRemoteFeedbackFilter(fl.getDeviceID(), RemoteSensorSource.TalonSRX_SelectedSensor, RobotMap.REMOTE_0,
+        RobotMap.kTimeoutMs);
     /* Remote 1 will be a pigeon */
-    fr.configRemoteFeedbackFilter(pigeon.getDeviceID(), RemoteSensorSource.Pigeon_Yaw, MotionConstants.REMOTE_1,
-        MotionConstants.kTimeoutMs);
+    fr.configRemoteFeedbackFilter(pigeon.getDeviceID(), RemoteSensorSource.Pigeon_Yaw, RobotMap.REMOTE_1,
+        RobotMap.kTimeoutMs);
     /* setup sum and difference signals */
-    fr.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, MotionConstants.kTimeoutMs);
-    fr.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, MotionConstants.kTimeoutMs);
-    fr.configSensorTerm(SensorTerm.Diff1, FeedbackDevice.RemoteSensor0, MotionConstants.kTimeoutMs);
-    fr.configSensorTerm(SensorTerm.Diff0, FeedbackDevice.QuadEncoder, MotionConstants.kTimeoutMs);
+    fr.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, RobotMap.kTimeoutMs);
+    fr.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, RobotMap.kTimeoutMs);
+    fr.configSensorTerm(SensorTerm.Diff1, FeedbackDevice.RemoteSensor0, RobotMap.kTimeoutMs);
+    fr.configSensorTerm(SensorTerm.Diff0, FeedbackDevice.QuadEncoder, RobotMap.kTimeoutMs);
     /* select sum for distance(0), different for turn(1) */
-    fr.configSelectedFeedbackSensor(FeedbackDevice.SensorSum, MotionConstants.PID_PRIMARY, MotionConstants.kTimeoutMs);
+    fr.configSelectedFeedbackSensor(FeedbackDevice.SensorSum, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
 
-    if (MotionConstants.kHeadingSensorChoice == 0)
+    if (RobotMap.kHeadingSensorChoice == 0)
     {
 
-      fr.configSelectedFeedbackSensor(FeedbackDevice.SensorDifference, MotionConstants.PID_TURN,
-          MotionConstants.kTimeoutMs);
+      fr.configSelectedFeedbackSensor(FeedbackDevice.SensorDifference, RobotMap.PID_TURN, RobotMap.kTimeoutMs);
 
       /* do not scale down the primary sensor (distance) */
-      fr.configSelectedFeedbackCoefficient(1, MotionConstants.PID_PRIMARY, MotionConstants.kTimeoutMs);
+      fr.configSelectedFeedbackCoefficient(1, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
 
       /*
        * scale empirically measured units to 3600units, this gives us - 0.1 deg
@@ -146,9 +141,8 @@ public class DriveTrain extends Subsystem
        * ensures 0.1 deg precision in firmware closed-loop and motion profile
        * trajectory points can range +-2 rotations.
        */
-      fr.configSelectedFeedbackCoefficient(
-          MotionConstants.kTurnTravelUnitsPerRotation / MotionConstants.kEncoderUnitsPerRotation,
-          MotionConstants.PID_TURN, MotionConstants.kTimeoutMs);
+      fr.configSelectedFeedbackCoefficient(RobotMap.kTurnTravelUnitsPerRotation / RobotMap.kEncoderUnitsPerRotation,
+          RobotMap.PID_TURN, RobotMap.kTimeoutMs);
     }
     else
     {
@@ -157,78 +151,68 @@ public class DriveTrain extends Subsystem
        * do not scale down the primary sensor (distance). If selected sensor is going
        * to be a sensorSum user can pass 0.5 to produce an average.
        */
-      fr.configSelectedFeedbackCoefficient(1.0, MotionConstants.PID_PRIMARY, MotionConstants.kTimeoutMs);
+      fr.configSelectedFeedbackCoefficient(1.0, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
 
-      fr.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor1, MotionConstants.PID_TURN,
-          MotionConstants.kTimeoutMs);
+      fr.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor1, RobotMap.PID_TURN, RobotMap.kTimeoutMs);
 
-      fr.configSelectedFeedbackCoefficient(
-          MotionConstants.kTurnTravelUnitsPerRotation / MotionConstants.kPigeonUnitsPerRotation,
-          MotionConstants.PID_TURN, MotionConstants.kTimeoutMs);
+      fr.configSelectedFeedbackCoefficient(RobotMap.kTurnTravelUnitsPerRotation / RobotMap.kPigeonUnitsPerRotation,
+          RobotMap.PID_TURN, RobotMap.kTimeoutMs);
     }
 
     // ------------ telemetry-----------------//
-    fr.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, 20, MotionConstants.kTimeoutMs);
-    fr.setStatusFramePeriod(StatusFrame.Status_13_Base_PIDF0, 20, MotionConstants.kTimeoutMs);
-    fr.setStatusFramePeriod(StatusFrame.Status_14_Turn_PIDF1, 20, MotionConstants.kTimeoutMs);
-    fr.setStatusFramePeriod(StatusFrame.Status_10_Targets, 20, MotionConstants.kTimeoutMs);
+    fr.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, 20, RobotMap.kTimeoutMs);
+    fr.setStatusFramePeriod(StatusFrame.Status_13_Base_PIDF0, 20, RobotMap.kTimeoutMs);
+    fr.setStatusFramePeriod(StatusFrame.Status_14_Turn_PIDF1, 20, RobotMap.kTimeoutMs);
+    fr.setStatusFramePeriod(StatusFrame.Status_10_Targets, 20, RobotMap.kTimeoutMs);
     /* speed up the left since we are polling it's sensor */
-    fl.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 5, MotionConstants.kTimeoutMs);
+    fl.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 5, RobotMap.kTimeoutMs);
 
-    fl.configNeutralDeadband(MotionConstants.kNeutralDeadband, MotionConstants.kTimeoutMs);
-    fr.configNeutralDeadband(MotionConstants.kNeutralDeadband, MotionConstants.kTimeoutMs);
+    fl.configNeutralDeadband(RobotMap.kNeutralDeadband, RobotMap.kTimeoutMs);
+    fr.configNeutralDeadband(RobotMap.kNeutralDeadband, RobotMap.kTimeoutMs);
 
-    fr.configMotionAcceleration(1000, MotionConstants.kTimeoutMs);
-    fr.configMotionCruiseVelocity(1000, MotionConstants.kTimeoutMs);
+    fr.configMotionAcceleration(1000, RobotMap.kTimeoutMs);
+    fr.configMotionCruiseVelocity(1000, RobotMap.kTimeoutMs);
 
     /*
      * max out the peak output (for all modes). However you can limit the output of
      * a given PID object with configClosedLoopPeakOutput().
      */
-    fl.configPeakOutputForward(+1.0, MotionConstants.kTimeoutMs);
-    fl.configPeakOutputReverse(-1.0, MotionConstants.kTimeoutMs);
-    fr.configPeakOutputForward(+1.0, MotionConstants.kTimeoutMs);
-    fr.configPeakOutputReverse(-1.0, MotionConstants.kTimeoutMs);
+    fl.configPeakOutputForward(+1.0, RobotMap.kTimeoutMs);
+    fl.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
+    fr.configPeakOutputForward(+1.0, RobotMap.kTimeoutMs);
+    fr.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
 
     /* distance servo */
-    fr.config_kP(MotionConstants.kSlot_Distanc, MotionConstants.kGains_Distanc.kP, MotionConstants.kTimeoutMs);
-    fr.config_kI(MotionConstants.kSlot_Distanc, MotionConstants.kGains_Distanc.kI, MotionConstants.kTimeoutMs);
-    fr.config_kD(MotionConstants.kSlot_Distanc, MotionConstants.kGains_Distanc.kD, MotionConstants.kTimeoutMs);
-    fr.config_kF(MotionConstants.kSlot_Distanc, MotionConstants.kGains_Distanc.kF, MotionConstants.kTimeoutMs);
-    fr.config_IntegralZone(MotionConstants.kSlot_Distanc, (int) MotionConstants.kGains_Distanc.kIzone,
-        MotionConstants.kTimeoutMs);
-    fr.configClosedLoopPeakOutput(MotionConstants.kSlot_Distanc, MotionConstants.kGains_Distanc.kPeakOutput,
-        MotionConstants.kTimeoutMs);
+    fr.config_kP(RobotMap.kSlot_Distanc, RobotMap.kGains_Distanc.kP, RobotMap.kTimeoutMs);
+    fr.config_kI(RobotMap.kSlot_Distanc, RobotMap.kGains_Distanc.kI, RobotMap.kTimeoutMs);
+    fr.config_kD(RobotMap.kSlot_Distanc, RobotMap.kGains_Distanc.kD, RobotMap.kTimeoutMs);
+    fr.config_kF(RobotMap.kSlot_Distanc, RobotMap.kGains_Distanc.kF, RobotMap.kTimeoutMs);
+    fr.config_IntegralZone(RobotMap.kSlot_Distanc, (int) RobotMap.kGains_Distanc.kIzone, RobotMap.kTimeoutMs);
+    fr.configClosedLoopPeakOutput(RobotMap.kSlot_Distanc, RobotMap.kGains_Distanc.kPeakOutput, RobotMap.kTimeoutMs);
 
     /* turn servo */
-    fr.config_kP(MotionConstants.kSlot_Turning, MotionConstants.kGains_Turning.kP, MotionConstants.kTimeoutMs);
-    fr.config_kI(MotionConstants.kSlot_Turning, MotionConstants.kGains_Turning.kI, MotionConstants.kTimeoutMs);
-    fr.config_kD(MotionConstants.kSlot_Turning, MotionConstants.kGains_Turning.kD, MotionConstants.kTimeoutMs);
-    fr.config_kF(MotionConstants.kSlot_Turning, MotionConstants.kGains_Turning.kF, MotionConstants.kTimeoutMs);
-    fr.config_IntegralZone(MotionConstants.kSlot_Turning, (int) MotionConstants.kGains_Turning.kIzone,
-        MotionConstants.kTimeoutMs);
-    fr.configClosedLoopPeakOutput(MotionConstants.kSlot_Turning, MotionConstants.kGains_Turning.kPeakOutput,
-        MotionConstants.kTimeoutMs);
+    fr.config_kP(RobotMap.kSlot_Turning, RobotMap.kGains_Turning.kP, RobotMap.kTimeoutMs);
+    fr.config_kI(RobotMap.kSlot_Turning, RobotMap.kGains_Turning.kI, RobotMap.kTimeoutMs);
+    fr.config_kD(RobotMap.kSlot_Turning, RobotMap.kGains_Turning.kD, RobotMap.kTimeoutMs);
+    fr.config_kF(RobotMap.kSlot_Turning, RobotMap.kGains_Turning.kF, RobotMap.kTimeoutMs);
+    fr.config_IntegralZone(RobotMap.kSlot_Turning, (int) RobotMap.kGains_Turning.kIzone, RobotMap.kTimeoutMs);
+    fr.configClosedLoopPeakOutput(RobotMap.kSlot_Turning, RobotMap.kGains_Turning.kPeakOutput, RobotMap.kTimeoutMs);
 
     /* magic servo */
-    fr.config_kP(MotionConstants.kSlot_MotProf, MotionConstants.kGains_MotProf.kP, MotionConstants.kTimeoutMs);
-    fr.config_kI(MotionConstants.kSlot_MotProf, MotionConstants.kGains_MotProf.kI, MotionConstants.kTimeoutMs);
-    fr.config_kD(MotionConstants.kSlot_MotProf, MotionConstants.kGains_MotProf.kD, MotionConstants.kTimeoutMs);
-    fr.config_kF(MotionConstants.kSlot_MotProf, MotionConstants.kGains_MotProf.kF, MotionConstants.kTimeoutMs);
-    fr.config_IntegralZone(MotionConstants.kSlot_MotProf, (int) MotionConstants.kGains_MotProf.kIzone,
-        MotionConstants.kTimeoutMs);
-    fr.configClosedLoopPeakOutput(MotionConstants.kSlot_MotProf, MotionConstants.kGains_MotProf.kPeakOutput,
-        MotionConstants.kTimeoutMs);
+    fr.config_kP(RobotMap.kSlot_MotProf, RobotMap.kGains_MotProf.kP, RobotMap.kTimeoutMs);
+    fr.config_kI(RobotMap.kSlot_MotProf, RobotMap.kGains_MotProf.kI, RobotMap.kTimeoutMs);
+    fr.config_kD(RobotMap.kSlot_MotProf, RobotMap.kGains_MotProf.kD, RobotMap.kTimeoutMs);
+    fr.config_kF(RobotMap.kSlot_MotProf, RobotMap.kGains_MotProf.kF, RobotMap.kTimeoutMs);
+    fr.config_IntegralZone(RobotMap.kSlot_MotProf, (int) RobotMap.kGains_MotProf.kIzone, RobotMap.kTimeoutMs);
+    fr.configClosedLoopPeakOutput(RobotMap.kSlot_MotProf, RobotMap.kGains_MotProf.kPeakOutput, RobotMap.kTimeoutMs);
 
     /* velocity servo */
-    fr.config_kP(MotionConstants.kSlot_Velocit, MotionConstants.kGains_Velocit.kP, MotionConstants.kTimeoutMs);
-    fr.config_kI(MotionConstants.kSlot_Velocit, MotionConstants.kGains_Velocit.kI, MotionConstants.kTimeoutMs);
-    fr.config_kD(MotionConstants.kSlot_Velocit, MotionConstants.kGains_Velocit.kD, MotionConstants.kTimeoutMs);
-    fr.config_kF(MotionConstants.kSlot_Velocit, MotionConstants.kGains_Velocit.kF, MotionConstants.kTimeoutMs);
-    fr.config_IntegralZone(MotionConstants.kSlot_Velocit, (int) MotionConstants.kGains_Velocit.kIzone,
-        MotionConstants.kTimeoutMs);
-    fr.configClosedLoopPeakOutput(MotionConstants.kSlot_Velocit, MotionConstants.kGains_Velocit.kPeakOutput,
-        MotionConstants.kTimeoutMs);
+    fr.config_kP(RobotMap.kSlot_Velocit, RobotMap.kGains_Velocit.kP, RobotMap.kTimeoutMs);
+    fr.config_kI(RobotMap.kSlot_Velocit, RobotMap.kGains_Velocit.kI, RobotMap.kTimeoutMs);
+    fr.config_kD(RobotMap.kSlot_Velocit, RobotMap.kGains_Velocit.kD, RobotMap.kTimeoutMs);
+    fr.config_kF(RobotMap.kSlot_Velocit, RobotMap.kGains_Velocit.kF, RobotMap.kTimeoutMs);
+    fr.config_IntegralZone(RobotMap.kSlot_Velocit, (int) RobotMap.kGains_Velocit.kIzone, RobotMap.kTimeoutMs);
+    fr.configClosedLoopPeakOutput(RobotMap.kSlot_Velocit, RobotMap.kGains_Velocit.kPeakOutput, RobotMap.kTimeoutMs);
 
     fl.setNeutralMode(NeutralMode.Brake);
     fr.setNeutralMode(NeutralMode.Brake);
@@ -240,17 +224,15 @@ public class DriveTrain extends Subsystem
      * very slow causing the derivative error to be near zero.
      */
     int closedLoopTimeMs = 1;
-    fr.configSetParameter(ParamEnum.ePIDLoopPeriod, closedLoopTimeMs, 0x00, MotionConstants.PID_PRIMARY,
-        MotionConstants.kTimeoutMs);
-    fr.configSetParameter(ParamEnum.ePIDLoopPeriod, closedLoopTimeMs, 0x00, MotionConstants.PID_TURN,
-        MotionConstants.kTimeoutMs);
+    fr.configSetParameter(ParamEnum.ePIDLoopPeriod, closedLoopTimeMs, 0x00, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
+    fr.configSetParameter(ParamEnum.ePIDLoopPeriod, closedLoopTimeMs, 0x00, RobotMap.PID_TURN, RobotMap.kTimeoutMs);
 
     /**
      * false means talon's local output is PID0 + PID1, and other side Talon is PID0
      * - PID1 true means talon's local output is PID0 - PID1, and other side Talon
      * is PID0 + PID1
      */
-    fr.configAuxPIDPolarity(false, MotionConstants.kTimeoutMs);
+    fr.configAuxPIDPolarity(false, RobotMap.kTimeoutMs);
 
     zeroEncoders();
   }

@@ -5,10 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.motionprofiling;
+package frc.robot.autoncommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.utilities.*;
 
 public class AutonDrivePath extends Command
 {
@@ -29,6 +30,7 @@ public class AutonDrivePath extends Command
   protected void initialize()
   {
     Robot.drivetrain.initMotionProfile();
+
     Robot.drivetrain.zeroEncoders();
     Robot.drivetrain.startMotionProfile(MotionProfiling.initBuffer(fileName));
   }

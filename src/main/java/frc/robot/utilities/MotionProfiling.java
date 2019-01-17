@@ -5,13 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.motionprofiling;
+package frc.robot.utilities;
 
 import java.io.File;
 
 import com.ctre.phoenix.motion.*;
 
-import frc.robot.utilities.*;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -40,18 +40,18 @@ public class MotionProfiling
             double heading = profile[i][3];
 
             /* for each point, fill our structure and pass it to API */
-            point.position = direction * positionRot * MotionConstants.kSensorUnitsPerRotation * 2; // Convert
-            // Revolutions
-            // to Units
-            point.velocity = direction * velocityRPM * MotionConstants.kSensorUnitsPerRotation / 600.0; // Convert
-            // RPM
-            // to
-            // Units/100ms
+            point.position = direction * positionRot * RobotMap.kSensorUnitsPerRotation * 2; // Convert
+                                                                                             // Revolutions
+                                                                                             // to Units
+            point.velocity = direction * velocityRPM * RobotMap.kSensorUnitsPerRotation / 600.0; // Convert
+                                                                                                 // RPM
+                                                                                                 // to
+                                                                                                 // Units/100ms
             point.auxiliaryPos = heading * 10; /* scaled such that 3600 => 360 deg */
-            point.profileSlotSelect0 = MotionConstants.kSlot_MotProf; /*
-                                                                       * which set of gains would you like to use [0,3]?
-                                                                       */
-            point.profileSlotSelect1 = MotionConstants.kSlot_Turning; /* auxiliary PID [0,1], leave zero */
+            point.profileSlotSelect0 = RobotMap.kSlot_MotProf; /*
+                                                                * which set of gains would you like to use [0,3]?
+                                                                */
+            point.profileSlotSelect1 = RobotMap.kSlot_Turning; /* auxiliary PID [0,1], leave zero */
             point.timeDur = (int) profile[i][2];
             point.zeroPos = false;
             if (i == 0)
@@ -65,5 +65,4 @@ public class MotionProfiling
         }
         return _bufferedStream;
     }
-
 }

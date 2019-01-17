@@ -28,7 +28,7 @@ public final class JsonParser
 
 	public static double[][] RetrieveProfileData(File target)
 	{
-		long start_time = System.nanoTime();
+
 		double[][] data = null;
 		String jsonData = readFile(target);
 		JSONObject jobj;
@@ -60,11 +60,7 @@ public final class JsonParser
 					e.printStackTrace();
 				}
 			}
-			long end_time = System.nanoTime();
-			double difference = (end_time - start_time) / 1e6;
-			System.out.println("Motion Profile File Load Time:" + difference);
 			return data;
-
 		}
 		catch (JSONException e)
 		{
@@ -79,7 +75,7 @@ public final class JsonParser
 		try
 		{
 			BufferedReader br = new BufferedReader(new FileReader(fileurl));
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			String line = br.readLine();
 			while (line != null)
 			{
