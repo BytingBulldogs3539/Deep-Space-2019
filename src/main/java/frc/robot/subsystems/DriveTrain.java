@@ -16,7 +16,6 @@ import com.ctre.phoenix.sensors.PigeonIMU.PigeonState;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motion.*;
 import frc.robot.utilities.*;
-import com.ctre.phoenix.ParamEnum;
 
 import frc.robot.RobotMap;
 
@@ -68,179 +67,91 @@ public class DriveTrain extends Subsystem
     br.configAllSettings(basicTalonConfig);
     bl.configAllSettings(basicTalonConfig);
 
-    bl.setInverted(true);
+    fl.setInverted(true);
     ml.setInverted(true);
 
     // Back motors must be reversed because of the gear box
     fr.setInverted(true);
-    fl.setInverted(false);
+    bl.setInverted(false);
 
-    // initMotionProfile();
-
-    ml.follow(fl);
-    bl.follow(fl);
-
-    mr.follow(fr);
-    br.follow(fr);
-
-    fl.setSensorPhase(true);
-    fr.setSensorPhase(true);
-    pigeon.setYaw(0);
-    fl.setSelectedSensorPosition(0);
-    fr.setSelectedSensorPosition(0);
-
-    fr.getSensorCollection().setPulseWidthPosition(0, 10);
-    fr.getSensorCollection().setQuadraturePosition(0, 10);
-
-    fl.setNeutralMode(NeutralMode.Brake);
-    fr.setNeutralMode(NeutralMode.Brake);
+    initMotionProfile();
 
   }
 
   public void initMotionProfile()
   {
-    fr.set(ControlMode.PercentOutput, 0);
-
-    // ------------ talons -----------------//
-
-    // ------------ setup filters -----------------//
-    /* other side is quad */
-    fl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
-
-    /* Remote 0 will be the other side's Talon */
-    fr.configRemoteFeedbackFilter(fl.getDeviceID(), RemoteSensorSource.TalonSRX_SelectedSensor, RobotMap.REMOTE_0,
-        RobotMap.kTimeoutMs);
-    /* Remote 1 will be a pigeon */
-    fr.configRemoteFeedbackFilter(pigeon.getDeviceID(), RemoteSensorSource.Pigeon_Yaw, RobotMap.REMOTE_1,
-        RobotMap.kTimeoutMs);
-    /* setup sum and difference signals */
-    fr.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, RobotMap.kTimeoutMs);
-    fr.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, RobotMap.kTimeoutMs);
-    fr.configSensorTerm(SensorTerm.Diff1, FeedbackDevice.RemoteSensor0, RobotMap.kTimeoutMs);
-    fr.configSensorTerm(SensorTerm.Diff0, FeedbackDevice.QuadEncoder, RobotMap.kTimeoutMs);
-    /* select sum for distance(0), different for turn(1) */
-    fr.configSelectedFeedbackSensor(FeedbackDevice.SensorSum, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
-
-    if (RobotMap.kHeadingSensorChoice == 0)
-    {
-
-      fr.configSelectedFeedbackSensor(FeedbackDevice.SensorDifference, RobotMap.PID_TURN, RobotMap.kTimeoutMs);
-
-      /* do not scale down the primary sensor (distance) */
-      fr.configSelectedFeedbackCoefficient(1, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
-
-      /*
-       * scale empirically measured units to 3600units, this gives us - 0.1 deg
-       * resolution - scales to human-readable units - keeps target away from ovefrlow
-       * (12bit)
-       *
-       * Heading units should be scaled to ~4000 per 360 deg, due to the following
-       * limitations... - Target param for aux PID1 is 18bits with a range of
-       * [-131072,+131072] units. - Target for aux PID1 in motion profile is 14bits
-       * with a range of [-8192,+8192] units. ... so at 3600 units per 360', that
-       * ensures 0.1 deg precision in firmware closed-loop and motion profile
-       * trajectory points can range +-2 rotations.
-       */
-      fr.configSelectedFeedbackCoefficient(RobotMap.kTurnTravelUnitsPerRotation / RobotMap.kEncoderUnitsPerRotation,
-          RobotMap.PID_TURN, RobotMap.kTimeoutMs);
-    }
-    else
-    {
-
-      /*
-       * do not scale down the primary sensor (distance). If selected sensor is going
-       * to be a sensorSum user can pass 0.5 to produce an average.
-       */
-      fr.configSelectedFeedbackCoefficient(1.0, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
-
-      fr.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor1, RobotMap.PID_TURN, RobotMap.kTimeoutMs);
-
-      fr.configSelectedFeedbackCoefficient(RobotMap.kTurnTravelUnitsPerRotation / RobotMap.kPigeonUnitsPerRotation,
-          RobotMap.PID_TURN, RobotMap.kTimeoutMs);
-    }
-
-    // ------------ telemetry-----------------//
-    fr.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, 20, RobotMap.kTimeoutMs);
-    fr.setStatusFramePeriod(StatusFrame.Status_13_Base_PIDF0, 20, RobotMap.kTimeoutMs);
-    fr.setStatusFramePeriod(StatusFrame.Status_14_Turn_PIDF1, 20, RobotMap.kTimeoutMs);
-    fr.setStatusFramePeriod(StatusFrame.Status_10_Targets, 20, RobotMap.kTimeoutMs);
-    /* speed up the left since we are polling it's sensor */
-    fl.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 5, RobotMap.kTimeoutMs);
-
-    fl.configNeutralDeadband(RobotMap.kNeutralDeadband, RobotMap.kTimeoutMs);
-    fr.configNeutralDeadband(RobotMap.kNeutralDeadband, RobotMap.kTimeoutMs);
-
-    fr.configMotionAcceleration(1000, RobotMap.kTimeoutMs);
-    fr.configMotionCruiseVelocity(1000, RobotMap.kTimeoutMs);
-
+    TalonSRXConfiguration motionProfileConfig = new TalonSRXConfiguration();
+    // Include the basic config aswell because we are going to writing over the
+    // already completed talon config.
+    motionProfileConfig.nominalOutputForward = 0.0;
+    motionProfileConfig.nominalOutputReverse = 0.0;
+    motionProfileConfig.peakOutputForward = 1.0;
+    motionProfileConfig.peakOutputReverse = -1.0;
+    motionProfileConfig.continuousCurrentLimit = 37;
+    motionProfileConfig.peakCurrentLimit = 50;
+    motionProfileConfig.peakCurrentDuration = 100;
+    motionProfileConfig.voltageCompSaturation = 12.2;
+    /* -------------- config the master specific settings ----------------- */
+    /* remote 0 will capture Pigeon IMU */
+    motionProfileConfig.remoteFilter0.remoteSensorDeviceID = pigeon.getDeviceID();
+    motionProfileConfig.remoteFilter0.remoteSensorSource = RemoteSensorSource.Pigeon_Yaw;
+    /* remote 1 will capture the quad encoder on left talon */
+    motionProfileConfig.remoteFilter1.remoteSensorDeviceID = fl.getDeviceID();
+    motionProfileConfig.remoteFilter1.remoteSensorSource = RemoteSensorSource.TalonSRX_SelectedSensor;
     /*
-     * max out the peak output (for all modes). However you can limit the output of
-     * a given PID object with configClosedLoopPeakOutput().
+     * drive-position is our local quad minus left-talon's selected sens. depending
+     * on sensor orientation, it could be the sum instead
      */
-    fl.configPeakOutputForward(+1.0, RobotMap.kTimeoutMs);
-    fl.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
-    fr.configPeakOutputForward(+1.0, RobotMap.kTimeoutMs);
-    fr.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
+    motionProfileConfig.diff0Term = FeedbackDevice.QuadEncoder;
+    motionProfileConfig.diff1Term = FeedbackDevice.RemoteSensor1;
+    motionProfileConfig.primaryPID.selectedFeedbackSensor = FeedbackDevice.SensorDifference;
+    motionProfileConfig.primaryPID.selectedFeedbackCoefficient = 0.5; /*
+                                                                       * divide by 2 so we servo sensor-average, intead
+                                                                       * of sum
+                                                                       */
+    /* turn position will come from the pigeon */
+    motionProfileConfig.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.RemoteSensor0;
+    /* rest of the configs */
+    motionProfileConfig.neutralDeadband = RobotMap.kNeutralDeadband; /* 0.1 % super small for best low-speed control */
+    motionProfileConfig.slot0.kF = RobotMap.kGains_MotProf.kF;
+    motionProfileConfig.slot0.kP = RobotMap.kGains_MotProf.kP;
+    motionProfileConfig.slot0.kI = RobotMap.kGains_MotProf.kI;
+    motionProfileConfig.slot0.kD = RobotMap.kGains_MotProf.kD;
+    motionProfileConfig.slot0.integralZone = (int) RobotMap.kGains_MotProf.kIzone;
+    motionProfileConfig.slot0.closedLoopPeakOutput = RobotMap.kGains_MotProf.kPeakOutput;
+    // motionProfileConfig.slot0.allowableClosedloopError // leave default
+    // motionProfileConfig.slot0.maxIntegralAccumulator; // leave default
+    // motionProfileConfig.slot0.closedLoopPeriod; // leave default
+    motionProfileConfig.slot1.kF = RobotMap.kGains_MotProf.kF;
+    motionProfileConfig.slot1.kP = RobotMap.kGains_MotProf.kP;
+    motionProfileConfig.slot1.kI = RobotMap.kGains_MotProf.kI;
+    motionProfileConfig.slot1.kD = RobotMap.kGains_MotProf.kD;
+    motionProfileConfig.slot1.integralZone = (int) RobotMap.kGains_MotProf.kIzone;
+    motionProfileConfig.slot1.closedLoopPeakOutput = RobotMap.kGains_MotProf.kPeakOutput;
+    // motionProfileConfig.slot1.allowableClosedloopError // leave default
+    // motionProfileConfig.slot1.maxIntegralAccumulator; // leave default
+    // motionProfileConfig.slot1.closedLoopPeriod; // leave default
+    fr.configAllSettings(motionProfileConfig);
 
-    /* distance servo */
-    fr.config_kP(RobotMap.kSlot_Distanc, RobotMap.kGains_Distanc.kP, RobotMap.kTimeoutMs);
-    fr.config_kI(RobotMap.kSlot_Distanc, RobotMap.kGains_Distanc.kI, RobotMap.kTimeoutMs);
-    fr.config_kD(RobotMap.kSlot_Distanc, RobotMap.kGains_Distanc.kD, RobotMap.kTimeoutMs);
-    fr.config_kF(RobotMap.kSlot_Distanc, RobotMap.kGains_Distanc.kF, RobotMap.kTimeoutMs);
-    fr.config_IntegralZone(RobotMap.kSlot_Distanc, (int) RobotMap.kGains_Distanc.kIzone, RobotMap.kTimeoutMs);
-    fr.configClosedLoopPeakOutput(RobotMap.kSlot_Distanc, RobotMap.kGains_Distanc.kPeakOutput, RobotMap.kTimeoutMs);
+    // ToDo: Configure motor sensor phase.
 
-    /* turn servo */
-    fr.config_kP(RobotMap.kSlot_Turning, RobotMap.kGains_Turning.kP, RobotMap.kTimeoutMs);
-    fr.config_kI(RobotMap.kSlot_Turning, RobotMap.kGains_Turning.kI, RobotMap.kTimeoutMs);
-    fr.config_kD(RobotMap.kSlot_Turning, RobotMap.kGains_Turning.kD, RobotMap.kTimeoutMs);
-    fr.config_kF(RobotMap.kSlot_Turning, RobotMap.kGains_Turning.kF, RobotMap.kTimeoutMs);
-    fr.config_IntegralZone(RobotMap.kSlot_Turning, (int) RobotMap.kGains_Turning.kIzone, RobotMap.kTimeoutMs);
-    fr.configClosedLoopPeakOutput(RobotMap.kSlot_Turning, RobotMap.kGains_Turning.kPeakOutput, RobotMap.kTimeoutMs);
+    /* pick the sensor phase and desired direction */
+    fr.setSensorPhase(true);
 
-    /* magic servo */
-    fr.config_kP(RobotMap.kSlot_MotProf, RobotMap.kGains_MotProf.kP, RobotMap.kTimeoutMs);
-    fr.config_kI(RobotMap.kSlot_MotProf, RobotMap.kGains_MotProf.kI, RobotMap.kTimeoutMs);
-    fr.config_kD(RobotMap.kSlot_MotProf, RobotMap.kGains_MotProf.kD, RobotMap.kTimeoutMs);
-    fr.config_kF(RobotMap.kSlot_MotProf, RobotMap.kGains_MotProf.kF, RobotMap.kTimeoutMs);
-    fr.config_IntegralZone(RobotMap.kSlot_MotProf, (int) RobotMap.kGains_MotProf.kIzone, RobotMap.kTimeoutMs);
-    fr.configClosedLoopPeakOutput(RobotMap.kSlot_MotProf, RobotMap.kGains_MotProf.kPeakOutput, RobotMap.kTimeoutMs);
+    /* speed up the target polling for PID[0] and PID-aux[1] */
+    fr.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, 10); /* plotthread is polling aux-pid-sensor-pos */
+    fr.setStatusFramePeriod(StatusFrame.Status_10_Targets, 10);
+    fr.setStatusFramePeriod(StatusFrame.Status_17_Targets1, 10);
+    fr.setStatusFramePeriod(StatusFrame.Status_14_Turn_PIDF1, 10);
+    fr.setStatusFramePeriod(StatusFrame.Status_13_Base_PIDF0, 10);
 
-    /* velocity servo */
-    fr.config_kP(RobotMap.kSlot_Velocit, RobotMap.kGains_Velocit.kP, RobotMap.kTimeoutMs);
-    fr.config_kI(RobotMap.kSlot_Velocit, RobotMap.kGains_Velocit.kI, RobotMap.kTimeoutMs);
-    fr.config_kD(RobotMap.kSlot_Velocit, RobotMap.kGains_Velocit.kD, RobotMap.kTimeoutMs);
-    fr.config_kF(RobotMap.kSlot_Velocit, RobotMap.kGains_Velocit.kF, RobotMap.kTimeoutMs);
-    fr.config_IntegralZone(RobotMap.kSlot_Velocit, (int) RobotMap.kGains_Velocit.kIzone, RobotMap.kTimeoutMs);
-    fr.configClosedLoopPeakOutput(RobotMap.kSlot_Velocit, RobotMap.kGains_Velocit.kPeakOutput, RobotMap.kTimeoutMs);
-
-    fl.setNeutralMode(NeutralMode.Brake);
-    fr.setNeutralMode(NeutralMode.Brake);
-
-    /*
-     * 1ms per loop. PID loop can be slowed down if need be. For example, - if
-     * sensor updates are too slow - sensor deltas are very small per update, so
-     * derivative error never gets large enough to be useful. - sensor movement is
-     * very slow causing the derivative error to be near zero.
-     */
-    int closedLoopTimeMs = 1;
-    fr.configSetParameter(ParamEnum.ePIDLoopPeriod, closedLoopTimeMs, 0x00, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
-    fr.configSetParameter(ParamEnum.ePIDLoopPeriod, closedLoopTimeMs, 0x00, RobotMap.PID_TURN, RobotMap.kTimeoutMs);
-
-    /**
-     * false means talon's local output is PID0 + PID1, and other side Talon is PID0
-     * - PID1 true means talon's local output is PID0 - PID1, and other side Talon
-     * is PID0 + PID1
-     */
-    fr.configAuxPIDPolarity(false, RobotMap.kTimeoutMs);
-
-    zeroEncoders();
+    fr.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10, 10);
+    fl.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10, 10);
   }
 
   public void startMotionProfile(BufferedTrajectoryPointStream buffer)
   {
     fr.startMotionProfile(buffer, 10, ControlMode.MotionProfileArc);
-    fl.follow(fr, FollowerType.AuxOutput1);
   }
 
   public boolean isMotionProfileFinished()
@@ -251,21 +162,6 @@ public class DriveTrain extends Subsystem
   public void driveArcade(double speed, double turn)
   {
     drive.driveArcade(speed, turn);
-  }
-
-  public void zeroEncoders()
-  {
-    pigeon.setYaw(0);
-    pigeon.setAccumZAngle(0, 10);
-    fl.setSelectedSensorPosition(0);
-    fr.setSelectedSensorPosition(0);
-
-    fr.getSensorCollection().setPulseWidthPosition(0, 10);
-    fr.getSensorCollection().setQuadraturePosition(0, 10);
-
-    fl.getSensorCollection().setPulseWidthPosition(0, 10);
-    fl.getSensorCollection().setQuadraturePosition(0, 10);
-
   }
 
   @Override

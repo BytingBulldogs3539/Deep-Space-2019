@@ -29,9 +29,6 @@ public class AutonDrivePath extends Command
   @Override
   protected void initialize()
   {
-    Robot.drivetrain.initMotionProfile();
-
-    Robot.drivetrain.zeroEncoders();
     Robot.drivetrain.startMotionProfile(MotionProfiling.initBuffer(fileName));
   }
 
