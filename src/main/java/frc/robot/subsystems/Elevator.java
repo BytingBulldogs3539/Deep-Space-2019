@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -18,6 +20,9 @@ public class Elevator extends Subsystem
 
   public Elevator()
   {
+    master = new TalonSRX(RobotMap.ElevatorMaster);
+    slave = new TalonSRX(RobotMap.ElevatorSlave);
+
     // Factory default hardware to prevent unexpected behavior
     master.configFactoryDefault();
     slave.configFactoryDefault();
@@ -53,6 +58,13 @@ public class Elevator extends Subsystem
 
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0 /* Constants.kPIDLoopIdx */, timeoutMs);
+  }
+
+  public void setHeightInches(double inches)
+  {
+    // "3539" should be changed to the circumference of the spool
+    double encoderTicks = inches / 3539 * 4096;
+    master.set(ControlMode.MotionMagic, encoderTicks);
   }
 
   @Override

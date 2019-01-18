@@ -16,12 +16,23 @@ import frc.robot.utilities.*;
 public class RobotMap
 {
     // List of TalonSRX CAN ID numbers
-    public static int FRTalon = 4;
-    public static int FLTalon = 9;
-    public static int MRTalon = 2;
-    public static int MLTalon = 10;
-    public static int BRTalon = 1;
-    public static int BLTalon = 18;
+
+    // DriveTrain
+    public static final int FRTalon = 4;
+    public static final int FLTalon = 9;
+    public static final int MRTalon = 2;
+    public static final int MLTalon = 10;
+    public static final int BRTalon = 1;
+    public static final int BLTalon = 18;
+
+    // Evelator
+    public static final int ElevatorMaster = 0;
+    public static final int ElevatorSlave = 0;
+    // Manipulator
+
+    // Turret
+
+    // Verticate
 
     // Amount of ticks in a mag encoder
     public final static int kSensorUnitsPerRot = 4096;
