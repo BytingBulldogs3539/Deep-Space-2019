@@ -81,6 +81,19 @@ public class Robot extends TimedRobot
   {
     autonomousCommand = chooser.getSelected();
 
+    try
+    {
+      autonomousCommand = autonomousCommand.getClass().newInstance();
+    }
+    catch (InstantiationException e)
+    {
+      e.printStackTrace();
+    }
+    catch (IllegalAccessException e)
+    {
+      e.printStackTrace();
+    }
+
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector", "Default"); switch(autoSelected) { case "My Auto": autonomousCommand = new MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
      * ExampleCommand(); break; }
