@@ -31,7 +31,7 @@ public class DriveTrain extends Subsystem
 
   public DriveTrain()
   {
-    // Initiation of drive Talons
+    // Initiation of Drive Talons
     fr = new TalonSRX(RobotMap.FRTalon);
     fl = new TalonSRX(RobotMap.FLTalon);
     mr = new TalonSRX(RobotMap.MRTalon);
@@ -108,11 +108,9 @@ public class DriveTrain extends Subsystem
     fl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
 
     /* Remote 0 will be the other side's Talon */
-    fr.configRemoteFeedbackFilter(fl.getDeviceID(), RemoteSensorSource.TalonSRX_SelectedSensor, RobotMap.REMOTE_0,
-        RobotMap.kTimeoutMs);
+    fr.configRemoteFeedbackFilter(fl.getDeviceID(), RemoteSensorSource.TalonSRX_SelectedSensor, RobotMap.REMOTE_0, RobotMap.kTimeoutMs);
     /* Remote 1 will be a pigeon */
-    fr.configRemoteFeedbackFilter(pigeon.getDeviceID(), RemoteSensorSource.Pigeon_Yaw, RobotMap.REMOTE_1,
-        RobotMap.kTimeoutMs);
+    fr.configRemoteFeedbackFilter(pigeon.getDeviceID(), RemoteSensorSource.Pigeon_Yaw, RobotMap.REMOTE_1, RobotMap.kTimeoutMs);
     /* setup sum and difference signals */
     fr.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, RobotMap.kTimeoutMs);
     fr.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, RobotMap.kTimeoutMs);
@@ -130,33 +128,23 @@ public class DriveTrain extends Subsystem
       fr.configSelectedFeedbackCoefficient(1, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
 
       /*
-       * scale empirically measured units to 3600units, this gives us - 0.1 deg
-       * resolution - scales to human-readable units - keeps target away from ovefrlow
-       * (12bit)
-       *
-       * Heading units should be scaled to ~4000 per 360 deg, due to the following
-       * limitations... - Target param for aux PID1 is 18bits with a range of
-       * [-131072,+131072] units. - Target for aux PID1 in motion profile is 14bits
-       * with a range of [-8192,+8192] units. ... so at 3600 units per 360', that
-       * ensures 0.1 deg precision in firmware closed-loop and motion profile
-       * trajectory points can range +-2 rotations.
+       * scale empirically measured units to 3600units, this gives us - 0.1 deg resolution - scales to human-readable units - keeps target away from ovefrlow (12bit) Heading units should be scaled to ~4000 per 360 deg, due to the following
+       * limitations... - Target param for aux PID1 is 18bits with a range of [-131072,+131072] units. - Target for aux PID1 in motion profile is 14bits with a range of [-8192,+8192] units. ... so at 3600 units per 360', that ensures 0.1
+       * deg precision in firmware closed-loop and motion profile trajectory points can range +-2 rotations.
        */
-      fr.configSelectedFeedbackCoefficient(RobotMap.kTurnTravelUnitsPerRotation / RobotMap.kEncoderUnitsPerRotation,
-          RobotMap.PID_TURN, RobotMap.kTimeoutMs);
+      fr.configSelectedFeedbackCoefficient(RobotMap.kTurnTravelUnitsPerRotation / RobotMap.kEncoderUnitsPerRotation, RobotMap.PID_TURN, RobotMap.kTimeoutMs);
     }
     else
     {
 
       /*
-       * do not scale down the primary sensor (distance). If selected sensor is going
-       * to be a sensorSum user can pass 0.5 to produce an average.
+       * do not scale down the primary sensor (distance). If selected sensor is going to be a sensorSum user can pass 0.5 to produce an average.
        */
       fr.configSelectedFeedbackCoefficient(1.0, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
 
       fr.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor1, RobotMap.PID_TURN, RobotMap.kTimeoutMs);
 
-      fr.configSelectedFeedbackCoefficient(RobotMap.kTurnTravelUnitsPerRotation / RobotMap.kPigeonUnitsPerRotation,
-          RobotMap.PID_TURN, RobotMap.kTimeoutMs);
+      fr.configSelectedFeedbackCoefficient(RobotMap.kTurnTravelUnitsPerRotation / RobotMap.kPigeonUnitsPerRotation, RobotMap.PID_TURN, RobotMap.kTimeoutMs);
     }
 
     // ------------ telemetry-----------------//
@@ -174,8 +162,7 @@ public class DriveTrain extends Subsystem
     fr.configMotionCruiseVelocity(1000, RobotMap.kTimeoutMs);
 
     /*
-     * max out the peak output (for all modes). However you can limit the output of
-     * a given PID object with configClosedLoopPeakOutput().
+     * max out the peak output (for all modes). However you can limit the output of a given PID object with configClosedLoopPeakOutput().
      */
     fl.configPeakOutputForward(+1.0, RobotMap.kTimeoutMs);
     fl.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
@@ -218,19 +205,15 @@ public class DriveTrain extends Subsystem
     fr.setNeutralMode(NeutralMode.Brake);
 
     /*
-     * 1ms per loop. PID loop can be slowed down if need be. For example, - if
-     * sensor updates are too slow - sensor deltas are very small per update, so
-     * derivative error never gets large enough to be useful. - sensor movement is
-     * very slow causing the derivative error to be near zero.
+     * 1ms per loop. PID loop can be slowed down if need be. For example, - if sensor updates are too slow - sensor deltas are very small per update, so derivative error never gets large enough to be useful. - sensor movement is very slow
+     * causing the derivative error to be near zero.
      */
     int closedLoopTimeMs = 1;
     fr.configSetParameter(ParamEnum.ePIDLoopPeriod, closedLoopTimeMs, 0x00, RobotMap.PID_PRIMARY, RobotMap.kTimeoutMs);
     fr.configSetParameter(ParamEnum.ePIDLoopPeriod, closedLoopTimeMs, 0x00, RobotMap.PID_TURN, RobotMap.kTimeoutMs);
 
     /**
-     * false means talon's local output is PID0 + PID1, and other side Talon is PID0
-     * - PID1 true means talon's local output is PID0 - PID1, and other side Talon
-     * is PID0 + PID1
+     * false means talon's local output is PID0 + PID1, and other side Talon is PID0 - PID1 true means talon's local output is PID0 - PID1, and other side Talon is PID0 + PID1
      */
     fr.configAuxPIDPolarity(false, RobotMap.kTimeoutMs);
 

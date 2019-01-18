@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import frc.robot.utilities.*;
@@ -15,9 +8,9 @@ import frc.robot.utilities.*;
  */
 public class RobotMap
 {
-    // List of TalonSRX CAN ID numbers
+    /* DriveTrain ---------- */
 
-    // DriveTrain
+    // List of TalonSRX CAN ID numbers
     public static final int FRTalon = 4;
     public static final int FLTalon = 9;
     public static final int MRTalon = 2;
@@ -25,19 +18,29 @@ public class RobotMap
     public static final int BRTalon = 1;
     public static final int BLTalon = 18;
 
-    // Evelator
+    /* Evelator ---------- */
+
+    // List of TalonSRX CAN ID numbers
     public static final int ElevatorMaster = 0;
     public static final int ElevatorSlave = 0;
 
-    // Manipulator
+    // PID values
+    public static int ElevatorPee = 0;
+    public static int ElevatorEye = 0;
+    public static int ElevatorDee = 0;
+
+    /* Manipulator ---------- */
     public static final int ManipulatorMaster = 0;
     public static final int ManipulatorSlave = 0;
 
-    // Turret
+    /* Turret ---------- */
     public static final int TurretMaster = 0;
     public static final int TurretSlave = 0;
 
-    // Verticate
+    /* Verticate ---------- */
+
+    // Amount of time to wait before reporting to Driver Station that action failed
+    public static final int timeoutMs = 20;
 
     // Amount of ticks in a mag encoder
     public final static int kSensorUnitsPerRot = 4096;

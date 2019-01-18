@@ -6,6 +6,7 @@ import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
 /**
@@ -15,11 +16,10 @@ public class Elevator extends Subsystem
 {
   // Declare talons
   TalonSRX master, slave;
-  // Amount of time to wait before reporting to Driver Station that action failed
-  int timeoutMs = 20;
 
   public Elevator()
   {
+    // Initiation of Elevator Talons
     master = new TalonSRX(RobotMap.ElevatorMaster);
     slave = new TalonSRX(RobotMap.ElevatorSlave);
 
@@ -27,37 +27,51 @@ public class Elevator extends Subsystem
     master.configFactoryDefault();
     slave.configFactoryDefault();
 
+    // Basic config for Talons
+    TalonSRXConfiguration basicTalonConfig = new TalonSRXConfiguration();
+
+    /* Set the peak and nominal outputs */
+    basicTalonConfig.nominalOutputForward = 0.0;
+    basicTalonConfig.nominalOutputReverse = 0.0;
+    basicTalonConfig.peakOutputForward = 1.0;
+    basicTalonConfig.peakOutputReverse = -1.0;
+
+    /* Set to 27 because Talons are on 30 amp breaker */
+    basicTalonConfig.continuousCurrentLimit = 27;
+    basicTalonConfig.peakCurrentLimit = 40;
+    basicTalonConfig.peakCurrentDuration = 100;
+
+    /* Compensates for overcharging batteries. PID acts differently with different voltage. Sets Max Voltage */
+    basicTalonConfig.voltageCompSaturation = 12.2;
+
     /* Configure Sensor Source for Primary PID */
     // Constants.kPIDLoopIdx
     // timeoutMs
-    master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+    master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.timeoutMs);
 
     master.setSensorPhase(true);
     master.setInverted(false);
 
-    /* Set relevant frame periods to be at least as fast as periodic rate */
-    master.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, timeoutMs);
-    master.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, timeoutMs);
+    master.setNeutralMode(NeutralMode.Brake);
+    slave.setNeutralMode(NeutralMode.Brake);
 
-    /* Set the peak and nominal outputs */
-    master.configNominalOutputForward(0, timeoutMs);
-    master.configNominalOutputReverse(0, timeoutMs);
-    master.configPeakOutputForward(1, timeoutMs);
-    master.configPeakOutputReverse(-1, timeoutMs);
+    /* Set relevant frame periods to be at least as fast as periodic rate */
+    master.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.timeoutMs);
+    master.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.timeoutMs);
 
     /* Set Motion Magic gains in slot0 - see documentation */
     master.selectProfileSlot(0/* Constants.kSlotIdx */, 0 /* Constants.kPIDLoopIdx */);
-    master.config_kF(0/* Constants.kSlotIdx */, 0, timeoutMs); // F
-    master.config_kP(0/* Constants.kSlotIdx */, 0, timeoutMs); // P
-    master.config_kI(0/* Constants.kSlotIdx */, 0, timeoutMs); // I
-    master.config_kD(0/* Constants.kSlotIdx */, 0, timeoutMs); // D
+    master.config_kF(0, 0, RobotMap.timeoutMs); // F
+    master.config_kP(0, RobotMap.ElevatorPee, RobotMap.timeoutMs); // P
+    master.config_kI(0, 0, RobotMap.timeoutMs); // I
+    master.config_kD(0, 0, RobotMap.timeoutMs); // D
 
     /* Set acceleration and vcruise velocity - see documentation */
-    master.configMotionCruiseVelocity(15000, timeoutMs);
-    master.configMotionAcceleration(6000, timeoutMs);
+    master.configMotionCruiseVelocity(15000, RobotMap.timeoutMs);
+    master.configMotionAcceleration(6000, RobotMap.timeoutMs);
 
     /* Zero the sensor */
-    master.setSelectedSensorPosition(0, 0 /* Constants.kPIDLoopIdx */, timeoutMs);
+    master.setSelectedSensorPosition(0, 0 /* Constants.kPIDLoopIdx */, RobotMap.timeoutMs);
   }
 
   public void setHeightInches(double inches)
