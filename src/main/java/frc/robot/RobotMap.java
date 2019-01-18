@@ -28,9 +28,14 @@ public class RobotMap
     // Evelator
     public static final int ElevatorMaster = 0;
     public static final int ElevatorSlave = 0;
+
     // Manipulator
+    public static final int ManipulatorMaster = 0;
+    public static final int ManipulatorSlave = 0;
 
     // Turret
+    public static final int TurretMaster = 0;
+    public static final int TurretSlave = 0;
 
     // Verticate
 
