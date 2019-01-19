@@ -101,19 +101,19 @@ public class DriveTrain extends Subsystem
     MotionConfig.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.RemoteSensor0;
     /* rest of the configs */
     MotionConfig.neutralDeadband = Constants.kNeutralDeadband; /* 0.1 % super small for best low-speed control */
-    MotionConfig.slot0.kF = Constants.kGains_MotProf.kF;
-    MotionConfig.slot0.kP = Constants.kGains_MotProf.kP;
-    MotionConfig.slot0.kI = Constants.kGains_MotProf.kI;
-    MotionConfig.slot0.kD = Constants.kGains_MotProf.kD;
-    MotionConfig.slot0.integralZone = (int) Constants.kGains_MotProf.kIzone;
-    MotionConfig.slot0.closedLoopPeakOutput = Constants.kGains_MotProf.kPeakOutput;
+    MotionConfig.slot0.kF = Constants.kGains_MotProf.f;
+    MotionConfig.slot0.kP = Constants.kGains_MotProf.p;
+    MotionConfig.slot0.kI = Constants.kGains_MotProf.i;
+    MotionConfig.slot0.kD = Constants.kGains_MotProf.d;
+    MotionConfig.slot0.integralZone = (int) Constants.kGains_MotProf.iZone;
+    MotionConfig.slot0.closedLoopPeakOutput = Constants.kGains_MotProf.peakOutput;
 
-    MotionConfig.slot1.kF = Constants.kGains_MotProfAngle.kF;
-    MotionConfig.slot1.kP = Constants.kGains_MotProfAngle.kP;
-    MotionConfig.slot1.kI = Constants.kGains_MotProfAngle.kI;
-    MotionConfig.slot1.kD = Constants.kGains_MotProfAngle.kD;
-    MotionConfig.slot1.integralZone = (int) Constants.kGains_MotProfAngle.kIzone;
-    MotionConfig.slot1.closedLoopPeakOutput = Constants.kGains_MotProfAngle.kPeakOutput;
+    MotionConfig.slot1.kF = Constants.kGains_MotProfAngle.f;
+    MotionConfig.slot1.kP = Constants.kGains_MotProfAngle.p;
+    MotionConfig.slot1.kI = Constants.kGains_MotProfAngle.i;
+    MotionConfig.slot1.kD = Constants.kGains_MotProfAngle.d;
+    MotionConfig.slot1.integralZone = (int) Constants.kGains_MotProfAngle.iZone;
+    MotionConfig.slot1.closedLoopPeakOutput = Constants.kGains_MotProfAngle.peakOutput;
 
     fr.configAllSettings(MotionConfig);
 
