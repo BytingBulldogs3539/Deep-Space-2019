@@ -13,13 +13,10 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class bbDoubleSolenoid extends DoubleSolenoid
 {
 	private boolean isTrigger;
-	int on, off;
 
 	public bbDoubleSolenoid(int pcm, int on, int off, boolean isTrigger)
 	{
 		super(pcm, on, off);
-		this.on = on;
-		this.off = off;
 		defaultPosition(isTrigger);
 	}
 
