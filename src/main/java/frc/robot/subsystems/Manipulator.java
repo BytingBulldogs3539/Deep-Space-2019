@@ -1,17 +1,25 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * Intake/Extake for Cargo comprised of two compliant wheel rollers
  */
-public class Manipulator extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+public class Manipulator extends Subsystem
+{
+  TalonSRX master;
+
+  public Manipulator()
+  {
+    master = new TalonSRX(RobotMap.ManipulatorMaster);
+
+  }
 
   @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+  public void initDefaultCommand()
+  {
   }
 }

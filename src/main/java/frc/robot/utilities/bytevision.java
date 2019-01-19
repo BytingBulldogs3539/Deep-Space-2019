@@ -7,25 +7,23 @@
 
 package frc.robot.utilities;
 
-/**
- * Organizes gains used when assigning values to slots
- */
-public class Gains
-{
-    public double kP;
-    public double kI;
-    public double kD;
-    public double kF;
-    public double kIzone;
-    public double kPeakOutput;
+import edu.wpi.first.wpilibj.SerialPort;
 
-    public Gains(double kP, double kI, double kD, double kF, double kIzone, double kPeakOutput)
+/**
+ * Add your docs here.
+ */
+public class bytevision
+{
+    /*
+     * # sp = serial.Serial(port, baudrate=115200, bytesize=serial.EIGHTBITS,
+     * parity=serial.PARITY_NONE, # xonxoff=False, rtscts=False,
+     * stopbits=serial.STOPBITS_ONE, timeout=None, dsrdtr=True)
+     */
+    SerialPort visionPort = new SerialPort(115200, SerialPort.Port.kUSB, 8, SerialPort.Parity.kNone,
+            SerialPort.StopBits.kOne);
+
+    public String getData()
     {
-        this.kP = kP;
-        this.kI = kI;
-        this.kD = kD;
-        this.kF = kF;
-        this.kIzone = kIzone;
-        this.kPeakOutput = kPeakOutput;
+        return visionPort.readString();
     }
 }

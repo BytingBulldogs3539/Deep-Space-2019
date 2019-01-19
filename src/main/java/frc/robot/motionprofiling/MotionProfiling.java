@@ -5,17 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.utilities;
+package frc.robot.motionprofiling;
 
 import java.io.File;
 
 import com.ctre.phoenix.motion.*;
 
-import frc.robot.RobotMap;
+import frc.robot.utilities.*;
 
-/**
- * Add your docs here.
- */
 public class MotionProfiling
 {
     public static BufferedTrajectoryPointStream initBuffer(String fileName)
@@ -29,6 +26,9 @@ public class MotionProfiling
 
         TrajectoryPoint point = new TrajectoryPoint(); // temp for for loop, since unused params are initialized
                                                        // automatically, you can alloc just one
+
+        /* clear the buffer, in case it was used elsewhere */
+        _bufferedStream.Clear();
 
         /* Insert every point into buffer, no limit on size */
         for (int i = 0; i < profile.length; ++i)
@@ -50,17 +50,17 @@ public class MotionProfiling
             point.timeDur = durationMilliseconds;
 
             /* drive part */
-            point.position = direction * positionRot * RobotMap.kSensorUnitsPerRot; // Rotations => sensor units
-            point.velocity = direction * velocityRPM * RobotMap.kSensorUnitsPerRot / 600.0; // RPM => units per 100ms
+            point.position = direction * positionRot * Constants.kSensorUnitsPerRot; // Rotations => sensor units
+            point.velocity = direction * velocityRPM * Constants.kSensorUnitsPerRot / 600.0; // RPM => units per 100ms
             point.arbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
             /* turn part */
-            point.auxiliaryPos = targetTurnDeg * RobotMap.kTurnUnitsPerDeg; // Convert deg to remote sensor units
+            point.auxiliaryPos = targetTurnDeg * Constants.kTurnUnitsPerDeg; // Convert deg to remote sensor units
             point.auxiliaryVel = 0; // advanced teams can also provide the target velocity
             point.auxiliaryArbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
-            point.profileSlotSelect0 = RobotMap.kPrimaryPIDSlot; /* which set of gains would you like to use [0,3]? */
-            point.profileSlotSelect1 = RobotMap.kAuxPIDSlot; /* auxiliary PID [0,1], leave zero */
+            point.profileSlotSelect0 = Constants.kPrimaryPIDSlot; /* which set of gains would you like to use [0,3]? */
+            point.profileSlotSelect1 = Constants.kAuxPIDSlot; /* auxiliary PID [0,1], leave zero */
             point.zeroPos = false; /* don't reset sensor, this is done elsewhere since we have multiple sensors */
             point.isLastPoint = ((i + 1) == profile.length); /* set this to true on the last point */
             point.useAuxPID = true; /* tell MPB that we are using both pids */
