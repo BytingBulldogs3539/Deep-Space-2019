@@ -87,8 +87,6 @@ public class Elevator extends Subsystem
 
   public void setHeightInches(double inches)
   {
-    // "3539" should be changed to the circumference of the
-    // spool
     double encoderTicks = inches / 18.84 * 4096;
     master.set(ControlMode.MotionMagic, encoderTicks);
     System.out.println("set" + encoderTicks);
@@ -97,7 +95,5 @@ public class Elevator extends Subsystem
   @Override
   public void initDefaultCommand()
   {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new ElevatorSetpointCommand());
   }
 }
