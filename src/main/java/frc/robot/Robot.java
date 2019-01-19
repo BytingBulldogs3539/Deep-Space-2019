@@ -58,7 +58,21 @@ public class Robot extends TimedRobot
 		catch (Error eeee)
 		{
 
-			System.out.println("--------------");
+			System.out.println("issue with cameraOne ");
+    }
+    try
+		{
+			//
+			cameraTwo = CameraServer.getInstance().startAutomaticCapture(0);
+			cameraTwo.setResolution(240, 135);
+			cameraTwo.setFPS(20);
+			//cameraOne.setExposureManual(50);
+			//cameraOne.setBrightness(50);
+		}
+		catch (Error eeee)
+		{
+
+			System.out.println("issue with cameraTwo ");
 		}
   }
 
