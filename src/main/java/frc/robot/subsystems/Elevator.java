@@ -61,10 +61,10 @@ public class Elevator extends Subsystem
 
     /* Set Motion Magic gains in slot0 - see documentation */
     master.selectProfileSlot(0/* Constants.kSlotIdx */, 0 /* Constants.kPIDLoopIdx */);
-    master.config_kF(0, RobotMap.kGains_Elevator.f, RobotMap.timeoutMs); // F
-    master.config_kP(0, RobotMap.kGains_Elevator.p, RobotMap.timeoutMs); // P
-    master.config_kI(0, RobotMap.kGains_Elevator.i, RobotMap.timeoutMs); // I
-    master.config_kD(0, RobotMap.kGains_Elevator.d, RobotMap.timeoutMs); // D
+    master.config_kF(0, RobotMap.elevatorGains.f, RobotMap.timeoutMs); // F
+    master.config_kP(0, RobotMap.elevatorGains.p, RobotMap.timeoutMs); // P
+    master.config_kI(0, RobotMap.elevatorGains.i, RobotMap.timeoutMs); // I
+    master.config_kD(0, RobotMap.elevatorGains.d, RobotMap.timeoutMs); // D
 
     /* Set acceleration and vcruise velocity - see documentation */
     master.configMotionCruiseVelocity(15000, RobotMap.timeoutMs);
