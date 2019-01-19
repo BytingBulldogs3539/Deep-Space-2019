@@ -12,15 +12,12 @@ import edu.wpi.first.wpilibj.SerialPort;
 /**
  * Add your docs here.
  */
-public class bytevision
+public class ByteVision
 {
     /*
-     * # sp = serial.Serial(port, baudrate=115200, bytesize=serial.EIGHTBITS,
-     * parity=serial.PARITY_NONE, # xonxoff=False, rtscts=False,
-     * stopbits=serial.STOPBITS_ONE, timeout=None, dsrdtr=True)
+     * # sp = serial.Serial(port, baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, # xonxoff=False, rtscts=False, stopbits=serial.STOPBITS_ONE, timeout=None, dsrdtr=True)
      */
-    SerialPort visionPort = new SerialPort(115200, SerialPort.Port.kUSB, 8, SerialPort.Parity.kNone,
-            SerialPort.StopBits.kOne);
+    SerialPort visionPort = new SerialPort(115200, SerialPort.Port.kUSB, 8, SerialPort.Parity.kNone, SerialPort.StopBits.kOne);
 
     public String getData()
     {
