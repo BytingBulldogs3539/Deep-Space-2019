@@ -24,10 +24,7 @@ public class RobotMap
     public static final int ElevatorMaster = 0;
     public static final int ElevatorSlave = 0;
 
-    // PID values
-    public static int ElevatorPee = .10;
-    public static int ElevatorEye = 0;
-    public static int ElevatorDee = 0;
+    
 
     /* Manipulator ---------- */
     public static final int ManipulatorMaster = 0;
@@ -77,9 +74,9 @@ public class RobotMap
      * 
      * @link https://github.com/CrossTheRoadElec/Phoenix-Documentation#what-are-the-units-of-my-sensor
      */
-    public final static int kSensorUnitsPerRotation = 4096;
+    public final static int SensorUnitsPerRotation = 4096;
 
-    public final static double kRotationsToTravel = 6;
+    public final static double RotationsToTravel = 6;
 
     /**
      * How to measure robot heading. 0 for Difference between left and right quad encoder. 1 for Pigeon IMU.
@@ -121,9 +118,6 @@ public class RobotMap
     public static Gains kGains_Turning = new Gains(3.2, 0, 15, 0.75, 200, 1.00);
     public static Gains kGains_Velocit = new Gains(0.04, 0.0, 20.0, 1023.0 / 2300.0, 300, 0.50); /* measured 6800 velocity units at full motor output */
     public static Gains kGains_MotProf = new Gains(.2, 0.0, 0.0, 1023.0 / 2300.0, 400, 1.00);
+    public static Gains kGains_Elevator = new Gains(.1,0.0,0.0, .054,400,1.00);
 
-    public final static int kSlot_Distanc = SLOT_0;
-    public final static int kSlot_Turning = SLOT_1;
-    public final static int kSlot_Velocit = SLOT_2;
-    public final static int kSlot_MotProf = SLOT_3;
 }

@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.motionprofiling.Constants;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -61,10 +62,10 @@ public class Elevator extends Subsystem
 
     /* Set Motion Magic gains in slot0 - see documentation */
     master.selectProfileSlot(0/* Constants.kSlotIdx */, 0 /* Constants.kPIDLoopIdx */);
-    master.config_kF(0, 0, RobotMap.timeoutMs); // F
-    master.config_kP(0, RobotMap.ElevatorPee, RobotMap.timeoutMs); // P
-    master.config_kI(0, 0, RobotMap.timeoutMs); // I
-    master.config_kD(0, 0, RobotMap.timeoutMs); // D
+    master.config_kF(0, RobotMap.kGains_Elevator.kF, RobotMap.timeoutMs); // F
+    master.config_kP(0, RobotMap.kGains_Elevator.kP, RobotMap.timeoutMs); // P
+    master.config_kI(0, RobotMap.kGains_Elevator.kI, RobotMap.timeoutMs); // I
+    master.config_kD(0, RobotMap.kGains_Elevator.kD, RobotMap.timeoutMs); // D
 
     /* Set acceleration and vcruise velocity - see documentation */
     master.configMotionCruiseVelocity(15000, RobotMap.timeoutMs);
@@ -77,7 +78,7 @@ public class Elevator extends Subsystem
   public void setHeightInches(double inches)
   {
     // "3539" should be changed to the circumference of the spool
-    double encoderTicks = inches / 3539 * 4096;
+    double encoderTicks = inches / 18.84 * 4096;
     master.set(ControlMode.MotionMagic, encoderTicks);
   }
 
