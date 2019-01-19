@@ -27,6 +27,9 @@ public class Elevator extends Subsystem
     master.configFactoryDefault();
     slave.configFactoryDefault();
 
+    // Slave will imitate all commands sent to master e.g set() but not configurations
+    slave.follow(master);
+
     // Basic config for Talons
     TalonSRXConfiguration basicTalonConfig = new TalonSRXConfiguration();
 
@@ -44,6 +47,9 @@ public class Elevator extends Subsystem
     /* Compensates for overcharging batteries. PID acts differently with different voltage. Sets Max Voltage */
     basicTalonConfig.voltageCompSaturation = 12.2;
 
+    master.configAllSettings(basicTalonConfig);
+    slave.configAllSettings(basicTalonConfig);
+
     /* Configure Sensor Source for Primary PID */
     // Constants.kPIDLoopIdx
     // timeoutMs
@@ -59,8 +65,8 @@ public class Elevator extends Subsystem
     master.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.timeoutMs);
     master.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.timeoutMs);
 
-    /* Set Motion Magic gains in slot0 - see documentation */
-    master.selectProfileSlot(0/* Constants.kSlotIdx */, 0 /* Constants.kPIDLoopIdx */);
+    /* Set Motion Magic gains in slot 0 - see documentation */
+    master.selectProfileSlot(0, 0);
     master.config_kF(0, RobotMap.elevatorGains.f, RobotMap.timeoutMs); // F
     master.config_kP(0, RobotMap.elevatorGains.p, RobotMap.timeoutMs); // P
     master.config_kI(0, RobotMap.elevatorGains.i, RobotMap.timeoutMs); // I
@@ -71,7 +77,7 @@ public class Elevator extends Subsystem
     master.configMotionAcceleration(6000, RobotMap.timeoutMs);
 
     /* Zero the sensor */
-    master.setSelectedSensorPosition(0, 0 /* Constants.kPIDLoopIdx */, RobotMap.timeoutMs);
+    master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
   }
 
   public void setHeightInches(double inches)
