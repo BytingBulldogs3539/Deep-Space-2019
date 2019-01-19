@@ -55,6 +55,7 @@ public class Elevator extends Subsystem
     // timeoutMs
     master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.timeoutMs);
 
+    /* Sets phase of sensor so forward/reverse on sensor is synced with forward/reverse on talon */
     master.setSensorPhase(true);
     master.setInverted(false);
 
