@@ -8,13 +8,15 @@ import frc.robot.utilities.bbDoubleSolenoid;
  */
 public class Solenoids extends Subsystem
 {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  public bbDoubleSolenoid panelSolenoid;
+  public bbDoubleSolenoid intakeSolenoid;
 
-  // Commented these out for later use, wasn't sure on names yet
-
-  // public bbDoubleSolenoid intakeSol
-  // public bbDoubleSolenoid climbSol
+  public Solenoids()
+  {
+    // TODO: add solenoid ports to RobotMap
+    panelSolenoid = new bbDoubleSolenoid(0, 0, 0, false);
+    intakeSolenoid = new bbDoubleSolenoid(0, 0, 0, false);
+  }
 
   @Override
   public void initDefaultCommand()
