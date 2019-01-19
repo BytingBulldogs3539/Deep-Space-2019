@@ -31,7 +31,6 @@ public class RobotMap
 
     /* Manipulator ---------- */
     public static final int ManipulatorMaster = 0;
-    public static final int ManipulatorSlave = 0;
 
     /* Turret ---------- */
     public static final int TurretMaster = 0;
