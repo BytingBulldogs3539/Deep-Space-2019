@@ -25,7 +25,7 @@ public class RobotMap
     public static final int ElevatorSlave = 0;
 
     // PID values
-    public static int ElevatorPee = 0;
+    public static int ElevatorPee = .10;
     public static int ElevatorEye = 0;
     public static int ElevatorDee = 0;
 
