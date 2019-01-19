@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.ElevatorSetpointCommand;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -20,8 +21,8 @@ public class Elevator extends Subsystem
   public Elevator()
   {
     // Initiation of Elevator Talons
-    master = new TalonSRX(RobotMap.elevatorMaster);
-    slave = new TalonSRX(RobotMap.elevatorSlave);
+    master = new TalonSRX(RobotMap.ElevatorMaster);
+    slave = new TalonSRX(RobotMap.ElevatorSlave);
 
     // Factory default hardware to prevent unexpected behavior
     master.configFactoryDefault();
@@ -90,12 +91,13 @@ public class Elevator extends Subsystem
     // spool
     double encoderTicks = inches / 18.84 * 4096;
     master.set(ControlMode.MotionMagic, encoderTicks);
+    System.out.println("set" + encoderTicks);
   }
 
   @Override
   public void initDefaultCommand()
   {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    // setDefaultCommand(new ElevatorSetpointCommand());
   }
 }
