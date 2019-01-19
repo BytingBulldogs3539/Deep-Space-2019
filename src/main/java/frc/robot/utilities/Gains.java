@@ -8,24 +8,24 @@
 package frc.robot.utilities;
 
 /**
- * Organizes gains used when assigning values to slots
+ * Encapsulates PIDF and related variables
  */
 public class Gains
 {
-    public double kP;
-    public double kI;
-    public double kD;
-    public double kF;
-    public double kIzone;
-    public double kPeakOutput;
+    public double p;
+    public double i;
+    public double d;
+    public double f;
+    public double iZone;
+    public double peakOutput;
 
-    public Gains(double kP, double kI, double kD, double kF, double kIzone, double kPeakOutput)
+    public Gains(double p, double i, double d, double f, double iZone, double peakOutput)
     {
-        this.kP = kP;
-        this.kI = kI;
-        this.kD = kD;
-        this.kF = kF;
-        this.kIzone = kIzone;
-        this.kPeakOutput = kPeakOutput;
+        this.p = p;
+        this.i = i;
+        this.d = d;
+        this.f = f;
+        this.iZone = iZone;
+        this.peakOutput = peakOutput;
     }
 }
