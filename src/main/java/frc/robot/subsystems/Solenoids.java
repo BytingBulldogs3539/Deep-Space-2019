@@ -3,11 +3,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.utilities.bbDoubleSolenoid;
 
-/**
- * Add your docs here.
+/*
+ * Add your docs
+ * here is an autistically long comment that i cannot spell correctly but this is a testkh
  */
-public class Solenoids extends Subsystem
-{
+public class Solenoids extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -17,8 +17,7 @@ public class Solenoids extends Subsystem
   // public bbDoubleSolenoid climbSol
 
   @Override
-  public void initDefaultCommand()
-  {
+  public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }

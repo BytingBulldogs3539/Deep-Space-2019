@@ -21,7 +21,7 @@ public class RobotMap
     /* Evelator ---------- */
 
     // List of TalonSRX CAN ID numbers
-    public static final int ElevatorMaster = 55;
+    public static final int ElevatorMaster = 1;
     public static final int ElevatorSlave = 56;
 
     /* Manipulator ---------- */
@@ -36,6 +36,6 @@ public class RobotMap
     // Amount of time to wait before reporting to Driver Station that action failed
     public static final int timeoutMs = 20;
 
-    public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
+    public static Gains elevatorGains = new Gains(.7, 0.0, 7.0, .054, 400, 1.00);
 
 }

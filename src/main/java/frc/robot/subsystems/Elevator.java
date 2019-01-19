@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.ElevatorSetpointCommand;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -84,14 +85,15 @@ public class Elevator extends Subsystem
   public void setHeightInches(double inches)
   {
     // "3539" should be changed to the circumference of the spool
-    double encoderTicks = inches / 18.84 * 4096;
+    double encoderTicks = inches /1 * 4096;
     master.set(ControlMode.MotionMagic, encoderTicks);
+    System.out.println("set" + encoderTicks);
   }
 
   @Override
   public void initDefaultCommand()
   {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    // setDefaultCommand(new ElevatorSetpointCommand());
   }
 }
