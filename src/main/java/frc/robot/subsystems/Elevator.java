@@ -21,17 +21,18 @@ public class Elevator extends Subsystem
   public Elevator()
   {
     // Initiation of Elevator Talons
-    master = new TalonSRX(RobotMap.ElevatorMaster);
-    slave = new TalonSRX(RobotMap.ElevatorSlave);
+    master = new TalonSRX(RobotMap.elevatorMaster);
+    slave = new TalonSRX(RobotMap.elevatorSlave);
 
     // Factory default hardware to prevent unexpected behavior
     master.configFactoryDefault();
     slave.configFactoryDefault();
 
-    // Slave will imitate all commands sent to master e.g set() but not configurations
+    /* Slave will imitate all commands sent to master e.g set() but not
+     * configurations */
     slave.follow(master);
 
-    // Basic config for Talons
+    /* Basic config for Talons */
     TalonSRXConfiguration basicTalonConfig = new TalonSRXConfiguration();
 
     /* Set the peak and nominal outputs */
@@ -45,7 +46,8 @@ public class Elevator extends Subsystem
     basicTalonConfig.peakCurrentLimit = 40;
     basicTalonConfig.peakCurrentDuration = 100;
 
-    /* Compensates for overcharging batteries. PID acts differently with different voltage. Sets Max Voltage */
+    /* Compensates for overcharging batteries. PID acts differently with different
+     * voltage. Sets Max Voltage */
     basicTalonConfig.voltageCompSaturation = 12.2;
 
     master.configAllSettings(basicTalonConfig);
@@ -56,7 +58,8 @@ public class Elevator extends Subsystem
     // timeoutMs
     master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.timeoutMs);
 
-    /* Sets phase of sensor so forward/reverse on sensor is synced with forward/reverse on talon */
+    /* Sets phase of sensor so forward/reverse on sensor is synced with
+     * forward/reverse on talon */
     master.setSensorPhase(true);
     master.setInverted(false);
 
@@ -84,8 +87,9 @@ public class Elevator extends Subsystem
 
   public void setHeightInches(double inches)
   {
-    // "3539" should be changed to the circumference of the spool
-    double encoderTicks = inches /1 * 4096;
+    // "3539" should be changed to the circumference of the
+    // spool
+    double encoderTicks = inches / 18.84 * 4096;
     master.set(ControlMode.MotionMagic, encoderTicks);
     System.out.println("set" + encoderTicks);
   }

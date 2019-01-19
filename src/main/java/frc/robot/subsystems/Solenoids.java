@@ -17,8 +17,10 @@ public class Solenoids extends Subsystem {
   // public bbDoubleSolenoid climbSol
 
   @Override
+
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-  }
+ 
+}
 }
