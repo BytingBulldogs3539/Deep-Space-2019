@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.autoncommands.AutonDrivePath;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
-
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to each mode, as described in the TimedRobot documentation. If you change the name of this class or the package after creating this project,
  * you must also update the build.gradle file in the project.
@@ -25,6 +26,8 @@ public class Robot extends TimedRobot
   public static DriveTrain drivetrain;
   public static Elevator elevator;
   public static OI oi;
+  public static UsbCamera cameraOne, cameraTwo;
+
 
   Command autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
@@ -42,6 +45,21 @@ public class Robot extends TimedRobot
     chooser.setDefaultOption("Default Auto", new AutonDrivePath("AUSA.json", true));
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
+
+    try
+		{
+			//
+			cameraOne = CameraServer.getInstance().startAutomaticCapture(0);
+			cameraOne.setResolution(240, 135);
+			cameraOne.setFPS(20);
+			//cameraOne.setExposureManual(50);
+			//cameraOne.setBrightness(50);
+		}
+		catch (Error eeee)
+		{
+
+			System.out.println("--------------");
+		}
   }
 
   /**
