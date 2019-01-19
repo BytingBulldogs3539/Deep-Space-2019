@@ -21,8 +21,8 @@ public class Elevator extends Subsystem
   public Elevator()
   {
     // Initiation of Elevator Talons
-    master = new TalonSRX(RobotMap.elevatorMaster);
-    slave = new TalonSRX(RobotMap.elevatorSlave);
+    master = new TalonSRX(RobotMap.ElevatorMaster);
+    slave = new TalonSRX(RobotMap.ElevatorSlave);
 
     // Factory default hardware to prevent unexpected behavior
     master.configFactoryDefault();
