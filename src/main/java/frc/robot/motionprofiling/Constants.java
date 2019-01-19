@@ -1,11 +1,10 @@
 package frc.robot.motionprofiling;
+
 import frc.robot.utilities.Gains;;
 
 public class Constants
-
-
 {
-	
+
 	/**
 	 * How many sensor units per rotation. Using CTRE Magnetic Encoder.
 	 * 
