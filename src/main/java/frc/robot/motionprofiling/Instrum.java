@@ -6,28 +6,23 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 /**
  * Routines for printing to console (FRC Message log).
  */
-public class Instrum
-{
+public class Instrum {
 
 	static int _loops = 0;
 
 	static boolean _bPrintValues = false;
 
-	public static void printLine(String s)
-	{
+	public static void printLine(String s) {
 		System.out.println(s);
 	}
 
-	public static void loop(boolean bPrintValues, TalonSRX talon)
-	{
-		if (!_bPrintValues && bPrintValues)
-		{
+	public static void loop(boolean bPrintValues, TalonSRX talon) {
+		if (!_bPrintValues && bPrintValues) {
 			/* user just pressed button, immediete print */
 			_loops = 999;
 		}
 		/* if button is off, don't print */
-		if (bPrintValues == false)
-		{
+		if (bPrintValues == false) {
 			/* reset so we don't print */
 			_loops = 0;
 		}
@@ -35,8 +30,7 @@ public class Instrum
 		_bPrintValues = bPrintValues;
 
 		/* build string and print if button is down */
-		if (++_loops >= 10)
-		{
+		if (++_loops >= 10) {
 			_loops = 0;
 			/* get status info */
 			MotionProfileStatus status = new MotionProfileStatus();

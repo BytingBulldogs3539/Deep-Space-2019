@@ -3,9 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.utilities.bbDoubleSolenoid;
 
-/**
- * Add your docs here.
- */
+/** Add your docs here. */
 public class Solenoids extends Subsystem
 {
   // Put methods for controlling this subsystem
