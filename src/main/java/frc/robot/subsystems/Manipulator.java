@@ -12,7 +12,7 @@ public class Manipulator extends Subsystem
 
   public Manipulator()
   {
-    master = new TalonSRX(RobotMap.ManipulatorMaster);
+    master = new TalonSRX(RobotMap.manipulatorMaster);
 
   }
 

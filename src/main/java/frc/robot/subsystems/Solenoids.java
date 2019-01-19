@@ -3,7 +3,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.utilities.bbDoubleSolenoid;
 
-/** Add your docs here. */
+/**
+ * Solenoid container for hatch panel placement and intake arm
+ */
 public class Solenoids extends Subsystem
 {
   // Put methods for controlling this subsystem
@@ -17,7 +19,5 @@ public class Solenoids extends Subsystem
   @Override
   public void initDefaultCommand()
   {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
 }
