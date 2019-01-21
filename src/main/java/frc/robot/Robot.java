@@ -51,35 +51,34 @@ public class Robot extends TimedRobot
     SmartDashboard.putData("Auto mode", chooser);
   }
 
-    // try
-		// {
-		// 	//
-		// 	cameraOne = CameraServer.getInstance().startAutomaticCapture(0);
-		// 	cameraOne.setResolution(240, 135);
-		// 	cameraOne.setFPS(20);
-		// 	//cameraOne.setExposureManual(50);
-		// 	//cameraOne.setBrightness(50);
-		// }
-		// catch (Error eeee)
-		// {
+  // try
+  // {
+  // //
+  // cameraOne = CameraServer.getInstance().startAutomaticCapture(0);
+  // cameraOne.setResolution(240, 135);
+  // cameraOne.setFPS(20);
+  // //cameraOne.setExposureManual(50);
+  // //cameraOne.setBrightness(50);
+  // }
+  // catch (Error eeee)
+  // {
 
-		// 	System.out.println("issue with cameraOne ");
-    // }
-    // try
-		// {
-		// 	//
-		// 	cameraTwo = CameraServer.getInstance().startAutomaticCapture(0);
-		// 	cameraTwo.setResolution(240, 135);
-		// 	cameraTwo.setFPS(20);
-		// 	//cameraOne.setExposureManual(50);
-		// 	//cameraOne.setBrightness(50);
-		// }
-		// catch (Error eeee)
-		// {
+  // System.out.println("issue with cameraOne ");
+  // }
+  // try
+  // {
+  // //
+  // cameraTwo = CameraServer.getInstance().startAutomaticCapture(0);
+  // cameraTwo.setResolution(240, 135);
+  // cameraTwo.setFPS(20);
+  // //cameraOne.setExposureManual(50);
+  // //cameraOne.setBrightness(50);
+  // }
+  // catch (Error eeee)
+  // {
 
-		// 	System.out.println("issue with cameraTwo ");
-		//}
-
+  // System.out.println("issue with cameraTwo ");
+  // }
 
   /**
    * This function is called every robot packet, no matter the mode. Use this for

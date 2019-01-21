@@ -38,6 +38,9 @@ public class RobotMap
     // Amount of time to wait before reporting to Driver Station that action failed
     public static final int timeoutMs = 20;
 
+    // PDP
+    public static final int pdp = 0;
+
     /* Gains / PIDs ---------- */
     public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static Gains turretGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);

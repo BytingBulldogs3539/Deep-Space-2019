@@ -63,6 +63,7 @@ public class Elevator extends Subsystem
     master.setSensorPhase(true);
     master.setInverted(false);
 
+    /* Automatically tries to stop motors when not being powered */
     master.setNeutralMode(NeutralMode.Brake);
     slave.setNeutralMode(NeutralMode.Brake);
 
@@ -85,6 +86,7 @@ public class Elevator extends Subsystem
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
   }
 
+  /* Moves elevator to given position in inches */
   public void setHeightInches(double inches)
   {
     double encoderTicks = inches / 18.84 * 4096;
