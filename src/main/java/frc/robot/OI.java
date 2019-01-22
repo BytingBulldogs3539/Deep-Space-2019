@@ -17,17 +17,19 @@ import frc.robot.commands.*;
  */
 public class OI
 {
-  // Driver controller should be plugged in first.
-  // Operator controller should be plugged in second.
+  // driver controller should be plugged in first.
+  // operator controller should be plugged in second.
 
   public LogitechF310 driver = new LogitechF310(0);
   public LogitechF310 operator = new LogitechF310(1);
 
   public OI()
   {
+    /* driver */
+
+    /* operator */
     operator.buttonA.whenPressed(new ElevatorPositionCommand(0));
     operator.buttonB.whenPressed(new ElevatorPositionCommand(24));
     operator.buttonY.whenPressed(new ElevatorPositionCommand(50));
-
   }
 }
