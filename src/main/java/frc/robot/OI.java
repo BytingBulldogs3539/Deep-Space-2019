@@ -8,8 +8,8 @@
 package frc.robot;
 
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.ElevatorSetpointCommand;
 import frc.robot.utilities.LogitechF310;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,11 +25,9 @@ public class OI
 
   public OI()
   {
-    driver.buttonA.whenPressed(new ElevatorSetpointCommand(10));
-    driver.buttonB.whenPressed(new ElevatorSetpointCommand(15));
-    driver.buttonY.whenPressed(new ElevatorSetpointCommand(20));
-    
-
+    operator.buttonA.whenPressed(new ElevatorPositionCommand(0));
+    operator.buttonB.whenPressed(new ElevatorPositionCommand(24));
+    operator.buttonY.whenPressed(new ElevatorPositionCommand(50));
 
   }
 }
