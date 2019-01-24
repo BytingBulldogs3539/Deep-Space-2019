@@ -17,7 +17,6 @@ public class Elevator extends Subsystem
   // Declare talons
   TalonSRX master, slave;
 
-
   //TODO: we need to add a feature for a limit switch for two things to stop the elevator at the bottom and to zero the encoder at the bottom.
   public Elevator()
   {
@@ -91,7 +90,10 @@ public class Elevator extends Subsystem
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
   }
 
-  /* Moves elevator to given position in inches */
+  /**
+	 * Allows us to move our elevator using motion magic to the specified height in inches.
+   * @param inches The height (in inches) that the elevator will move to.
+	 */  
   public void setHeightInches(double inches)
   {
     //TODO: This may need to be changed.
@@ -99,6 +101,8 @@ public class Elevator extends Subsystem
     master.set(ControlMode.MotionMagic, encoderTicks);
     System.out.println("set" + encoderTicks);
   }
+
+  //TODO: Add a feature for override control.
 
   @Override
   public void initDefaultCommand()

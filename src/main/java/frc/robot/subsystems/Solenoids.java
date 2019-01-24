@@ -19,7 +19,6 @@ public class Solenoids extends Subsystem
   }
 
   @Override
-
   public void initDefaultCommand()
   {
   }
