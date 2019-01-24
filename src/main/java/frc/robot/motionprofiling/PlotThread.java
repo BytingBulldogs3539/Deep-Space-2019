@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 class PlotThread implements Runnable
 {
-
+	//TODO: Implement this.
 	private TalonSRX _talon;
 	private Thread _thread;
 

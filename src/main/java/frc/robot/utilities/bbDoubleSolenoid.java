@@ -14,12 +14,23 @@ public class bbDoubleSolenoid extends DoubleSolenoid
 {
 	private boolean isTrigger;
 
+    /**
+	 * Allows us to create a double solenoid object.
+	 * 
+	 * @param pcm The CAN id of the pcm.
+     * @param on The port that the on wire of the solenoid is plugged into.
+	 * @param off The port that the off wire of the solenoid is plugged into.
+	 * @param isTrigger The direction that the solenoid will default to.
+	 */
 	public bbDoubleSolenoid(int pcm, int on, int off, boolean isTrigger)
 	{
 		super(pcm, on, off);
 		defaultPosition(isTrigger);
 	}
-
+	/**
+	 * Allows us to toggle a double solenoid object so that it is the opposite direction that it currently is in
+	 * however if the solenoid is off it will return to the default position.
+	 */
 	public void toggle()
 	{
 		if (get() == DoubleSolenoid.Value.kOff)
@@ -35,7 +46,10 @@ public class bbDoubleSolenoid extends DoubleSolenoid
 			reverse();
 		}
 	}
-
+	/**
+	 * Allows us to set the default direction of the double solenoid object.
+	 * @param isTrigger The direction that the solenoid will default to.
+	 */
 	public void defaultPosition(boolean isTrigger)
 	{
 		if (isTrigger)
@@ -43,23 +57,29 @@ public class bbDoubleSolenoid extends DoubleSolenoid
 		else
 			reverse();
 	}
-
+	/**
+	 * Allows us to set the solenoid to the forward position.
+	 */
 	public void forward()
 	{
 		set(DoubleSolenoid.Value.kForward);
 	}
-
+	/**
+	 * Allows us to set the solenoid to the reverse position.
+	 */
 	public void reverse()
 	{
 		set(DoubleSolenoid.Value.kReverse);
 	}
-
+	/**
+	 * Allows us to set the solenoid to the disabled position.
+	 */
 	public void disable()
 	{
 		set(DoubleSolenoid.Value.kOff);
 	}
 
-	// possibly change to rely on the get() method which returns a Value
+	//TODO: possibly change to rely on the get() method which returns a Value
 	public boolean isTrigger()
 	{
 		return isTrigger;

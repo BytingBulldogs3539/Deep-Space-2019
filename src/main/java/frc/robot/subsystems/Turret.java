@@ -79,7 +79,7 @@ public class Turret extends Subsystem
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
   }
-
+  //TODO: change naming because our rotation does not have a height :P
   public void setHeightInches(double inches)
   {
     // "3539" should be changed to the circumference of the lazy susan or output

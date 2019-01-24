@@ -30,6 +30,7 @@ public class AutonDrivePath extends Command
   protected void initialize()
   {
     Robot.drivetrain.zeroEncoders();
+    //TODO: We need to change this so that we can load the file and its points before we try to start motion profiling for a faster start.
     Robot.drivetrain.startMotionProfile(MotionProfiling.initBuffer(fileName));
   }
 
@@ -43,13 +44,17 @@ public class AutonDrivePath extends Command
   @Override
   protected boolean isFinished()
   {
-    return Robot.drivetrain.isMotionProfileFinished();
+    if(useIsFinished)
+      return Robot.drivetrain.isMotionProfileFinished();
+    else
+      return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end()
   {
+    Robot.drivetrain.neutralOutput();
   }
 
   // Called when another command which requires one or more of the same
@@ -57,5 +62,6 @@ public class AutonDrivePath extends Command
   @Override
   protected void interrupted()
   {
+    end();
   }
 }

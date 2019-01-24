@@ -7,8 +7,15 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class bbCamera 
 {
     private UsbCamera camera;
+    /**
+	 * Allows us to create a camera object without causing any errors any long code in Robot.
+	 * 
+	 * @param label The name to give the camera.
+     * @param port The device number of the camera interface.
+	 */
     public bbCamera(String label,int port)
     {
+        //Try creating the camera however if this fails then we need to tell the driver that they won't have a camera if they don't fix it.
         try
         {
             camera = CameraServer.getInstance().startAutomaticCapture(label, port);

@@ -10,6 +10,7 @@ public class Constants
 	 * 
 	 * @link https://github.com/CrossTheRoadElec/Phoenix-Documentation#what-are-the-units-of-my-sensor
 	 */
+	//TODO: Change this because our encoder is not on the output shaft :( CAD WHY!
 	public final static int kSensorUnitsPerRot = 4096;
 
 	/**
@@ -27,6 +28,7 @@ public class Constants
 	 * PID Gains may have to be adjusted based on the responsiveness of control loop
 	 * kP kI kD kF Iz PeakOut
 	 */
+	//TODO: Tune for robot.
 	public final static Gains kGains_MotProf = new Gains(.2, 0.0, 0.0, 1023.0 / 2300.0, 400, 1.00);
 	public final static Gains kGains_MotProfAngle = new Gains(.2, 0.0, 0.0, 1023.0 / 2300.0, 400, 1.00);
 

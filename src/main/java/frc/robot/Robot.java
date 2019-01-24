@@ -46,6 +46,7 @@ public class Robot extends TimedRobot
     oi = new OI();
 
     //Lets start the camera servers.
+    //TODO: this needs to be tested.
     fCamera = new bbCamera("Front", 0);
     bCamera = new bbCamera("Back", 1);
 
@@ -127,6 +128,8 @@ public class Robot extends TimedRobot
   public void autonomousPeriodic()
   {
     Scheduler.getInstance().run();
+
+    //TODO: We need to add a function to kill our auton somewhere in here.
 
   }
 

@@ -16,6 +16,7 @@ public class ElevatorPositionCommand extends Command
   @Override
   protected void initialize()
   {
+    //TODO: Think about using enums instead, as well as use an if statement to check if we are holding a cargo or a hatch.
     Robot.elevator.setHeightInches(inches);
   }
 

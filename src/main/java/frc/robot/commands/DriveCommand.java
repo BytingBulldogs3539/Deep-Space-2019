@@ -22,7 +22,7 @@ public class DriveCommand extends Command
   @Override
   protected void initialize()
   {
-
+    //We don't need an initialize because we did all the initializing on robot start.
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -43,6 +43,8 @@ public class DriveCommand extends Command
   @Override
   protected void end()
   {
+    //If our drivetrain gets canceled or ended even though it should not we need to stop our drivetrain so we don't keep driving.
+    Robot.drivetrain.neutralOutput();
   }
 
   // Called when another command which requires one or more of the same
@@ -50,5 +52,6 @@ public class DriveCommand extends Command
   @Override
   protected void interrupted()
   {
+    end();
   }
 }

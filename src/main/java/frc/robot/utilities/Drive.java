@@ -66,7 +66,9 @@ public final class Drive
 
 	/**
 	 * The constructor for the drive method allowing the user to control the right
-	 * and left side of robot with a total of <b>6</b> motors.
+	 * and left side of robot with a total of <b>6</b> motors do note that this may
+	 * require you to invert one of your motor controllers depending on how your 
+	 * gearbox is designed...
 	 *
 	 * @param rightFront
 	 *                        the motor controller that controls the right front
@@ -157,7 +159,7 @@ public final class Drive
 	 * @param right
 	 *                  the right motor speed must be between -1 and 1
 	 * @param left
-	 *                  the left motor speed must be between -1 and
+	 *                  the left motor speed must be between -1 and 1
 	 */
 
 	public void setMotorOutputs(double right, double left)

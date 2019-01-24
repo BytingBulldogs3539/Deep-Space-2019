@@ -17,6 +17,8 @@ public class Elevator extends Subsystem
   // Declare talons
   TalonSRX master, slave;
 
+
+  //TODO: we need to add a feature for a limit switch for two things to stop the elevator at the bottom and to zero the encoder at the bottom.
   public Elevator()
   {
     // Initiation of Elevator Talons

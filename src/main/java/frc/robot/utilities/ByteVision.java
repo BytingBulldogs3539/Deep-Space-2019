@@ -17,6 +17,9 @@ public class ByteVision
     /*
      * # sp = serial.Serial(port, baudrate=115200, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, # xonxoff=False, rtscts=False, stopbits=serial.STOPBITS_ONE, timeout=None, dsrdtr=True)
      */
+    //TODO: make a watchdog for this so if we loose the camera we don't fail our auton.
+    
+    //TODO: make this in try catch so if vision is not their we don't kill our robot.
     SerialPort visionPort = new SerialPort(115200, SerialPort.Port.kUSB, 8, SerialPort.Parity.kNone, SerialPort.StopBits.kOne);
 
     public String getData()

@@ -21,9 +21,14 @@ public class PowerDistribution
 
     private PowerDistribution()
     {
+        //TODO: We should pass the pdp CAN id in so that we don't have to change this if we use this in another robot.
         pdp = new PowerDistributionPanel(RobotMap.pdp);
     }
-
+    /**
+	 * Allows us to get the current of the pdp slot specified.
+	 * 
+	 * @param pdpSlotNumber the slot that you would like to get the current from.
+	 */
     public static double getCurrent(int pdpSlotNumber)
     {
         if (powerDistribution == null)
