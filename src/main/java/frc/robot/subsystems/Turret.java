@@ -23,10 +23,6 @@ public class Turret extends Subsystem
     master = new TalonSRX(RobotMap.turretMaster);
     slave = new TalonSRX(RobotMap.turretSlave);
 
-    // Factory default hardware to prevent unexpected behavior
-    master.configFactoryDefault();
-    slave.configFactoryDefault();
-
     /* Slave will imitate all commands sent to master e.g set() but not
      * configurations */
     slave.follow(master);

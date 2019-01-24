@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import frc.robot.commands.DriveCommand;
 import frc.robot.utilities.LogitechF310;
 import frc.robot.commands.*;
 
@@ -28,6 +27,7 @@ public class OI
     /* driver */
 
     /* operator */
+    //TODO: This NEEDS to be changed.
     operator.buttonA.whenPressed(new ElevatorPositionCommand(0));
     operator.buttonB.whenPressed(new ElevatorPositionCommand(24));
     operator.buttonY.whenPressed(new ElevatorPositionCommand(50));

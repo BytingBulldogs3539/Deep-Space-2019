@@ -15,8 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.autoncommands.AutonDrivePath;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
+import frc.robot.utilities.bbCamera;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,7 +29,7 @@ public class Robot extends TimedRobot
   public static DriveTrain drivetrain;
   public static Elevator elevator;
   public static OI oi;
-  public static UsbCamera cameraOne, cameraTwo;
+  public static bbCamera fCamera, bCamera;
 
   Command autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
@@ -44,41 +43,16 @@ public class Robot extends TimedRobot
   {
     drivetrain = new DriveTrain();
     elevator = new Elevator();
-
     oi = new OI();
+
+    //Lets start the camera servers.
+    fCamera = new bbCamera("Front", 0);
+    bCamera = new bbCamera("Back", 1);
+
     chooser.setDefaultOption("Default Auto", new AutonDrivePath("AUSA.json", true));
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
   }
-
-  // try
-  // {
-  // //
-  // cameraOne = CameraServer.getInstance().startAutomaticCapture(0);
-  // cameraOne.setResolution(240, 135);
-  // cameraOne.setFPS(20);
-  // //cameraOne.setExposureManual(50);
-  // //cameraOne.setBrightness(50);
-  // }
-  // catch (Error eeee)
-  // {
-
-  // System.out.println("issue with cameraOne ");
-  // }
-  // try
-  // {
-  // //
-  // cameraTwo = CameraServer.getInstance().startAutomaticCapture(0);
-  // cameraTwo.setResolution(240, 135);
-  // cameraTwo.setFPS(20);
-  // //cameraOne.setExposureManual(50);
-  // //cameraOne.setBrightness(50);
-  // }
-  // catch (Error eeee)
-  // {
-
-  // System.out.println("issue with cameraTwo ");
-  // }
 
   /**
    * This function is called every robot packet, no matter the mode. Use this for
@@ -140,12 +114,6 @@ public class Robot extends TimedRobot
       e.printStackTrace();
     }
 
-    /* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-     * switch(autoSelected) { case "My Auto": autonomousCommand = new
-     * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
-     * ExampleCommand(); break; } */
-
-    // schedule the autonomous command (example)
     if (autonomousCommand != null)
     {
       autonomousCommand.start();
@@ -159,6 +127,7 @@ public class Robot extends TimedRobot
   public void autonomousPeriodic()
   {
     Scheduler.getInstance().run();
+
   }
 
   @Override

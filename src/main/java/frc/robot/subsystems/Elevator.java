@@ -57,6 +57,8 @@ public class Elevator extends Subsystem
     // timeoutMs
     master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.timeoutMs);
 
+    //TODO: This may need to be changed.
+
     /* Sets phase of sensor so forward/reverse on sensor is synced with
      * forward/reverse on talon */
     master.setSensorPhase(true);
@@ -77,6 +79,8 @@ public class Elevator extends Subsystem
     master.config_kI(0, RobotMap.elevatorGains.i, RobotMap.timeoutMs); // I
     master.config_kD(0, RobotMap.elevatorGains.d, RobotMap.timeoutMs); // D
 
+
+    //TODO: This may need to be changed.
     /* Set acceleration and vcruise velocity - see documentation */
     master.configMotionCruiseVelocity(15000, RobotMap.timeoutMs);
     master.configMotionAcceleration(6000, RobotMap.timeoutMs);
@@ -88,6 +92,7 @@ public class Elevator extends Subsystem
   /* Moves elevator to given position in inches */
   public void setHeightInches(double inches)
   {
+    //TODO: This may need to be changed.
     double encoderTicks = inches / 18.84 * 4096;
     master.set(ControlMode.MotionMagic, encoderTicks);
     System.out.println("set" + encoderTicks);

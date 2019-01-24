@@ -63,12 +63,15 @@ public class DriveTrain extends Subsystem
 
     // Applies config to all Talons; more config is done in the initMotionProfile
     // method
-    fr.configAllSettings(basicTalonConfig);
+    // We don't need to configure our fr talon because we 
     fl.configAllSettings(basicTalonConfig);
     mr.configAllSettings(basicTalonConfig);
     ml.configAllSettings(basicTalonConfig);
     br.configAllSettings(basicTalonConfig);
     bl.configAllSettings(basicTalonConfig);
+
+
+    /* -------------- config the motion profiling specific settings ----------------- */
 
     TalonSRXConfiguration MotionConfig = new TalonSRXConfiguration();
 
@@ -81,7 +84,6 @@ public class DriveTrain extends Subsystem
     MotionConfig.peakCurrentDuration = 100;
     MotionConfig.voltageCompSaturation = 12.2;
 
-    /* -------------- config the master specific settings ----------------- */
     /* remote 0 will capture Pigeon IMU */
     MotionConfig.remoteFilter0.remoteSensorDeviceID = pigeon.getDeviceID();
     MotionConfig.remoteFilter0.remoteSensorSource = RemoteSensorSource.Pigeon_Yaw;
@@ -130,8 +132,7 @@ public class DriveTrain extends Subsystem
     fr.setInverted(true);
     fl.setInverted(false);
 
-    // initMotionProfile();
-
+    //Set our back and middle motors to follow our master front talons.
     ml.follow(fl);
     bl.follow(fl);
 
@@ -140,14 +141,18 @@ public class DriveTrain extends Subsystem
 
     fl.setSensorPhase(false);
     fr.setSensorPhase(true);
-    pigeon.setYaw(0);
-    fl.setSelectedSensorPosition(0);
-    fr.setSelectedSensorPosition(0);
 
     zeroEncoders();
 
+    //TODO: Check to see if we want to disable this in teleop
     fl.setNeutralMode(NeutralMode.Brake);
     fr.setNeutralMode(NeutralMode.Brake);
+
+    ml.setNeutralMode(NeutralMode.Brake);
+    mr.setNeutralMode(NeutralMode.Brake);
+
+    bl.setNeutralMode(NeutralMode.Brake);
+    br.setNeutralMode(NeutralMode.Brake);
 
   }
 
