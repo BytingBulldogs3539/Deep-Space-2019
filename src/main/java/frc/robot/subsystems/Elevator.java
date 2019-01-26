@@ -17,6 +17,41 @@ public class Elevator extends Subsystem
   // Declare talons
   TalonSRX master, slave;
 
+  public GamePieceType gamePieceType;
+
+  /**
+	 * Defines the set of levels that the elevator will lift to.
+	 * <li>{@link #CARGO}</li>
+	 * <li>{@link #HATCH}</li>
+	 * <li>{@link #NONE}</li>
+	 */
+	public enum GamePieceType
+	{
+
+		/** The intake will be set to go to Cargo levels*/
+		CARGO,
+		/** The intake will be set to go to Hatch levels*/
+		HATCH,
+    //** the intake contains neither a Hatch or a Cargo */
+    NONE
+  }
+    /**
+	 * Defines the level that the elevator will lift to.
+	 * <li>{@link #High}</li>
+	 * <li>{@link #Middle}</li>
+	 * <li>{@link #Low}</li>
+	 */
+	public enum ElevatorHeight
+	{
+
+		/** The intake will be set to go to Cargo levels*/
+		High,
+		/** The intake will be set to go to Hatch levels*/
+		Middle,
+    //** the intake contains neither a Hatch or a Cargo */
+    Low
+	}
+
   //TODO: we need to add a feature for a limit switch for two things to stop the elevator at the bottom and to zero the encoder at the bottom.
   public Elevator()
   {
@@ -101,9 +136,42 @@ public class Elevator extends Subsystem
     master.set(ControlMode.MotionMagic, encoderTicks);
     System.out.println("set" + encoderTicks);
   }
+  /**
+	 * Allows us to move our elevator using motion magic to the specified height in inches.
+   * @param inches The height (in inches) that the elevator will move to.
+	 */  
+  public void setHeightCargo(ElevatorHeight height)
+  {
+    switch(height)
+    {
+      case High:
+        setHeightInches(RobotMap.CargoHigh);
+        break;
+      case Middle:
+        setHeightInches(RobotMap.CargoMiddle);
+        break;
+      case Low:
+        setHeightInches(RobotMap.CargoLow);
+        break;
+    }
+  }
 
+  public void setHeightHatch(ElevatorHeight height)
+  {
+    switch(height)
+    {
+      case High:
+        setHeightInches(RobotMap.HatchHigh);
+        break;
+      case Middle:
+        setHeightInches(RobotMap.HatchMiddle);
+        break;
+      case Low:
+        setHeightInches(RobotMap.HatchLow);
+        break;
+    }
+  }
   //TODO: Add a feature for override control.
-
   @Override
   public void initDefaultCommand()
   {

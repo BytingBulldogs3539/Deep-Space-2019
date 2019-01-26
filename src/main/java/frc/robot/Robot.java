@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.autoncommands.AutonDrivePath;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Elevator.GamePieceType;
 import frc.robot.utilities.bbCamera;
 
 /**
@@ -32,7 +33,11 @@ public class Robot extends TimedRobot
   public static bbCamera fCamera, bCamera;
 
   Command autonomousCommand;
+  //TODO: Add a chooser for what we start with... (CARGO / HATCH ... none?)
+  //Used to select the auton.
   SendableChooser<Command> chooser = new SendableChooser<>();
+  //Used to select what game piece we start with.
+  SendableChooser<GamePieceType> gamePieceChooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -46,9 +51,13 @@ public class Robot extends TimedRobot
     oi = new OI();
 
     //Lets start the camera servers.
-    //TODO: this needs to be tested.
+    //TODO: test to make sure that both the front and the back camera are always the front and back camera.
     fCamera = new bbCamera("Front", 0);
     bCamera = new bbCamera("Back", 1);
+
+
+    gamePieceChooser.addOption("Hatch", GamePieceType.HATCH);
+    gamePieceChooser.addOption("Cargo", GamePieceType.CARGO);
 
     chooser.setDefaultOption("Default Auto", new AutonDrivePath("AUSA.json", true));
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -102,6 +111,9 @@ public class Robot extends TimedRobot
   {
     autonomousCommand = chooser.getSelected();
 
+    //We need to get the feed back from the drivers and give it to our elevator.
+    elevator.gamePieceType = gamePieceChooser.getSelected();
+    //TODO: Think about changing this to not recreate the object on init and add a button to refresh the command instead.
     try
     {
       autonomousCommand = autonomousCommand.getClass().newInstance();
@@ -129,7 +141,12 @@ public class Robot extends TimedRobot
   {
     Scheduler.getInstance().run();
 
-    //TODO: We need to add a function to kill our auton somewhere in here.
+    //TODO: Test this function.
+
+    if(oi.driver.buttonSTART.get())
+    {
+      autonomousCommand.cancel();
+    }
 
   }
 

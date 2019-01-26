@@ -2,22 +2,32 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.*;
+import frc.robot.subsystems.Elevator.ElevatorHeight;
+import frc.robot.subsystems.Elevator.GamePieceType;
 
 public class ElevatorPositionCommand extends Command
 {
-  private double inches;
+  private ElevatorHeight height;
 
-  public ElevatorPositionCommand(double inches)
+  public ElevatorPositionCommand(ElevatorHeight height)
   {
     requires(Robot.elevator);
-    this.inches = inches;
+    this.height = height;
   }
 
   @Override
   protected void initialize()
   {
-    //TODO: Think about using enums instead, as well as use an if statement to check if we are holding a cargo or a hatch.
-    Robot.elevator.setHeightInches(inches);
+    //TODO: TEST!
+    if(Robot.elevator.gamePieceType == GamePieceType.CARGO)
+    {
+      Robot.elevator.setHeightCargo(height);
+    }
+    if(Robot.elevator.gamePieceType == GamePieceType.HATCH)
+    {
+      Robot.elevator.setHeightHatch(height);
+    }
+    
   }
 
   @Override

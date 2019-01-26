@@ -22,8 +22,18 @@ public class RobotMap
 
     /* Evelator ---------- */
 
+    //List of heights that the elevator can go to in inches while holding a cargo
+    public static double CargoHigh = 0.0;
+    public static double CargoMiddle = 0.0;
+    public static double CargoLow = 0.0;
+
+    //List of heights that the elevator can go to in inches while holding a cargo
+    public static double HatchHigh = 0.0;
+    public static double HatchMiddle = 0.0;
+    public static double HatchLow = 0.0;
+
     // List of TalonSRX CAN ID numbers
-    public static final int ElevatorMaster = 1;
+    public static final int ElevatorMaster = 55;
     public static final int ElevatorSlave = 56;
 
     /* Manipulator ---------- */

@@ -9,6 +9,7 @@ package frc.robot;
 
 import frc.robot.utilities.LogitechF310;
 import frc.robot.commands.*;
+import frc.robot.subsystems.Elevator.ElevatorHeight;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -28,9 +29,9 @@ public class OI
 
     /* operator */
     
-    //TODO: This NEEDS to be changed.
-    operator.buttonA.whenPressed(new ElevatorPositionCommand(0));
-    operator.buttonB.whenPressed(new ElevatorPositionCommand(24));
-    operator.buttonY.whenPressed(new ElevatorPositionCommand(50));
+    //TODO: This NEEDS to be TESTED.
+    operator.buttonA.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
+    operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
+    operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
   }
 }
