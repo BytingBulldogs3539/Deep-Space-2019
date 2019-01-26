@@ -61,6 +61,10 @@ public class RobotMap
     public static final int turretMaster = 53;
     public static final int turretSlave = 52;
 
+    // Gear ratios for lazy suzan
+    public static final int largeGear = 60;
+    public static final int smallGear = 16;
+
     /* Verticate ------------------------------ */
 
     // Amount of time to wait before reporting to Driver Station that action failed
