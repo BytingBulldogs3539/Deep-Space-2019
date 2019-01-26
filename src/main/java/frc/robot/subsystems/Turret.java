@@ -79,7 +79,7 @@ public class Turret extends Subsystem
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
   }
-  
+
   public void setRotation(double degrees)
   {
     double rotations = degrees / 360 * (RobotMap.largeGear / RobotMap.smallGear);
@@ -90,7 +90,7 @@ public class Turret extends Subsystem
 
   public double encoderTicksToDegrees(double encoderTicks)
   {
-    double irotations = encoderTicks * 360 * (RobotMap.smallGear / robotMap.largeGear);
+    double irotations = encoderTicks * 360 * (RobotMap.smallGear / RobotMap.largeGear);
     double degrees = irotations / 4096;
 
     return degrees;
