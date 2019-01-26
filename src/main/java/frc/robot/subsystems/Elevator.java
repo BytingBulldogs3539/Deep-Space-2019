@@ -141,7 +141,7 @@ public class Elevator extends Subsystem
   public void setHeightInches(double inches)
   {
     // TODO: This may need to be changed.
-    double encoderTicks = inches / 18.84 * 4096;
+    double encoderTicks = inches / 3.63 * 4096;
     master.set(ControlMode.MotionMagic, encoderTicks);
     System.out.println("set" + encoderTicks);
   }
