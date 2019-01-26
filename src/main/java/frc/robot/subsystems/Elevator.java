@@ -60,8 +60,8 @@ public class Elevator extends Subsystem
   public Elevator()
   {
     // Initiation of Elevator Talons
-    master = new TalonSRX(RobotMap.ElevatorMaster);
-    slave = new TalonSRX(RobotMap.ElevatorSlave);
+    master = new TalonSRX(RobotMap.elevatorMaster);
+    slave = new TalonSRX(RobotMap.elevatorSlave);
 
     cargoLimitSwitch = new DigitalInput(RobotMap.cargoLimitSwitchPort);
     panelLimitSwitch = new DigitalInput(RobotMap.panelLimitSwitchPort);
@@ -158,13 +158,13 @@ public class Elevator extends Subsystem
     switch (height)
     {
     case High:
-      setHeightInches(RobotMap.CargoHigh);
+      setHeightInches(RobotMap.cargoHigh);
       break;
     case Middle:
-      setHeightInches(RobotMap.CargoMiddle);
+      setHeightInches(RobotMap.cargoMiddle);
       break;
     case Low:
-      setHeightInches(RobotMap.CargoLow);
+      setHeightInches(RobotMap.cargoLow);
       break;
     }
   }
@@ -174,13 +174,13 @@ public class Elevator extends Subsystem
     switch (height)
     {
     case High:
-      setHeightInches(RobotMap.HatchHigh);
+      setHeightInches(RobotMap.hatchHigh);
       break;
     case Middle:
-      setHeightInches(RobotMap.HatchMiddle);
+      setHeightInches(RobotMap.hatchMiddle);
       break;
     case Low:
-      setHeightInches(RobotMap.HatchLow);
+      setHeightInches(RobotMap.hatchLow);
       break;
     }
   }
