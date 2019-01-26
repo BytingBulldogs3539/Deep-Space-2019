@@ -10,6 +10,8 @@ import frc.robot.utilities.*;
  */
 public class RobotMap
 {
+    // Pneumatics
+    public static final int pcm = 0;
     /* DriveTrain ------------------------------ */
 
     /**
@@ -71,4 +73,6 @@ public class RobotMap
     public final static int sensorUnitsPerRot = 4096;
     public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static Gains turretGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
+    public static final int manipulatorOn = 1;
+    public static final int manipulatorOff = 0;
 }

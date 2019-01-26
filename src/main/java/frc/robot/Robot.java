@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.autoncommands.AutonDrivePath;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.Elevator.GamePieceType;
 import frc.robot.utilities.bbCamera;
 
@@ -29,6 +30,7 @@ public class Robot extends TimedRobot
 {
   public static DriveTrain drivetrain;
   public static Elevator elevator;
+  public static Manipulator manipulator;
   public static OI oi;
   public static bbCamera fCamera, bCamera;
 
@@ -48,6 +50,7 @@ public class Robot extends TimedRobot
   {
     drivetrain = new DriveTrain();
     elevator = new Elevator();
+    manipulator = new Manipulator();
     oi = new OI();
 
     // Lets start the camera servers.
