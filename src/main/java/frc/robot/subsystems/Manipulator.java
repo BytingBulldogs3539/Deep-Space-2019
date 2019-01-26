@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.utilities.bbDoubleSolenoid;
@@ -12,13 +11,14 @@ import frc.robot.utilities.bbDoubleSolenoid;
  */
 public class Manipulator extends Subsystem
 {
-  bbDoubleSolenoid ejectorSolenoid;
+  bbDoubleSolenoid intakeSolenoid;
   TalonSRX master;
+
 
   public Manipulator()
   {
     master = new TalonSRX(RobotMap.manipulatorMaster);
-    ejectorSolenoid = new bbDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
+    intakeSolenoid = new bbDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
   }
   // TODO: add limit switches to tell if we are holding a cargo or hatch, add way
   // of controlling the motor, and configure the motor with basic talon config.
@@ -28,14 +28,13 @@ public class Manipulator extends Subsystem
   {
   }
 
-  public void down()
+  public void trigger(boolean shouldActive)//True for down; False for up
   {
-    ejectorSolenoid.set(Value.kForward);
-  }
+    if(shouldActive)
+      intakeSolenoid.forward();
+    else
+      intakeSolenoid.reverse();
 
-  public void up()
-  {
-    ejectorSolenoid.set(Value.kReverse);
   }
 
 }

@@ -41,11 +41,14 @@ public class RobotMap
     public static final int panelLimitSwitchPort = 1;
 
     // List of heights that the elevator can go to (in inches) while holding a cargo
+    //TODO: Change these when we get the robot.
+
     public static double cargoHigh = 0.0;
     public static double cargoMiddle = 0.0;
     public static double cargoLow = 0.0;
 
     // List of heights that the elevator can go to (in inches) while holding a cargo
+    //TODO: Change these when we get the robot.
     public static double hatchHigh = 0.0;
     public static double hatchMiddle = 0.0;
     public static double hatchLow = 0.0;
