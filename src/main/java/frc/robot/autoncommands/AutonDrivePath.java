@@ -7,6 +7,8 @@
 
 package frc.robot.autoncommands;
 
+import com.ctre.phoenix.motion.BufferedTrajectoryPointStream;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.motionprofiling.*;
@@ -16,12 +18,14 @@ public class AutonDrivePath extends Command
   String fileName;
   String fullURL;
   boolean useIsFinished;
+  BufferedTrajectoryPointStream buffer;
 
   public AutonDrivePath(String fileName, boolean useIsFinished)
   {
     requires(Robot.drivetrain);
     this.fileName = fileName;
     this.useIsFinished = useIsFinished;
+    buffer = MotionProfiling.initBuffer(fileName);
 
   }
 
@@ -31,7 +35,7 @@ public class AutonDrivePath extends Command
   {
     Robot.drivetrain.zeroEncoders();
     //TODO: We need to change this so that we can load the file and its points before we try to start motion profiling for a faster start.
-    Robot.drivetrain.startMotionProfile(MotionProfiling.initBuffer(fileName));
+    Robot.drivetrain.startMotionProfile(buffer);
   }
 
   // Called repeatedly when this Command is scheduled to run

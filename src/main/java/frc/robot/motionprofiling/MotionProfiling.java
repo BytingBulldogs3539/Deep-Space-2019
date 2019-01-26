@@ -40,8 +40,7 @@ public class MotionProfiling
             double velocityRPM = profile[i][1];
             int durationMilliseconds = (int) profile[i][2];
 
-            /* to get the turn target, lets just scale from 0 deg to caller's final deg
-             * linearizly */
+            /* to get the turn target;*/
             double targetTurnDeg = profile[i][3];
 
             /* for each point, fill our structure and pass it to API */
