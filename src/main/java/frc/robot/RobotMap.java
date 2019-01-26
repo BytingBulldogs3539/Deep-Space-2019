@@ -10,7 +10,7 @@ import frc.robot.utilities.*;
  */
 public class RobotMap
 {
-    /* DriveTrain ---------- */
+    /* DriveTrain ------------------------------ */
 
     // List of TalonSRX CAN ID numbers
     public static final int FRTalon = 4;
@@ -20,14 +20,18 @@ public class RobotMap
     public static final int BRTalon = 1;
     public static final int BLTalon = 18;
 
-    /* Evelator ---------- */
+    /* Evelator ------------------------------ */
 
-    //List of heights that the elevator can go to in inches while holding a cargo
+    // DIO number of port that limit switch is plugged into
+    public static final int cargoLimitSwitchPort = 0;
+    public static final int panelLimitSwitchPort = 1;
+
+    // List of heights that the elevator can go to (in inches) while holding a cargo
     public static double CargoHigh = 0.0;
     public static double CargoMiddle = 0.0;
     public static double CargoLow = 0.0;
 
-    //List of heights that the elevator can go to in inches while holding a cargo
+    // List of heights that the elevator can go to (in inches) while holding a cargo
     public static double HatchHigh = 0.0;
     public static double HatchMiddle = 0.0;
     public static double HatchLow = 0.0;
@@ -36,14 +40,18 @@ public class RobotMap
     public static final int ElevatorMaster = 55;
     public static final int ElevatorSlave = 56;
 
-    /* Manipulator ---------- */
+    /* Manipulator ------------------------------ */
+
+    // List of TalonSRX CAN ID numbers
     public static final int manipulatorMaster = 54;
 
-    /* Turret ---------- */
+    /* Turret ------------------------------ */
+
+    // List of TalonSRX CAN ID numbers
     public static final int turretMaster = 53;
     public static final int turretSlave = 52;
 
-    /* Verticate ---------- */
+    /* Verticate ------------------------------ */
 
     // Amount of time to wait before reporting to Driver Station that action failed
     public static final int timeoutMs = 20;
@@ -51,8 +59,7 @@ public class RobotMap
     // PDP
     public static final int pdp = 0;
 
-    /* Gains / PIDs ---------- */
+    /* Gains / PIDs ------------------------------ */
     public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static Gains turretGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
-
 }

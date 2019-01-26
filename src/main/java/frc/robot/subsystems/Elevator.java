@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -19,45 +20,51 @@ public class Elevator extends Subsystem
 
   public GamePieceType gamePieceType;
 
-  /**
-	 * Defines the set of levels that the elevator will lift to.
-	 * <li>{@link #CARGO}</li>
-	 * <li>{@link #HATCH}</li>
-	 * <li>{@link #NONE}</li>
-	 */
-	public enum GamePieceType
-	{
+  private DigitalInput cargoLimitSwitch;
+  private DigitalInput panelLimitSwitch;
 
-		/** The intake will be set to go to Cargo levels*/
-		CARGO,
-		/** The intake will be set to go to Hatch levels*/
-		HATCH,
-    //** the intake contains neither a Hatch or a Cargo */
+  /**
+   * Defines the set of levels that the elevator will lift to.
+   * <li>{@link #CARGO}</li>
+   * <li>{@link #HATCH}</li>
+   * <li>{@link #NONE}</li>
+   */
+  public enum GamePieceType
+  {
+    /** The intake will be set to go to Cargo levels */
+    CARGO,
+    /** The intake will be set to go to Hatch levels */
+    HATCH,
+    /** the intake contains neither a Hatch or a Cargo */
     NONE
   }
-    /**
-	 * Defines the level that the elevator will lift to.
-	 * <li>{@link #High}</li>
-	 * <li>{@link #Middle}</li>
-	 * <li>{@link #Low}</li>
-	 */
-	public enum ElevatorHeight
-	{
 
-		/** The intake will be set to go to Cargo levels*/
-		High,
-		/** The intake will be set to go to Hatch levels*/
-		Middle,
-    //** the intake contains neither a Hatch or a Cargo */
+  /**
+   * Defines the level that the elevator will lift to.
+   * <li>{@link #High}</li>
+   * <li>{@link #Middle}</li>
+   * <li>{@link #Low}</li>
+   */
+  public enum ElevatorHeight
+  {
+    /** The intake will be set to go to Cargo levels */
+    High,
+    /** The intake will be set to go to Hatch levels */
+    Middle,
+    /** The intake contains neither a Hatch or a Cargo */
     Low
-	}
+  }
 
-  //TODO: we need to add a feature for a limit switch for two things to stop the elevator at the bottom and to zero the encoder at the bottom.
+  // TODO: we need to add a feature for a limit switch for two things to stop the
+  // elevator at the bottom and to zero the encoder at the bottom.
   public Elevator()
   {
     // Initiation of Elevator Talons
     master = new TalonSRX(RobotMap.ElevatorMaster);
     slave = new TalonSRX(RobotMap.ElevatorSlave);
+
+    cargoLimitSwitch = new DigitalInput(RobotMap.cargoLimitSwitchPort);
+    panelLimitSwitch = new DigitalInput(RobotMap.panelLimitSwitchPort);
 
     // Factory default hardware to prevent unexpected behavior
     master.configFactoryDefault();
@@ -93,7 +100,7 @@ public class Elevator extends Subsystem
     // timeoutMs
     master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.timeoutMs);
 
-    //TODO: This may need to be changed.
+    // TODO: This may need to be changed.
 
     /* Sets phase of sensor so forward/reverse on sensor is synced with
      * forward/reverse on talon */
@@ -115,8 +122,7 @@ public class Elevator extends Subsystem
     master.config_kI(0, RobotMap.elevatorGains.i, RobotMap.timeoutMs); // I
     master.config_kD(0, RobotMap.elevatorGains.d, RobotMap.timeoutMs); // D
 
-
-    //TODO: This may need to be changed.
+    // TODO: This may need to be changed.
     /* Set acceleration and vcruise velocity - see documentation */
     master.configMotionCruiseVelocity(15000, RobotMap.timeoutMs);
     master.configMotionAcceleration(6000, RobotMap.timeoutMs);
@@ -126,52 +132,60 @@ public class Elevator extends Subsystem
   }
 
   /**
-	 * Allows us to move our elevator using motion magic to the specified height in inches.
-   * @param inches The height (in inches) that the elevator will move to.
-	 */  
+   * Allows us to move our elevator using motion magic to the specified height in
+   * inches.
+   * 
+   * @param inches
+   *                 The height (in inches) that the elevator will move to.
+   */
   public void setHeightInches(double inches)
   {
-    //TODO: This may need to be changed.
+    // TODO: This may need to be changed.
     double encoderTicks = inches / 18.84 * 4096;
     master.set(ControlMode.MotionMagic, encoderTicks);
     System.out.println("set" + encoderTicks);
   }
+
   /**
-	 * Allows us to move our elevator using motion magic to the specified height in inches.
-   * @param inches The height (in inches) that the elevator will move to.
-	 */  
+   * Allows us to move our elevator using motion magic to the specified height in
+   * inches.
+   * 
+   * @param inches
+   *                 The height (in inches) that the elevator will move to.
+   */
   public void setHeightCargo(ElevatorHeight height)
   {
-    switch(height)
+    switch (height)
     {
-      case High:
-        setHeightInches(RobotMap.CargoHigh);
-        break;
-      case Middle:
-        setHeightInches(RobotMap.CargoMiddle);
-        break;
-      case Low:
-        setHeightInches(RobotMap.CargoLow);
-        break;
+    case High:
+      setHeightInches(RobotMap.CargoHigh);
+      break;
+    case Middle:
+      setHeightInches(RobotMap.CargoMiddle);
+      break;
+    case Low:
+      setHeightInches(RobotMap.CargoLow);
+      break;
     }
   }
 
   public void setHeightHatch(ElevatorHeight height)
   {
-    switch(height)
+    switch (height)
     {
-      case High:
-        setHeightInches(RobotMap.HatchHigh);
-        break;
-      case Middle:
-        setHeightInches(RobotMap.HatchMiddle);
-        break;
-      case Low:
-        setHeightInches(RobotMap.HatchLow);
-        break;
+    case High:
+      setHeightInches(RobotMap.HatchHigh);
+      break;
+    case Middle:
+      setHeightInches(RobotMap.HatchMiddle);
+      break;
+    case Low:
+      setHeightInches(RobotMap.HatchLow);
+      break;
     }
   }
-  //TODO: Add a feature for override control.
+
+  // TODO: Add a feature for override control.
   @Override
   public void initDefaultCommand()
   {

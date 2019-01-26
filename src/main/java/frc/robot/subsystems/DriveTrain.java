@@ -20,6 +20,7 @@ import com.ctre.phoenix.motion.*;
 import frc.robot.RobotMap;
 import frc.robot.motionprofiling.*;
 import frc.robot.utilities.*;
+
 /**
  * Six mini cim, six wheel tank
  */
@@ -41,13 +42,15 @@ public class DriveTrain extends Subsystem
     ml = new TalonSRX(RobotMap.MLTalon);
     br = new TalonSRX(RobotMap.BRTalon);
     bl = new TalonSRX(RobotMap.BLTalon);
-    //TODO: Add pigeon can id to robotmap.
+    // TODO: Add pigeon can id to robotmap.
     pigeon = new PigeonIMU(0);
 
-    //We only use two motor drive train because the rest of the motors follow our "master talons"
+    // We only use two motor drive train because the rest of the motors follow our
+    // "master talons"
     drive = new Drive(fr, fl);
 
-    //TODO: Think about adding a incase if pigeon is not plugged in or not responding.
+    // TODO: Think about adding a incase if pigeon is not plugged in or not
+    // responding.
     if (pigeon.getState() != PigeonState.Ready || pigeon.getState() != PigeonState.Initializing)
     {
       System.out.println("PIGEON READY!");
@@ -68,15 +71,15 @@ public class DriveTrain extends Subsystem
 
     // Applies config to all Talons
 
-    // We don't need to configure our fr talon because we configure it later with more motion profiling stuff.
+    // We don't need to configure our fr talon because we configure it later with
+    // more motion profiling stuff.
     fl.configAllSettings(basicTalonConfig);
     mr.configAllSettings(basicTalonConfig);
     ml.configAllSettings(basicTalonConfig);
     br.configAllSettings(basicTalonConfig);
     bl.configAllSettings(basicTalonConfig);
 
-
-    /* -------------- config the motion profiling specific settings ----------------- */
+    /* --- config the motion profiling specific settings --- */
 
     TalonSRXConfiguration MotionConfig = new TalonSRXConfiguration();
 
@@ -95,15 +98,12 @@ public class DriveTrain extends Subsystem
     /* remote 1 will capture the quad encoder on left talon */
     MotionConfig.remoteFilter1.remoteSensorDeviceID = fl.getDeviceID();
     MotionConfig.remoteFilter1.remoteSensorSource = RemoteSensorSource.TalonSRX_SelectedSensor;
-    /*
-     * drive-position is our local quad minus left-talon's selected sens. depending on sensor orientation, it could be the sum instead
-     */
+    /* drive-position is our local quad minus left-talon's selected sens. depending
+     * on sensor orientation, it could be the sum instead */
     MotionConfig.diff0Term = FeedbackDevice.QuadEncoder;
     MotionConfig.diff1Term = FeedbackDevice.RemoteSensor1;
     MotionConfig.primaryPID.selectedFeedbackSensor = FeedbackDevice.SensorDifference;
-    MotionConfig.primaryPID.selectedFeedbackCoefficient = 0.5; /*
-                                                                * divide by 2 so we servo sensor-average, intead of sum
-                                                                */
+    MotionConfig.primaryPID.selectedFeedbackCoefficient = 0.5; /* divide by 2 so we servo sensor-average, intead of sum */
     /* turn position will come from the pigeon */
     MotionConfig.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.RemoteSensor0;
     /* rest of the configs */
@@ -122,7 +122,7 @@ public class DriveTrain extends Subsystem
     MotionConfig.slot1.integralZone = (int) Constants.kGains_MotProfAngle.iZone;
     MotionConfig.slot1.closedLoopPeakOutput = Constants.kGains_MotProfAngle.peakOutput;
 
-    //Apply the configuration to the right master talon
+    // Apply the configuration to the right master talon
     fr.configAllSettings(MotionConfig);
 
     /* speed up the target polling for PID[0] and PID-aux[1] */
@@ -138,7 +138,7 @@ public class DriveTrain extends Subsystem
     fr.setInverted(true);
     fl.setInverted(false);
 
-    //Set our back and middle motors to follow our master front talons.
+    // Set our back and middle motors to follow our master front talons.
     ml.follow(fl);
     bl.follow(fl);
 
@@ -150,7 +150,7 @@ public class DriveTrain extends Subsystem
 
     zeroEncoders();
 
-    //TODO: Check to see if we want to disable this in teleop
+    // TODO: Check to see if we want to disable this in teleop
     fl.setNeutralMode(NeutralMode.Brake);
     fr.setNeutralMode(NeutralMode.Brake);
 
@@ -161,11 +161,14 @@ public class DriveTrain extends Subsystem
     br.setNeutralMode(NeutralMode.Brake);
 
   }
+
   /**
-	 * Allows us to start the motion profile.
-	 * 
-	 * @param buffer The BufferedTrjaectoryPointStream that contains all of our points.
-	 */
+   * Allows us to start the motion profile.
+   * 
+   * @param buffer
+   *                 The BufferedTrjaectoryPointStream that contains all of our
+   *                 points.
+   */
   public void startMotionProfile(BufferedTrajectoryPointStream buffer)
   {
     fr.startMotionProfile(buffer, 10, ControlMode.MotionProfileArc);
@@ -173,8 +176,8 @@ public class DriveTrain extends Subsystem
   }
 
   /**
-	 * Sets our master talons to a disabled state so they do nothing.
-	 */
+   * Sets our master talons to a disabled state so they do nothing.
+   */
   public void neutralOutput()
   {
     fr.neutralOutput();
@@ -182,27 +185,31 @@ public class DriveTrain extends Subsystem
   }
 
   /**
-	 * Allows us to tell if the motion profile is done running.
-	 */
+   * Allows us to tell if the motion profile is done running.
+   */
   public boolean isMotionProfileFinished()
   {
     return fr.isMotionProfileFinished();
   }
 
   /**
-	 * Allows us to get the current of the pdp slot specified.
-	 * 
-	 * @param speed The speed the robot will travel forward/backward a value between 1 and -1 (normally the left stick y axis).
-   * @param turn The speed the robot will travel right/left a value between 1 and -1 (normally the right stick x axis).
-	 */
+   * Allows us to get the current of the pdp slot specified.
+   * 
+   * @param speed
+   *                The speed the robot will travel forward/backward a value
+   *                between 1 and -1 (normally the left stick y axis).
+   * @param turn
+   *                The speed the robot will travel right/left a value between 1
+   *                and -1 (normally the right stick x axis).
+   */
   public void driveArcade(double speed, double turn)
   {
     drive.driveArcade(speed, turn);
   }
 
   /**
-	 * Allows us to zero all of the encoders/sensors associated with the drivetrain.
-	 */
+   * Allows us to zero all of the encoders/sensors associated with the drivetrain.
+   */
   public void zeroEncoders()
   {
     pigeon.setYaw(0);
@@ -215,13 +222,12 @@ public class DriveTrain extends Subsystem
 
     fl.getSensorCollection().setPulseWidthPosition(0, 10);
     fl.getSensorCollection().setQuadraturePosition(0, 10);
-
   }
+
   @Override
   public void initDefaultCommand()
   {
-    //If nothing else is running go back to running the DriveCommand.
+    // If nothing else is running go back to running the DriveCommand.
     setDefaultCommand(new DriveCommand());
   }
-
 }
