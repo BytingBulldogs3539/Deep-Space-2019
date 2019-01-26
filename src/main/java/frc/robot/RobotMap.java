@@ -10,6 +10,10 @@ import frc.robot.utilities.*;
  */
 public class RobotMap
 {
+    /* Robot ------------------------------ */
+    public static final int pdp = 0;
+    public static final int encTicksPerRot = 4096;
+
     /* DriveTrain ------------------------------ */
 
     /**
@@ -17,7 +21,8 @@ public class RobotMap
      * 
      * @link https://github.com/CrossTheRoadElec/Phoenix-Documentation#what-are-the-units-of-my-sensor
      */
-    // TODO: Change this because our encoder is not on the output shaft :( CAD WHY!
+
+    // TODO: Change this because our encoder is not on the output shaft :( CAD WHY?
     public final static int sensorUnitsPerRotDriveTrain = (int) (4096 * 3.86);
 
     // List of TalonSRX CAN ID numbers
@@ -35,18 +40,18 @@ public class RobotMap
     public static final int panelLimitSwitchPort = 1;
 
     // List of heights that the elevator can go to (in inches) while holding a cargo
-    public static double CargoHigh = 0.0;
-    public static double CargoMiddle = 0.0;
-    public static double CargoLow = 0.0;
+    public static double cargoHigh = 0.0;
+    public static double cargoMiddle = 0.0;
+    public static double cargoLow = 0.0;
 
     // List of heights that the elevator can go to (in inches) while holding a cargo
-    public static double HatchHigh = 0.0;
-    public static double HatchMiddle = 0.0;
-    public static double HatchLow = 0.0;
+    public static double hatchHigh = 0.0;
+    public static double hatchMiddle = 0.0;
+    public static double hatchLow = 0.0;
 
     // List of TalonSRX CAN ID numbers
-    public static final int ElevatorMaster = 55;
-    public static final int ElevatorSlave = 56;
+    public static final int elevatorMaster = 55;
+    public static final int elevatorSlave = 56;
 
     /* Manipulator ------------------------------ */
 
@@ -60,12 +65,13 @@ public class RobotMap
     public static final int turretSlave = 52;
 
     /* Verticate ------------------------------ */
+    public static final int verticateTopMaster = 53;
+    public static final int verticateTopSlave = 52;
+    public static final int verticateBottomMaster = 53;
+    public static final int verticateBottomSlave = 52;
 
     // Amount of time to wait before reporting to Driver Station that action failed
     public static final int timeoutMs = 20;
-
-    // PDP
-    public static final int pdp = 0;
 
     /* Gains / PIDs ------------------------------ */
     public final static int sensorUnitsPerRot = 4096;
