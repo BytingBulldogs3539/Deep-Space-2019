@@ -79,8 +79,7 @@ public class Turret extends Subsystem
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
   }
-  //TODO: change naming because our rotation does not have a height also change to degrees :P
-
+  
   public void setRotation(double degrees)
   {
     double rotations = degrees / 360 * (RobotMap.largeGear / RobotMap.smallGear);
