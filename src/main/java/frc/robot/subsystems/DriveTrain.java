@@ -107,20 +107,20 @@ public class DriveTrain extends Subsystem
     /* turn position will come from the pigeon */
     MotionConfig.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.RemoteSensor0;
     /* rest of the configs */
-    MotionConfig.neutralDeadband = Constants.kNeutralDeadband; /* 0.1 % super small for best low-speed control */
-    MotionConfig.slot0.kF = Constants.kGains_MotProf.f;
-    MotionConfig.slot0.kP = Constants.kGains_MotProf.p;
-    MotionConfig.slot0.kI = Constants.kGains_MotProf.i;
-    MotionConfig.slot0.kD = Constants.kGains_MotProf.d;
-    MotionConfig.slot0.integralZone = (int) Constants.kGains_MotProf.iZone;
-    MotionConfig.slot0.closedLoopPeakOutput = Constants.kGains_MotProf.peakOutput;
+    MotionConfig.neutralDeadband = Constants.neutralDeadband; /* 0.1 % super small for best low-speed control */
+    MotionConfig.slot0.kF = Constants.gains_MotProf.f;
+    MotionConfig.slot0.kP = Constants.gains_MotProf.p;
+    MotionConfig.slot0.kI = Constants.gains_MotProf.i;
+    MotionConfig.slot0.kD = Constants.gains_MotProf.d;
+    MotionConfig.slot0.integralZone = (int) Constants.gains_MotProf.iZone;
+    MotionConfig.slot0.closedLoopPeakOutput = Constants.gains_MotProf.peakOutput;
 
-    MotionConfig.slot1.kF = Constants.kGains_MotProfAngle.f;
-    MotionConfig.slot1.kP = Constants.kGains_MotProfAngle.p;
-    MotionConfig.slot1.kI = Constants.kGains_MotProfAngle.i;
-    MotionConfig.slot1.kD = Constants.kGains_MotProfAngle.d;
-    MotionConfig.slot1.integralZone = (int) Constants.kGains_MotProfAngle.iZone;
-    MotionConfig.slot1.closedLoopPeakOutput = Constants.kGains_MotProfAngle.peakOutput;
+    MotionConfig.slot1.kF = Constants.gains_MotProfAngle.f;
+    MotionConfig.slot1.kP = Constants.gains_MotProfAngle.p;
+    MotionConfig.slot1.kI = Constants.gains_MotProfAngle.i;
+    MotionConfig.slot1.kD = Constants.gains_MotProfAngle.d;
+    MotionConfig.slot1.integralZone = (int) Constants.gains_MotProfAngle.iZone;
+    MotionConfig.slot1.closedLoopPeakOutput = Constants.gains_MotProfAngle.peakOutput;
 
     // Apply the configuration to the right master talon
     fr.configAllSettings(MotionConfig);

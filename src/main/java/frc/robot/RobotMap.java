@@ -12,6 +12,14 @@ public class RobotMap
 {
     /* DriveTrain ------------------------------ */
 
+    /**
+     * How many sensor units per rotation. Using CTRE Magnetic Encoder.
+     * 
+     * @link https://github.com/CrossTheRoadElec/Phoenix-Documentation#what-are-the-units-of-my-sensor
+     */
+    // TODO: Change this because our encoder is not on the output shaft :( CAD WHY!
+    public final static int sensorUnitsPerRotDriveTrain = (int) (4096 * 3.86);
+
     // List of TalonSRX CAN ID numbers
     public static final int FRTalon = 4;
     public static final int FLTalon = 9;
@@ -60,6 +68,7 @@ public class RobotMap
     public static final int pdp = 0;
 
     /* Gains / PIDs ------------------------------ */
+    public final static int sensorUnitsPerRot = 4096;
     public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static Gains turretGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
 }

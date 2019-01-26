@@ -12,6 +12,7 @@ import java.io.File;
 import com.ctre.phoenix.motion.*;
 
 import frc.robot.utilities.*;
+import frc.robot.RobotMap;
 
 public class MotionProfiling
 {
@@ -40,24 +41,24 @@ public class MotionProfiling
             double velocityRPM = profile[i][1];
             int durationMilliseconds = (int) profile[i][2];
 
-            /* to get the turn target;*/
+            /* to get the turn target; */
             double targetTurnDeg = profile[i][3];
 
             /* for each point, fill our structure and pass it to API */
             point.timeDur = durationMilliseconds;
 
             /* drive part */
-            point.position = direction * positionRot * Constants.kSensorUnitsPerRot; // Rotations => sensor units
-            point.velocity = direction * velocityRPM * Constants.kSensorUnitsPerRot / 600.0; // RPM => units per 100ms
+            point.position = direction * positionRot * RobotMap.sensorUnitsPerRotDriveTrain; // Rotations => sensor units
+            point.velocity = direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0; // RPM => units per 100ms
             point.arbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
             /* turn part */
-            point.auxiliaryPos = targetTurnDeg * Constants.kTurnUnitsPerDeg; // Convert deg to remote sensor units
+            point.auxiliaryPos = targetTurnDeg * Constants.turnUnitsPerDeg; // Convert deg to remote sensor units
             point.auxiliaryVel = 0; // advanced teams can also provide the target velocity
             point.auxiliaryArbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
-            point.profileSlotSelect0 = Constants.kPrimaryPIDSlot; /* which set of gains would you like to use [0,3]? */
-            point.profileSlotSelect1 = Constants.kAuxPIDSlot; /* auxiliary PID [0,1], leave zero */
+            point.profileSlotSelect0 = Constants.primaryPIDSlot; /* which set of gains would you like to use [0,3]? */
+            point.profileSlotSelect1 = Constants.auxPIDSlot; /* auxiliary PID [0,1], leave zero */
             point.zeroPos = false; /* don't reset sensor, this is done elsewhere since we have multiple sensors */
             point.isLastPoint = ((i + 1) == profile.length); /* set this to true on the last point */
             point.useAuxPID = true; /* tell MPB that we are using both pids */
