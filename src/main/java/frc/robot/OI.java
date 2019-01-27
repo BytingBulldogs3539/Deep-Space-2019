@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import frc.robot.utilities.LimitButton;
 import frc.robot.utilities.LogitechF310;
 import frc.robot.commands.*;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
@@ -23,8 +22,7 @@ public class OI {
   public LogitechF310 driver = new LogitechF310(0);
   public LogitechF310 operator = new LogitechF310(1);
 
-  public LimitButton cargoLimitSwitch = new LimitButton(RobotMap.cargoLimitSwitchPort);
-  public LimitButton panelLimitSwitch = new LimitButton(RobotMap.panelLimitSwitchPort);
+
 
   public OI() {
     /* Driver */
@@ -35,12 +33,5 @@ public class OI {
     operator.buttonA.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
     operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
     operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
-
-    /* Limit Switches */
-    cargoLimitSwitch.whenPressed(new LimitSwitchCommand());
-    cargoLimitSwitch.whenReleased(new LimitSwitchCommand());
-
-    panelLimitSwitch.whenPressed(new LimitSwitchCommand());
-    panelLimitSwitch.whenReleased(new LimitSwitchCommand());
   }
 }

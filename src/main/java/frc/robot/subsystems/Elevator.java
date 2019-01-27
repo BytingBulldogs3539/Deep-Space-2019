@@ -23,9 +23,6 @@ public class Elevator extends Subsystem
   // TODO: add limit switches to tell if we are holding a cargo or hatch, add way
   // of controling the motor
 
-  private DigitalInput cargoLimitSwitch;
-  private DigitalInput panelLimitSwitch;
-
   /**
    * Defines the set of levels that the elevator will lift to.
    * <li>{@link #CARGO}</li>
@@ -67,8 +64,6 @@ public class Elevator extends Subsystem
     // Initiation of Elevator Talons
     master = new TalonSRX(RobotMap.elevatorMaster);
     slave = new TalonSRX(RobotMap.elevatorSlave);
-
-
 
     // Factory default hardware to prevent unexpected behavior
     master.configFactoryDefault();
@@ -144,7 +139,7 @@ public class Elevator extends Subsystem
    */
   public void setHeightInches(double inches)
   {
-    //TODO: This may need to be changed.
+    // TODO: This may need to be changed.
     double encoderTicks = inches / 3.63 * 4096;
     master.set(ControlMode.MotionMagic, encoderTicks);
     System.out.println("set" + encoderTicks);
@@ -189,12 +184,12 @@ public class Elevator extends Subsystem
     }
   }
 
-  //TODO create a method to return the limit switch states.
+  // TODO create a method to return the limit switch states.
 
   // TODO: Add a feature for override control.
   @Override
   public void initDefaultCommand()
   {
-    
+
   }
 }

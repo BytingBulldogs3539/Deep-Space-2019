@@ -7,35 +7,87 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.Elevator.GamePieceType;
 
 /**
  * Add your docs here.
  */
-public class LimitSwitchCommand extends InstantCommand {
+public class LimitSwitchCommand extends Command
+{
   /**
    * Run this command to update the status of all of the lights
    */
-  public LimitSwitchCommand() {
-    super();
+
+  boolean lastPanelState;
+  boolean lastCargoState;
+
+  public LimitSwitchCommand()
+  {
+    requires(Robot.rioDuino);
   }
 
-  // Called once when the command executes
   @Override
-  protected void initialize() {
-    if (Robot.oi.cargoLimitSwitch.get() && Robot.oi.panelLimitSwitch.get()) {
-      Robot.elevator.gamePieceType = GamePieceType.BOTH;
-      // TODO: add update lights
-      // TODO: add button override
-    } else if (Robot.oi.cargoLimitSwitch.get()) {
-      Robot.elevator.gamePieceType = GamePieceType.CARGO;
-    } else if (Robot.oi.panelLimitSwitch.get()) {
-      Robot.elevator.gamePieceType = GamePieceType.HATCH;
-    } else {
-      Robot.elevator.gamePieceType = GamePieceType.NONE;
+  protected void initialize()
+  {
+
+  }
+
+  @Override
+  protected void execute()
+  {
+    if (Robot.oi.operator.buttonX.get())
+    {
+      if (Robot.elevator.gamePieceType == GamePieceType.NONE)
+      {
+        Robot.elevator.gamePieceType = GamePieceType.HATCH;
+      }
+      else if (Robot.elevator.gamePieceType == GamePieceType.CARGO)
+      {
+        Robot.elevator.gamePieceType = GamePieceType.HATCH;
+      }
+      else if (Robot.elevator.gamePieceType == GamePieceType.HATCH)
+      {
+        Robot.elevator.gamePieceType = GamePieceType.CARGO;
+      }
+    }
+    else if (Robot.rioDuino.cargoLimitSwitch.get() != lastCargoState || Robot.rioDuino.panelLimitSwitch.get() != lastPanelState)
+    {
+      if (Robot.rioDuino.cargoLimitSwitch.get() && Robot.rioDuino.panelLimitSwitch.get())
+      {
+        Robot.elevator.gamePieceType = GamePieceType.BOTH;
+      }
+      else if (!Robot.rioDuino.cargoLimitSwitch.get() && !Robot.rioDuino.panelLimitSwitch.get())
+      {
+        Robot.elevator.gamePieceType = GamePieceType.NONE;
+      }
+      else if (Robot.rioDuino.cargoLimitSwitch.get())
+      {
+        Robot.elevator.gamePieceType = GamePieceType.CARGO;
+      }
+      else if (Robot.rioDuino.panelLimitSwitch.get())
+      {
+        Robot.elevator.gamePieceType = GamePieceType.HATCH;
+      }
     }
   }
 
+  @Override
+  protected boolean isFinished()
+  {
+    return false;
+  }
+
+  @Override
+  protected void end()
+  {
+
+  }
+
+  @Override
+  protected void interrupted()
+  {
+    end();
+  }
 }
