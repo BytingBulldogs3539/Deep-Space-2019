@@ -20,8 +20,6 @@ public class Manipulator extends Subsystem
     master = new TalonSRX(RobotMap.manipulatorMaster);
     intakeSolenoid = new bbDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
   }
-  // TODO: add limit switches to tell if we are holding a cargo or hatch, add way
-  // of controlling the motor, and configure the motor with basic talon config.
 
   @Override
   public void initDefaultCommand()

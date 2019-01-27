@@ -78,8 +78,6 @@ public class bbDoubleSolenoid extends DoubleSolenoid
 	{
 		set(DoubleSolenoid.Value.kOff);
 	}
-
-	//TODO: possibly change to rely on the get() method which returns a Value
 	public boolean isTrigger()
 	{
 		return isTrigger;

@@ -7,17 +7,19 @@
 
 package frc.robot;
 
+import java.util.HashMap;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.autoncommands.AutonDrivePath;
+import frc.robot.autongroups.MotionTest;
+import frc.robot.motionprofiling.MotionProfiling;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.Elevator.GamePieceType;
-import frc.robot.utilities.bbCamera;
+import com.ctre.phoenix.motion.*;
+import frc.robot.utilities.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,12 +36,15 @@ public class Robot extends TimedRobot
   public static OI oi;
   public static bbCamera fCamera, bCamera;
 
-  Command autonomousCommand;
+  MotionCommandGroup autonomousCommand;
   // TODO: Add a chooser for what we start with... (CARGO / HATCH ... none?)
   // Used to select the auton.
-  SendableChooser<Command> chooser = new SendableChooser<>();
+  SendableChooser<MotionCommandGroup> chooser = new SendableChooser<>();
   // Used to select what game piece we start with.
   SendableChooser<GamePieceType> gamePieceChooser = new SendableChooser<>();
+
+  //TODO: THIS ABSOLUTLY NEEDS TO BE TESTED!
+  public static HashMap<String, BufferedTrajectoryPointStream> MotionBuffers = new HashMap<String, BufferedTrajectoryPointStream>();
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -62,9 +67,10 @@ public class Robot extends TimedRobot
     gamePieceChooser.addOption("Hatch", GamePieceType.HATCH);
     gamePieceChooser.addOption("Cargo", GamePieceType.CARGO);
 
-    chooser.setDefaultOption("Default Auto", new AutonDrivePath("AUSA.json", true));
+    chooser.setDefaultOption("Default Auto", new MotionTest());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
+    SmartDashboard.putData("Auto mode", gamePieceChooser);
   }
 
   /**
@@ -90,11 +96,20 @@ public class Robot extends TimedRobot
   public void disabledInit()
   {
   }
-
   @Override
   public void disabledPeriodic()
   {
     Scheduler.getInstance().run();
+
+    if(autonomousCommand!=chooser.getSelected())
+    {
+      autonomousCommand=chooser.getSelected();
+      for(String fileName : autonomousCommand.motionProfileList)
+      {
+        MotionBuffers.put(fileName, MotionProfiling.initBuffer(fileName));
+      }
+      //load command
+    }
   }
 
   /**
@@ -112,8 +127,6 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousInit()
   {
-    autonomousCommand = chooser.getSelected();
-
     // We need to get the feed back from the drivers and give it to our elevator.
     elevator.gamePieceType = gamePieceChooser.getSelected();
     // TODO: Think about changing this to not recreate the object on init and add a

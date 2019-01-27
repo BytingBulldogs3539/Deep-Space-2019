@@ -22,8 +22,7 @@ public class RobotMap
      * 
      * @link https://github.com/CrossTheRoadElec/Phoenix-Documentation#what-are-the-units-of-my-sensor
      */
-
-    // TODO: Change this because our encoder is not on the output shaft :( CAD WHY?
+                                                                //Ticks per rev //Gear ratio
     public final static int sensorUnitsPerRotDriveTrain = (int) (4096 * 3.86);
 
     // List of TalonSRX CAN ID numbers
@@ -33,6 +32,8 @@ public class RobotMap
     public static final int MLTalon = 10;
     public static final int BRTalon = 1;
     public static final int BLTalon = 18;
+
+    public static final int PigeonID = 0;
 
     /* Evelator ------------------------------ */
 
@@ -82,7 +83,6 @@ public class RobotMap
     public static final int timeoutMs = 20;
 
     /* Gains / PIDs ------------------------------ */
-    public final static int sensorUnitsPerRot = 4096;
     public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static Gains turretGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static final int manipulatorOn = 1;
