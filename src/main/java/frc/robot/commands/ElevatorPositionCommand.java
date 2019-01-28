@@ -27,7 +27,6 @@ public class ElevatorPositionCommand extends Command
     {
       Robot.elevator.setHeightHatch(height);
     }
-    
   }
 
   @Override

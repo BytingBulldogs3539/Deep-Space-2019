@@ -39,7 +39,7 @@ public class Robot extends TimedRobot
   public static RioDuino rioDuino;
   public static Turret turret;
   public static ByteVision byteVision;
-  public static bbCamera fCamera, bCamera;
+  public static ByteCamera fCamera, bCamera;
 
   MotionCommandGroup autonomousCommand;
   SendableChooser<MotionCommandGroup> chooser = new SendableChooser<>();
@@ -67,8 +67,8 @@ public class Robot extends TimedRobot
     // Lets start the camera servers.
     // TODO: test to make sure that both the front and the back camera are always
     // the front and back camera.
-    fCamera = new bbCamera("Front", 0);
-    bCamera = new bbCamera("Back", 1);
+    fCamera = new ByteCamera("Front", 0);
+    bCamera = new ByteCamera("Back", 1);
 
     gamePieceChooser.addOption("Hatch", GamePieceType.HATCH);
     gamePieceChooser.addOption("Cargo", GamePieceType.CARGO);
