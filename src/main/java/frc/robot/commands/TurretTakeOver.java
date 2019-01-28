@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class TurretTakeOver extends Command
 {
@@ -27,7 +28,10 @@ public class TurretTakeOver extends Command
   @Override
   protected void execute()
   {
-    // get the left stick x value and set to the motor speed maybe with a multiplier.
+    // get the left stick x value and set to the motor speed maybe with a
+    // multiplier.
+
+    Robot.turret.setSpeed(Robot.oi.operator.getLeftStickX() * RobotMap.turretSpeedMultipier);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -41,6 +45,7 @@ public class TurretTakeOver extends Command
   @Override
   protected void end()
   {
+    Robot.turret.setNeutralOutput();
   }
 
   // Called when another command which requires one or more of the same
@@ -48,5 +53,6 @@ public class TurretTakeOver extends Command
   @Override
   protected void interrupted()
   {
+    end();
   }
 }

@@ -72,6 +72,7 @@ public class Turret extends Subsystem
     master.config_kI(0, RobotMap.turretGains.i, RobotMap.timeoutMs); // I
     master.config_kD(0, RobotMap.turretGains.d, RobotMap.timeoutMs); // D
 
+    // TODO: Change possible
     /* Set acceleration and vcruise velocity - see documentation */
     master.configMotionCruiseVelocity(15000, RobotMap.timeoutMs);
     master.configMotionAcceleration(6000, RobotMap.timeoutMs);
@@ -83,7 +84,7 @@ public class Turret extends Subsystem
   public void setRotation(double degrees)
   {
     double rotations = degrees / 360 * (RobotMap.largeGear / RobotMap.smallGear);
-    double encoderTicks = rotations * 4096;
+    double encoderTicks = rotations * RobotMap.encTicksPerRot;
 
     master.set(ControlMode.MotionMagic, encoderTicks);
   }
@@ -91,9 +92,19 @@ public class Turret extends Subsystem
   public double encoderTicksToDegrees(double encoderTicks)
   {
     double irotations = encoderTicks * 360 * (RobotMap.smallGear / RobotMap.largeGear);
-    double degrees = irotations / 4096;
+    double degrees = irotations / RobotMap.encTicksPerRot;
 
     return degrees;
+  }
+
+  public void setSpeed(double speed)
+  {
+    master.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void setNeutralOutput()
+  {
+    master.neutralOutput();
   }
 
   @Override

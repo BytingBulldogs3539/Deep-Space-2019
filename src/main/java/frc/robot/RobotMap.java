@@ -14,7 +14,7 @@ public class RobotMap
     public static final int pcm = 0;
     public static final int pdp = 0;
     public static final int encTicksPerRot = 4096;
-    public static boolean useLimitSwitches=true;
+    public static boolean useLimitSwitches = true;
 
     /* DriveTrain ------------------------------ */
 
@@ -23,7 +23,7 @@ public class RobotMap
      * 
      * @link https://github.com/CrossTheRoadElec/Phoenix-Documentation#what-are-the-units-of-my-sensor
      */
-                                                                //Ticks per rev //Gear ratio
+    // Ticks per rev //Gear ratio
     public final static int sensorUnitsPerRotDriveTrain = (int) (4096 * 3.86);
 
     // List of TalonSRX CAN ID numbers
@@ -43,14 +43,14 @@ public class RobotMap
     public static final int panelLimitSwitchPort = 1;
 
     // List of heights that the elevator can go to (in inches) while holding a cargo
-    //TODO: Change these when we get the robot.
+    // TODO: Change these when we get the robot.
 
     public static double cargoHigh = 0.0;
     public static double cargoMiddle = 0.0;
     public static double cargoLow = 0.0;
 
     // List of heights that the elevator can go to (in inches) while holding a cargo
-    //TODO: Change these when we get the robot.
+    // TODO: Change these when we get the robot.
     public static double hatchHigh = 0.0;
     public static double hatchMiddle = 0.0;
     public static double hatchLow = 0.0;
@@ -73,6 +73,9 @@ public class RobotMap
     // Gear ratios for lazy suzan
     public static final int largeGear = 60;
     public static final int smallGear = 16;
+
+    // A speed multiplier for manual take over of the turret.
+    public static final double turretSpeedMultipier = .5;
 
     /* Verticate ------------------------------ */
     public static final int verticateTopMaster = 53;

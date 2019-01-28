@@ -7,13 +7,8 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.command.Subsystem;
-
-import frc.robot.commands.*;
-import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
