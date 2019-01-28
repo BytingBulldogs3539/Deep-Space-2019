@@ -14,6 +14,7 @@ public class RobotMap
     public static final int pcm = 0;
     public static final int pdp = 0;
     public static final int encTicksPerRot = 4096;
+    public static boolean useLimitSwitches=true;
 
     /* DriveTrain ------------------------------ */
 

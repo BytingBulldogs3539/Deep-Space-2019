@@ -17,6 +17,8 @@ import frc.robot.motionprofiling.MotionProfiling;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Manipulator;
+import frc.robot.subsystems.RioDuino;
+import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Elevator.GamePieceType;
 import com.ctre.phoenix.motion.*;
 import frc.robot.utilities.*;
@@ -34,16 +36,17 @@ public class Robot extends TimedRobot
   public static Elevator elevator;
   public static Manipulator manipulator;
   public static OI oi;
+  public static RioDuino rioDuino;
+  public static Turret turret;
+  public static ByteVision byteVision;
   public static bbCamera fCamera, bCamera;
 
   MotionCommandGroup autonomousCommand;
-  // TODO: Add a chooser for what we start with... (CARGO / HATCH ... none?)
-  // Used to select the auton.
   SendableChooser<MotionCommandGroup> chooser = new SendableChooser<>();
   // Used to select what game piece we start with.
   SendableChooser<GamePieceType> gamePieceChooser = new SendableChooser<>();
 
-  //TODO: THIS ABSOLUTLY NEEDS TO BE TESTED!
+  // TODO: THIS ABSOLUTLY NEEDS TO BE TESTED!
   public static HashMap<String, BufferedTrajectoryPointStream> MotionBuffers = new HashMap<String, BufferedTrajectoryPointStream>();
 
   /**
@@ -56,6 +59,9 @@ public class Robot extends TimedRobot
     drivetrain = new DriveTrain();
     elevator = new Elevator();
     manipulator = new Manipulator();
+    rioDuino = new RioDuino();
+    turret = new Turret();
+    byteVision = new ByteVision();
     oi = new OI();
 
     // Lets start the camera servers.
@@ -96,19 +102,20 @@ public class Robot extends TimedRobot
   public void disabledInit()
   {
   }
+
   @Override
   public void disabledPeriodic()
   {
     Scheduler.getInstance().run();
 
-    if(autonomousCommand!=chooser.getSelected())
+    if (autonomousCommand != chooser.getSelected())
     {
-      autonomousCommand=chooser.getSelected();
-      for(String fileName : autonomousCommand.motionProfileList)
+      autonomousCommand = chooser.getSelected();
+      for (String fileName : autonomousCommand.motionProfileList)
       {
         MotionBuffers.put(fileName, MotionProfiling.initBuffer(fileName));
       }
-      //load command
+      // load command
     }
   }
 

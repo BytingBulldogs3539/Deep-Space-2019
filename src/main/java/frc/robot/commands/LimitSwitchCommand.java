@@ -10,31 +10,46 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 import frc.robot.subsystems.Elevator.GamePieceType;
+import frc.robot.subsystems.RioDuino.Mode;
 
 /**
  * Add your docs here.
  */
-public class LimitSwitchCommand extends InstantCommand {
+public class LimitSwitchCommand extends InstantCommand
+{
   /**
    * Run this command to update the status of all of the lights
    */
-  public LimitSwitchCommand() {
+  public LimitSwitchCommand()
+  {
     super();
   }
 
   // Called once when the command executes
   @Override
-  protected void initialize() {
-    if (Robot.oi.cargoLimitSwitch.get() && Robot.oi.panelLimitSwitch.get()) {
+  protected void initialize()
+  {
+
+    if (Robot.oi.cargoLimitSwitch.get() && Robot.oi.panelLimitSwitch.get())
+    {
       Robot.elevator.gamePieceType = GamePieceType.BOTH;
-      // TODO: add update lights
+      Robot.rioDuino.updateMode(Mode.RED);
       // TODO: add button override
-    } else if (Robot.oi.cargoLimitSwitch.get()) {
+    }
+    else if (Robot.oi.cargoLimitSwitch.get())
+    {
       Robot.elevator.gamePieceType = GamePieceType.CARGO;
-    } else if (Robot.oi.panelLimitSwitch.get()) {
+      Robot.rioDuino.updateMode(Mode.ORANGE);
+    }
+    else if (Robot.oi.panelLimitSwitch.get())
+    {
       Robot.elevator.gamePieceType = GamePieceType.HATCH;
-    } else {
+      Robot.rioDuino.updateMode(Mode.YELLOW);
+    }
+    else
+    {
       Robot.elevator.gamePieceType = GamePieceType.NONE;
+      Robot.rioDuino.updateMode(Mode.GREEN);
     }
   }
 

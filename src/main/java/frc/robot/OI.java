@@ -16,7 +16,8 @@ import frc.robot.subsystems.Elevator.ElevatorHeight;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI {
+public class OI
+{
   // driver controller should be plugged in first.
   // operator controller should be plugged in second.
 
@@ -26,7 +27,8 @@ public class OI {
   public LimitButton cargoLimitSwitch = new LimitButton(RobotMap.cargoLimitSwitchPort);
   public LimitButton panelLimitSwitch = new LimitButton(RobotMap.panelLimitSwitchPort);
 
-  public OI() {
+  public OI()
+  {
     /* Driver */
 
     /* Operator */
@@ -35,6 +37,11 @@ public class OI {
     operator.buttonA.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
     operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
     operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
+
+    operator.buttonSTART.whenPressed(new IgnoreLimitSwitchCommand());
+
+    operator.buttonRS.toggleWhenActive(new ElevatorTakeOver());
+    operator.buttonLS.toggleWhenActive(new ElevatorTakeOver());
 
     /* Limit Switches */
     cargoLimitSwitch.whenPressed(new LimitSwitchCommand());
