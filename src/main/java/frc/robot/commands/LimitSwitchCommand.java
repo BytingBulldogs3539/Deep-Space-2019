@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.Elevator.GamePieceType;
 import frc.robot.subsystems.RioDuino.Mode;
 
@@ -29,27 +30,29 @@ public class LimitSwitchCommand extends InstantCommand
   @Override
   protected void initialize()
   {
-
-    if (Robot.oi.cargoLimitSwitch.get() && Robot.oi.panelLimitSwitch.get())
+    if (RobotMap.useLimitSwitches)
     {
-      Robot.elevator.gamePieceType = GamePieceType.BOTH;
-      Robot.rioDuino.updateMode(Mode.RED);
-      // TODO: add button override
-    }
-    else if (Robot.oi.cargoLimitSwitch.get())
-    {
-      Robot.elevator.gamePieceType = GamePieceType.CARGO;
-      Robot.rioDuino.updateMode(Mode.ORANGE);
-    }
-    else if (Robot.oi.panelLimitSwitch.get())
-    {
-      Robot.elevator.gamePieceType = GamePieceType.HATCH;
-      Robot.rioDuino.updateMode(Mode.YELLOW);
-    }
-    else
-    {
-      Robot.elevator.gamePieceType = GamePieceType.NONE;
-      Robot.rioDuino.updateMode(Mode.GREEN);
+      if (Robot.oi.cargoLimitSwitch.get() && Robot.oi.panelLimitSwitch.get())
+      {
+        Robot.elevator.gamePieceType = GamePieceType.BOTH;
+        Robot.rioDuino.updateMode(Mode.RED);
+        // TODO: add button override
+      }
+      else if (Robot.oi.cargoLimitSwitch.get())
+      {
+        Robot.elevator.gamePieceType = GamePieceType.CARGO;
+        Robot.rioDuino.updateMode(Mode.ORANGE);
+      }
+      else if (Robot.oi.panelLimitSwitch.get())
+      {
+        Robot.elevator.gamePieceType = GamePieceType.HATCH;
+        Robot.rioDuino.updateMode(Mode.YELLOW);
+      }
+      else
+      {
+        Robot.elevator.gamePieceType = GamePieceType.NONE;
+        Robot.rioDuino.updateMode(Mode.GREEN);
+      }
     }
   }
 
