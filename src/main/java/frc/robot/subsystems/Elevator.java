@@ -183,6 +183,16 @@ public class Elevator extends Subsystem
     }
   }
 
+  public void setPower(double power)
+  {
+    master.set(ControlMode.PercentOutput, power);
+  }
+
+  public void neutralOutput()
+  {
+    master.neutralOutput();
+  }
+
   // TODO create a method to return the limit switch states.
 
   // TODO: Add a feature for override control.

@@ -21,8 +21,6 @@ public class ByteVision
     // TODO: make a watchdog for this so if we loose the camera we don't fail our
     // auton.
 
-    // TODO: make this in try catch so if vision is not their we don't kill our
-    // robot.
     SerialPort visionPortIntake;
     SerialPort visionPortTurret;
 

@@ -59,6 +59,8 @@ public class RobotMap
     public static final int elevatorMaster = 55;
     public static final int elevatorSlave = 56;
 
+    public static final double elevatorSpeedMultiplier = .5;
+
     /* Manipulator ------------------------------ */
 
     // List of TalonSRX CAN ID numbers

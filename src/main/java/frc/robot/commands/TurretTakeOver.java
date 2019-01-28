@@ -45,7 +45,7 @@ public class TurretTakeOver extends Command
   @Override
   protected void end()
   {
-    Robot.turret.setNeutralOutput();
+    Robot.turret.neutralOutput();
   }
 
   // Called when another command which requires one or more of the same

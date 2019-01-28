@@ -102,7 +102,7 @@ public class Turret extends Subsystem
     master.set(ControlMode.PercentOutput, speed);
   }
 
-  public void setNeutralOutput()
+  public void neutralOutput()
   {
     master.neutralOutput();
   }

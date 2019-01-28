@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class ElevatorTakeOver extends Command
 {
@@ -21,14 +22,16 @@ public class ElevatorTakeOver extends Command
   @Override
   protected void initialize()
   {
-    // get the right stick y value and set to the motor speed maybe with a
-    // multiplier.
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute()
   {
+    // get the right stick y value and set to the motor speed maybe with a
+    // multiplier.
+    Robot.elevator.setPower(Robot.oi.operator.getRightStickY() * RobotMap.elevatorSpeedMultiplier);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -42,6 +45,7 @@ public class ElevatorTakeOver extends Command
   @Override
   protected void end()
   {
+    Robot.elevator.neutralOutput();
   }
 
   // Called when another command which requires one or more of the same
@@ -49,5 +53,6 @@ public class ElevatorTakeOver extends Command
   @Override
   protected void interrupted()
   {
+    end();
   }
 }
