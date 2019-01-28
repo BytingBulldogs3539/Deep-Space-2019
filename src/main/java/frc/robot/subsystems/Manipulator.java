@@ -14,6 +14,7 @@ public class Manipulator extends Subsystem
   bbDoubleSolenoid intakeSolenoid;
   TalonSRX master;
 
+
   public Manipulator()
   {
     master = new TalonSRX(RobotMap.manipulatorMaster);
@@ -25,9 +26,9 @@ public class Manipulator extends Subsystem
   {
   }
 
-  public void trigger(boolean shouldActive)// True for down; False for up
+  public void trigger(boolean shouldActive)//True for down; False for up
   {
-    if (shouldActive)
+    if(shouldActive)
       intakeSolenoid.forward();
     else
       intakeSolenoid.reverse();
