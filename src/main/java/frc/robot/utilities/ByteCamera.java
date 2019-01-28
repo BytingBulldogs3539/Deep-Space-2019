@@ -4,7 +4,7 @@ import edu.wpi.cscore.*;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 
-public class bbCamera
+public class ByteCamera
 {
     private UsbCamera camera;
 
@@ -17,7 +17,7 @@ public class bbCamera
      * @param port
      *                  The device number of the camera interface.
      */
-    public bbCamera(String label, int port)
+    public ByteCamera(String label, int port)
     {
         // Try creating the camera however if this fails then we need to tell the driver
         // that they won't have a camera if they don't fix it.
