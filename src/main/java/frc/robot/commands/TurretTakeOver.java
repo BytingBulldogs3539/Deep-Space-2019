@@ -31,7 +31,7 @@ public class TurretTakeOver extends Command
     // get the left stick x value and set to the motor speed maybe with a
     // multiplier.
 
-    Robot.turret.setSpeed(Robot.oi.operator.getLeftStickX() * RobotMap.turretSpeedMultipier);
+    Robot.turret.setSpeed(Robot.oi.operator.getRightStickX() * RobotMap.turretSpeedMultipier);
   }
 
   // Make this return true when this Command no longer needs to run execute()
