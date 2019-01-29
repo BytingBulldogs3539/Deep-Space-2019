@@ -172,7 +172,6 @@ public class Robot extends TimedRobot
       System.out.println("AUTO CANCELED BY USER");
       autonomousCommand.cancel();
     }
-
   }
 
   @Override

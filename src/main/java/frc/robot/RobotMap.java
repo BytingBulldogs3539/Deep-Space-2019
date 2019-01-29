@@ -68,6 +68,10 @@ public class RobotMap
 
     /* Turret ------------------------------ */
 
+    // Soft limits for angle
+    public static final int turretNegativeLimit = -225;
+    public static final int turretPositiveLimit = 225;
+
     // List of TalonSRX CAN ID numbers
     public static final int turretMaster = 53;
     public static final int turretSlave = 52;

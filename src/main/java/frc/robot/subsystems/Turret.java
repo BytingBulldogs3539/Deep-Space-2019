@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -81,6 +82,14 @@ public class Turret extends Subsystem
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
   }
 
+  /* Rotates the turret to an angle by the smallest distance between start and end
+   * angle; respects soft limits */
+  public void setPosition(double degrees)
+  {
+
+  }
+
+  /* Rotates turret to an angle; soft limits will interfere */
   public void setRotation(double degrees)
   {
     double rotations = degrees / 360 * (RobotMap.largeGear / RobotMap.smallGear);
@@ -89,6 +98,7 @@ public class Turret extends Subsystem
     master.set(ControlMode.MotionMagic, encoderTicks);
   }
 
+  /* Converts encoder ticks into turret angle */
   public double encoderTicksToDegrees(double encoderTicks)
   {
     double irotations = encoderTicks * 360 * (RobotMap.smallGear / RobotMap.largeGear);
