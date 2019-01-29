@@ -4,21 +4,20 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.utilities.bbDoubleSolenoid;
+import frc.robot.utilities.ByteDoubleSolenoid;
 
 /**
  * Intake/Extake for Cargo comprised of two compliant wheel rollers
  */
 public class Manipulator extends Subsystem
 {
-  bbDoubleSolenoid intakeSolenoid;
+  ByteDoubleSolenoid intakeSolenoid;
   TalonSRX master;
-
 
   public Manipulator()
   {
     master = new TalonSRX(RobotMap.manipulatorMaster);
-    intakeSolenoid = new bbDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
+    intakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
   }
 
   @Override
@@ -26,9 +25,9 @@ public class Manipulator extends Subsystem
   {
   }
 
-  public void trigger(boolean shouldActive)//True for down; False for up
+  public void trigger(boolean shouldActive)// True for down; False for up
   {
-    if(shouldActive)
+    if (shouldActive)
       intakeSolenoid.forward();
     else
       intakeSolenoid.reverse();
