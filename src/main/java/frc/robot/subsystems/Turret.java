@@ -86,7 +86,8 @@ public class Turret extends Subsystem
    * angle; respects soft limits */
   public void setPosition(double degrees)
   {
-
+    double currentPosition = getAngle();
+    currentPosition = 0;
   }
 
   /* Rotates turret to an angle; soft limits will interfere */
@@ -96,6 +97,11 @@ public class Turret extends Subsystem
     double encoderTicks = rotations * RobotMap.encTicksPerRot;
 
     master.set(ControlMode.MotionMagic, encoderTicks);
+  }
+
+  public double getAngle()
+  {
+    return encoderTicksToDegrees(master.getSelectedSensorPosition());
   }
 
   /* Converts encoder ticks into turret angle */
