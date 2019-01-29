@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class TurretTakeOver extends Command
+public class TurretTakeoverCommand extends Command
 {
-  public TurretTakeOver()
+  public TurretTakeoverCommand()
   {
     requires(Robot.turret);
   }

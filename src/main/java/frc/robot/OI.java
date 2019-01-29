@@ -40,8 +40,8 @@ public class OI
 
     operator.buttonSTART.whenPressed(new IgnoreLimitSwitchCommand());
 
-    operator.buttonLS.toggleWhenActive(new ElevatorTakeOver());
-    operator.buttonRS.toggleWhenActive(new TurretTakeOver());
+    operator.buttonLS.toggleWhenActive(new ElevatorTakeoverCommand());
+    operator.buttonRS.toggleWhenActive(new TurretTakeoverCommand());
 
     /* Limit Switches */
     cargoLimitSwitch.whenPressed(new LimitSwitchCommand());
