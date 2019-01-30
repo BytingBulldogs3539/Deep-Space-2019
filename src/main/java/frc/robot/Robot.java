@@ -19,7 +19,6 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.RioDuino;
 import frc.robot.subsystems.Turret;
-import frc.robot.subsystems.TurretAuto;
 import frc.robot.subsystems.Elevator.GamePieceType;
 import com.ctre.phoenix.motion.*;
 import frc.robot.utilities.*;
@@ -39,7 +38,6 @@ public class Robot extends TimedRobot
   public static OI oi;
   public static RioDuino rioDuino;
   public static Turret turret;
-  public static TurretAuto turretAuto;
 
   public static ByteVision byteVision;
   public static ByteCamera fCamera, bCamera;
@@ -67,8 +65,7 @@ public class Robot extends TimedRobot
     turret = new Turret();
     byteVision = new ByteVision();
     oi = new OI();
-    turretAuto = new TurretAuto();
-  
+ 
 
     // Lets start the camera servers.
     // TODO: test to make sure that both the front and the back camera are always
