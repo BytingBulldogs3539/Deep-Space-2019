@@ -46,7 +46,7 @@ public class MotionProfiling
 
             /* for each point, fill our structure and pass it to API */
             point.timeDur = durationMilliseconds;
-
+            System.out.println(RobotMap.sensorUnitsPerRotDriveTrain);
             /* drive part */
             point.position = direction * positionRot * RobotMap.sensorUnitsPerRotDriveTrain; // Rotations => sensor units
             point.velocity = direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0; // RPM => units per 100ms
