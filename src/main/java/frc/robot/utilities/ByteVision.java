@@ -50,6 +50,10 @@ public class ByteVision
     {
         return visionPortIntake.readString();
     }
+    public int getPixeloffset()
+    {
+        return 3539;//TODO: return Pixel offset 
+    }
 
     public String getDataTurret()
     {
