@@ -21,6 +21,8 @@ import frc.robot.subsystems.RioDuino;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.TurretAuto;
 import frc.robot.subsystems.Elevator.GamePieceType;
+import frc.robot.subsystems.RioDuino.Mode;
+
 import com.ctre.phoenix.motion.*;
 import frc.robot.utilities.*;
 
@@ -43,7 +45,6 @@ public class Robot extends TimedRobot
 
   public static ByteVision byteVision;
   public static ByteCamera fCamera, bCamera;
-
 
   MotionCommandGroup autonomousCommand;
   SendableChooser<MotionCommandGroup> chooser = new SendableChooser<>();
@@ -68,7 +69,6 @@ public class Robot extends TimedRobot
     byteVision = new ByteVision();
     oi = new OI();
     turretAuto = new TurretAuto();
-  
 
     // Lets start the camera servers.
     // TODO: test to make sure that both the front and the back camera are always
@@ -97,6 +97,7 @@ public class Robot extends TimedRobot
   @Override
   public void robotPeriodic()
   {
+    rioDuino.updateMode(Mode.RED);
   }
 
   /**

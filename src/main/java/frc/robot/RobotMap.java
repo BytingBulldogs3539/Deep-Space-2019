@@ -24,7 +24,8 @@ public class RobotMap
      * @link https://github.com/CrossTheRoadElec/Phoenix-Documentation#what-are-the-units-of-my-sensor
      */
     // Ticks per rev //Gear ratio
-    public final static int sensorUnitsPerRotDriveTrain = (int) (4096 * 3.86);
+    // public final static int sensorUnitsPerRotDriveTrain = (int) (4096 * 3.86);
+    public final static int sensorUnitsPerRotDriveTrain = (int) (4096 / 1.2);
 
     // List of TalonSRX CAN ID numbers
     public static final int FRTalon = 4;
