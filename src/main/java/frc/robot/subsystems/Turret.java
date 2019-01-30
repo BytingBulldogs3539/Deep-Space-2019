@@ -87,7 +87,9 @@ public class Turret extends Subsystem
   public void setPosition(double degrees)
   {
     double currentPosition = getAngle();
-    currentPosition = 0;
+    if (Math.abs(degrees) >= 180)
+    {
+    }
   }
 
   /* Rotates turret to an angle; soft limits will interfere */
