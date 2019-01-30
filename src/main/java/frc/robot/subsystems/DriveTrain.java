@@ -28,7 +28,6 @@ public class DriveTrain extends Subsystem
 {
   TalonSRX fr, fl, mr, ml, br, bl;
   PigeonIMU pigeon;
-
   Drive drive;
 
   public DriveTrain()
@@ -78,6 +77,27 @@ public class DriveTrain extends Subsystem
     br.configAllSettings(basicTalonConfig);
     bl.configAllSettings(basicTalonConfig);
 
+    fl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    fr.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+
+    // The left side must also be inverted so that we can drive forward with two
+    bl.setInverted(true);
+    ml.setInverted(true);
+
+    // Back motors must be reversed because of the gear box
+    fr.setInverted(true);
+    fl.setInverted(false);
+
+    // Set our back and middle motors to follow our master front talons.
+    ml.follow(fl);
+    bl.follow(fl);
+
+    mr.follow(fr);
+    br.follow(fr);
+
+    fl.setSensorPhase(true);
+    fr.setSensorPhase(true);
+
     /* --- config the motion profiling specific settings --- */
 
     TalonSRXConfiguration MotionConfig = new TalonSRXConfiguration();
@@ -99,9 +119,11 @@ public class DriveTrain extends Subsystem
     MotionConfig.remoteFilter1.remoteSensorSource = RemoteSensorSource.TalonSRX_SelectedSensor;
     /* drive-position is our local quad minus left-talon's selected sens. depending
      * on sensor orientation, it could be the sum instead */
-    MotionConfig.diff0Term = FeedbackDevice.QuadEncoder;
-    MotionConfig.diff1Term = FeedbackDevice.RemoteSensor1;
-    MotionConfig.primaryPID.selectedFeedbackSensor = FeedbackDevice.SensorDifference;
+
+    MotionConfig.sum0Term = FeedbackDevice.QuadEncoder;
+    MotionConfig.sum1Term = FeedbackDevice.RemoteSensor1;
+
+    MotionConfig.primaryPID.selectedFeedbackSensor = FeedbackDevice.SensorSum;
     MotionConfig.primaryPID.selectedFeedbackCoefficient = 0.5; /* divide by 2 so we servo sensor-average, intead of sum */
     /* turn position will come from the pigeon */
     MotionConfig.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.RemoteSensor0;
@@ -129,24 +151,6 @@ public class DriveTrain extends Subsystem
     fr.setStatusFramePeriod(StatusFrame.Status_10_Targets, 10);
     fr.setStatusFramePeriod(StatusFrame.Status_17_Targets1, 10);
 
-    // The left side must also be inverted so that we can drive forward with two
-    bl.setInverted(true);
-    ml.setInverted(true);
-
-    // Back motors must be reversed because of the gear box
-    fr.setInverted(true);
-    fl.setInverted(false);
-
-    // Set our back and middle motors to follow our master front talons.
-    ml.follow(fl);
-    bl.follow(fl);
-
-    mr.follow(fr);
-    br.follow(fr);
-
-    fl.setSensorPhase(false);
-    fr.setSensorPhase(true);
-
     zeroEncoders();
 
     // TODO: Check to see if we want to disable this in teleop
@@ -158,6 +162,11 @@ public class DriveTrain extends Subsystem
 
     bl.setNeutralMode(NeutralMode.Brake);
     br.setNeutralMode(NeutralMode.Brake);
+
+    PlotThread _plotThread = new PlotThread(fr);
+
+    fr.clearStickyFaults();
+    fl.clearStickyFaults();
 
   }
 

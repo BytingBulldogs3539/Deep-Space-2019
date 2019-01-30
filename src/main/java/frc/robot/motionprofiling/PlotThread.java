@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Quick and dirty threaded plotter class
  */
-class PlotThread implements Runnable
+public class PlotThread implements Runnable
 {
-	//TODO: Implement this.
+	// TODO: Implement this.
 	private TalonSRX _talon;
 	private Thread _thread;
 

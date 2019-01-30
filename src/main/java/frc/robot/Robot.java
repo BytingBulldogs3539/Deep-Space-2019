@@ -76,7 +76,7 @@ public class Robot extends TimedRobot
     chooser.setDefaultOption("Default Auto", new MotionTest());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
-    SmartDashboard.putData("Auto mode", gamePieceChooser);
+    SmartDashboard.putData("Game Piece", gamePieceChooser);
   }
 
   /**
