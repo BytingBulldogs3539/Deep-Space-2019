@@ -7,10 +7,14 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PIDCommand;
+import frc.robot.Robot;
 
-public class AutoTurret extends Command {
+public class AutoTurret extends PIDCommand {
+  private double target=0;
   public AutoTurret() {
+    super(0.0, 0.0, 0.0);
+
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -18,6 +22,12 @@ public class AutoTurret extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    this.getPIDController().setOutputRange(-1, 1);
+    this.getPIDController().setSetpoint(target);
+		this.getPIDController().setAbsoluteTolerance(1);
+		this.getPIDController().enable();
+		this.getPIDController().setToleranceBuffer(5);
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -28,12 +38,14 @@ public class AutoTurret extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+		return getPIDController().onTarget() || isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    this.getPIDController().reset();
+  	this.getPIDController().disable();
   }
 
   // Called when another command which requires one or more of the same
@@ -41,4 +53,15 @@ public class AutoTurret extends Command {
   @Override
   protected void interrupted() {
   }
+
+  protected double returnPIDInput()
+	{
+		return Robot.byteVision.getPixeloffset();
+	}
+
+	@Override
+	protected void usePIDOutput(double output)
+	{
+	Robot.turret.setSpeed(output);
+	}
 }
