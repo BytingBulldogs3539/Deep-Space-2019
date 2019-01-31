@@ -27,7 +27,7 @@ import frc.robot.utilities.*;
 public class DriveTrain extends Subsystem
 {
   TalonSRX fr, fl, mr, ml, br, bl;
-  public  PigeonIMU pigeon;
+  PigeonIMU pigeon;
   Drive drive;
 
   public DriveTrain()
@@ -231,10 +231,18 @@ public class DriveTrain extends Subsystem
     fl.getSensorCollection().setPulseWidthPosition(0, 10);
     fl.getSensorCollection().setQuadraturePosition(0, 10);
   }
+
   public double getPigeonHeading()
-	{
-		return pigeon.getFusedHeading();
-	}
+  {
+    double[] feedback = new double[3];
+    pigeon.getYawPitchRoll(feedback);
+    return feedback[0];
+  }
+
+  public void zeroPigeon()
+  {
+    pigeon.setYaw(0);
+  }
 
   @Override
   public void initDefaultCommand()
