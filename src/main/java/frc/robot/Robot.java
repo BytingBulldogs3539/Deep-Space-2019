@@ -80,6 +80,7 @@ public class Robot extends TimedRobot
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
     SmartDashboard.putData("Game Piece", gamePieceChooser);
+    Robot.elevator.gamePieceType = GamePieceType.NONE;
   }
 
   /**
@@ -94,7 +95,7 @@ public class Robot extends TimedRobot
   @Override
   public void robotPeriodic()
   {
-    rioDuino.updateMode(Mode.RED);
+    // rioDuino.updateMode(Mode.PULSERED);
   }
 
   /**
