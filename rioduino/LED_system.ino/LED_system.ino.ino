@@ -7,7 +7,8 @@
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 
-int color = 3; //Sets the lights to a color between 0-6, following the standard 7 color ROYGBIV order. if more than 6, also applies a fade effect.
+int color = 10; //Sets the lights to a color between 0-6, following the standard 7 color ROYGBIV order. if more than 6, also applies a fade effect.
+//Default color = 3
 
 bool isAdding = true; //If true, fade increases; if false, fade decreases.
 int storeBrightness = 0; //Store brightness value
@@ -45,36 +46,36 @@ void loop() {
   for (int i=0; i < NUMPIXELS; i++) {
     // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
 
-  if(color == 0 || color == 7)
+  if(color%7 == 0)
     {    //Error Red
     pixels.setPixelColor(i, pixels.Color(255, 0, 0));
     }
-  else if(color == 1 || color == 8)
+  else if(color%7 == 1)
     {    //Cargo Orange
-    pixels.setPixelColor(i, pixels.Color(215, 105, 0));
+    pixels.setPixelColor(i, pixels.Color(220, 60, 0));
     }
-  else if(color == 2 || color == 9)
+  else if(color%7 == 2)
     {    //Hatch Yellow
-    pixels.setPixelColor(i, pixels.Color(255, 255, 0));
+    pixels.setPixelColor(i, pixels.Color(200, 130, 0));
     }
-  else if(color == 3 || color == 10)
-    {    //Bulldog Green
+  else if(color%7 == 3)
+    {    //Bulldog Green  (0, 255, 0)
     pixels.setPixelColor(i, pixels.Color(0, 255, 0));
     }
-  else if(color == 4 || color == 11)
-    {    //Unsued Blue
+  else if(color%7 == 4)
+    {    //Unused Blue
     pixels.setPixelColor(i, pixels.Color(0, 0, 255));
     }
-  else if(color == 5 || color == 12)
+  else if(color%7 == 5)
     {    //Fault Purple
-    pixels.setPixelColor(i, pixels.Color(128, 0, 128));
+    pixels.setPixelColor(i, pixels.Color(100, 0, 210));
     }
-  else if(color == 6 || color == 13)
+  else if(color%7 == 6)
     {    //Usless Magenta
     pixels.setPixelColor(i, pixels.Color(255, 0, 255));
     }
   else //(less than 0 or greater than 13)
-    { //off
+    {    //Off Black
     pixels.setPixelColor(i, pixels.Color(0, 0, 0));
     }
     
