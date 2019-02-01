@@ -46,7 +46,7 @@ public class OI
     operator.buttonRS.toggleWhenActive(new TurretTakeoverCommand());
 
     /* Limit Switches */
-    cargoLimitSwitch.whenPressed(new LimitSwitchCommand());
+    cargoLimitSwitch.whileHeld(new LimitSwitchCommand());
     cargoLimitSwitch.whenReleased(new LimitSwitchCommand());
 
     panelLimitSwitch.whenPressed(new LimitSwitchCommand());

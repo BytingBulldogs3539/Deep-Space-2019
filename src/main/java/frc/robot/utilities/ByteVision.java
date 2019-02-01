@@ -28,7 +28,7 @@ public class ByteVision
     {
         try
         {
-            visionPortIntake = new SerialPort(115200, SerialPort.Port.kUSB);
+            visionPortIntake = new SerialPort(115200, SerialPort.Port.kUSB2);
 
         }
         catch (Exception e)
@@ -50,9 +50,10 @@ public class ByteVision
     {
         return visionPortIntake.readString();
     }
+
     public int getPixeloffset()
     {
-        return 3539;//TODO: return Pixel offset 
+        return 3539;// TODO: return Pixel offset
     }
 
     public String getDataTurret()

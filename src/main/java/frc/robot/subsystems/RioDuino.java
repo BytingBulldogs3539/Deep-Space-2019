@@ -31,6 +31,7 @@ public class RioDuino
 
   public void updateMode(Mode mode)
   {
+    System.out.println("CALLLLLLLLLLLLLLLL");
     if (rioDuinoPort != null)
     {
       rioDuinoPort.writeString("" + (char) mode.ordinal());
@@ -39,6 +40,6 @@ public class RioDuino
 
   public enum Mode
   {
-    RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK, PULSERED, PULSEORANGE, PULSEYELLOW, PULSEGREEN, PULSEBLUE, PULSEPURPLE, PULSEPINK,
+    RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK, PULSERED, PULSEORANGE, PULSEYELLOW, PULSEGREEN, PULSEBLUE, PULSEPURPLE, PULSEPINK, OFF
   }
 }

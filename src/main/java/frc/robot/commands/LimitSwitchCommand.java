@@ -36,24 +36,32 @@ public class LimitSwitchCommand extends InstantCommand
       {
         Robot.elevator.gamePieceType = GamePieceType.BOTH;
         Robot.rioDuino.updateMode(Mode.RED);
+        System.out.println("RED");
+
         // TODO: add button override
       }
       else if (Robot.oi.cargoLimitSwitch.get())
       {
         Robot.elevator.gamePieceType = GamePieceType.CARGO;
         Robot.rioDuino.updateMode(Mode.ORANGE);
+        System.out.println("ORANGE");
+
       }
       else if (Robot.oi.panelLimitSwitch.get())
       {
         Robot.elevator.gamePieceType = GamePieceType.HATCH;
         Robot.rioDuino.updateMode(Mode.YELLOW);
+        System.out.println("YELLOW");
+
       }
       else
       {
         Robot.elevator.gamePieceType = GamePieceType.NONE;
         Robot.rioDuino.updateMode(Mode.GREEN);
+        System.out.println("Green");
       }
     }
+
   }
 
 }

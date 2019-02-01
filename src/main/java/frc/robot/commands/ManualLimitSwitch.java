@@ -24,7 +24,6 @@ public class ManualLimitSwitch extends InstantCommand
   @Override
   protected void initialize()
   {
-    System.out.println("UPDATE");
     if (Robot.elevator.gamePieceType == GamePieceType.NONE)
     {
       Robot.elevator.gamePieceType = GamePieceType.HATCH;
