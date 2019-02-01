@@ -98,9 +98,25 @@ public class LogitechF310 extends Joystick
 	 */
 	public DirectionalButton buttonPadLeft = new DirectionalButton(this, Direction.LEFT);
 	/**
+	 * refers to the <b>Up Left Directional Pad</b> button on the controller
+	 */
+	public DirectionalButton buttonPadUpLeft = new DirectionalButton(this, Direction.UPLEFT);
+	/**
+	 * refers to the <b>Down Left Directional Pad</b> button on the controller
+	 */
+	public DirectionalButton buttonPadDownLeft = new DirectionalButton(this, Direction.DOWNLEFT);
+	/**
 	 * refers to the <b>Right Directional Pad</b> button on the controller
 	 */
 	public DirectionalButton buttonPadRight = new DirectionalButton(this, Direction.RIGHT);
+	/**
+	 * refers to the <b>Up Right Directional Pad</b> button on the controller
+	 */
+	public DirectionalButton buttonPadUpRight = new DirectionalButton(this, Direction.UPRIGHT);
+	/**
+	 * refers to the <b>Down Right Directional Pad</b> button on the controller
+	 */
+	public DirectionalButton buttonPadDownRight = new DirectionalButton(this, Direction.DOWNRIGHT);
 	/**
 	 * refers to the <b>Top Directional Pad</b> button on the controller
 	 */

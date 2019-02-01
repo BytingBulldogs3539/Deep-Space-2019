@@ -44,6 +44,17 @@ public class OI
 
     operator.buttonLS.toggleWhenActive(new ElevatorTakeoverCommand());
     operator.buttonRS.toggleWhenActive(new TurretTakeoverCommand());
+    
+    // Turret Controls
+    operator.buttonPadDownLeft.whenPressed(new TurretPositionCommand(-135));
+    operator.buttonPadLeft.whenPressed(new TurretPositionCommand(-90));
+    operator.buttonPadUpLeft.whenPressed(new TurretPositionCommand(-45));
+    operator.buttonPadUp.whenPressed(new TurretPositionCommand(0));
+    operator.buttonPadUpRight.whenPressed(new TurretPositionCommand(45));
+    operator.buttonPadRight.whenPressed(new TurretPositionCommand(90));
+    operator.buttonPadDownRight.whenPressed(new TurretPositionCommand(135));
+    // This will be changed to -180 if the angle was previously negative:
+    operator.buttonPadDown.whenPressed(new TurretPositionCommand(180));
 
     /* Limit Switches */
     cargoLimitSwitch.whileHeld(new LimitSwitchCommand());
