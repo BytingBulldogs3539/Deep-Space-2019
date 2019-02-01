@@ -31,6 +31,7 @@ public class AutonTurnGyroCommand extends PIDCommand
 
 		this.getPIDController().enable();
 		this.getPIDController().setToleranceBuffer(5);
+		Robot.drivetrain.zeroPigeon();
 
 	}
 
