@@ -30,6 +30,7 @@ public class OI
   public OI()
   {
     /* Driver */
+    driver.buttonY.whenPressed(new ClimbCommand(0));
 
     /* Operator */
 
@@ -44,7 +45,7 @@ public class OI
 
     operator.buttonLS.toggleWhenActive(new ElevatorTakeoverCommand());
     operator.buttonRS.toggleWhenActive(new TurretTakeoverCommand());
-    
+
     // Turret Controls
     operator.buttonPadDownLeft.whenPressed(new TurretPositionCommand(-135));
     operator.buttonPadLeft.whenPressed(new TurretPositionCommand(-90));
