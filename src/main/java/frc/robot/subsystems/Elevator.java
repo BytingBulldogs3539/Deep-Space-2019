@@ -8,6 +8,9 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 
 /**
  * Three stage cascading elevator
@@ -190,6 +193,11 @@ public class Elevator extends Subsystem
     master.neutralOutput();
   }
 
+  public void SetupLimitSwitchLimits()
+	{
+		master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,LimitSwitchNormal.NormallyOpen,10);
+	//	liftMaster.getSensorCollection().isRevLimitSwitchClosed();// to get value of limit switch
+	}
   // TODO create a method to return the limit switch states.
 
   // TODO: Add a feature for override control.
