@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.*;
 import frc.robot.utilities.ByteDoubleSolenoid;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -77,5 +78,6 @@ public class Manipulator extends Subsystem
   @Override
   public void initDefaultCommand()
   {
+    setDefaultCommand(new IntakeCommand());
   }
 }

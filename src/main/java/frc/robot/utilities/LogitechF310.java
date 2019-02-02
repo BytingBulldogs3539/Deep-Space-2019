@@ -23,8 +23,10 @@ public class LogitechF310 extends Joystick
 	private static final int BL = 5;
 	private static final int BR = 6;
 
-	private static final int RIGHT_TRIGGER = 3;
-	private static final int LEFT_TRIGGER = 2;
+	// Public because referenced in IntakeCommand
+	// Non-static because of silly warning
+	public final int RIGHT_TRIGGER = 3;
+	public final int LEFT_TRIGGER = 2;
 
 	// Axis numbers each object contains a number that directly references an axis.
 	private static final int X_AxisL = 0;
@@ -72,6 +74,7 @@ public class LogitechF310 extends Joystick
 	 */
 	public JoystickButton buttonBR = new JoystickButton(this, BR);
 
+	// Cannot be used in tandem with default IntakeCommand
 	// public TriggerButton buttonTL = new TriggerButton(this, LEFT_TRIGGER);
 	// public TriggerButton buttonTR = new TriggerButton(this, RIGHT_TRIGGER);
 

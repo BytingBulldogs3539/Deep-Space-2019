@@ -12,18 +12,15 @@ import frc.robot.Robot;
 
 public class IntakeCommand extends Command
 {
-  private double speed;
-
-  public IntakeCommand(double speed)
+  public IntakeCommand()
   {
     requires(Robot.manipulator);
-    this.speed = speed;
   }
 
   @Override
   protected void initialize()
   {
-    Robot.manipulator.intake(speed);
+    Robot.manipulator.intake(Robot.oi.operator.getRawAxis(Robot.oi.operator.LEFT_TRIGGER) + Robot.oi.operator.getRawAxis(Robot.oi.operator.RIGHT_TRIGGER));
   }
 
   @Override
@@ -34,7 +31,7 @@ public class IntakeCommand extends Command
   @Override
   protected boolean isFinished()
   {
-    // False because we use the "whileHeld" method in OI which interupts the command
+    // False because we rely on other methods to interupt
     return false;
   }
 
