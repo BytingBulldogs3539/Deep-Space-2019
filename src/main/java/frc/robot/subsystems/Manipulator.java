@@ -11,13 +11,16 @@ import frc.robot.utilities.ByteDoubleSolenoid;
  */
 public class Manipulator extends Subsystem
 {
-  ByteDoubleSolenoid intakeSolenoid;
+  ByteDoubleSolenoid panelIntakeSolenoid, cargoIntakeSolenoid, placementLeftSolenoid, placementRightSolenoid;
   TalonSRX master;
 
   public Manipulator()
   {
     master = new TalonSRX(RobotMap.manipulatorMaster);
-    intakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
+    panelIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
+    cargoIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
+    placementLeftSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
+    placementRightSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
   }
 
   @Override
@@ -27,10 +30,10 @@ public class Manipulator extends Subsystem
 
   public void trigger(boolean shouldActive)// True for down; False for up
   {
-    if (shouldActive)
-      intakeSolenoid.forward();
-    else
-      intakeSolenoid.reverse();
+    // if (shouldActive)
+    // intakeSolenoid.forward();
+    // else
+    // intakeSolenoid.reverse();
 
   }
 
