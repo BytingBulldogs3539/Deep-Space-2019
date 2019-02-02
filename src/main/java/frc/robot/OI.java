@@ -30,8 +30,18 @@ public class OI
   public OI()
   {
     /* Driver */
+    driver.buttonY.whenPressed(new ClimbCommand(0));
 
     /* Operator */
+
+    operator.buttonBL.whenPressed(new PanelArmActuateCommand(true));
+    operator.buttonBL.whenReleased(new PanelArmActuateCommand(false));
+
+    operator.buttonBR.whenPressed(new CargoArmActuateCommand(true));
+    operator.buttonBR.whenReleased(new CargoArmActuateCommand(false));
+
+    operator.buttonX.whenPressed(new PanelPlacementCommand(true));
+    operator.buttonX.whenReleased(new PanelPlacementCommand(false));
 
     // TODO: This NEEDS to be TESTED.
     operator.buttonA.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
