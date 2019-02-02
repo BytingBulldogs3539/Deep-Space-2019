@@ -190,6 +190,11 @@ public class Elevator extends Subsystem
     master.neutralOutput();
   }
 
+  public void SetupLimitSwitchLimits()
+	{
+		liftMaster.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,LimitSwitchNormal.NormallyOpen,10);
+	//	liftMaster.getSensorCollection().isRevLimitSwitchClosed();// to get value of limit switch
+	}
   // TODO create a method to return the limit switch states.
 
   // TODO: Add a feature for override control.
