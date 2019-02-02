@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ManipulatorSolenoidCommand extends InstantCommand
+public class CargoArmActuateCommand extends InstantCommand
 {
   boolean shouldActive;
 
@@ -18,7 +18,7 @@ public class ManipulatorSolenoidCommand extends InstantCommand
    * @param shouldActive
    *                       actuates solenoid. true = down; false = up
    */
-  public ManipulatorSolenoidCommand(boolean shouldActive)
+  public CargoArmActuateCommand(boolean shouldActive)
   {
     this.shouldActive = shouldActive;
   }
