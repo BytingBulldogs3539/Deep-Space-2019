@@ -196,8 +196,17 @@ public class Elevator extends Subsystem
   public void SetupLimitSwitchLimits()
 	{
 		master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,LimitSwitchNormal.NormallyOpen,10);
-	//	liftMaster.getSensorCollection().isRevLimitSwitchClosed();// to get value of limit switch
-	}
+  }
+  public void ResetEncOnLimit()
+  {
+  // boolean limit = master.getSensorCollection().isRevLimitSwitchClosed();
+      // if (limit)
+      //   {
+      //   master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
+      //   }
+        master.configClearPositionOnLimitR(true, 10); //TODO: Test to see if this zeros the encoder 
+
+  }
   // TODO create a method to return the limit switch states.
 
   // TODO: Add a feature for override control.
