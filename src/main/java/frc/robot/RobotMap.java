@@ -10,11 +10,17 @@ import frc.robot.utilities.*;
  */
 public class RobotMap
 {
-    /* Robot ------------------------------ */
-    public static final int pcm = 0;
-    public static final int pdp = 0;
+    /* Robot ----------------------------------- */
+    public static final int pcm = 0; // CAN ID number
+    public static final int pdp = 0; // CAN ID number
     public static final int encTicksPerRot = 4096;
     public static boolean useLimitSwitches = true;
+
+    // Voltage "cap" to promote consistency as the voltage drops over time
+    public static final double voltageCompSaturation = 12.2;
+
+    // Amount of time to wait before reporting to Driver Station that action failed
+    public static final int timeoutMs = 20;
 
     /* DriveTrain ------------------------------ */
 
@@ -90,13 +96,10 @@ public class RobotMap
     public static final int verticateBottomMaster = 53;
     public static final int verticateBottomSlave = 52;
 
-    // Amount of time to wait before reporting to Driver Station that action failed
-    public static final int timeoutMs = 20;
-
     /* Gains / PIDs ------------------------------ */
     public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static Gains turretGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
-    public static Gains TurnPid = new Gains(.1,0.0,0.0,0.0,0.0,0.0);
+    public static Gains TurnPid = new Gains(.1, 0.0, 0.0, 0.0, 0.0, 0.0);
     public static final int manipulatorOn = 1;
     public static final int manipulatorOff = 0;
 }
