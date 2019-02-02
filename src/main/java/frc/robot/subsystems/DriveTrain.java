@@ -83,10 +83,12 @@ public class DriveTrain extends Subsystem
     // The left side must also be inverted so that we can drive forward with two
     bl.setInverted(true);
     ml.setInverted(true);
+    fl.setInverted(false);
 
     // Back motors must be reversed because of the gear box
     fr.setInverted(true);
-    fl.setInverted(false);
+    mr.setInverted(false);
+    br.setInverted(false);
 
     // Set our back and middle motors to follow our master front talons.
     ml.follow(fl);
@@ -232,6 +234,7 @@ public class DriveTrain extends Subsystem
     fl.getSensorCollection().setQuadraturePosition(0, 10);
   }
 
+  /* Get the current reference angle of the pigeon. */
   public double getPigeonHeading()
   {
     double[] feedback = new double[3];
@@ -239,6 +242,7 @@ public class DriveTrain extends Subsystem
     return feedback[0];
   }
 
+  /* Zero the pigeons angle. */
   public void zeroPigeon()
   {
     pigeon.setYaw(0);

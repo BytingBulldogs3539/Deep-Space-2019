@@ -18,7 +18,7 @@ public class TurretPositionCommand extends Command
   public TurretPositionCommand(double degrees)
   {
     this.degrees = degrees;
-    // requires(Robot.turret);
+    requires(Robot.turret);
   }
 
   // Called just before this Command runs the first time

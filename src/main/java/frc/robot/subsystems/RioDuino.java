@@ -31,7 +31,6 @@ public class RioDuino
 
   public void updateMode(Mode mode)
   {
-    System.out.println("CALLLLLLLLLLLLLLLL");
     if (rioDuinoPort != null)
     {
       rioDuinoPort.writeString("" + (char) mode.ordinal());

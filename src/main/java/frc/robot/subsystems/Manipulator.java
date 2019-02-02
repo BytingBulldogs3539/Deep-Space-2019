@@ -11,8 +11,8 @@ import frc.robot.utilities.ByteDoubleSolenoid;
  */
 public class Manipulator extends Subsystem
 {
-  ByteDoubleSolenoid panelIntakeSolenoid, cargoIntakeSolenoid, placementLeftSolenoid, placementRightSolenoid;
-  TalonSRX master;
+  private ByteDoubleSolenoid panelIntakeSolenoid, cargoIntakeSolenoid, placementLeftSolenoid, placementRightSolenoid;
+  private TalonSRX master;
 
   public Manipulator()
   {
@@ -28,13 +28,12 @@ public class Manipulator extends Subsystem
   {
   }
 
-  public void trigger(boolean shouldActive)// True for down; False for up
+  public void triggerPanelIntake(boolean shouldActive)// True for down; False for up
   {
-    // if (shouldActive)
-    // intakeSolenoid.forward();
-    // else
-    // intakeSolenoid.reverse();
-
+    if (shouldActive)
+      panelIntakeSolenoid.forward();
+    else
+      panelIntakeSolenoid.reverse();
   }
 
 }
