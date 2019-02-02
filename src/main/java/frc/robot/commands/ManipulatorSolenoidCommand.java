@@ -10,12 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-
 public class ManipulatorSolenoidCommand extends InstantCommand
 {
   boolean shouldActive;
 
-  public ManipulatorSolenoidCommand(boolean shouldActive)//True for down; False for up
+  /**
+   * @param shouldActive
+   *                       actuates solenoid. true = down; false = up
+   */
+  public ManipulatorSolenoidCommand(boolean shouldActive)
   {
     this.shouldActive = shouldActive;
   }
@@ -24,6 +27,6 @@ public class ManipulatorSolenoidCommand extends InstantCommand
   @Override
   protected void initialize()
   {
-    Robot.manipulator.trigger(shouldActive);//True for down
+    Robot.manipulator.cargoIntakeSetPosition(shouldActive);
   }
 }
