@@ -37,8 +37,6 @@ public class LimitSwitchCommand extends InstantCommand
         Robot.elevator.gamePieceType = GamePieceType.BOTH;
         Robot.rioDuino.updateMode(Mode.RED);
         System.out.println("RED");
-
-        // TODO: add button override
       }
       else if (Robot.oi.cargoLimitSwitch.get())
       {

@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -16,17 +15,12 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 public class Turret extends Subsystem
 {
   // Declare talons
-  TalonSRX master, slave;
+  TalonSRX master;
 
   public Turret()
   {
     // Initiation of Turret Talons
     master = new TalonSRX(RobotMap.turretMaster);
-    slave = new TalonSRX(RobotMap.turretSlave);
-
-    /* Slave will imitate all commands sent to master e.g set() but not
-     * configurations */
-    slave.follow(master);
 
     /* Basic config for Talons */
     TalonSRXConfiguration basicTalonConfig = new TalonSRXConfiguration();
@@ -47,7 +41,6 @@ public class Turret extends Subsystem
     basicTalonConfig.voltageCompSaturation = 12.2;
 
     master.configAllSettings(basicTalonConfig);
-    slave.configAllSettings(basicTalonConfig);
 
     /* Configure Sensor Source for Primary PID */
     // Constants.kPIDLoopIdx
@@ -59,8 +52,8 @@ public class Turret extends Subsystem
     master.setSensorPhase(true);
     master.setInverted(false);
 
+    /* Make our motor not want to turn. */
     master.setNeutralMode(NeutralMode.Brake);
-    slave.setNeutralMode(NeutralMode.Brake);
 
     /* Set relevant frame periods to be at least as fast as periodic rate */
     master.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.timeoutMs);
@@ -103,6 +96,7 @@ public class Turret extends Subsystem
     master.set(ControlMode.MotionMagic, encoderTicks);
   }
 
+  /* Gets the current angle of the turret */
   public double getAngle()
   {
     return encoderTicksToDegrees(master.getSelectedSensorPosition());
@@ -117,6 +111,7 @@ public class Turret extends Subsystem
     return degrees;
   }
 
+  /* Sets the speed of the turret motor */
   public void setSpeed(double speed)
   {
     master.set(ControlMode.PercentOutput, speed);

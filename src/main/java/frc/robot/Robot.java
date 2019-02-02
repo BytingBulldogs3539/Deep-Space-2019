@@ -8,6 +8,8 @@
 package frc.robot;
 
 import java.util.HashMap;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -20,7 +22,6 @@ import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.RioDuino;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Elevator.GamePieceType;
-import frc.robot.subsystems.RioDuino.Mode;
 
 import com.ctre.phoenix.motion.*;
 import frc.robot.utilities.*;
@@ -176,7 +177,7 @@ public class Robot extends TimedRobot
 
     if (oi.driver.buttonSTART.get())
     {
-      System.out.println("AUTO CANCELED BY USER");
+      DriverStation.reportWarning("AUTO CANCELED BY USER", false);
       autonomousCommand.cancel();
     }
   }

@@ -19,9 +19,6 @@ public class Elevator extends Subsystem
 
   public GamePieceType gamePieceType;
 
-  // TODO: add limit switches to tell if we are holding a cargo or hatch, add way
-  // of controling the motor
-
   /**
    * Defines the set of levels that the elevator will lift to.
    * <li>{@link #CARGO}</li>

@@ -11,13 +11,13 @@ import frc.robot.utilities.ByteDoubleSolenoid;
  */
 public class Manipulator extends Subsystem
 {
-  ByteDoubleSolenoid intakeSolenoid;
+  ByteDoubleSolenoid manipulatorSolenoid;
   TalonSRX master;
 
   public Manipulator()
   {
     master = new TalonSRX(RobotMap.manipulatorMaster);
-    intakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
+    manipulatorSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, false);
   }
 
   @Override
@@ -28,9 +28,9 @@ public class Manipulator extends Subsystem
   public void trigger(boolean shouldActive)// True for down; False for up
   {
     if (shouldActive)
-      intakeSolenoid.forward();
+      manipulatorSolenoid.forward();
     else
-      intakeSolenoid.reverse();
+      manipulatorSolenoid.reverse();
 
   }
 
