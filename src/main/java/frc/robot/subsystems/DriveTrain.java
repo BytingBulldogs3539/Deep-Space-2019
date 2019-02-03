@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.DriveCommand;
 
@@ -49,9 +50,9 @@ public class DriveTrain extends Subsystem
 
     // TODO: Think about adding a incase if pigeon is not plugged in or not
     // responding.
-    if (pigeon.getState() != PigeonState.Ready || pigeon.getState() != PigeonState.Initializing)
+    if (pigeon.getState() != PigeonState.Ready && pigeon.getState() != PigeonState.Initializing)
     {
-      System.out.println("PIGEON READY!");
+      DriverStation.reportError("ERROR: PIGEON NOT RESPONDING!", false);
     }
 
     // Stores basic Talon config
