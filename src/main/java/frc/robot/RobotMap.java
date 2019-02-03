@@ -11,8 +11,8 @@ import frc.robot.utilities.*;
 public class RobotMap
 {
     /* Robot ----------------------------------- */
-    public static final int pcm = 0; // CAN ID number
-    public static final int pdp = 0; // CAN ID number
+    public static final int pcm = 20; // CAN ID number
+    public static final int pdp = 30; // CAN ID number
     public static final int encTicksPerRot = 4096;
     public static boolean useLimitSwitches = true;
 
@@ -46,8 +46,8 @@ public class RobotMap
     /* Evelator ------------------------------ */
 
     // DIO number of port that limit switch is plugged into
-    public static final int cargoLimitSwitchPort = 0;
-    public static final int panelLimitSwitchPort = 1;
+    public static final int cargoLimitSwitchPort = 2;
+    public static final int panelLimitSwitchPort = 3;
 
     // List of heights that the elevator can go to (in inches) while holding a cargo
     // TODO: Change these when we get the robot.

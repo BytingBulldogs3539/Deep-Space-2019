@@ -52,8 +52,6 @@ public class Robot extends TimedRobot
   // Used to select what game piece we start with.
   SendableChooser<GamePieceType> gamePieceChooser = new SendableChooser<>();
 
-
-
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -66,9 +64,11 @@ public class Robot extends TimedRobot
     manipulator = new Manipulator();
     rioDuino = new RioDuino();
     turret = new Turret();
-    // byteVision = new ByteVision();
-    oi = new OI();
     verticate = new Verticate();
+
+    // byteVision = new ByteVision();
+
+    oi = new OI();
 
     // Lets start the camera servers.
     // TODO: test to make sure that both the front and the back camera are always

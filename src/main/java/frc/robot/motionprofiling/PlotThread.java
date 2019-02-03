@@ -17,8 +17,8 @@ public class PlotThread implements Runnable
 	{
 		_talon = talon;
 
-		_thread = new Thread(this);
-		_thread.start();
+		// _thread = new Thread(this);
+		// _thread.start();
 	}
 
 	public void run()

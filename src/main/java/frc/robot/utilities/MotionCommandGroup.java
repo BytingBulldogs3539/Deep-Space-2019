@@ -36,10 +36,19 @@ public abstract class MotionCommandGroup extends CommandGroup
     {
         if (eventThread == null)
         {
+            System.out.println("Add thread");
             eventThread = new Thread(() ->
             {
                 while (!Thread.interrupted())
                 {
+                    try
+                    {
+                        Thread.sleep(5);
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
                     if (MotionBuffers.get("fileName").state.containsKey(_talon.getActiveTrajectoryPosition()))
                     {
                         ByteTrajectoryPoint point = MotionBuffers.get("fileName").state.get(_talon.getActiveTrajectoryPosition());

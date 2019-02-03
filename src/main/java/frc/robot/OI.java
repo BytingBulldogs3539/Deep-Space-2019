@@ -67,10 +67,10 @@ public class OI
     operator.buttonPadDown.whenPressed(new TurretPositionCommand(180));
 
     /* Limit Switches */
-    cargoLimitSwitch.whileHeld(new LimitSwitchCommand());
-    cargoLimitSwitch.whenReleased(new LimitSwitchCommand());
+    // cargoLimitSwitch.whileHeld(new LimitSwitchCommand());
+    // cargoLimitSwitch.whenReleased(new LimitSwitchCommand());
 
-    panelLimitSwitch.whenPressed(new LimitSwitchCommand());
-    panelLimitSwitch.whenReleased(new LimitSwitchCommand());
+    // panelLimitSwitch.whenPressed(new LimitSwitchCommand());
+    // panelLimitSwitch.whenReleased(new LimitSwitchCommand());
   }
 }
