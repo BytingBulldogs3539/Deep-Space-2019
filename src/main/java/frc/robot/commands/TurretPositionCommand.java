@@ -25,6 +25,7 @@ public class TurretPositionCommand extends Command
   @Override
   protected void initialize()
   {
+    System.out.println("HEY");
     Robot.turret.setPosition(degrees);
   }
 

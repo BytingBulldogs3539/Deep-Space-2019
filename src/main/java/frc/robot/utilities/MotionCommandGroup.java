@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import java.util.Map.*;
 
 import com.ctre.phoenix.motion.BufferedTrajectoryPointStream;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -48,9 +49,11 @@ public abstract class MotionCommandGroup extends CommandGroup
                     {
 
                     }
-                    if (Robot.MotionBuffers.get("fileName").state.containsKey(_talon.getActiveTrajectoryPosition()))
+
+                    if (Robot.MotionBuffers.get(fileName).state.containsKey(_talon.getActiveTrajectoryPosition()))
                     {
-                        ByteTrajectoryPoint point = Robot.MotionBuffers.get("fileName").state.get(_talon.getActiveTrajectoryPosition());
+                        System.out.println("Running Thread: Found Point");
+                        ByteTrajectoryPoint point = Robot.MotionBuffers.get(fileName).state.get(_talon.getActiveTrajectoryPosition());
 
                         if (_talon.getActiveTrajectoryVelocity() == point.velocity && _talon.getActiveTrajectoryPosition(1) == point.headingDeg)
                         {
@@ -61,6 +64,8 @@ public abstract class MotionCommandGroup extends CommandGroup
 
                 }
             });
+            System.out.println("START THREAD!");
+            eventThread.start();
         }
     }
 }

@@ -30,7 +30,7 @@ public class RobotMap
      * @link https://github.com/CrossTheRoadElec/Phoenix-Documentation#what-are-the-units-of-my-sensor
      */
     // Ticks per rev //Gear ratio
-    public final static int sensorUnitsPerRotDriveTrain = (int) (4096 * 3.86);
+    public final static int sensorUnitsPerRotDriveTrain = (int) (4096 * 2.5);
     // public final static int sensorUnitsPerRotDriveTrain = (int) (4096 / 1.2);
 
     // The battery is the front of the robot and the left is the left and the right

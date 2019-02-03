@@ -17,8 +17,8 @@ public class PlotThread implements Runnable
 	{
 		_talon = talon;
 
-		// _thread = new Thread(this);
-		// _thread.start();
+		 _thread = new Thread(this);
+		 _thread.start();
 	}
 
 	public void run()
@@ -33,7 +33,7 @@ public class PlotThread implements Runnable
 			/* Yield for a Ms or so - this is not meant to be accurate */
 			try
 			{
-				Thread.sleep(1);
+				Thread.sleep(5);
 			}
 			catch (Exception e)
 			{
