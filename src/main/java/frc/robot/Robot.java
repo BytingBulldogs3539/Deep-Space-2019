@@ -52,6 +52,9 @@ public class Robot extends TimedRobot
   // Used to select what game piece we start with.
   SendableChooser<GamePieceType> gamePieceChooser = new SendableChooser<>();
 
+  // TODO: THIS ABSOLUTLY NEEDS TO BE TESTED!
+  public static HashMap<String, ByteTrajectoryPointStream> MotionBuffers = new HashMap<String, ByteTrajectoryPointStream>();
+
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -123,7 +126,8 @@ public class Robot extends TimedRobot
       autonomousCommand = chooser.getSelected();
       for (String fileName : autonomousCommand.motionProfileList)
       {
-        autonomousCommand.MotionBuffers.put(fileName, MotionProfiling.initBuffer(fileName));
+        System.out.println("Load File");
+        Robot.MotionBuffers.put(fileName, MotionProfiling.initBuffer(fileName));
       }
     }
   }
