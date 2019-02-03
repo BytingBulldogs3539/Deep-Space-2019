@@ -45,10 +45,10 @@ public class Manipulator extends Subsystem
 
     master.setNeutralMode(NeutralMode.Brake);
 
-    panelIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
-    cargoIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
-    placementLeftSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
-    placementRightSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.manipulatorOn, RobotMap.manipulatorOff, true);
+    panelIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.panelIntakeOn, RobotMap.panelIntakeOff, true);
+    cargoIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.cargoIntakeOn, RobotMap.cargoIntakeOff, true);
+    placementLeftSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.placementLeftOn, RobotMap.placementLeftOff, true);
+    placementRightSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.placementRightOn, RobotMap.placementRightOff, true);
   }
 
   // Grabs hatch panel from floor; not necessary for feeder station
