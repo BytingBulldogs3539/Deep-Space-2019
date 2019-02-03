@@ -66,6 +66,8 @@ public class MotionProfiling
             point.isLastPoint = !profile.hasNext(); /* set this to true on the last point */
             point.useAuxPID = true; /* tell MPB that we are using both pids */
 
+            point.state = bytePoint.state;
+
             _bufferedStream.Write(point);
 
         }

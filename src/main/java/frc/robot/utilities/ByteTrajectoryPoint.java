@@ -14,5 +14,5 @@ import com.ctre.phoenix.motion.TrajectoryPoint;
  */
 public class ByteTrajectoryPoint extends TrajectoryPoint
 {
-    String state = "";
+    public String state = "";
 }
