@@ -46,13 +46,15 @@ public class PlotThread implements Runnable
 			double trgt_pos = _talon.getActiveTrajectoryPosition(0);
 			double trgt_vel = _talon.getActiveTrajectoryVelocity(0);
 			double trgt_arbF = _talon.getActiveTrajectoryArbFeedFwd(0);
-			double test = _talon.configGetParameter(ParamEnum.eMotionMeas_tap_count, 0);
+
 			SmartDashboard.putNumber("sen_pos", sen_pos);
 			SmartDashboard.putNumber("sen_vel", sen_vel);
 			SmartDashboard.putNumber("trgt_pos", trgt_pos);
 			SmartDashboard.putNumber("trgt_vel", trgt_vel);
-			SmartDashboard.putNumber("test", test);
 			SmartDashboard.putNumber("trgt_arbF", trgt_arbF);
+
+			// SmartDashboard.putNumber("test", _talon.);
+
 		}
 	}
 }

@@ -24,18 +24,20 @@ public class RobotMap
      * @link https://github.com/CrossTheRoadElec/Phoenix-Documentation#what-are-the-units-of-my-sensor
      */
     // Ticks per rev //Gear ratio
-    // public final static int sensorUnitsPerRotDriveTrain = (int) (4096 * 3.86);
-    public final static int sensorUnitsPerRotDriveTrain = (int) (4096 / 1.2);
+    public final static int sensorUnitsPerRotDriveTrain = (int) (4096 * 3.86);
+    // public final static int sensorUnitsPerRotDriveTrain = (int) (4096 / 1.2);
 
+    // The battery is the front of the robot and the left is the left and the right
+    // is the right.
     // List of TalonSRX CAN ID numbers
-    public static final int FRTalon = 4;
-    public static final int FLTalon = 9;
-    public static final int MRTalon = 2;
-    public static final int MLTalon = 10;
-    public static final int BRTalon = 1;
-    public static final int BLTalon = 18;
+    public static final int FRTalon = 12; // 4
+    public static final int FLTalon = 1; // 9
+    public static final int MRTalon = 11; // 2
+    public static final int MLTalon = 2; // 10
+    public static final int BRTalon = 10; // 1
+    public static final int BLTalon = 3;// 18
 
-    public static final int PigeonID = 0;
+    public static final int PigeonID = 48;
 
     /* Evelator ------------------------------ */
 
@@ -96,7 +98,7 @@ public class RobotMap
     /* Gains / PIDs ------------------------------ */
     public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static Gains turretGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
-    public static Gains TurnPid = new Gains(.1,0.0,0.0,0.0,0.0,0.0);
+    public static Gains TurnPid = new Gains(.1, 0.0, 0.0, 0.0, 0.0, 0.0);
     public static final int manipulatorOn = 1;
     public static final int manipulatorOff = 0;
 }

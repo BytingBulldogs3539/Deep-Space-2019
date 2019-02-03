@@ -65,7 +65,7 @@ public class Robot extends TimedRobot
     manipulator = new Manipulator();
     rioDuino = new RioDuino();
     turret = new Turret();
-    byteVision = new ByteVision();
+    // byteVision = new ByteVision();
     oi = new OI();
 
     // Lets start the camera servers.
@@ -97,8 +97,8 @@ public class Robot extends TimedRobot
   public void robotPeriodic()
   {
     // rioDuino.updateMode(Mode.PULSERED);
-    System.out.println("INTAKE" + byteVision.getDataIntake() + "End Intake");
-    System.out.println("Turret" + byteVision.getDataTurret() + "End Turret");
+    // System.out.println("INTAKE" + byteVision.getDataIntake() + "End Intake");
+    // System.out.println("Turret" + byteVision.getDataTurret() + "End Turret");
   }
 
   /**

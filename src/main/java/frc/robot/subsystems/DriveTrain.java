@@ -41,7 +41,7 @@ public class DriveTrain extends Subsystem
     ml = new TalonSRX(RobotMap.MLTalon);
     br = new TalonSRX(RobotMap.BRTalon);
     bl = new TalonSRX(RobotMap.BLTalon);
-    pigeon = new PigeonIMU(RobotMap.PigeonID);
+    pigeon = new PigeonIMU(mr);
 
     // We only use two motor drive train because the rest of the motors follow our
     // "master talons"
@@ -81,24 +81,16 @@ public class DriveTrain extends Subsystem
     fr.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
     // The left side must also be inverted so that we can drive forward with two
-    bl.setInverted(true);
-    ml.setInverted(true);
-    fl.setInverted(false);
+    fr.setInverted(true);
+    mr.setInverted(true);
 
     // Back motors must be reversed because of the gear box
-    fr.setInverted(true);
-    mr.setInverted(false);
-    br.setInverted(false);
+    bl.setInverted(true);
 
     // Set our back and middle motors to follow our master front talons.
-    ml.follow(fl);
-    bl.follow(fl);
 
-    mr.follow(fr);
-    br.follow(fr);
-
-    fl.setSensorPhase(true);
-    fr.setSensorPhase(true);
+    fl.setSensorPhase(false);
+    fr.setSensorPhase(false);
 
     /* --- config the motion profiling specific settings --- */
 
@@ -115,7 +107,7 @@ public class DriveTrain extends Subsystem
 
     /* remote 0 will capture Pigeon IMU */
     MotionConfig.remoteFilter0.remoteSensorDeviceID = pigeon.getDeviceID();
-    MotionConfig.remoteFilter0.remoteSensorSource = RemoteSensorSource.Pigeon_Yaw;
+    MotionConfig.remoteFilter0.remoteSensorSource = RemoteSensorSource.GadgeteerPigeon_Yaw;
     /* remote 1 will capture the quad encoder on left talon */
     MotionConfig.remoteFilter1.remoteSensorDeviceID = fl.getDeviceID();
     MotionConfig.remoteFilter1.remoteSensorSource = RemoteSensorSource.TalonSRX_SelectedSensor;
@@ -156,19 +148,25 @@ public class DriveTrain extends Subsystem
     zeroEncoders();
 
     // TODO: Check to see if we want to disable this in teleop
-    fl.setNeutralMode(NeutralMode.Brake);
-    fr.setNeutralMode(NeutralMode.Brake);
+    fl.setNeutralMode(NeutralMode.Coast);
+    fr.setNeutralMode(NeutralMode.Coast);
 
-    ml.setNeutralMode(NeutralMode.Brake);
-    mr.setNeutralMode(NeutralMode.Brake);
+    ml.setNeutralMode(NeutralMode.Coast);
+    mr.setNeutralMode(NeutralMode.Coast);
 
-    bl.setNeutralMode(NeutralMode.Brake);
-    br.setNeutralMode(NeutralMode.Brake);
+    bl.setNeutralMode(NeutralMode.Coast);
+    br.setNeutralMode(NeutralMode.Coast);
 
     PlotThread _plotThread = new PlotThread(fr);
 
-    fr.clearStickyFaults();
-    fl.clearStickyFaults();
+    ml.follow(fl);
+    bl.follow(fl);
+
+    mr.follow(fr);
+    br.follow(fr);
+
+    fl.setSensorPhase(true);
+    fr.setSensorPhase(false);
 
   }
 

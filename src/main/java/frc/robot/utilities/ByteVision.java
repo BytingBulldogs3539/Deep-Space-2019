@@ -48,7 +48,11 @@ public class ByteVision
 
     public String getDataIntake()
     {
-        return visionPortIntake.readString();
+        if (visionPortIntake != null)
+        {
+            return visionPortIntake.readString();
+        }
+        return "";
     }
 
     public int getPixeloffset()
@@ -58,6 +62,11 @@ public class ByteVision
 
     public String getDataTurret()
     {
-        return visionPortTurret.readString();
+        if (visionPortIntake != null)
+        {
+            return visionPortTurret.readString();
+        }
+        return "";
+
     }
 }
