@@ -31,7 +31,7 @@ public class ByteDoubleSolenoid extends DoubleSolenoid
 	public ByteDoubleSolenoid(int pcm, int on, int off, boolean isTrigger)
 	{
 		super(pcm, on, off);
-		defaultPosition(isTrigger);
+		setPosition(isTrigger);
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class ByteDoubleSolenoid extends DoubleSolenoid
 	{
 		if (get() == DoubleSolenoid.Value.kOff)
 		{
-			defaultPosition(isTrigger);
+			setPosition(isTrigger);
 		}
 		else if (get() == DoubleSolenoid.Value.kReverse)
 		{
@@ -56,14 +56,14 @@ public class ByteDoubleSolenoid extends DoubleSolenoid
 	}
 
 	/**
-	 * Allows us to set the default direction of the double solenoid object.
+	 * Allows us to set the position of the double solenoid object.
 	 * 
-	 * @param isTrigger
-	 *                      The direction that the solenoid will default to.
+	 * @param shouldTrigger
+	 *                          The position that the solenoid will move to.
 	 */
-	public void defaultPosition(boolean isTrigger)
+	public void setPosition(boolean shouldTrigger)
 	{
-		if (isTrigger)
+		if (shouldTrigger)
 			forward();
 		else
 			reverse();

@@ -109,4 +109,8 @@ public class Verticate extends Subsystem
   public void initDefaultCommand()
   {
   }
+
+  public void climb(double speed)
+  {
+  }
 }
