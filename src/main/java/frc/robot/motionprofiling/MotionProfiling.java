@@ -8,6 +8,7 @@
 package frc.robot.motionprofiling;
 
 import java.io.File;
+import java.util.Iterator;
 
 import com.ctre.phoenix.motion.*;
 
@@ -16,33 +17,35 @@ import frc.robot.RobotMap;
 
 public class MotionProfiling
 {
-    public static BufferedTrajectoryPointStream initBuffer(String fileName)
+    public static ByteTrajectoryPointStream initBuffer(String fileName)
     {
         String fullURL = "/home/lvuser/Motion_Profiles/" + fileName;
-        double[][] profile = JsonParser.RetrieveProfileData(new File(fullURL));
-        BufferedTrajectoryPointStream _bufferedStream = new BufferedTrajectoryPointStream();
+        Iterator<BytePoint> profile = JsonParser.RetrieveProfileData(new File(fullURL)).iterator();
+        ByteTrajectoryPointStream _bufferedStream = new ByteTrajectoryPointStream();
 
         boolean forward = true; // set to false to drive in opposite direction of profile (not really needed
                                 // since you can use negative numbers in profile).
 
-        TrajectoryPoint point = new TrajectoryPoint(); // temp for for loop, since unused params are initialized
-                                                       // automatically, you can alloc just one
+        ByteTrajectoryPoint point = new ByteTrajectoryPoint(); // temp for for loop, since unused params are initialized
+        // automatically, you can alloc just one
 
         /* clear the buffer, in case it was used elsewhere */
         _bufferedStream.Clear();
 
         /* Insert every point into buffer, no limit on size */
-        for (int i = 0; i < profile.length; ++i)
+
+        while (profile.hasNext())
         {
+            BytePoint bytePoint = profile.next();
 
             double direction = forward ? +1 : -1;
             /* use the generated profile to figure out the forward arc path (translation) */
-            double positionRot = profile[i][0];
-            double velocityRPM = profile[i][1];
-            int durationMilliseconds = (int) profile[i][2];
+            double positionRot = bytePoint.rotation;
+            double velocityRPM = bytePoint.velocity;
+            int durationMilliseconds = (int) bytePoint.time;
 
             /* to get the turn target; */
-            double targetTurnDeg = profile[i][3];
+            double targetTurnDeg = bytePoint.angle;
 
             /* for each point, fill our structure and pass it to API */
             point.timeDur = durationMilliseconds;
@@ -60,10 +63,11 @@ public class MotionProfiling
             point.profileSlotSelect0 = Constants.primaryPIDSlot; /* which set of gains would you like to use [0,3]? */
             point.profileSlotSelect1 = Constants.auxPIDSlot; /* auxiliary PID [0,1], leave zero */
             point.zeroPos = false; /* don't reset sensor, this is done elsewhere since we have multiple sensors */
-            point.isLastPoint = ((i + 1) == profile.length); /* set this to true on the last point */
+            point.isLastPoint = !profile.hasNext(); /* set this to true on the last point */
             point.useAuxPID = true; /* tell MPB that we are using both pids */
 
             _bufferedStream.Write(point);
+
         }
         return _bufferedStream;
     }

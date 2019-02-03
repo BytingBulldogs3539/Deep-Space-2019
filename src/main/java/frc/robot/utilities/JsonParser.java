@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public final class JsonParser
 {
@@ -26,17 +27,16 @@ public final class JsonParser
 	 * @return returns an array for the motion profile.
 	 */
 
-	public static double[][] RetrieveProfileData(File target)
+	public static ArrayList<BytePoint> RetrieveProfileData(File target)
 	{
 
-		double[][] data = null;
+		ArrayList<BytePoint> points = new ArrayList<BytePoint>();
 		String jsonData = readFile(target);
 		JSONObject jobj;
 		try
 		{
 			jobj = new JSONObject(jsonData);
 			JSONArray jsonArray = new JSONArray(jobj.get("Data").toString());
-			data = new double[jsonArray.length()][4];
 
 			for (int i = 0; i < jsonArray.length(); i++)
 			{
@@ -45,14 +45,15 @@ public final class JsonParser
 
 					JSONObject object1 = jsonArray.getJSONObject(i);
 
-					double[] array = new double[4];
+					BytePoint point = new BytePoint();
 
-					array[0] = object1.getDouble("Rotation");
-					array[1] = object1.getDouble("Velocity");
-					array[2] = object1.getDouble("Time");
-					array[3] = object1.getDouble("Angle");
+					point.rotation = object1.getDouble("Rotation");
+					point.velocity = object1.getDouble("Velocity");
+					point.time = object1.getDouble("Time");
+					point.angle = object1.getDouble("Angle");
+					point.state = object1.getString("State");
 
-					data[i] = array;
+					points.add(point);
 
 				}
 				catch (Exception e)
@@ -60,7 +61,7 @@ public final class JsonParser
 					e.printStackTrace();
 				}
 			}
-			return data;
+			return points;
 		}
 		catch (JSONException e)
 		{

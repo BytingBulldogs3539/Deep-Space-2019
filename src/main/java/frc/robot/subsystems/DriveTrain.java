@@ -27,7 +27,7 @@ import frc.robot.utilities.*;
  */
 public class DriveTrain extends Subsystem
 {
-  TalonSRX fr, fl, mr, ml, br, bl;
+  public TalonSRX fr, fl, mr, ml, br, bl;
   PigeonIMU pigeon;
   Drive drive;
 

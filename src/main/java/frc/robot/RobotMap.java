@@ -43,8 +43,6 @@ public class RobotMap
     public static final int BRTalon = 10; // 1
     public static final int BLTalon = 3;// 18
 
-    public static final int PigeonID = 48;
-
     /* Evelator ------------------------------ */
 
     // DIO number of port that limit switch is plugged into

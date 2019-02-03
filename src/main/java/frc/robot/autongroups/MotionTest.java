@@ -8,15 +8,19 @@
 package frc.robot.autongroups;
 
 import frc.robot.utilities.*;
+import frc.robot.Robot;
 import frc.robot.autoncommands.*;
+import frc.robot.commands.*;
 
-public class MotionTest extends MotionCommandGroup{
-  /**
-   * Add your docs here.
-   */
-  public MotionTest() {
-    addSequential(new AutonDrivePath("AUSA.json", true));
+public class MotionTest extends MotionCommandGroup
+{
+
+  public MotionTest()
+  {
+    addSequential(new AutonDrivePath("AUSA.json", true, this));
     addMotionProfile("AUSA.json");
+
+    setOnEvent("AUSA.json", "T90", new TurretPositionCommand(90), Robot.drivetrain.fr);
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

@@ -10,17 +10,49 @@ package frc.robot.utilities;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import edu.wpi.first.wpilibj.command.Command;
 
+import com.ctre.phoenix.motion.BufferedTrajectoryPointStream;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 /**
  * A Command group required for using motion profiles in auton.
  */
-public abstract class MotionCommandGroup extends CommandGroup 
+public abstract class MotionCommandGroup extends CommandGroup
 {
     public ArrayList<String> motionProfileList = new ArrayList<String>();
+
+    // TODO: THIS ABSOLUTLY NEEDS TO BE TESTED!
+    public HashMap<String, ByteTrajectoryPointStream> MotionBuffers = new HashMap<String, ByteTrajectoryPointStream>();
+    private Thread eventThread;
 
     public void addMotionProfile(String fileName)
     {
         motionProfileList.add(fileName);
+    }
+
+    public void setOnEvent(String fileName, String eventName, final Command command, TalonSRX _talon)
+    {
+        if (eventThread == null)
+        {
+            eventThread = new Thread(() ->
+            {
+                while (!Thread.interrupted())
+                {
+                    if (MotionBuffers.get("fileName").state.containsKey(_talon.getActiveTrajectoryPosition()))
+                    {
+                        ByteTrajectoryPoint point = MotionBuffers.get("fileName").state.get(_talon.getActiveTrajectoryPosition());
+
+                        if (_talon.getActiveTrajectoryVelocity() == point.velocity && _talon.getActiveTrajectoryPosition(1) == point.headingDeg)
+                        {
+                            if (eventName.equals(point.state))
+                                command.start();
+                        }
+                    }
+
+                }
+            });
+        }
     }
 }
