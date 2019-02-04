@@ -10,11 +10,13 @@ package frc.robot.utilities;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+import java.util.Map.*;
 
-import com.ctre.phoenix.motion.BufferedTrajectoryPointStream;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import frc.robot.motionprofiling.*;
 
 /**
  * A Command group required for using motion profiles in auton.
@@ -23,8 +25,6 @@ public abstract class MotionCommandGroup extends CommandGroup
 {
     public ArrayList<String> motionProfileList = new ArrayList<String>();
 
-    // TODO: THIS ABSOLUTLY NEEDS TO BE TESTED!
-    public HashMap<String, ByteTrajectoryPointStream> MotionBuffers = new HashMap<String, ByteTrajectoryPointStream>();
     private Thread eventThread;
 
     public void addMotionProfile(String fileName)
@@ -49,9 +49,11 @@ public abstract class MotionCommandGroup extends CommandGroup
                     {
 
                     }
-                    if (MotionBuffers.get("fileName").state.containsKey(_talon.getActiveTrajectoryPosition()))
+
+                    if (Robot.MotionBuffers.get(fileName).state.containsKey(_talon.getActiveTrajectoryPosition()))
                     {
-                        ByteTrajectoryPoint point = MotionBuffers.get("fileName").state.get(_talon.getActiveTrajectoryPosition());
+                        System.out.println("Running Thread: Found Point");
+                        ByteTrajectoryPoint point = Robot.MotionBuffers.get(fileName).state.get(_talon.getActiveTrajectoryPosition());
 
                         if (_talon.getActiveTrajectoryVelocity() == point.velocity && _talon.getActiveTrajectoryPosition(1) == point.headingDeg)
                         {
@@ -62,6 +64,8 @@ public abstract class MotionCommandGroup extends CommandGroup
 
                 }
             });
+            System.out.println("START THREAD!");
+            eventThread.start();
         }
     }
 }

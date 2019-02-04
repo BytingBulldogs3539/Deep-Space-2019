@@ -23,8 +23,8 @@ import frc.robot.subsystems.RioDuino;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Elevator.GamePieceType;
 import frc.robot.subsystems.Verticate;
+import frc.robot.motionprofiling.*;
 
-import com.ctre.phoenix.motion.*;
 import frc.robot.utilities.*;
 
 /**
@@ -51,6 +51,9 @@ public class Robot extends TimedRobot
   SendableChooser<MotionCommandGroup> chooser = new SendableChooser<>();
   // Used to select what game piece we start with.
   SendableChooser<GamePieceType> gamePieceChooser = new SendableChooser<>();
+
+  // TODO: THIS ABSOLUTLY NEEDS TO BE TESTED!
+  public static HashMap<String, ByteTrajectoryPointStream> MotionBuffers = new HashMap<String, ByteTrajectoryPointStream>();
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -123,7 +126,8 @@ public class Robot extends TimedRobot
       autonomousCommand = chooser.getSelected();
       for (String fileName : autonomousCommand.motionProfileList)
       {
-        autonomousCommand.MotionBuffers.put(fileName, MotionProfiling.initBuffer(fileName));
+        System.out.println("Load File");
+        Robot.MotionBuffers.put(fileName, MotionProfiling.initBuffer(fileName));
       }
     }
   }

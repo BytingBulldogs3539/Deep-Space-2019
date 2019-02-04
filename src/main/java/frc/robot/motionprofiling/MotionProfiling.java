@@ -10,8 +10,6 @@ package frc.robot.motionprofiling;
 import java.io.File;
 import java.util.Iterator;
 
-import com.ctre.phoenix.motion.*;
-
 import frc.robot.utilities.*;
 import frc.robot.RobotMap;
 
@@ -65,6 +63,8 @@ public class MotionProfiling
             point.zeroPos = false; /* don't reset sensor, this is done elsewhere since we have multiple sensors */
             point.isLastPoint = !profile.hasNext(); /* set this to true on the last point */
             point.useAuxPID = true; /* tell MPB that we are using both pids */
+
+            point.state = bytePoint.state;
 
             _bufferedStream.Write(point);
 

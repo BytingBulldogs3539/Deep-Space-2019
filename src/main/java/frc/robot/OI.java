@@ -32,6 +32,8 @@ public class OI
     /* Driver */
     driver.buttonY.whenPressed(new ClimbCommand(0));
 
+    driver.buttonTR.whenActive(new VisionControlCommand());
+
     /* Operator */
 
     operator.buttonBL.whenPressed(new PanelArmActuateCommand(true));
@@ -40,15 +42,15 @@ public class OI
     operator.buttonBR.whenPressed(new CargoArmActuateCommand(true));
     operator.buttonBR.whenReleased(new CargoArmActuateCommand(false));
 
-    operator.buttonX.whenPressed(new PanelPlacementCommand(true));
-    operator.buttonX.whenReleased(new PanelPlacementCommand(false));
+    operator.buttonA.whenPressed(new PanelPlacementCommand(true));
+    operator.buttonA.whenReleased(new PanelPlacementCommand(false));
 
     // TODO: This NEEDS to be TESTED.
-    operator.buttonA.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
-    operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
-    operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
+    operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
+    operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
+    operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
 
-    operator.buttonX.whenPressed(new ManualLimitSwitch());
+    operator.buttonSELECT.whenPressed(new ManualLimitSwitch());
 
     operator.buttonSTART.whenPressed(new IgnoreLimitSwitchCommand());
 

@@ -20,8 +20,8 @@ public class Constants
 	 * kP kI kD kF Iz PeakOut
 	 */
 	// TODO: Tune for robot.
-	public final static Gains gains_MotProf = new Gains(.2, 0.0, 0.0, 1023.0 / 2300.0, 400, 1.00);
-	public final static Gains gains_MotProfAngle = new Gains(.2, 0.0, 0.0, 1023.0 / 2300.0, 400, 1.00);
+	public final static Gains gains_MotProf = new Gains(.2, 0.0, 0.0, 1023.0 / 7000.0, 400, 1.00);
+	public final static Gains gains_MotProfAngle = new Gains(.2, 0.0, 0.0, 1023.0 / 7000.0, 400, 1.00);
 
 	public final static int primaryPIDSlot = 0; // any slot [0,3]
 	public final static int auxPIDSlot = 1; // any slot [0,3]

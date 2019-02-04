@@ -129,7 +129,7 @@ public class Elevator extends Subsystem
 
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
-    master.configClearPositionOnLimitR(true, 10); //TODO: Test to see if this zeros the encoder 
+    master.configClearPositionOnLimitR(true, 10); 
     master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,LimitSwitchNormal.NormallyOpen,10);
 
 

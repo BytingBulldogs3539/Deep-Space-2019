@@ -5,16 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.utilities;
+package frc.robot.motionprofiling;
+
+import com.ctre.phoenix.motion.TrajectoryPoint;
 
 /**
  * Add your docs here.
  */
-public class BytePoint
+public class ByteTrajectoryPoint extends TrajectoryPoint
 {
-    public double rotation;
-    public double velocity;
-    public double time;
-    public double angle;
-    public String state;
+    public String state = "";
 }

@@ -10,7 +10,6 @@ package frc.robot.autoncommands;
 import com.ctre.phoenix.motion.BufferedTrajectoryPointStream;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.utilities.*;
 import frc.robot.Robot;
 
 public class AutonDrivePath extends Command
@@ -20,12 +19,12 @@ public class AutonDrivePath extends Command
   boolean useIsFinished;
   BufferedTrajectoryPointStream buffer;
 
-  public AutonDrivePath(String fileName, boolean useIsFinished, MotionCommandGroup commandGroup)
+  public AutonDrivePath(String fileName, boolean useIsFinished)
   {
     requires(Robot.drivetrain);
     this.fileName = fileName;
     this.useIsFinished = useIsFinished;
-    buffer = commandGroup.MotionBuffers.get(fileName);
+    buffer = Robot.MotionBuffers.get(fileName);
 
   }
 

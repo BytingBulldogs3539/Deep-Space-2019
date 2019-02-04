@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.utilities;
+package frc.robot.motionprofiling;
 
 import java.util.HashMap;
 
@@ -18,9 +18,11 @@ public class ByteTrajectoryPointStream extends BufferedTrajectoryPointStream
 
     public ErrorCode Write(ByteTrajectoryPoint point)
     {
+        System.out.println("WRITE");
         if (!point.state.equals(""))
         {
             state.put((int) point.position, point);
+            System.out.println("POINT ADDED");
         }
         return super.Write(point);
     }
