@@ -93,6 +93,7 @@ public class Elevator extends Subsystem
     master.configAllSettings(basicTalonConfig);
     slave.configAllSettings(basicTalonConfig);
 
+
     /* Configure Sensor Source for Primary PID */
     // Constants.kPIDLoopIdx
     // timeoutMs
@@ -102,8 +103,9 @@ public class Elevator extends Subsystem
 
     /* Sets phase of sensor so forward/reverse on sensor is synced with
      * forward/reverse on talon */
-    master.setSensorPhase(true);
+    master.setSensorPhase(false);
     master.setInverted(false);
+    slave.setInverted(false);
 
     /* Automatically tries to stop motors when not being powered */
     master.setNeutralMode(NeutralMode.Brake);
@@ -127,7 +129,12 @@ public class Elevator extends Subsystem
 
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
+    master.configClearPositionOnLimitR(true, 10); //TODO: Test to see if this zeros the encoder 
+    master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,LimitSwitchNormal.NormallyOpen,10);
+
+
   }
+
 
   /**
    * Allows us to move our elevator using motion magic to the specified height in
@@ -193,20 +200,7 @@ public class Elevator extends Subsystem
     master.neutralOutput();
   }
 
-  public void SetupLimitSwitchLimits()
-	{
-		master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,LimitSwitchNormal.NormallyOpen,10);
-  }
-  public void ResetEncOnLimit()
-  {
-  // boolean limit = master.getSensorCollection().isRevLimitSwitchClosed();
-      // if (limit)
-      //   {
-      //   master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
-      //   }
-        master.configClearPositionOnLimitR(true, 10); //TODO: Test to see if this zeros the encoder 
-
-  }
+  
   // TODO create a method to return the limit switch states.
 
   // TODO: Add a feature for override control.

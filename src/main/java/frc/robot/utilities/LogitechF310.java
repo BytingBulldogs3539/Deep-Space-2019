@@ -166,7 +166,7 @@ public class LogitechF310 extends Joystick
 	 */
 	public double getLeftStickY()
 	{
-		return getRawAxis(Y_AxisL);
+		return -getRawAxis(Y_AxisL);
 	}
 
 	/**
@@ -186,6 +186,6 @@ public class LogitechF310 extends Joystick
 	 */
 	public double getRightStickY()
 	{
-		return getRawAxis(Y_AxisR);
+		return -getRawAxis(Y_AxisR);
 	}
 }
