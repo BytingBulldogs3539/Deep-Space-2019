@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SerialPort;
 
 /**
- * Add your docs here.
+ * Microcontroller attached directly to RoboRIO in order to control light strips
  */
 public class RioDuino
 {
