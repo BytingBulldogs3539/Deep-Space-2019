@@ -32,6 +32,8 @@ public class OI
     /* Driver */
     driver.buttonY.whenPressed(new ClimbCommand(0));
 
+    driver.buttonTR.whenActive(new VisionControlCommand());
+
     /* Operator */
 
     operator.buttonBL.whenPressed(new PanelArmActuateCommand(true));
