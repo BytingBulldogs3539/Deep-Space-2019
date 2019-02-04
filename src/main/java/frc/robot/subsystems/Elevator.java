@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
-import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 
 /**
  * Three stage cascading elevator
@@ -127,6 +126,11 @@ public class Elevator extends Subsystem
 
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
+
+    master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
+
+    master.configClearPositionOnLimitR(true, 10); // TODO: Test to see if this zeros the encoder
+
   }
 
   /**
@@ -193,20 +197,6 @@ public class Elevator extends Subsystem
     master.neutralOutput();
   }
 
-  public void SetupLimitSwitchLimits()
-	{
-		master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,LimitSwitchNormal.NormallyOpen,10);
-  }
-  public void ResetEncOnLimit()
-  {
-  // boolean limit = master.getSensorCollection().isRevLimitSwitchClosed();
-      // if (limit)
-      //   {
-      //   master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
-      //   }
-        master.configClearPositionOnLimitR(true, 10); //TODO: Test to see if this zeros the encoder 
-
-  }
   // TODO create a method to return the limit switch states.
 
   // TODO: Add a feature for override control.

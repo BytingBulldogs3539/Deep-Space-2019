@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.utilities;
+package frc.robot.motionprofiling;
 
 import java.util.HashMap;
 

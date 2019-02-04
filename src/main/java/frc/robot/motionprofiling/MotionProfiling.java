@@ -10,8 +10,6 @@ package frc.robot.motionprofiling;
 import java.io.File;
 import java.util.Iterator;
 
-import com.ctre.phoenix.motion.*;
-
 import frc.robot.utilities.*;
 import frc.robot.RobotMap;
 

@@ -10,13 +10,13 @@ package frc.robot.utilities;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import java.util.Map.*;
 
-import com.ctre.phoenix.motion.BufferedTrajectoryPointStream;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import frc.robot.motionprofiling.*;
 
 /**
  * A Command group required for using motion profiles in auton.

@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import frc.robot.motionprofiling.*;
 
 public final class JsonParser
 {
@@ -70,6 +71,13 @@ public final class JsonParser
 		return null;
 	}
 
+	/**
+	 * reads the file into a string
+	 * 
+	 * @param fileurl
+	 *                    The whole url of the file.
+	 * @return The whole file as a string.
+	 */
 	private static String readFile(File fileurl)
 	{
 		String result = "";
