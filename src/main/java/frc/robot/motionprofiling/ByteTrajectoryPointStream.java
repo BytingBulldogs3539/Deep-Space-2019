@@ -14,16 +14,26 @@ import com.ctre.phoenix.motion.BufferedTrajectoryPointStream;
 
 public class ByteTrajectoryPointStream extends BufferedTrajectoryPointStream
 {
-    public HashMap<Integer, ByteTrajectoryPoint> state = new HashMap<Integer, ByteTrajectoryPoint>();
+    public HashMap<Integer, EventPoint> state = new HashMap<Integer, EventPoint>();
 
     public ErrorCode Write(ByteTrajectoryPoint point)
     {
-        System.out.println("WRITE");
+        return super.Write(point);
+    }
+
+    public void AddState(ByteTrajectoryPoint point)
+    {
         if (!point.state.equals(""))
         {
-            state.put((int) point.position, point);
-            System.out.println("POINT ADDED");
+            EventPoint point2 = new EventPoint();
+            point2.velocity = (int) point.velocity;
+            point2.position = (int) point.position;
+            point2.headingDeg = (int) point.auxiliaryPos;
+            point2.state = point.state;
+
+            state.put((int) point.position, point2);
+
+            System.out.println("POINT ADDED : " + state.get((int) point.position).velocity);
         }
-        return super.Write(point);
     }
 }

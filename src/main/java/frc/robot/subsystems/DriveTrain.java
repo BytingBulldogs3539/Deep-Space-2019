@@ -149,14 +149,6 @@ public class DriveTrain extends Subsystem
     zeroEncoders();
 
     // TODO: Check to see if we want to disable this in teleop
-    fl.setNeutralMode(NeutralMode.Coast);
-    fr.setNeutralMode(NeutralMode.Coast);
-
-    ml.setNeutralMode(NeutralMode.Coast);
-    mr.setNeutralMode(NeutralMode.Coast);
-
-    bl.setNeutralMode(NeutralMode.Coast);
-    br.setNeutralMode(NeutralMode.Coast);
 
     PlotThread _plotThread = new PlotThread(fr);
 
@@ -168,6 +160,15 @@ public class DriveTrain extends Subsystem
 
     fl.setSensorPhase(true);
     fr.setSensorPhase(false);
+
+    fl.setNeutralMode(NeutralMode.Coast);
+    fr.setNeutralMode(NeutralMode.Coast);
+
+    ml.setNeutralMode(NeutralMode.Coast);
+    mr.setNeutralMode(NeutralMode.Coast);
+
+    bl.setNeutralMode(NeutralMode.Coast);
+    br.setNeutralMode(NeutralMode.Coast);
 
   }
 

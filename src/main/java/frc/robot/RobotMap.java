@@ -40,7 +40,8 @@ public class RobotMap
     public static final int FLTalon = 1; // 9
     public static final int MRTalon = 11; // 2
     public static final int MLTalon = 2; // 10
-    public static final int BRTalon = 10; // 1
+    public static final int BRTalon = 9; // 1 //TODO:this should be 10 for the practice bot however we cant because of a
+                                         // broken talon.
     public static final int BLTalon = 3;// 18
 
     /* Evelator ------------------------------ */

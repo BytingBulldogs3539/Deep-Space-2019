@@ -128,6 +128,10 @@ public class Robot extends TimedRobot
       {
         System.out.println("Load File");
         Robot.MotionBuffers.put(fileName, MotionProfiling.initBuffer(fileName));
+        for (int hi : Robot.MotionBuffers.get("AUSA.json").state.keySet())
+        {
+          System.out.println("TEST " + Robot.MotionBuffers.get(fileName).state.get(hi).velocity);
+        }
       }
     }
   }

@@ -67,7 +67,7 @@ public final class Drive
 	/**
 	 * The constructor for the drive method allowing the user to control the right
 	 * and left side of robot with a total of <b>6</b> motors do note that this may
-	 * require you to invert one of your motor controllers depending on how your 
+	 * require you to invert one of your motor controllers depending on how your
 	 * gearbox is designed...
 	 *
 	 * @param rightFront
@@ -90,8 +90,7 @@ public final class Drive
 	 *                        motor.
 	 */
 
-	public Drive(TalonSRX rightFront, TalonSRX rightMiddle, TalonSRX rightBack, TalonSRX leftFront, TalonSRX leftMiddle,
-			TalonSRX leftBack)
+	public Drive(TalonSRX rightFront, TalonSRX rightMiddle, TalonSRX rightBack, TalonSRX leftFront, TalonSRX leftMiddle, TalonSRX leftBack)
 	{
 		driveMode = DriveMode.SIX;
 		talon1 = rightFront;
@@ -119,7 +118,7 @@ public final class Drive
 		double leftMotorSpeed;
 		double rightMotorSpeed;
 
-		moveValue = limitValue(moveValue);
+		moveValue = limitValue(-moveValue);
 		rotateValue = limitValue(rotateValue);
 
 		if (moveValue >= 0.0)
@@ -148,7 +147,7 @@ public final class Drive
 				rightMotorSpeed = -Math.max(-moveValue, -rotateValue);
 			}
 		}
-		setMotorOutputs(-rightMotorSpeed, -leftMotorSpeed);
+		setMotorOutputs(rightMotorSpeed, leftMotorSpeed);
 	}
 
 	/**

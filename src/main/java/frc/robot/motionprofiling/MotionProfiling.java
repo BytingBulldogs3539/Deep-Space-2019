@@ -46,15 +46,14 @@ public class MotionProfiling
             double targetTurnDeg = bytePoint.angle;
 
             /* for each point, fill our structure and pass it to API */
-            point.timeDur = durationMilliseconds;
-            System.out.println(RobotMap.sensorUnitsPerRotDriveTrain);
+            point.timeDur = (int) durationMilliseconds;
             /* drive part */
-            point.position = direction * positionRot * RobotMap.sensorUnitsPerRotDriveTrain; // Rotations => sensor units
-            point.velocity = direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0; // RPM => units per 100ms
+            point.position = (int) direction * positionRot * RobotMap.sensorUnitsPerRotDriveTrain; // Rotations => sensor units
+            point.velocity = (int) direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0; // RPM => units per 100ms
             point.arbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
             /* turn part */
-            point.auxiliaryPos = targetTurnDeg * Constants.turnUnitsPerDeg; // Convert deg to remote sensor units
+            point.auxiliaryPos = (int) targetTurnDeg * Constants.turnUnitsPerDeg; // Convert deg to remote sensor units
             point.auxiliaryVel = 0; // advanced teams can also provide the target velocity
             point.auxiliaryArbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
@@ -67,7 +66,7 @@ public class MotionProfiling
             point.state = bytePoint.state;
 
             _bufferedStream.Write(point);
-
+            _bufferedStream.AddState(point);
         }
         return _bufferedStream;
     }
