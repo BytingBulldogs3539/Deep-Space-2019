@@ -54,8 +54,8 @@ public class OI
 
     operator.buttonSTART.whenPressed(new IgnoreLimitSwitchCommand());
 
-    operator.buttonLS.toggleWhenActive(new ElevatorTakeoverCommand());
-    operator.buttonRS.toggleWhenActive(new TurretTakeoverCommand());
+    operator.buttonRS.toggleWhenActive(new ElevatorTakeoverCommand());
+    operator.buttonLS.toggleWhenActive(new TurretTakeoverCommand());
 
     // Turret Controls
     operator.buttonPadDownLeft.whenPressed(new TurretPositionCommand(-135));

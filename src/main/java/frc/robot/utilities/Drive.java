@@ -118,8 +118,8 @@ public final class Drive
 		double leftMotorSpeed;
 		double rightMotorSpeed;
 
-		moveValue = limitValue(-moveValue);
-		rotateValue = limitValue(rotateValue);
+		moveValue = limitValue(moveValue);
+		rotateValue = limitValue(-rotateValue);
 
 		if (moveValue >= 0.0)
 		{
