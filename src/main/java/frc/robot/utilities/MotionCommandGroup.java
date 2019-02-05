@@ -56,12 +56,11 @@ public abstract class MotionCommandGroup extends CommandGroup
                         // System.out.println("Running Thread: Found Point" +
                         // Robot.MotionBuffers.get(fileName).state.get(traj).velocity);
                         EventPoint point = Robot.MotionBuffers.get(fileName).state.get(_talon.getActiveTrajectoryPosition());
-                        System.out.println(_talon.getActiveTrajectoryVelocity() == point.velocity && _talon.getActiveTrajectoryPosition(1) == point.headingDeg);
                         if (_talon.getActiveTrajectoryVelocity() == point.velocity && _talon.getActiveTrajectoryPosition(1) == point.headingDeg)
                         {
                             if (eventName.equals(point.state))
                             {
-                                System.out.println("START COMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMAND");
+                                System.out.println("START COMMAND");
                                 command.start();
                             }
 

@@ -28,11 +28,15 @@ public class ManualLimitSwitch extends InstantCommand
     {
       Robot.elevator.gamePieceType = GamePieceType.HATCH;
       Robot.rioDuino.updateMode(Mode.YELLOW);
+      System.out.println("YELLOW");
+
     }
     else if (Robot.elevator.gamePieceType == GamePieceType.BOTH)
     {
       Robot.elevator.gamePieceType = GamePieceType.HATCH;
       Robot.rioDuino.updateMode(Mode.YELLOW);
+      System.out.println("YELLOW");
+
     }
     else if (Robot.elevator.gamePieceType == GamePieceType.HATCH)
     {
