@@ -152,11 +152,7 @@ public class DriveTrain extends Subsystem
 
     PlotThread _plotThread = new PlotThread(fr);
 
-    ml.follow(fl);
-    bl.follow(fl);
-
-    mr.follow(fr);
-    br.follow(fr);
+    
 
     fl.setSensorPhase(true);
     fr.setSensorPhase(false);
@@ -169,6 +165,14 @@ public class DriveTrain extends Subsystem
 
     bl.setNeutralMode(NeutralMode.Coast);
     br.setNeutralMode(NeutralMode.Coast);
+
+    ml.follow(fl);
+    bl.follow(fl);
+
+    mr.follow(fr);
+    mr.set(ControlMode.Follower, RobotMap.FRTalon);
+
+    br.follow(fr);
 
   }
 

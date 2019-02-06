@@ -29,7 +29,7 @@ public class DriveCommand extends Command
   @Override
   protected void execute()
   {
-    Robot.drivetrain.driveArcade(Robot.oi.driver.getLeftStickY(), Robot.oi.driver.getRightStickX());
+    Robot.drivetrain.driveArcade(Robot.oi.driver.getLeftStickY(), (Math.tan(Robot.oi.driver.getRightStickX())/1.55));
   }
 
   // Make this return true when this Command no longer needs to run execute()
