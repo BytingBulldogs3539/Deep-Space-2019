@@ -10,6 +10,8 @@ package frc.robot.utilities;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 import java.util.ArrayList;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import java.util.Map.*;
@@ -39,7 +41,7 @@ public abstract class MotionCommandGroup extends CommandGroup
             System.out.println("Add thread");
             eventThread = new Thread(() ->
             {
-                while (!Thread.interrupted())
+                while (!this.isFinished() && !this.eventThread.isInterrupted())
                 {
                     try
                     {
@@ -49,13 +51,20 @@ public abstract class MotionCommandGroup extends CommandGroup
                     {
 
                     }
+                    System.out.println("Running");
                     int traj = _talon.getActiveTrajectoryPosition();
+                    if (!Robot.MotionBuffers.containsKey(fileName))
+                    {
+                        return;
+                    }
+
                     if (Robot.MotionBuffers.get(fileName).state.containsKey(traj))
                     {
 
                         // System.out.println("Running Thread: Found Point" +
                         // Robot.MotionBuffers.get(fileName).state.get(traj).velocity);
                         EventPoint point = Robot.MotionBuffers.get(fileName).state.get(_talon.getActiveTrajectoryPosition());
+
                         if (_talon.getActiveTrajectoryVelocity() == point.velocity && _talon.getActiveTrajectoryPosition(1) == point.headingDeg)
                         {
                             if (eventName.equals(point.state))
@@ -72,5 +81,12 @@ public abstract class MotionCommandGroup extends CommandGroup
             System.out.println("START THREAD!");
             eventThread.start();
         }
+    }
+
+    @Override
+    public void interrupted()
+    {
+        this.eventThread.interrupt();
+        super.interrupted();
     }
 }

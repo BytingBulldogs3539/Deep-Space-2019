@@ -14,7 +14,7 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 public class Verticate extends Subsystem
 {
   // Declare Talons
-  TalonSRX topMaster, topSlave, bottomMaster, bottomSlave;
+  TalonSRX topMaster, topSlave, bottomMaster;
 
   public Verticate()
   {
@@ -22,12 +22,10 @@ public class Verticate extends Subsystem
     topMaster = new TalonSRX(RobotMap.verticateTopMaster);
     topSlave = new TalonSRX(RobotMap.verticateTopSlave);
     bottomMaster = new TalonSRX(RobotMap.verticateBottomMaster);
-    bottomSlave = new TalonSRX(RobotMap.verticateBottomSlave);
 
     /* Slaves will imitate all commands sent to masters e.g set() but not
      * configurations */
     topSlave.follow(topMaster);
-    bottomSlave.follow(bottomMaster);
 
     /* Basic config for Talons */
     TalonSRXConfiguration basicTalonConfig = new TalonSRXConfiguration();
@@ -50,7 +48,6 @@ public class Verticate extends Subsystem
     topMaster.configAllSettings(basicTalonConfig);
     bottomMaster.configAllSettings(basicTalonConfig);
     topSlave.configAllSettings(basicTalonConfig);
-    bottomSlave.configAllSettings(basicTalonConfig);
 
     /* Configure Sensor Source for Primary PID */
     // Constants.kPIDLoopIdx
@@ -68,7 +65,6 @@ public class Verticate extends Subsystem
     topMaster.setNeutralMode(NeutralMode.Brake);
     bottomMaster.setNeutralMode(NeutralMode.Brake);
     topSlave.setNeutralMode(NeutralMode.Brake);
-    bottomSlave.setNeutralMode(NeutralMode.Brake);
 
     /* Set relevant frame periods to be at least as fast as periodic rate */
     topMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.timeoutMs);
