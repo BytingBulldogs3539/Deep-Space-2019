@@ -40,8 +40,7 @@ public class RobotMap
     public static final int FLTalon = 1; // 9
     public static final int MRTalon = 11; // 2
     public static final int MLTalon = 2; // 10
-    public static final int BRTalon = 10; // 1 //TODO:this should be 10 for the practice bot however we cant because of a
-                                         // broken talon.
+    public static final int BRTalon = 10; // 1
     public static final int BLTalon = 3;// 18
 
     /* Evelator ------------------------------ */
@@ -64,15 +63,15 @@ public class RobotMap
     public static double hatchLow = 0.0;
 
     // List of TalonSRX CAN ID numbers
-    public static final int elevatorMaster = 10;
-    public static final int elevatorSlave = 18;
+    public static final int elevatorMaster = 7;
+    public static final int elevatorSlave = 6;
 
     public static final double elevatorSpeedMultiplier = 1;
 
     /* Manipulator ------------------------------ */
 
     // List of TalonSRX CAN ID numbers
-    public static final int manipulatorMaster = 54;
+    public static final int manipulatorMaster = 5;
 
     /* Turret ------------------------------ */
 
@@ -81,8 +80,7 @@ public class RobotMap
     public static final int turretPositiveLimit = 225;
 
     // List of TalonSRX CAN ID numbers
-    public static final int turretMaster = 53;
-    public static final int turretSlave = 52;
+    public static final int turretMaster = 4;
 
     // Gear ratios for lazy suzan
     public static final int largeGear = 60;
@@ -92,10 +90,9 @@ public class RobotMap
     public static final double turretSpeedMultipier = .5;
 
     /* Verticate ------------------------------ */
-    public static final int verticateTopMaster = 53;
-    public static final int verticateTopSlave = 52;
-    public static final int verticateBottomMaster = 53;
-    public static final int verticateBottomSlave = 52;
+    public static final int verticateTopMaster = 8;
+    public static final int verticateTopSlave = 9;
+    public static final int verticateBottomMaster = 13;
 
     /* Gains / PIDs ------------------------------ */
     public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);

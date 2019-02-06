@@ -32,8 +32,6 @@ public class ByteTrajectoryPointStream extends BufferedTrajectoryPointStream
             point2.state = point.state;
 
             state.put((int) point.position, point2);
-
-            System.out.println("POINT ADDED : " + state.get((int) point.position).velocity);
         }
     }
 }

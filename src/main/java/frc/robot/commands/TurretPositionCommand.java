@@ -33,7 +33,6 @@ public class TurretPositionCommand extends Command
   @Override
   protected void execute()
   {
-    // System.out.println("HEY");
 
   }
 
