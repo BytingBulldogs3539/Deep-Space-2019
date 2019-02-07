@@ -62,13 +62,13 @@ public class MotionProfiling
             point.arbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
             /* turn part */
-            point.auxiliaryPos = (int) targetTurnDeg * Constants.turnUnitsPerDeg; // Convert deg to remote sensor units
+            point.auxiliaryPos = (int) targetTurnDeg * RobotMap.turnUnitsPerDeg; // Convert deg to remote sensor units
             
             point.auxiliaryVel = 0; // advanced teams can also provide the target velocity
             point.auxiliaryArbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
-            point.profileSlotSelect0 = Constants.primaryPIDSlot; /* which set of gains would you like to use [0,3]? */
-            point.profileSlotSelect1 = Constants.auxPIDSlot; /* auxiliary PID [0,1], leave zero */
+            point.profileSlotSelect0 = RobotMap.primaryPIDSlot; /* which set of gains would you like to use [0,3]? */
+            point.profileSlotSelect1 = RobotMap.auxPIDSlot; /* auxiliary PID [0,1], leave zero */
             point.zeroPos = false; /* don't reset sensor, this is done elsewhere since we have multiple sensors */
             point.isLastPoint = !profile.hasNext(); /* set this to true on the last point */
             

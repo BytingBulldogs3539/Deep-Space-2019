@@ -10,7 +10,7 @@ import frc.robot.utilities.*;
  */
 public class RobotMap
 {
-    /* Robot ----------------------------------- */
+    /* Robot ------------------------------------------------------------ */
     public static final int pcm = 20; // CAN ID number
     public static final int pdp = 30; // CAN ID number
     public static final int encTicksPerRot = 4096;
@@ -22,7 +22,7 @@ public class RobotMap
     // Amount of time to wait before reporting to Driver Station that action failed
     public static final int timeoutMs = 20;
 
-    /* DriveTrain ------------------------------ */
+    /* DriveTrain ------------------------------------------------------------ */
 
     public static boolean scaleDriveSticks = true;
 
@@ -45,7 +45,7 @@ public class RobotMap
     public static final int BRTalon = 10; // 1
     public static final int BLTalon = 3;// 18
 
-    /* Evelator ------------------------------ */
+    /* Evelator ------------------------------------------------------------ */
 
     // DIO number of port that limit switch is plugged into
     public static final int cargoLimitSwitchPort = 2;
@@ -70,12 +70,21 @@ public class RobotMap
 
     public static final double elevatorSpeedMultiplier = 1;
 
-    /* Manipulator ------------------------------ */
+    /* Manipulator ------------------------------------------------------------ */
+
+    public static final int panelIntakeOn = 1;
+    public static final int panelIntakeOff = 0;
+    public static final int cargoIntakeOn = 3;
+    public static final int cargoIntakeOff = 2;
+    public static final int placementLeftOn = 5;
+    public static final int placementLeftOff = 4;
+    public static final int placementRightOn = 7;
+    public static final int placementRightOff = 6;
 
     // List of TalonSRX CAN ID numbers
     public static final int manipulatorMaster = 5;
 
-    /* Turret ------------------------------ */
+    /* Turret ------------------------------------------------------------ */
 
     // Soft limits for angle
     public static final int turretNegativeLimit = -225;
@@ -91,21 +100,36 @@ public class RobotMap
     // A speed multiplier for manual take over of the turret.
     public static final double turretSpeedMultipier = .5;
 
-    /* Verticate ------------------------------ */
+    /* Verticate ------------------------------------------------------------ */
     public static final int verticateTopMaster = 8;
     public static final int verticateTopSlave = 9;
     public static final int verticateBottomMaster = 13;
 
-    /* Gains / PIDs ------------------------------ */
+    /* Motion Profile ------------------------------------------------------------ */
+	public final static int primaryPIDSlot = 0; // any slot [0,3]
+    public final static int auxPIDSlot = 1; // any slot [0,3]    
+    
+	/**
+	 * Motor neutral dead-band, set to the minimum 0.1%.
+	 */
+	public final static double neutralDeadband = 0.01;
+
+	/**
+	 * Pigeon will reports 8192 units per 360 deg (1 rotation) If using
+	 * encoder-derived (left plus/minus right) heading, find this emperically.
+	 */
+	public final static double turnUnitsPerDeg = 8192.0 / 360.0;
+    
+    /* Gains / PIDs ------------------------------------------------------------ */
+
+    /**
+	 * PID Gains may have to be adjusted based on the responsiveness of control loop
+	 * kP kI kD kF Iz PeakOut
+	 */
+    // TODO: Tune for robot.
     public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static Gains turretGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static Gains TurnPid = new Gains(.1, 0.0, 0.0, 0.0, 0.0, 0.0);
-    public static final int panelIntakeOn = 1;
-    public static final int panelIntakeOff = 0;
-    public static final int cargoIntakeOn = 3;
-    public static final int cargoIntakeOff = 2;
-    public static final int placementLeftOn = 5;
-    public static final int placementLeftOff = 4;
-    public static final int placementRightOn = 7;
-    public static final int placementRightOff = 6;
+	public final static Gains gains_MotProf = new Gains(.2, 0.0, 0.0, 1023.0 / 7000.0, 400, 1.00);
+	public final static Gains gains_MotProfAngle = new Gains(.3, 0.0, .1, 1023.0 / 7000.0, 400, 1.00);
 }
