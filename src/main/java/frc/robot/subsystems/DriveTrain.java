@@ -67,7 +67,7 @@ public class DriveTrain extends Subsystem
     basicTalonConfig.continuousCurrentLimit = 37;
     basicTalonConfig.peakCurrentLimit = 50;
     basicTalonConfig.peakCurrentDuration = 100;
-    basicTalonConfig.voltageCompSaturation = 12.2;
+    basicTalonConfig.voltageCompSaturation = RobotMap.voltageCompSaturation;
 
     // Applies config to all Talons
 

@@ -43,7 +43,7 @@ public class Verticate extends Subsystem
 
     /* Compensates for overcharging batteries. PID acts differently with different
      * voltage. Sets Max Voltage */
-    basicTalonConfig.voltageCompSaturation = 12.2;
+    basicTalonConfig.voltageCompSaturation = RobotMap.voltageCompSaturation;
 
     topMaster.configAllSettings(basicTalonConfig);
     bottomMaster.configAllSettings(basicTalonConfig);
