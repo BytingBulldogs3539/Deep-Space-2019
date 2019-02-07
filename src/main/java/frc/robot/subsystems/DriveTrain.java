@@ -18,6 +18,7 @@ import com.ctre.phoenix.sensors.PigeonIMU.PigeonState;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motion.*;
 
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.motionprofiling.*;
 import frc.robot.utilities.*;
@@ -104,7 +105,7 @@ public class DriveTrain extends Subsystem
     MotionConfig.continuousCurrentLimit = 37;
     MotionConfig.peakCurrentLimit = 50;
     MotionConfig.peakCurrentDuration = 100;
-    MotionConfig.voltageCompSaturation = 12.2;
+    MotionConfig.voltageCompSaturation = RobotMap.voltageCompSaturation;
 
     /* remote 0 will capture Pigeon IMU */
     MotionConfig.remoteFilter0.remoteSensorDeviceID = pigeon.getDeviceID();
@@ -170,7 +171,6 @@ public class DriveTrain extends Subsystem
     bl.follow(fl);
 
     mr.follow(fr);
-    mr.set(ControlMode.Follower, RobotMap.FRTalon);
 
     br.follow(fr);
 

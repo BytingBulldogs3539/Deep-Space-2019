@@ -44,13 +44,24 @@ public class PlotThread implements Runnable
 			double trgt_pos = _talon.getActiveTrajectoryPosition(0);
 			double trgt_vel = _talon.getActiveTrajectoryVelocity(0);
 			double trgt_arbF = _talon.getActiveTrajectoryArbFeedFwd(0);
+			double heading = _talon.getSelectedSensorPosition(1);
+			double trgt_heading = _talon.getActiveTrajectoryPosition(1);
+
 
 			SmartDashboard.putNumber("sen_pos", sen_pos);
+			SmartDashboard.setPersistent("sen_pos");
 			SmartDashboard.putNumber("sen_vel", sen_vel);
+			SmartDashboard.setPersistent("trgt_vel");
 			SmartDashboard.putNumber("trgt_pos", trgt_pos);
+			SmartDashboard.setPersistent("trgt_pos");
 			SmartDashboard.putNumber("trgt_vel", trgt_vel);
+			SmartDashboard.setPersistent("trgt_vel");
 			SmartDashboard.putNumber("trgt_arbF", trgt_arbF);
-
+			SmartDashboard.setPersistent("trgt_arbF");
+			SmartDashboard.putNumber("trgt heading", trgt_heading);
+			SmartDashboard.setPersistent("trgt heading");
+			SmartDashboard.putNumber("heading", heading);
+			SmartDashboard.setPersistent("heading");
 			// SmartDashboard.putNumber("test", _talon.);
 
 		}
