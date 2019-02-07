@@ -33,7 +33,7 @@ public class DriveCommand extends Command
   {
     if (RobotMap.scaleDriveSticks)
     {
-      Robot.drivetrain.driveArcade(Robot.oi.driver.getLeftStickY(), (Math.tan(Robot.oi.driver.getRightStickX()) / 1.55));
+      Robot.drivetrain.driveArcade(Math.atan(Robot.oi.driver.getLeftStickY()) / Math.atan(1), (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1)));
     }
     else
     {
