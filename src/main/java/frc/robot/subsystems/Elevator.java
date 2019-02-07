@@ -88,7 +88,7 @@ public class Elevator extends Subsystem
 
     /* Compensates for overcharging batteries. PID acts differently with different
      * voltage. Sets Max Voltage */
-    basicTalonConfig.voltageCompSaturation = 12.2;
+    basicTalonConfig.voltageCompSaturation = RobotMap.voltageCompSaturation;
 
     master.configAllSettings(basicTalonConfig);
     slave.configAllSettings(basicTalonConfig);
