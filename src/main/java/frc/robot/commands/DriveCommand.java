@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class DriveCommand extends Command
 {
@@ -22,14 +23,23 @@ public class DriveCommand extends Command
   @Override
   protected void initialize()
   {
-    //We don't need an initialize because we did all the initializing on robot start.
+    // We don't need an initialize because we did all the initializing on robot
+    // start.
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute()
   {
-    Robot.drivetrain.driveArcade(Robot.oi.driver.getLeftStickY(), (Math.tan(Robot.oi.driver.getRightStickX())/1.55));
+    if (RobotMap.scaleDriveSticks)
+    {
+      Robot.drivetrain.driveArcade(Robot.oi.driver.getLeftStickY(), (Math.tan(Robot.oi.driver.getRightStickX()) / 1.55));
+    }
+    else
+    {
+      Robot.drivetrain.driveArcade(Robot.oi.driver.getLeftStickY(), Robot.oi.driver.getRightStickX());
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -43,7 +53,8 @@ public class DriveCommand extends Command
   @Override
   protected void end()
   {
-    //If our drivetrain gets canceled or ended even though it should not we need to stop our drivetrain so we don't keep driving.
+    // If our drivetrain gets canceled or ended even though it should not we need to
+    // stop our drivetrain so we don't keep driving.
     Robot.drivetrain.neutralOutput();
   }
 

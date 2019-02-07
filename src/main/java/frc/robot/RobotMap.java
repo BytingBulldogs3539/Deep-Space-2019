@@ -24,6 +24,8 @@ public class RobotMap
 
     /* DriveTrain ------------------------------ */
 
+    public static boolean scaleDriveSticks = true;
+
     /**
      * How many sensor units per rotation. Using CTRE Magnetic Encoder.
      * 
