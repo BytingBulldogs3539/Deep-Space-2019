@@ -18,7 +18,6 @@ import com.ctre.phoenix.sensors.PigeonIMU.PigeonState;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motion.*;
 
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.motionprofiling.*;
 import frc.robot.utilities.*;
@@ -152,8 +151,6 @@ public class DriveTrain extends Subsystem
     // TODO: Check to see if we want to disable this in teleop
 
     PlotThread _plotThread = new PlotThread(fr);
-
-    
 
     fl.setSensorPhase(true);
     fr.setSensorPhase(false);

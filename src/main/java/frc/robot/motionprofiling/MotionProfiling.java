@@ -31,7 +31,6 @@ public class MotionProfiling
         _bufferedStream.Clear();
 
         /* Insert every point into buffer, no limit on size */
-		
 
         while (profile.hasNext())
         {
@@ -45,16 +44,18 @@ public class MotionProfiling
 
             double targetTurnDeg;
             /* to get the turn target; */
-            if(true)
+
+            boolean turnTune = true;
+            if (turnTune)
             {
-              targetTurnDeg = bytePoint.angle;
+                targetTurnDeg = bytePoint.angle;
             }
             else
             {
-              //@SuppressWarnings
-              targetTurnDeg = 360 * (positionRot /9.45958545092102);
+                // @SuppressWarnings
+                targetTurnDeg = 360 * (positionRot / 9.45958545092102);
             }
-            
+
             /* for each point, fill our structure and pass it to API */
             point.timeDur = (int) durationMilliseconds;
             /* drive part */
@@ -64,7 +65,7 @@ public class MotionProfiling
 
             /* turn part */
             point.auxiliaryPos = (int) targetTurnDeg * RobotMap.turnUnitsPerDeg; // Convert deg to remote sensor units
-            
+
             point.auxiliaryVel = 0; // advanced teams can also provide the target velocity
             point.auxiliaryArbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
@@ -72,7 +73,7 @@ public class MotionProfiling
             point.profileSlotSelect1 = RobotMap.auxPIDSlot; /* auxiliary PID [0,1], leave zero */
             point.zeroPos = false; /* don't reset sensor, this is done elsewhere since we have multiple sensors */
             point.isLastPoint = !profile.hasNext(); /* set this to true on the last point */
-            
+
             point.useAuxPID = true; /* tell MPB that we are using both pids */
 
             point.state = bytePoint.state;
