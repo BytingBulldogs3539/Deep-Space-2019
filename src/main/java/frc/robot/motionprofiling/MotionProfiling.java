@@ -47,12 +47,13 @@ public class MotionProfiling
             /* to get the turn target; */
             if(true)
             {
-           targetTurnDeg = bytePoint.angle;
+              targetTurnDeg = bytePoint.angle;
             }
-          else
-          {
-            targetTurnDeg = 360 * (positionRot /9.45958545092102);
-          }
+            else
+            {
+              //@SuppressWarnings
+              targetTurnDeg = 360 * (positionRot /9.45958545092102);
+            }
             
             /* for each point, fill our structure and pass it to API */
             point.timeDur = (int) durationMilliseconds;

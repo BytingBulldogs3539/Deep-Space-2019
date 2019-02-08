@@ -18,8 +18,8 @@ public class MotionTest extends MotionCommandGroup
   public MotionTest()
   {
 
-    addSequential(new AutonDrivePath("Circle.json", true));
-    addMotionProfile("Circle.json");
+    addSequential(new AutonDrivePath("OmarLine.json", true));
+    addMotionProfile("OmarLine.json");
     // addSequential(new AutonDrivePath("AUSA.json", true));
     // addMotionProfile("AUSA.json");
    // setOnEvent("AUSA.json", "T90", new TurretPositionCommand(90), Robot.drivetrain.fr);

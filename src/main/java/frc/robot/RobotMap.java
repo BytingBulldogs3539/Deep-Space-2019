@@ -130,6 +130,6 @@ public class RobotMap
     public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static Gains turretGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
     public static Gains TurnPid = new Gains(.1, 0.0, 0.0, 0.0, 0.0, 0.0);
-	public final static Gains gains_MotProf = new Gains(.2, 0.0, 0.0, 1023.0 / 7000.0, 400, 1.00);
-	public final static Gains gains_MotProfAngle = new Gains(.3, 0.0, .1, 1023.0 / 7000.0, 400, 1.00);
+	public final static Gains gains_MotProf = new Gains(.2, 0.0, 0.0, 1023.0 / 9500.0, 400, 1.00);
+	public final static Gains gains_MotProfAngle = new Gains(.3, 0.0, 0, 1023.0 / 9500.0, 400, 1.00);
 }
