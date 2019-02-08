@@ -15,6 +15,8 @@ public class PlotThread implements Runnable
 
 	double pos_error, pos_error_accum, vel_error, vel_error_accum;
 
+	boolean isNetworking = false;
+
 	public PlotThread(TalonSRX talon)
 	{
 		_talon = talon;
@@ -50,48 +52,67 @@ public class PlotThread implements Runnable
 
 		while (true)
 		{
-			/* Yield for 5 Ms or so - this is not meant to be accurate */
-			try
+			if (isNetworking)
 			{
-				Thread.sleep(5);
+				/* Yield for 5 Ms or so - this is not meant to be accurate */
+				try
+				{
+					Thread.sleep(5);
+				}
+				catch (Exception e)
+				{
+					/* Do Nothing */
+				}
+
+				/* Grab the latest signal update from our 1ms frame update */
+				sen_pos = _talon.getSelectedSensorPosition(0);
+				sen_vel = _talon.getSelectedSensorVelocity(0);
+				trgt_pos = _talon.getActiveTrajectoryPosition(0);
+				trgt_vel = _talon.getActiveTrajectoryVelocity(0);
+				trgt_arbF = _talon.getActiveTrajectoryArbFeedFwd(0);
+				heading = _talon.getSelectedSensorPosition(1);
+				trgt_heading = _talon.getActiveTrajectoryPosition(1);
+
+				/* Calculate error */
+
+				pos_error = Math.abs(sen_pos - trgt_pos);
+				pos_error_accum = pos_error_accum + pos_error;
+
+				vel_error = Math.abs(sen_vel - trgt_vel);
+				vel_error_accum = vel_error_accum + vel_error;
+
+				SmartDashboard.putNumber("sen_pos", sen_pos);
+				SmartDashboard.putNumber("sen_vel", sen_vel);
+				SmartDashboard.putNumber("trgt_pos", trgt_pos);
+				SmartDashboard.putNumber("trgt_vel", trgt_vel);
+				SmartDashboard.putNumber("trgt_arbF", trgt_arbF);
+				SmartDashboard.putNumber("trgt heading", trgt_heading);
+				SmartDashboard.putNumber("heading", heading);
+
+				SmartDashboard.putNumber("pos_error", pos_error);
+				SmartDashboard.putNumber("vel_error", vel_error);
+				SmartDashboard.putNumber("pos_error_accum", pos_error_accum);
+				SmartDashboard.putNumber("vel_error_accum", vel_error_accum);
+
+				// SmartDashboard.putNumber("test", _talon.);
 			}
-			catch (Exception e)
-			{
-				/* Do Nothing */
-			}
-
-			/* Grab the latest signal update from our 1ms frame update */
-			sen_pos = _talon.getSelectedSensorPosition(0);
-			sen_vel = _talon.getSelectedSensorVelocity(0);
-			trgt_pos = _talon.getActiveTrajectoryPosition(0);
-			trgt_vel = _talon.getActiveTrajectoryVelocity(0);
-			trgt_arbF = _talon.getActiveTrajectoryArbFeedFwd(0);
-			heading = _talon.getSelectedSensorPosition(1);
-			trgt_heading = _talon.getActiveTrajectoryPosition(1);
-
-			/* Calculate error */
-
-			pos_error = Math.abs(sen_pos - trgt_pos);
-			pos_error_accum = pos_error_accum + pos_error;
-
-			vel_error = Math.abs(sen_vel - trgt_vel);
-			vel_error_accum = vel_error_accum + vel_error;
-
-			SmartDashboard.putNumber("sen_pos", sen_pos);
-			SmartDashboard.putNumber("sen_vel", sen_vel);
-			SmartDashboard.putNumber("trgt_pos", trgt_pos);
-			SmartDashboard.putNumber("trgt_vel", trgt_vel);
-			SmartDashboard.putNumber("trgt_arbF", trgt_arbF);
-			SmartDashboard.putNumber("trgt heading", trgt_heading);
-			SmartDashboard.putNumber("heading", heading);
-
-			SmartDashboard.putNumber("pos_error", pos_error);
-			SmartDashboard.putNumber("vel_error", vel_error);
-			SmartDashboard.putNumber("pos_error_accum", pos_error_accum);
-			SmartDashboard.putNumber("vel_error_accum", vel_error_accum);
-
-			// SmartDashboard.putNumber("test", _talon.);
-
 		}
+	}
+
+	/** Starts accumulating */
+	public void startThreading()
+	{
+		isNetworking = true;
+	}
+
+	public void stopThreading()
+	{
+		isNetworking = false;
+	}
+
+	public void resetAccum()
+	{
+		pos_error_accum = 0;
+		vel_error_accum = 0;
 	}
 }

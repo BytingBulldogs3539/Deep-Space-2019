@@ -25,7 +25,6 @@ public class AutonDrivePath extends Command
     this.fileName = fileName;
     this.useIsFinished = useIsFinished;
     buffer = Robot.MotionBuffers.get(fileName);
-
   }
 
   public AutonDrivePath(boolean useIsFinished, BufferedTrajectoryPointStream buffer)
@@ -33,7 +32,6 @@ public class AutonDrivePath extends Command
     requires(Robot.drivetrain);
     this.useIsFinished = useIsFinished;
     this.buffer = buffer;
-
   }
 
   // Called just before this Command runs the first time
@@ -41,6 +39,7 @@ public class AutonDrivePath extends Command
   protected void initialize()
   {
     Robot.drivetrain.zeroEncoders();
+    Robot.drivetrain.plotThread.startThreading();
     Robot.drivetrain.startMotionProfile(buffer);
   }
 
@@ -66,6 +65,8 @@ public class AutonDrivePath extends Command
   protected void end()
   {
     Robot.drivetrain.neutralOutput();
+    Robot.drivetrain.plotThread.resetAccum();
+    Robot.drivetrain.plotThread.stopThreading();
   }
 
   // Called when another command which requires one or more of the same

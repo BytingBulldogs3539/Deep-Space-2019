@@ -30,6 +30,7 @@ public class DriveTrain extends Subsystem
   public TalonSRX fr, fl, mr, ml, br, bl;
   PigeonIMU pigeon;
   Drive drive;
+  public PlotThread plotThread;
 
   public DriveTrain()
   {
@@ -149,8 +150,7 @@ public class DriveTrain extends Subsystem
     zeroEncoders();
 
     // TODO: Check to see if we want to disable this in teleop
-
-    PlotThread _plotThread = new PlotThread(fr);
+    plotThread = new PlotThread(fr);
 
     fl.setSensorPhase(true);
     fr.setSensorPhase(false);
