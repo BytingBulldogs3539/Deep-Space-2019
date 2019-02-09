@@ -75,10 +75,10 @@ public class PlotThread implements Runnable
 
 				/* Calculate error */
 
-				pos_error = Math.abs(sen_pos - trgt_pos);
+				pos_error = Math.abs(sen_pos - trgt_pos) / 25000;
 				pos_error_accum = pos_error_accum + pos_error;
 
-				vel_error = Math.abs(sen_vel - trgt_vel);
+				vel_error = Math.abs(sen_vel - trgt_vel) / 25000;
 				vel_error_accum = vel_error_accum + vel_error;
 
 				SmartDashboard.putNumber("sen_pos", sen_pos);

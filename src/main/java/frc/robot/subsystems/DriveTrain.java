@@ -21,6 +21,7 @@ import com.ctre.phoenix.motion.*;
 import frc.robot.RobotMap;
 import frc.robot.motionprofiling.*;
 import frc.robot.utilities.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Six mini cim, six wheel tank
@@ -241,6 +242,12 @@ public class DriveTrain extends Subsystem
     double[] feedback = new double[3];
     pigeon.getYawPitchRoll(feedback);
     return feedback[0];
+  }
+
+  public void putEncoder()
+  {
+    SmartDashboard.putNumber("actual_sen_pos", fr.getSelectedSensorPosition());
+    SmartDashboard.putNumber("actual_sen_vel", fr.getSelectedSensorVelocity());
   }
 
   /* Zero the pigeons angle. */

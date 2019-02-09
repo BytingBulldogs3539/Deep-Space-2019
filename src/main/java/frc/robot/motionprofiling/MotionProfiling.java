@@ -12,6 +12,7 @@ import java.util.Iterator;
 
 import frc.robot.utilities.*;
 import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MotionProfiling
 {

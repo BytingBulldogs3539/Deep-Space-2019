@@ -47,7 +47,7 @@ public class AutonDrivePath extends Command
   @Override
   protected void execute()
   {
-
+    Robot.drivetrain.putEncoder();
   }
 
   // Make this return true when this Command no longer needs to run execute()
