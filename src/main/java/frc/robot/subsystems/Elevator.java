@@ -93,7 +93,6 @@ public class Elevator extends Subsystem
     master.configAllSettings(basicTalonConfig);
     slave.configAllSettings(basicTalonConfig);
 
-
     /* Configure Sensor Source for Primary PID */
     // Constants.kPIDLoopIdx
     // timeoutMs
@@ -129,12 +128,9 @@ public class Elevator extends Subsystem
 
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
-    master.configClearPositionOnLimitR(true, 10); 
-    master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,LimitSwitchNormal.NormallyOpen,10);
-
-
+    master.configClearPositionOnLimitR(true, 10);
+    master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
   }
-
 
   /**
    * Allows us to move our elevator using motion magic to the specified height in
@@ -200,7 +196,6 @@ public class Elevator extends Subsystem
     master.neutralOutput();
   }
 
-  
   // TODO create a method to return the limit switch states.
 
   // TODO: Add a feature for override control.

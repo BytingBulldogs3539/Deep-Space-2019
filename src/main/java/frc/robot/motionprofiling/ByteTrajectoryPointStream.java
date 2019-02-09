@@ -16,11 +16,6 @@ public class ByteTrajectoryPointStream extends BufferedTrajectoryPointStream
 {
     public HashMap<Integer, EventPoint> state = new HashMap<Integer, EventPoint>();
 
-    public ErrorCode Write(ByteTrajectoryPoint point)
-    {
-        return super.Write(point);
-    }
-
     public void AddState(ByteTrajectoryPoint point)
     {
         if (!point.state.equals(""))

@@ -52,7 +52,7 @@ public final class JsonParser
 					point.velocity = object1.getDouble("Velocity");
 					point.time = object1.getDouble("Time");
 					point.angle = object1.getDouble("Angle");
-					point.state = object1.getString("State");
+					point.state = "";// object1.getString("State");
 
 					points.add(point);
 
