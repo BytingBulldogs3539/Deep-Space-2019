@@ -30,8 +30,6 @@ public class MotionProfiling
         ByteTrajectoryPoint point = new ByteTrajectoryPoint(); // temp for for loop, since unused params are initialized
         // automatically, you can alloc just one
 
-        /* clear the buffer, in case it was used elsewhere */
-        _bufferedStream.Clear();
 
         /* Insert every point into buffer, no limit on size */
 
@@ -96,9 +94,6 @@ public class MotionProfiling
 
         TrajectoryPoint point = new TrajectoryPoint(); // temp for for loop, since unused params are initialized
                                                        // automatically, you can alloc just one
-
-        /* clear the buffer, in case it was used elsewhere */
-        _bufferedStream.Clear();
 
         /* Insert every point into buffer, no limit on size */
         for (int i = 0; i < totalCnt; ++i)

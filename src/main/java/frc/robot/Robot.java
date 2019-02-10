@@ -53,7 +53,6 @@ public class Robot extends TimedRobot
   // Used to select what game piece we start with.
   SendableChooser<GamePieceType> gamePieceChooser = new SendableChooser<>();
 
-  // TODO: THIS ABSOLUTLY NEEDS TO BE TESTED!
   public static HashMap<String, ByteTrajectoryPointStream> MotionBuffers = new HashMap<String, ByteTrajectoryPointStream>();
 
   /**
@@ -180,8 +179,6 @@ public class Robot extends TimedRobot
   public void autonomousPeriodic()
   {
     Scheduler.getInstance().run();
-
-    // TODO: Test this function.
 
     if (oi.driver.buttonSTART.get())
     {

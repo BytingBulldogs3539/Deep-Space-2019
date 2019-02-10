@@ -9,7 +9,6 @@ package frc.robot.motionprofiling;
 
 import java.util.HashMap;
 
-import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motion.BufferedTrajectoryPointStream;
 
 public class ByteTrajectoryPointStream extends BufferedTrajectoryPointStream

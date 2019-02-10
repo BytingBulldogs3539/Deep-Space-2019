@@ -19,6 +19,10 @@ public class AutonDrivePath extends Command
   boolean useIsFinished;
   BufferedTrajectoryPointStream buffer;
 
+  /**
+   * Allows us to pass a file name and the motors will drive it. useIsFinished
+   * must be true inorder for events to work!
+   */
   public AutonDrivePath(String fileName, boolean useIsFinished)
   {
     requires(Robot.drivetrain);

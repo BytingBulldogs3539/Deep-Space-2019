@@ -11,10 +11,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 import java.util.ArrayList;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import java.util.Map.*;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 

@@ -8,9 +8,7 @@
 package frc.robot.autongroups;
 
 import frc.robot.utilities.*;
-import frc.robot.Robot;
 import frc.robot.autoncommands.*;
-import frc.robot.commands.*;
 import frc.robot.motionprofiling.MotionProfiling;
 import frc.robot.motionprofiling.TestProfile;
 
