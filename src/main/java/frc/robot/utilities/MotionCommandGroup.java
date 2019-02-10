@@ -86,7 +86,10 @@ public abstract class MotionCommandGroup extends CommandGroup
     @Override
     public void interrupted()
     {
-        this.eventThread.interrupt();
+        if (this.eventThread != null)
+        {
+            this.eventThread.interrupt();
+        }
         super.interrupted();
     }
 }
