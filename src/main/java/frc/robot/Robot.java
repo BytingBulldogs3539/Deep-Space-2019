@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.autongroups.ConfigMotion;
 import frc.robot.autongroups.MotionTest;
 import frc.robot.motionprofiling.MotionProfiling;
 import frc.robot.subsystems.DriveTrain;
@@ -52,7 +53,6 @@ public class Robot extends TimedRobot
   // Used to select what game piece we start with.
   SendableChooser<GamePieceType> gamePieceChooser = new SendableChooser<>();
 
-  // TODO: THIS ABSOLUTLY NEEDS TO BE TESTED!
   public static HashMap<String, ByteTrajectoryPointStream> MotionBuffers = new HashMap<String, ByteTrajectoryPointStream>();
 
   /**
@@ -83,6 +83,7 @@ public class Robot extends TimedRobot
     gamePieceChooser.addOption("Cargo", GamePieceType.CARGO);
 
     chooser.setDefaultOption("Default Auto", new MotionTest());
+    chooser.setDefaultOption("Motion Config Auto", new ConfigMotion());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
     SmartDashboard.putData("Game Piece", gamePieceChooser);
@@ -178,8 +179,6 @@ public class Robot extends TimedRobot
   public void autonomousPeriodic()
   {
     Scheduler.getInstance().run();
-
-    // TODO: Test this function.
 
     if (oi.driver.buttonSTART.get())
     {

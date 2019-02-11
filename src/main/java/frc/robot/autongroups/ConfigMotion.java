@@ -9,18 +9,21 @@ package frc.robot.autongroups;
 
 import frc.robot.utilities.*;
 import frc.robot.autoncommands.*;
+import frc.robot.motionprofiling.MotionProfiling;
+import frc.robot.motionprofiling.TestProfile;
 
-public class MotionTest extends MotionCommandGroup
+public class ConfigMotion extends MotionCommandGroup
 {
 
-  public MotionTest()
+  public ConfigMotion()
   {
 
-    addSequential(new AutonDrivePath("OmarLine.json", true));
-    addMotionProfile("OmarLine.json");
+    addSequential(new AutonDrivePath(MotionProfiling.initBuffer(TestProfile.Points, TestProfile.kNumPoints, 0), true));
+    // addMotionProfile("OmarLine.json");
     // addSequential(new AutonDrivePath("AUSA.json", true));
     // addMotionProfile("AUSA.json");
-   // setOnEvent("AUSA.json", "T90", new TurretPositionCommand(90), Robot.drivetrain.fr);
+    // setOnEvent("AUSA.json", "T90", new TurretPositionCommand(90),
+    // Robot.drivetrain.fr);
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

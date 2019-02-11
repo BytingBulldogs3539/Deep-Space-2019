@@ -19,6 +19,10 @@ public class AutonDrivePath extends Command
   boolean useIsFinished;
   BufferedTrajectoryPointStream buffer;
 
+  /**
+   * Allows us to pass a file name and the motors will drive it. useIsFinished
+   * must be true inorder for events to work!
+   */
   public AutonDrivePath(String fileName, boolean useIsFinished)
   {
     requires(Robot.drivetrain);
@@ -27,7 +31,7 @@ public class AutonDrivePath extends Command
     buffer = Robot.MotionBuffers.get(fileName);
   }
 
-  public AutonDrivePath(boolean useIsFinished, BufferedTrajectoryPointStream buffer)
+  public AutonDrivePath(BufferedTrajectoryPointStream buffer, boolean useIsFinished)
   {
     requires(Robot.drivetrain);
     this.useIsFinished = useIsFinished;
