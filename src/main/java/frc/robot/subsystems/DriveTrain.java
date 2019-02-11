@@ -156,14 +156,14 @@ public class DriveTrain extends Subsystem
     fl.setSensorPhase(true);
     fr.setSensorPhase(false);
 
-    fl.setNeutralMode(NeutralMode.Coast);
-    fr.setNeutralMode(NeutralMode.Coast);
+    fl.setNeutralMode(NeutralMode.Brake);
+    fr.setNeutralMode(NeutralMode.Brake);
 
-    ml.setNeutralMode(NeutralMode.Coast);
-    mr.setNeutralMode(NeutralMode.Coast);
+    ml.setNeutralMode(NeutralMode.Brake);
+    mr.setNeutralMode(NeutralMode.Brake);
 
-    bl.setNeutralMode(NeutralMode.Coast);
-    br.setNeutralMode(NeutralMode.Coast);
+    bl.setNeutralMode(NeutralMode.Brake);
+    br.setNeutralMode(NeutralMode.Brake);
 
     ml.follow(fl);
     bl.follow(fl);
