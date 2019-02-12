@@ -50,7 +50,7 @@ public class OI
     operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
     operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
 
-    operator.buttonSELECT.whenPressed(new ManualLimitSwitch());
+    operator.buttonSELECT.whenPressed(new ManualLimitSwitchCommand());
 
     operator.buttonSTART.whenPressed(new IgnoreLimitSwitchCommand());
 

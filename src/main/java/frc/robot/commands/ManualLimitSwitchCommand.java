@@ -12,9 +12,9 @@ import frc.robot.Robot;
 import frc.robot.subsystems.Elevator.GamePieceType;
 import frc.robot.subsystems.RioDuino.Mode;
 
-public class ManualLimitSwitch extends InstantCommand
+public class ManualLimitSwitchCommand extends InstantCommand
 {
-  public ManualLimitSwitch()
+  public ManualLimitSwitchCommand()
   {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
