@@ -14,7 +14,6 @@ import com.ctre.phoenix.motion.TrajectoryPoint;
 
 import frc.robot.utilities.*;
 import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MotionProfiling
 {
@@ -29,7 +28,6 @@ public class MotionProfiling
 
         ByteTrajectoryPoint point = new ByteTrajectoryPoint(); // temp for for loop, since unused params are initialized
         // automatically, you can alloc just one
-
 
         /* Insert every point into buffer, no limit on size */
 
@@ -61,7 +59,7 @@ public class MotionProfiling
             point.timeDur = (int) durationMilliseconds;
             /* drive part */
             point.position = direction * positionRot * RobotMap.sensorUnitsPerRotDriveTrain; // Rotations => sensor units
-            point.velocity = direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0 *.7; // RPM => units per 100ms
+            point.velocity = direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0 * .666; // RPM => units per 100ms
             point.arbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
             /* turn part */
@@ -114,7 +112,7 @@ public class MotionProfiling
 
             /* drive part */
             point.position = direction * positionRot * RobotMap.sensorUnitsPerRotDriveTrain; // Rotations => sensor units
-            point.velocity = direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0*.666; // RPM => units per 100ms
+            point.velocity = direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0 * .666; // RPM => units per 100ms
             point.arbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
             /* turn part */
