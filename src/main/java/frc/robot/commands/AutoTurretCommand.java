@@ -10,11 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.Robot;
 
-public class AutoTurret extends PIDCommand
+public class AutoTurretCommand extends PIDCommand
 {
   private double target = 0;
 
-  public AutoTurret()
+  public AutoTurretCommand()
   {
     super(0.0, 0.0, 0.0);
 
