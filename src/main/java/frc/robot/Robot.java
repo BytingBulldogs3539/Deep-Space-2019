@@ -73,7 +73,7 @@ public class Robot extends TimedRobot
 
     oi = new OI();
 
-    // Lets start the camera servers.
+    // Let's start the camera servers.
     // TODO: test to make sure that both the front and the back camera are always
     // the front and back camera.
     fCamera = new ByteCamera("Front", 0);
