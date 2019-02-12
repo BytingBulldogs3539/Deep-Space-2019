@@ -61,7 +61,7 @@ public class MotionProfiling
             point.timeDur = (int) durationMilliseconds;
             /* drive part */
             point.position = direction * positionRot * RobotMap.sensorUnitsPerRotDriveTrain; // Rotations => sensor units
-            point.velocity = direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0; // RPM => units per 100ms
+            point.velocity = direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0 *.7; // RPM => units per 100ms
             point.arbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
             /* turn part */
@@ -114,7 +114,7 @@ public class MotionProfiling
 
             /* drive part */
             point.position = direction * positionRot * RobotMap.sensorUnitsPerRotDriveTrain; // Rotations => sensor units
-            point.velocity = direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0; // RPM => units per 100ms
+            point.velocity = direction * velocityRPM * RobotMap.sensorUnitsPerRotDriveTrain / 600.0*.666; // RPM => units per 100ms
             point.arbFeedFwd = 0; // good place for kS, kV, kA, etc...
 
             /* turn part */
