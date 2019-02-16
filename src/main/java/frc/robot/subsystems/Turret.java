@@ -50,7 +50,7 @@ public class Turret extends Subsystem
     /* Sets phase of sensor so forward/reverse on sensor is synced with
      * forward/reverse on talon */
     master.setSensorPhase(true);
-    master.setInverted(false);
+    master.setInverted(true);
 
     /* Make our motor not want to turn. */
     master.setNeutralMode(NeutralMode.Brake);

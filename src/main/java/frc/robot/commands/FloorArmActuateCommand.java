@@ -8,20 +8,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.RobotMap;
+import frc.robot.Robot;
 
-public class IgnoreLimitSwitchCommand extends InstantCommand
+public class FloorArmActuateCommand extends InstantCommand
 {
-  public IgnoreLimitSwitchCommand()
+  boolean shouldActive;
+
+  /**
+   * @param shouldActive
+   *                       actuates solenoid. true = down; false = up
+   */
+  public FloorArmActuateCommand(boolean shouldActive)
   {
+    this.shouldActive = shouldActive;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize()
   {
-    RobotMap.useLimitSwitches = !RobotMap.useLimitSwitches;
-    SmartDashboard.putBoolean("Use Limit Switches?", RobotMap.useLimitSwitches);
+    Robot.manipulator.floorIntakeSetPosition(shouldActive);
   }
 }

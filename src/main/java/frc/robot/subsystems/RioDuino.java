@@ -33,6 +33,7 @@ public class RioDuino
   {
     if (rioDuinoPort != null)
     {
+      System.out.println("UPDATE");
       rioDuinoPort.writeString("" + (char) mode.ordinal());
     }
   }

@@ -15,7 +15,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
  */
 public class Manipulator extends Subsystem
 {
-  private ByteDoubleSolenoid panelIntakeSolenoid, cargoIntakeSolenoid, placementLeftSolenoid, placementRightSolenoid;
+  private ByteDoubleSolenoid panelIntakeSolenoid, cargoIntakeSolenoid, placementSolenoid,floorIntakeSolenoid;
   private TalonSRX master;
 
   public Manipulator()
@@ -45,16 +45,22 @@ public class Manipulator extends Subsystem
 
     master.setNeutralMode(NeutralMode.Brake);
 
+    
+    floorIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.floorIntakeOn, RobotMap.floorIntakeOff, true);
+
     panelIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.panelIntakeOn, RobotMap.panelIntakeOff, true);
-    cargoIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.cargoIntakeOn, RobotMap.cargoIntakeOff, true);
-    placementLeftSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.placementLeftOn, RobotMap.placementLeftOff, true);
-    placementRightSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.placementRightOn, RobotMap.placementRightOff, true);
+    cargoIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.cargoIntakeOn, RobotMap.cargoIntakeOff, false);
+    placementSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.placementOn, RobotMap.placementOff, true);
   }
 
   // Grabs hatch panel from floor; not necessary for feeder station
   public void panelIntakeSetPosition(boolean shouldActive)
   {
     panelIntakeSolenoid.setPosition(shouldActive);
+  }
+  public void floorIntakeSetPosition(boolean shouldActive)
+  {
+    floorIntakeSolenoid.setPosition(shouldActive);
   }
 
   // Actuates intake arm over bumper to grab cargo
@@ -66,8 +72,7 @@ public class Manipulator extends Subsystem
   // Places hatch panel onto hook tape
   public void placementSolenoidSetPosition(boolean shouldActive)
   {
-    placementLeftSolenoid.setPosition(shouldActive);
-    placementRightSolenoid.setPosition(shouldActive);
+    placementSolenoid.setPosition(shouldActive);
   }
 
   public void intake(double speed)

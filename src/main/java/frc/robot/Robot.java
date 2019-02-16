@@ -25,6 +25,8 @@ import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Elevator.GamePieceType;
 import frc.robot.subsystems.Verticate;
 import frc.robot.motionprofiling.*;
+import edu.wpi.first.wpilibj.Compressor;
+
 
 import frc.robot.utilities.*;
 
@@ -44,9 +46,10 @@ public class Robot extends TimedRobot
   public static RioDuino rioDuino;
   public static Turret turret;
   public static Verticate verticate;
-
+  public static Compressor c;
   public static ByteVision byteVision;
   public static ByteCamera fCamera, bCamera;
+  
 
   MotionCommandGroup autonomousCommand;
   SendableChooser<MotionCommandGroup> chooser = new SendableChooser<>();
@@ -68,6 +71,8 @@ public class Robot extends TimedRobot
     rioDuino = new RioDuino();
     turret = new Turret();
     verticate = new Verticate();
+    c = new Compressor(RobotMap.pcm);
+
 
     // byteVision = new ByteVision();
 
@@ -115,6 +120,7 @@ public class Robot extends TimedRobot
   @Override
   public void disabledInit()
   {
+    c.start();
   }
 
   @Override
@@ -190,6 +196,7 @@ public class Robot extends TimedRobot
   @Override
   public void teleopInit()
   {
+    c.start();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove

@@ -20,12 +20,12 @@ public class IntakeCommand extends Command
   @Override
   protected void initialize()
   {
-    Robot.manipulator.intake(Robot.oi.operator.getRawAxis(Robot.oi.operator.LEFT_TRIGGER) + Robot.oi.operator.getRawAxis(Robot.oi.operator.RIGHT_TRIGGER));
   }
 
   @Override
   protected void execute()
   {
+    Robot.manipulator.intake(Robot.oi.operator.getLeftTrigger() - Robot.oi.operator.getRightTrigger());
   }
 
   @Override

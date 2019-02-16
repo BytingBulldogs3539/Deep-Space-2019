@@ -48,41 +48,45 @@ public class RobotMap
     /* Evelator ------------------------------------------------------------ */
 
     // DIO number of port that limit switch is plugged into
-    public static final int cargoLimitSwitchPort = 2;
-    public static final int panelLimitSwitchPort = 3;
+    public static final int cargoLimitSwitchPort = 9;
+    public static final int panelLimitSwitchPort = 8;
 
     // List of heights that the elevator can go to (in inches) while holding a cargo
     // TODO: Change these when we get the robot.
 
     public static double cargoHigh = 0.0;
     public static double cargoMiddle = 0.0;
-    public static double cargoLow = 0.0;
+    public static double cargoLow = 40.0;
 
     // List of heights that the elevator can go to (in inches) while holding a cargo
     // TODO: Change these when we get the robot.
     public static double hatchHigh = 0.0;
     public static double hatchMiddle = 0.0;
-    public static double hatchLow = 0.0;
+    public static double hatchLow = 40.0;
 
     // List of TalonSRX CAN ID numbers
-    public static final int elevatorMaster = 7;
-    public static final int elevatorSlave = 6;
+    public static final int elevatorMaster = 6;
+    public static final int elevatorSlave = 5;
 
-    public static final double elevatorSpeedMultiplier = 1;
+    public static final double elevatorSpeedMultiplier = .35;
+
+    public static final int InchesToElevatorEncMultiplier = 246;
 
     /* Manipulator ------------------------------------------------------------ */
 
-    public static final int panelIntakeOn = 1;
-    public static final int panelIntakeOff = 0;
+    public static final int panelIntakeOn = 6;
+    public static final int panelIntakeOff = 1;
     public static final int cargoIntakeOn = 3;
-    public static final int cargoIntakeOff = 2;
-    public static final int placementLeftOn = 5;
-    public static final int placementLeftOff = 4;
-    public static final int placementRightOn = 7;
-    public static final int placementRightOff = 6;
+    public static final int cargoIntakeOff = 4;
+    public static final int placementOn = 7;
+    public static final int placementOff = 0;
+    public static final int floorIntakeOn =5;
+    public static final int floorIntakeOff = 2;
+    ;
+
 
     // List of TalonSRX CAN ID numbers
-    public static final int manipulatorMaster = 5;
+    public static final int manipulatorMaster = 7;
 
     /* Turret ------------------------------------------------------------ */
 
@@ -91,7 +95,7 @@ public class RobotMap
     public static final int turretPositiveLimit = 225;
 
     // List of TalonSRX CAN ID numbers
-    public static final int turretMaster = 4;
+    public static final int turretMaster = 9;
 
     // Gear ratios for lazy suzan
     public static final int largeGear = 60;
@@ -101,8 +105,8 @@ public class RobotMap
     public static final double turretSpeedMultipier = .5;
 
     /* Verticate ------------------------------------------------------------ */
-    public static final int verticateTopMaster = 8;
-    public static final int verticateTopSlave = 9;
+    public static final int verticateTopMaster = 4;
+    public static final int verticateTopSlave = 8;
     public static final int verticateBottomMaster = 13;
 
     /* Motion Profile

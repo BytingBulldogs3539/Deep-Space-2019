@@ -151,7 +151,7 @@ public class DriveTrain extends Subsystem
     zeroEncoders();
 
     // TODO: Check to see if we want to disable this in teleop
-    plotThread = new PlotThread(fr);
+    //plotThread = new PlotThread(fr);
 
     fl.setSensorPhase(true);
     fr.setSensorPhase(false);

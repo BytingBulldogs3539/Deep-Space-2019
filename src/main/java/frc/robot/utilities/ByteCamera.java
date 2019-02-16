@@ -27,7 +27,7 @@ public class ByteCamera
             camera.setResolution(240, 240);
             camera.setFPS(20);
             camera.setExposureManual(3);
-            camera.setBrightness(10);
+            camera.setBrightness(50);
             camera.getProperty("compression").set(80);
             camera.getProperty("default_compression").set(80);
             camera.getProperty("width").set(240);

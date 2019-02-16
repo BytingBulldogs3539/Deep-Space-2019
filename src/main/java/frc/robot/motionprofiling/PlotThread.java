@@ -15,7 +15,7 @@ public class PlotThread implements Runnable
 
 	double pos_error, pos_error_accum, vel_error, vel_error_accum;
 
-	boolean isNetworking = false;
+	boolean isNetworking = true;
 
 	public PlotThread(TalonSRX talon)
 	{

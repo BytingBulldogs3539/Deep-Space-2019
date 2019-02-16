@@ -33,7 +33,7 @@ public class TurretTakeoverCommand extends Command
 
     //if (Robot.oi.operator.)
 
-    Robot.turret.setSpeed(Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1) * RobotMap.turretSpeedMultipier);
+    Robot.turret.setSpeed(Math.tan(Robot.oi.operator.getLeftStickX()) / Math.tan(1) * RobotMap.turretSpeedMultipier);
   }
 
   // Make this return true when this Command no longer needs to run execute()

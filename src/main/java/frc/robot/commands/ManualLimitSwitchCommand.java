@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.subsystems.Elevator.GamePieceType;
 import frc.robot.subsystems.RioDuino.Mode;
@@ -27,6 +28,7 @@ public class ManualLimitSwitchCommand extends InstantCommand
     if (Robot.elevator.gamePieceType == GamePieceType.NONE)
     {
       Robot.elevator.gamePieceType = GamePieceType.HATCH;
+      SmartDashboard.putBoolean("Is Cargo Mode", false);
       Robot.rioDuino.updateMode(Mode.YELLOW);
       System.out.println("YELLOW");
 
@@ -34,6 +36,8 @@ public class ManualLimitSwitchCommand extends InstantCommand
     else if (Robot.elevator.gamePieceType == GamePieceType.BOTH)
     {
       Robot.elevator.gamePieceType = GamePieceType.HATCH;
+      SmartDashboard.putBoolean("Is Cargo Mode", false);
+
       Robot.rioDuino.updateMode(Mode.YELLOW);
       System.out.println("YELLOW");
 
@@ -41,12 +45,15 @@ public class ManualLimitSwitchCommand extends InstantCommand
     else if (Robot.elevator.gamePieceType == GamePieceType.HATCH)
     {
       Robot.elevator.gamePieceType = GamePieceType.CARGO;
+      SmartDashboard.putBoolean("Is Cargo Mode", true);
+
       Robot.rioDuino.updateMode(Mode.ORANGE);
       System.out.println("ORANGE");
     }
     else if (Robot.elevator.gamePieceType == GamePieceType.CARGO)
     {
       Robot.elevator.gamePieceType = GamePieceType.HATCH;
+      SmartDashboard.putBoolean("Is Cargo Mode", false);
       Robot.rioDuino.updateMode(Mode.YELLOW);
       System.out.println("YELLOW");
 

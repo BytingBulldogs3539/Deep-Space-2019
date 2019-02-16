@@ -8,10 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Elevator.GamePieceType;
 import frc.robot.subsystems.RioDuino.Mode;
+
 
 /**
  * Add your docs here.
@@ -30,17 +32,22 @@ public class LimitSwitchCommand extends InstantCommand
   @Override
   protected void initialize()
   {
+
+    System.out.println("limit pressed");
     if (RobotMap.useLimitSwitches)
     {
       if (Robot.oi.cargoLimitSwitch.get() && Robot.oi.panelLimitSwitch.get())
       {
         Robot.elevator.gamePieceType = GamePieceType.BOTH;
+        SmartDashboard.putBoolean("Is Cargo Mode", false);
         Robot.rioDuino.updateMode(Mode.RED);
         System.out.println("RED");
       }
       else if (Robot.oi.cargoLimitSwitch.get())
       {
         Robot.elevator.gamePieceType = GamePieceType.CARGO;
+        SmartDashboard.putBoolean("Is Cargo Mode", true);
+
         Robot.rioDuino.updateMode(Mode.ORANGE);
         System.out.println("ORANGE");
 
@@ -48,6 +55,8 @@ public class LimitSwitchCommand extends InstantCommand
       else if (Robot.oi.panelLimitSwitch.get())
       {
         Robot.elevator.gamePieceType = GamePieceType.HATCH;
+        SmartDashboard.putBoolean("Is Cargo Mode", false);
+
         Robot.rioDuino.updateMode(Mode.YELLOW);
         System.out.println("YELLOW");
 
@@ -55,6 +64,7 @@ public class LimitSwitchCommand extends InstantCommand
       else
       {
         Robot.elevator.gamePieceType = GamePieceType.NONE;
+        SmartDashboard.putBoolean("Is Cargo Mode", false);
         Robot.rioDuino.updateMode(Mode.GREEN);
         System.out.println("Green");
       }

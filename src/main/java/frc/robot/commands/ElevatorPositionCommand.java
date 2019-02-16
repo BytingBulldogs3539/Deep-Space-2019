@@ -18,6 +18,7 @@ public class ElevatorPositionCommand extends Command
   @Override
   protected void initialize()
   {
+    System.out.println("UP");
     //TODO: TEST!
     if(Robot.elevator.gamePieceType == GamePieceType.CARGO)
     {

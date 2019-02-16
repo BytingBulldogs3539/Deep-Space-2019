@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.motionprofiling.PlotThread;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -19,7 +20,7 @@ public class Elevator extends Subsystem
   // Declare talons
   TalonSRX master, slave;
 
-  public GamePieceType gamePieceType;
+  public GamePieceType gamePieceType=GamePieceType.HATCH;
 
   /**
    * Defines the set of levels that the elevator will lift to.
@@ -100,8 +101,8 @@ public class Elevator extends Subsystem
     /* Sets phase of sensor so forward/reverse on sensor is synced with
      * forward/reverse on talon */
     master.setSensorPhase(false);
-    master.setInverted(false);
-    slave.setInverted(false);
+    master.setInverted(true);
+    slave.setInverted(true);
 
     /* Automatically tries to stop motors when not being powered */
     master.setNeutralMode(NeutralMode.Brake);
@@ -113,20 +114,26 @@ public class Elevator extends Subsystem
 
     /* Set Motion Magic gains in slot 0 - see documentation */
     master.selectProfileSlot(0, 0);
-    master.config_kF(0, RobotMap.elevatorGains.f, RobotMap.timeoutMs); // F
-    master.config_kP(0, RobotMap.elevatorGains.p, RobotMap.timeoutMs); // P
-    master.config_kI(0, RobotMap.elevatorGains.i, RobotMap.timeoutMs); // I
-    master.config_kD(0, RobotMap.elevatorGains.d, RobotMap.timeoutMs); // D
+    PlotThread test = new PlotThread(master);
+    //TODO: Change
+    // master.config_kF(0, RobotMap.elevatorGains.f, RobotMap.timeoutMs); // F
+    // master.config_kP(0, RobotMap.elevatorGains.p, RobotMap.timeoutMs); // P
+    // master.config_kI(0, RobotMap.elevatorGains.i, RobotMap.timeoutMs); // I
+    // master.config_kD(0, RobotMap.elevatorGains.d, RobotMap.timeoutMs); // D
 
     // TODO: This may need to be changed.
     /* Set acceleration and vcruise velocity - see documentation */
-    master.configMotionCruiseVelocity(15000, RobotMap.timeoutMs);
-    master.configMotionAcceleration(6000, RobotMap.timeoutMs);
+    master.configMotionCruiseVelocity(5000, RobotMap.timeoutMs);
+    master.configMotionAcceleration(1000, RobotMap.timeoutMs);
 
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
     master.configClearPositionOnLimitR(true, 10);
     master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
+
+    master.configForwardSoftLimitEnable(true);
+
+    master.configForwardSoftLimitThreshold(12500);
   }
 
   /**
@@ -139,7 +146,7 @@ public class Elevator extends Subsystem
   public void setHeightInches(double inches)
   {
     // TODO: This may need to be changed.
-    double encoderTicks = inches / 3.63 * 4096;
+    double encoderTicks = inches * RobotMap.InchesToElevatorEncMultiplier;
     master.set(ControlMode.MotionMagic, encoderTicks);
     System.out.println("set" + encoderTicks);
   }

@@ -36,21 +36,24 @@ public class OI
 
     /* Operator */
 
-    operator.buttonBL.whenPressed(new PanelArmActuateCommand(true));
-    operator.buttonBL.whenReleased(new PanelArmActuateCommand(false));
+    operator.buttonBL.whenPressed(new PanelArmActuateCommand(false));
+    operator.buttonBL.whenReleased(new PanelArmActuateCommand(true));
 
     operator.buttonBR.whenPressed(new CargoArmActuateCommand(true));
     operator.buttonBR.whenReleased(new CargoArmActuateCommand(false));
 
-    operator.buttonA.whenPressed(new PanelPlacementCommand(true));
-    operator.buttonA.whenReleased(new PanelPlacementCommand(false));
+    driver.buttonA.whenPressed(new ManualLimitSwitchCommand());
+
+    operator.buttonA.whenPressed(new PanelPlacementCommand(false));
+    operator.buttonA.whenReleased(new PanelPlacementCommand(true));
 
     // TODO: This NEEDS to be TESTED.
     operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
     operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
     operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
 
-    operator.buttonSELECT.whenPressed(new ManualLimitSwitchCommand());
+    operator.buttonSELECT.whenPressed(new FloorArmActuateCommand(false));
+    operator.buttonSELECT.whenReleased(new FloorArmActuateCommand(true));
 
     operator.buttonSTART.whenPressed(new IgnoreLimitSwitchCommand());
 
@@ -69,10 +72,10 @@ public class OI
     operator.buttonPadDown.whenPressed(new TurretPositionCommand(180));
 
     /* Limit Switches */
-    // cargoLimitSwitch.whileHeld(new LimitSwitchCommand());
-    // cargoLimitSwitch.whenReleased(new LimitSwitchCommand());
+     cargoLimitSwitch.whenPressed(new LimitSwitchCommand());
+     cargoLimitSwitch.whenReleased(new LimitSwitchCommand());
 
-    // panelLimitSwitch.whenPressed(new LimitSwitchCommand());
-    // panelLimitSwitch.whenReleased(new LimitSwitchCommand());
+     panelLimitSwitch.whenPressed(new LimitSwitchCommand());
+     panelLimitSwitch.whenReleased(new LimitSwitchCommand());
   }
 }
