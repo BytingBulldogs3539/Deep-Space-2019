@@ -157,6 +157,8 @@ public class Robot extends TimedRobot
   {
     // We need to get the feed back from the drivers and give it to our elevator.
     elevator.gamePieceType = gamePieceChooser.getSelected();
+    elevator.neutralOutput();
+    drivetrain.neutralOutput();
     // TODO: Think about changing this to not recreate the object on init and add a
     // button to refresh the command instead.
     try
@@ -201,6 +203,8 @@ public class Robot extends TimedRobot
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    elevator.neutralOutput();
+    drivetrain.neutralOutput();
     if (autonomousCommand != null)
     {
       autonomousCommand.cancel();

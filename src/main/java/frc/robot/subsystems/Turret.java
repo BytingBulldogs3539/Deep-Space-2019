@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import frc.robot.motionprofiling.PlotThread;
 
 /**
  * Active lazy susan
@@ -68,15 +69,16 @@ public class Turret extends Subsystem
 
     // TODO: Change possible
     /* Set acceleration and vcruise velocity - see documentation */
-    master.configMotionCruiseVelocity(15000, RobotMap.timeoutMs);
-    master.configMotionAcceleration(6000, RobotMap.timeoutMs);
-
+    master.configMotionCruiseVelocity(12000, RobotMap.timeoutMs);
+    master.configMotionAcceleration(1200, RobotMap.timeoutMs);
+    PlotThread test = new PlotThread(master);
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
   }
 
   /* Rotates the turret to an angle by the smallest distance between start and end
    * angle; respects soft limits */
+  //TODO: counter clockwise is negative 
   public void setPosition(double degrees)
   {
     double currentPosition = getAngle();
@@ -90,7 +92,7 @@ public class Turret extends Subsystem
   /* Rotates turret to an angle; soft limits will interfere */
   public void setRotation(double degrees)
   {
-    double rotations = degrees / 360 * (RobotMap.largeGear / RobotMap.smallGear);
+    double rotations = degrees / 360 * 3.83;//(RobotMap.largeGear / RobotMap.smallGear);//3.75
     double encoderTicks = rotations * RobotMap.encTicksPerRot;
 
     master.set(ControlMode.MotionMagic, encoderTicks);

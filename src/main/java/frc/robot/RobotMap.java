@@ -55,20 +55,20 @@ public class RobotMap
     // TODO: Change these when we get the robot.
 
     public static double cargoHigh = 0.0;
-    public static double cargoMiddle = 0.0;
+    public static double cargoMiddle = 60.0;
     public static double cargoLow = 40.0;
 
     // List of heights that the elevator can go to (in inches) while holding a cargo
     // TODO: Change these when we get the robot.
     public static double hatchHigh = 0.0;
-    public static double hatchMiddle = 0.0;
+    public static double hatchMiddle = 60.0;
     public static double hatchLow = 40.0;
 
     // List of TalonSRX CAN ID numbers
     public static final int elevatorMaster = 6;
     public static final int elevatorSlave = 5;
 
-    public static final double elevatorSpeedMultiplier = .35;
+    public static final double elevatorSpeedMultiplier = .5;
 
     public static final int InchesToElevatorEncMultiplier = 246;
 
@@ -132,8 +132,8 @@ public class RobotMap
      * kP kI kD kF Iz PeakOut
      */
     // TODO: Tune for robot.
-    public static Gains elevatorGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
-    public static Gains turretGains = new Gains(.1, 0.0, 0.0, .054, 400, 1.00);
+    public static Gains elevatorGains = new Gains(.3, 0.0, 0.0, .6, 400, 1.00);
+    public static Gains turretGains = new Gains(1.8, 0.001, 0.0, .4, 400, 1.00);
     public static Gains TurnPid = new Gains(.1, 0.0, 0.0, 0.0, 0.0, 0.0);
     public final static Gains gains_MotProf = new Gains(0.01, 0.0, 0.0, .125, 400, 1.00);
     public final static Gains gains_MotProfAngle = new Gains(.3, 0.0, 0, 1023.0 / 9500.0, 400, 1.00);
