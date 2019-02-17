@@ -2,11 +2,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.motionprofiling.PlotThread;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
@@ -98,8 +96,6 @@ public class Elevator extends Subsystem
     // timeoutMs
     master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.timeoutMs);
 
-    // TODO: This may need to be changed.
-
     /* Sets phase of sensor so forward/reverse on sensor is synced with
      * forward/reverse on talon */
     master.setSensorPhase(false);
@@ -117,16 +113,18 @@ public class Elevator extends Subsystem
     /* Set Motion Magic gains in slot 0 - see documentation */
     master.selectProfileSlot(0, 0);
     //PlotThread test = new PlotThread(master);
-    //TODO: Change
+    
     master.config_kF(0, RobotMap.elevatorGains.f, RobotMap.timeoutMs); // F
     master.config_kP(0, RobotMap.elevatorGains.p, RobotMap.timeoutMs); // P
     master.config_kI(0, RobotMap.elevatorGains.i, RobotMap.timeoutMs); // I
     master.config_kD(0, RobotMap.elevatorGains.d, RobotMap.timeoutMs); // D
 
-    // TODO: This may need to be changed.
     /* Set acceleration and vcruise velocity - see documentation */
     master.configMotionCruiseVelocity(7000, RobotMap.timeoutMs);
     master.configMotionAcceleration(2000, RobotMap.timeoutMs);
+
+    //TODO: config the scurve strength
+    master.configMotionSCurveStrength(2);
 
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
@@ -134,6 +132,7 @@ public class Elevator extends Subsystem
     master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
     master.configForwardLimitSwitchSource(RemoteLimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, RobotMap.elevatorSlave, 10);
     master.configForwardSoftLimitEnable(false);// removed 
+    
 
   }
 

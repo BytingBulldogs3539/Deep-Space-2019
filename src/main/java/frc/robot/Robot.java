@@ -27,7 +27,6 @@ import frc.robot.subsystems.Verticate;
 import frc.robot.motionprofiling.*;
 import edu.wpi.first.wpilibj.Compressor;
 
-
 import frc.robot.utilities.*;
 
 /**
@@ -49,7 +48,6 @@ public class Robot extends TimedRobot
   public static Compressor c;
   public static ByteVision byteVision;
   public static ByteCamera fCamera, bCamera;
-  
 
   MotionCommandGroup autonomousCommand;
   SendableChooser<MotionCommandGroup> chooser = new SendableChooser<>();
@@ -72,7 +70,6 @@ public class Robot extends TimedRobot
     turret = new Turret();
     verticate = new Verticate();
     c = new Compressor(RobotMap.pcm);
-
 
     // byteVision = new ByteVision();
 
@@ -157,8 +154,13 @@ public class Robot extends TimedRobot
   {
     // We need to get the feed back from the drivers and give it to our elevator.
     elevator.gamePieceType = gamePieceChooser.getSelected();
+
+    /**
+     * This is here to make sure that we are not left in motion magic mode.
+     */
     elevator.neutralOutput();
     drivetrain.neutralOutput();
+
     // TODO: Think about changing this to not recreate the object on init and add a
     // button to refresh the command instead.
     try
@@ -199,12 +201,17 @@ public class Robot extends TimedRobot
   public void teleopInit()
   {
     c.start();
+
+    /**
+     * This is here to make sure that we are not left in motion magic mode.
+     */
+    elevator.neutralOutput();
+    drivetrain.neutralOutput();
+
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    elevator.neutralOutput();
-    drivetrain.neutralOutput();
     if (autonomousCommand != null)
     {
       autonomousCommand.cancel();

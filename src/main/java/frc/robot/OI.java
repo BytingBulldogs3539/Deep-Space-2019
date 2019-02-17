@@ -46,8 +46,7 @@ public class OI
 
     operator.buttonA.whenPressed(new PanelPlacementCommand(false));
     operator.buttonA.whenReleased(new PanelPlacementCommand(true));
-
-    // TODO: This NEEDS to be TESTED.
+    
     operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
     operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
     operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));

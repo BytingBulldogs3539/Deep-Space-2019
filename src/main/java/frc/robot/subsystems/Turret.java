@@ -62,6 +62,7 @@ public class Turret extends Subsystem
 
     /* Set Motion Magic gains in slot 0 - see documentation */
     master.selectProfileSlot(0, 0);
+
     master.config_kF(0, RobotMap.turretGains.f, RobotMap.timeoutMs); // F
     master.config_kP(0, RobotMap.turretGains.p, RobotMap.timeoutMs); // P
     master.config_kI(0, RobotMap.turretGains.i, RobotMap.timeoutMs); // I
@@ -71,14 +72,20 @@ public class Turret extends Subsystem
     /* Set acceleration and vcruise velocity - see documentation */
     master.configMotionCruiseVelocity(12000, RobotMap.timeoutMs);
     master.configMotionAcceleration(1200, RobotMap.timeoutMs);
+
+    // TODO: config the scurve strength
+    master.configMotionSCurveStrength(2);
+
     PlotThread test = new PlotThread(master);
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
   }
 
-  /* Rotates the turret to an angle by the smallest distance between start and end
-   * angle; respects soft limits */
-  //TODO: counter clockwise is negative 
+  /** Rotates the turret to an angle respects soft limits, counter clockwise is negative
+   * 
+   * 
+   * 
+   * */
   public void setPosition(double degrees)
   {
     double currentPosition = getAngle();
@@ -92,7 +99,7 @@ public class Turret extends Subsystem
   /* Rotates turret to an angle; soft limits will interfere */
   public void setRotation(double degrees)
   {
-    double rotations = degrees / 360 * 3.83;//(RobotMap.largeGear / RobotMap.smallGear);//3.75
+    double rotations = degrees / 360 * RobotMap.turretGearRatio;
     double encoderTicks = rotations * RobotMap.encTicksPerRot;
 
     master.set(ControlMode.MotionMagic, encoderTicks);
@@ -107,8 +114,8 @@ public class Turret extends Subsystem
   /* Converts encoder ticks into turret angle */
   public double encoderTicksToDegrees(double encoderTicks)
   {
-    double irotations = encoderTicks * 360 * (RobotMap.smallGear / RobotMap.largeGear);
-    double degrees = irotations / RobotMap.encTicksPerRot;
+    double irotations = encoderTicks / RobotMap.encTicksPerRot;
+    double degrees = irotations / RobotMap.turretGearRatio * 360.0;
 
     return degrees;
   }

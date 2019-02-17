@@ -23,15 +23,12 @@ public class ByteCamera
         // that they won't have a camera if they don't fix it.
         try
         {
-            camera = CameraServer.getInstance().startAutomaticCapture(label, port);
-            camera.setResolution(240, 240);
+            camera = new UsbCamera(label, port);
+            camera.setResolution(360, 360);
             camera.setFPS(20);
             camera.setExposureManual(3);
             camera.setBrightness(50);
-            camera.getProperty("compression").set(80);
-            camera.getProperty("default_compression").set(80);
-            camera.getProperty("width").set(240);
-            camera.getProperty("height").set(240);
+            CameraServer.getInstance().addCamera(camera);
 
         }
         catch (Exception e)

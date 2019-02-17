@@ -80,10 +80,8 @@ public class RobotMap
     public static final int cargoIntakeOff = 4;
     public static final int placementOn = 7;
     public static final int placementOff = 0;
-    public static final int floorIntakeOn =5;
+    public static final int floorIntakeOn = 5;
     public static final int floorIntakeOff = 2;
-    ;
-
 
     // List of TalonSRX CAN ID numbers
     public static final int manipulatorMaster = 7;
@@ -98,8 +96,7 @@ public class RobotMap
     public static final int turretMaster = 9;
 
     // Gear ratios for lazy suzan
-    public static final int largeGear = 60;
-    public static final int smallGear = 16;
+    public static final double turretGearRatio = 3.83;
 
     // A speed multiplier for manual take over of the turret.
     public static final double turretSpeedMultipier = .5;
@@ -132,9 +129,14 @@ public class RobotMap
      * kP kI kD kF Iz PeakOut
      */
     // TODO: Tune for robot.
+    // Tuned
     public static Gains elevatorGains = new Gains(.3, 0.0, 0.0, .6, 400, 1.00);
+    // Tuned
     public static Gains turretGains = new Gains(1.8, 0.001, 0.0, .4, 400, 1.00);
+    // NOT Tuned
     public static Gains TurnPid = new Gains(.1, 0.0, 0.0, 0.0, 0.0, 0.0);
+    // SEMI Tuned
     public final static Gains gains_MotProf = new Gains(0.01, 0.0, 0.0, .125, 400, 1.00);
+    // SEMI Tuned
     public final static Gains gains_MotProfAngle = new Gains(.3, 0.0, 0, 1023.0 / 9500.0, 400, 1.00);
 }
