@@ -43,7 +43,7 @@ public class DriveTrain extends Subsystem
     ml = new TalonSRX(RobotMap.MLTalon);
     br = new TalonSRX(RobotMap.BRTalon);
     bl = new TalonSRX(RobotMap.BLTalon);
-    pigeon = new PigeonIMU(ml);
+    pigeon = new PigeonIMU(mr);
 
     // We only use two motor drive train because the rest of the motors follow our
     // "master talons"
