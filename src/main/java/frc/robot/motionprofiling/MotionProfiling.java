@@ -44,15 +44,15 @@ public class MotionProfiling
             double targetTurnDeg;
             /* to get the turn target; */
 
-            boolean turnTune = true;
+            boolean turnTune = false;
             if (turnTune)
             {
-                targetTurnDeg = bytePoint.angle;
+            targetTurnDeg = bytePoint.angle;
             }
             else
             {
-                // @SuppressWarnings
-                targetTurnDeg = 360 * (positionRot / 9.45958545092102);
+            // @SuppressWarnings
+            targetTurnDeg = 360 * (positionRot / 9.40055846610894);
             }
 
             /* for each point, fill our structure and pass it to API */

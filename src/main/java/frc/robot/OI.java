@@ -48,13 +48,18 @@ public class OI
     operator.buttonA.whenReleased(new PanelPlacementCommand(true));
     
     operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
-    operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
-    operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
+    operator.buttonB.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
+
+    operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
+    operator.buttonX.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
+
+    operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
+    operator.buttonY.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
+
 
     operator.buttonSELECT.whenPressed(new FloorArmActuateCommand(false));
     operator.buttonSELECT.whenReleased(new FloorArmActuateCommand(true));
 
-    operator.buttonSTART.whenPressed(new IgnoreLimitSwitchCommand());
 
     operator.buttonRS.toggleWhenActive(new ElevatorTakeoverCommand());
     operator.buttonLS.toggleWhenActive(new TurretTakeoverCommand());

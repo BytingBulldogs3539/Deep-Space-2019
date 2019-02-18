@@ -26,6 +26,7 @@ public class LimitSwitchCommand extends InstantCommand
   public LimitSwitchCommand()
   {
     super();
+    requires(Robot.manipulator);
   }
 
   // Called once when the command executes
@@ -46,6 +47,7 @@ public class LimitSwitchCommand extends InstantCommand
       else if (Robot.oi.cargoLimitSwitch.get())
       {
         Robot.elevator.gamePieceType = GamePieceType.CARGO;
+        Robot.manipulator.cargoIntakeSetPosition(false);
         SmartDashboard.putBoolean("Is Cargo Mode", true);
 
         Robot.rioDuino.updateMode(Mode.ORANGE);

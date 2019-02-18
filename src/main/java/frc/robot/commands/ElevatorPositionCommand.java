@@ -28,6 +28,12 @@ public class ElevatorPositionCommand extends Command
     {
       Robot.elevator.setHeightHatch(height);
     }
+    if(this.height==ElevatorHeight.Home)
+    {
+      Robot.elevator.setHeightCargo(height);
+
+    }
+
   }
 
   @Override

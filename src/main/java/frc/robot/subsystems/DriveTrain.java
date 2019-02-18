@@ -31,7 +31,6 @@ public class DriveTrain extends Subsystem
   public TalonSRX fr, fl, mr, ml, br, bl;
   PigeonIMU pigeon;
   Drive drive;
-  public PlotThread plotThread;
 
   public DriveTrain()
   {
@@ -44,7 +43,7 @@ public class DriveTrain extends Subsystem
     ml = new TalonSRX(RobotMap.MLTalon);
     br = new TalonSRX(RobotMap.BRTalon);
     bl = new TalonSRX(RobotMap.BLTalon);
-    pigeon = new PigeonIMU(mr);
+    pigeon = new PigeonIMU(ml);
 
     // We only use two motor drive train because the rest of the motors follow our
     // "master talons"
@@ -84,16 +83,20 @@ public class DriveTrain extends Subsystem
     fr.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
     // The left side must also be inverted so that we can drive forward with two
-    fr.setInverted(true);
+    fr.setInverted(false);
     mr.setInverted(true);
+    br.setInverted(true);
 
     // Back motors must be reversed because of the gear box
-    bl.setInverted(true);
+    fl.setInverted(true);
+    ml.setInverted(false);
+    bl.setInverted(false);
 
-    // Set our back and middle motors to follow our master front talons.
-
+    
     fl.setSensorPhase(false);
     fr.setSensorPhase(false);
+  
+
 
     /* --- config the motion profiling specific settings --- */
 
@@ -153,9 +156,6 @@ public class DriveTrain extends Subsystem
     // TODO: Check to see if we want to disable this in teleop
     //plotThread = new PlotThread(fr);
 
-    fl.setSensorPhase(true);
-    fr.setSensorPhase(false);
-
     fl.setNeutralMode(NeutralMode.Brake);
     fr.setNeutralMode(NeutralMode.Brake);
 
@@ -171,6 +171,13 @@ public class DriveTrain extends Subsystem
     mr.follow(fr);
 
     br.follow(fr);
+
+    PlotThread test = new PlotThread(fr);
+
+
+    
+    // Set our back and middle motors to follow our master front talons.
+
 
   }
 

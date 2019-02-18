@@ -76,7 +76,7 @@ public class Turret extends Subsystem
     // TODO: config the scurve strength
     master.configMotionSCurveStrength(2);
 
-    PlotThread test = new PlotThread(master);
+    //PlotThread test = new PlotThread(master);
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
   }

@@ -38,31 +38,40 @@ public class RobotMap
     // The battery is the front of the robot and the left is the left and the right
     // is the right.
     // List of TalonSRX CAN ID numbers
-    public static final int FRTalon = 12; // 4
-    public static final int FLTalon = 1; // 9
-    public static final int MRTalon = 11; // 2
-    public static final int MLTalon = 2; // 10
-    public static final int BRTalon = 10; // 1
-    public static final int BLTalon = 3;// 18
+    public static final int FLTalon = 10; // 4
+    public static final int FRTalon = 3; // 9
+    public static final int MLTalon = 11; // 2
+    public static final int MRTalon = 2; // 10
+    public static final int BLTalon = 12; // 1
+    public static final int BRTalon = 1;// 18
 
     /* Evelator ------------------------------------------------------------ */
 
     // DIO number of port that limit switch is plugged into
-    public static final int cargoLimitSwitchPort = 9;
-    public static final int panelLimitSwitchPort = 8;
+    public static final int cargoLimitSwitchPort = 8;
+    public static final int panelLimitSwitchPort = 9;
 
     // List of heights that the elevator can go to (in inches) while holding a cargo
     // TODO: Change these when we get the robot.
 
-    public static double cargoHigh = 0.0;
-    public static double cargoMiddle = 60.0;
-    public static double cargoLow = 40.0;
-
+    public static double cargoHigh = 74.0;
+    public static double cargoMiddle = 48.0;
+    public static double cargoLow = 20.0;
+    public static double home = 0.0;
     // List of heights that the elevator can go to (in inches) while holding a cargo
     // TODO: Change these when we get the robot.
     public static double hatchHigh = 0.0;
     public static double hatchMiddle = 60.0;
-    public static double hatchLow = 40.0;
+    public static double hatchLow = 35.0;
+
+    public static double cargoHighOffset = 0.0;
+    public static double cargoMiddleOffset = 0.0;
+    public static double cargoLowOffset = 0.0;
+    // List of heights that the elevator can go to (in inches) while holding a cargo
+    // TODO: Change these when we get the robot.
+    public static double hatchHighOffset = 0.0;
+    public static double hatchMiddleOffset = 0.0;
+    public static double hatchLowOffset= 0.0;
 
     // List of TalonSRX CAN ID numbers
     public static final int elevatorMaster = 6;
@@ -70,7 +79,7 @@ public class RobotMap
 
     public static final double elevatorSpeedMultiplier = .5;
 
-    public static final int InchesToElevatorEncMultiplier = 246;
+    public static final double  InchesToElevatorEncMultiplier = 320;
 
     /* Manipulator ------------------------------------------------------------ */
 
@@ -120,7 +129,7 @@ public class RobotMap
      * Pigeon will reports 8192 units per 360 deg (1 rotation) If using
      * encoder-derived (left plus/minus right) heading, find this emperically.
      */
-    public final static double turnUnitsPerDeg = 8192.0 / 360.0;
+    public final static double turnUnitsPerDeg = (8192.0 / 360.0);
 
     /* Gains / PIDs ------------------------------------------------------------ */
 
@@ -130,7 +139,7 @@ public class RobotMap
      */
     // TODO: Tune for robot.
     // Tuned
-    public static Gains elevatorGains = new Gains(.3, 0.0, 0.0, .6, 400, 1.00);
+    public static Gains elevatorGains = new Gains(.6, 0.00005, 0.0, .7, 400, 1.00);
     // Tuned
     public static Gains turretGains = new Gains(1.8, 0.001, 0.0, .4, 400, 1.00);
     // NOT Tuned

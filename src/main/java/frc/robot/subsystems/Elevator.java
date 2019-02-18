@@ -11,6 +11,8 @@ import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import frc.robot.motionprofiling.PlotThread;
+
 
 /**
  * Three stage cascading elevator
@@ -53,7 +55,9 @@ public class Elevator extends Subsystem
     /** The intake will be set to go to Hatch levels */
     Middle,
     /** The intake contains neither a Hatch or a Cargo */
-    Low
+    Low,
+    
+    Home
   }
 
   public Elevator()
@@ -112,7 +116,6 @@ public class Elevator extends Subsystem
 
     /* Set Motion Magic gains in slot 0 - see documentation */
     master.selectProfileSlot(0, 0);
-    //PlotThread test = new PlotThread(master);
     
     master.config_kF(0, RobotMap.elevatorGains.f, RobotMap.timeoutMs); // F
     master.config_kP(0, RobotMap.elevatorGains.p, RobotMap.timeoutMs); // P
@@ -146,7 +149,7 @@ public class Elevator extends Subsystem
   public void setHeightInches(double inches)
   {
     // TODO: This may need to be changed.
-    double encoderTicks = inches * RobotMap.InchesToElevatorEncMultiplier;
+    double encoderTicks = (inches-(9)) * RobotMap.InchesToElevatorEncMultiplier;
     master.set(ControlMode.MotionMagic, encoderTicks);
     System.out.println("set" + encoderTicks);
   }
@@ -163,13 +166,16 @@ public class Elevator extends Subsystem
     switch (height)
     {
     case High:
-      setHeightInches(RobotMap.cargoHigh);
+      setHeightInches(RobotMap.cargoHigh+RobotMap.cargoHighOffset);
       break;
     case Middle:
-      setHeightInches(RobotMap.cargoMiddle);
+      setHeightInches(RobotMap.cargoMiddle+RobotMap.cargoMiddleOffset);
       break;
     case Low:
-      setHeightInches(RobotMap.cargoLow);
+      setHeightInches(RobotMap.cargoLow+RobotMap.cargoLowOffset);
+      break;
+    case Home:
+      setHeightInches(RobotMap.home);
       break;
     }
   }
@@ -179,13 +185,16 @@ public class Elevator extends Subsystem
     switch (height)
     {
     case High:
-      setHeightInches(RobotMap.hatchHigh);
+      setHeightInches(RobotMap.hatchHigh+RobotMap.hatchHighOffset);
       break;
     case Middle:
-      setHeightInches(RobotMap.hatchMiddle);
+      setHeightInches(RobotMap.hatchMiddle+RobotMap.hatchMiddleOffset);
       break;
     case Low:
-      setHeightInches(RobotMap.hatchLow);
+      setHeightInches(RobotMap.hatchLow+RobotMap.hatchLowOffset);
+      break;
+    case Home:
+      setHeightInches(RobotMap.home);
       break;
     }
   }

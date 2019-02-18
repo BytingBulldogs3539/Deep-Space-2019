@@ -14,7 +14,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.autongroups.CenterRightHatch;
 import frc.robot.autongroups.ConfigMotion;
+import frc.robot.autongroups.Circle;
+
 import frc.robot.autongroups.MotionTest;
 import frc.robot.motionprofiling.MotionProfiling;
 import frc.robot.subsystems.DriveTrain;
@@ -86,6 +89,9 @@ public class Robot extends TimedRobot
 
     chooser.setDefaultOption("Default Auto", new MotionTest());
     chooser.setDefaultOption("Motion Config Auto", new ConfigMotion());
+    chooser.setDefaultOption("CenterRightHatch", new CenterRightHatch());
+    chooser.setDefaultOption("Circle", new Circle());
+
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
     SmartDashboard.putData("Game Piece", gamePieceChooser);
