@@ -44,7 +44,7 @@ public class MotionProfiling
             double targetTurnDeg;
             /* to get the turn target; */
 
-            boolean turnTune = false;
+            boolean turnTune = true;
             if (turnTune)
             {
             targetTurnDeg = bytePoint.angle;

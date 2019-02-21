@@ -14,12 +14,12 @@ import frc.robot.subsystems.Verticate;
 /**
  * Add your docs here.
  */
-public class ClimbCommand extends InstantCommand {
+public class ClimbArmCommand extends InstantCommand {
   /**
    * Add your docs here.
    */
   double Speed;
-  public ClimbCommand(double speed) {
+  public ClimbArmCommand(double speed) {
     super();
     Speed = speed;
     // Use requires() here to declare subsystem dependencies
@@ -29,7 +29,7 @@ public class ClimbCommand extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.verticate.climb(Speed);
+    Robot.verticate.climbArm(Speed);
 
   }
 

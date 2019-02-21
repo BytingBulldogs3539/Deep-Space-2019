@@ -49,6 +49,8 @@ public class DriveTrain extends Subsystem
     // "master talons"
     drive = new Drive(fr, fl);
 
+ 
+
     // TODO: Think about adding a incase if pigeon is not plugged in or not
     // responding.
     if (pigeon.getState() != PigeonState.Ready && pigeon.getState() != PigeonState.Initializing)
@@ -82,20 +84,24 @@ public class DriveTrain extends Subsystem
     fl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     fr.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
+    fl.setSensorPhase(true);
+    fr.setSensorPhase(false);
+
+
+
+  
     // The left side must also be inverted so that we can drive forward with two
-    fr.setInverted(false);
+    fr.setInverted(true);
     mr.setInverted(true);
-    br.setInverted(true);
+    br.setInverted(false);
 
     // Back motors must be reversed because of the gear box
-    fl.setInverted(true);
+    fl.setInverted(false);
     ml.setInverted(false);
-    bl.setInverted(false);
+    bl.setInverted(true);
 
     
-    fl.setSensorPhase(false);
-    fr.setSensorPhase(false);
-  
+    
 
 
     /* --- config the motion profiling specific settings --- */
@@ -142,6 +148,7 @@ public class DriveTrain extends Subsystem
     MotionConfig.slot1.kD = RobotMap.gains_MotProfAngle.d;
     MotionConfig.slot1.integralZone = (int) RobotMap.gains_MotProfAngle.iZone;
     MotionConfig.slot1.closedLoopPeakOutput = RobotMap.gains_MotProfAngle.peakOutput;
+
 
     // Apply the configuration to the right master talon
     fr.configAllSettings(MotionConfig);

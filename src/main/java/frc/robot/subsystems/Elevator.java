@@ -106,7 +106,7 @@ public class Elevator extends Subsystem
     master.setInverted(true);
     slave.setInverted(true);
 
-    /* Automatically tries to stop motors when not being powered */
+    /* Automatically tries to stop motors whe\n not being powered */
     master.setNeutralMode(NeutralMode.Brake);
     slave.setNeutralMode(NeutralMode.Brake);
 

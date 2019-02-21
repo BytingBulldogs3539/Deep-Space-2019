@@ -30,8 +30,22 @@ public class OI
   public OI()
   {
     /* Driver */
-    driver.buttonY.whenPressed(new ClimbCommand(0));
+    driver.buttonY.whenPressed(new ManualLimitSwitchCommand());
 
+    driver.buttonA.whenPressed(new ClimbArmCommand(.95));
+
+    driver.buttonA.whenReleased(new ClimbArmCommand(0));
+
+
+    driver.buttonB.whenPressed(new ClimbCommand(-.95));
+    driver.buttonB.whenReleased(new ClimbCommand(0));
+
+    driver.buttonBL.whenPressed(new ClimbWheelCommand(.5));
+    driver.buttonBL.whenReleased(new ClimbWheelCommand(0));
+
+
+
+    
     driver.buttonTR.whenActive(new VisionControlCommand());
 
     /* Operator */
@@ -42,27 +56,26 @@ public class OI
     operator.buttonBR.whenPressed(new CargoArmActuateCommand(true));
     operator.buttonBR.whenReleased(new CargoArmActuateCommand(false));
 
-    driver.buttonA.whenPressed(new ManualLimitSwitchCommand());
 
-    operator.buttonA.whenPressed(new PanelPlacementCommand(false));
-    operator.buttonA.whenReleased(new PanelPlacementCommand(true));
+    operator.buttonX.whenPressed(new PanelPlacementCommand(false));
+    operator.buttonX.whenReleased(new PanelPlacementCommand(true));
     
-    operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
-    operator.buttonB.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
+    operator.buttonA.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
+    //operator.buttonA.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
 
-    operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
-    operator.buttonX.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
+    operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
+    //operator.buttonB.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
 
     operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
-    operator.buttonY.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
+    //operator.buttonY.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
 
 
     operator.buttonSELECT.whenPressed(new FloorArmActuateCommand(false));
     operator.buttonSELECT.whenReleased(new FloorArmActuateCommand(true));
 
 
-    operator.buttonRS.toggleWhenActive(new ElevatorTakeoverCommand());
-    operator.buttonLS.toggleWhenActive(new TurretTakeoverCommand());
+    operator.buttonLS.toggleWhenActive(new ElevatorTakeoverCommand());
+    operator.buttonRS.toggleWhenActive(new TurretTakeoverCommand());
 
     // Turret Controls
     operator.buttonPadDownLeft.whenPressed(new TurretPositionCommand(-135));

@@ -38,12 +38,12 @@ public class RobotMap
     // The battery is the front of the robot and the left is the left and the right
     // is the right.
     // List of TalonSRX CAN ID numbers
-    public static final int FLTalon = 10; // 4
-    public static final int FRTalon = 3; // 9
-    public static final int MLTalon = 11; // 2
-    public static final int MRTalon = 2; // 10
-    public static final int BLTalon = 12; // 1
-    public static final int BRTalon = 1;// 18
+    public static final int FRTalon = 12; // 4
+    public static final int FLTalon = 1; // 9
+    public static final int MRTalon = 11; // 2
+    public static final int MLTalon = 2; // 10
+    public static final int BRTalon = 10; // 1
+    public static final int BLTalon = 3;// 18
 
     /* Evelator ------------------------------------------------------------ */
 
@@ -61,8 +61,8 @@ public class RobotMap
     // List of heights that the elevator can go to (in inches) while holding a cargo
     // TODO: Change these when we get the robot.
     public static double hatchHigh = 0.0;
-    public static double hatchMiddle = 60.0;
-    public static double hatchLow = 35.0;
+    public static double hatchMiddle = 35.0;
+    public static double hatchLow = 15.0;
 
     public static double cargoHighOffset = 0.0;
     public static double cargoMiddleOffset = 0.0;
@@ -111,9 +111,9 @@ public class RobotMap
     public static final double turretSpeedMultipier = .5;
 
     /* Verticate ------------------------------------------------------------ */
-    public static final int verticateTopMaster = 4;
-    public static final int verticateTopSlave = 8;
-    public static final int verticateBottomMaster = 13;
+    public static final int verticateArm = 4;
+    public static final int verticateMaster = 8;
+    public static final int verticateWheel = 13;
 
     /* Motion Profile
      * ------------------------------------------------------------ */
@@ -145,7 +145,9 @@ public class RobotMap
     // NOT Tuned
     public static Gains TurnPid = new Gains(.1, 0.0, 0.0, 0.0, 0.0, 0.0);
     // SEMI Tuned
-    public final static Gains gains_MotProf = new Gains(0.01, 0.0, 0.0, .125, 400, 1.00);
+    public final static Gains gains_MotProf = new Gains(0.3, 0.00005, 0.001, .16, 400, 1.00);
     // SEMI Tuned
-    public final static Gains gains_MotProfAngle = new Gains(.3, 0.0, 0, 1023.0 / 9500.0, 400, 1.00);
+   // public final static Gains gains_MotProfAngle = new Gains(0, 0.0, 0, 0, 400, 1.00);
+
+    public final static Gains gains_MotProfAngle = new Gains(1.6, 0.0, 0, .16, 500, 1.00);
 }

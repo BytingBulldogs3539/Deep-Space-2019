@@ -31,7 +31,7 @@ public class ElevatorTakeoverCommand extends Command
   {
     // get the right stick y value and set to the motor speed maybe with a
     // multiplier.
-    Robot.elevator.setPower(Robot.oi.operator.getRightStickY() * RobotMap.elevatorSpeedMultiplier);
+    Robot.elevator.setPower(Robot.oi.operator.getLeftStickY() * RobotMap.elevatorSpeedMultiplier);
   }
 
   // Make this return true when this Command no longer needs to run execute()

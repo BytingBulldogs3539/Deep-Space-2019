@@ -19,6 +19,12 @@ import frc.robot.autongroups.ConfigMotion;
 import frc.robot.autongroups.Circle;
 
 import frc.robot.autongroups.MotionTest;
+import frc.robot.autongroups.RightHatchOne;
+import frc.robot.autongroups.RightRocketOne;
+
+import frc.robot.autongroups.LeftHatchOne;
+import frc.robot.autongroups.LeftRocketOne;
+
 import frc.robot.motionprofiling.MotionProfiling;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
@@ -26,6 +32,7 @@ import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.RioDuino;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Elevator.GamePieceType;
+import frc.robot.subsystems.RioDuino.Mode;
 import frc.robot.subsystems.Verticate;
 import frc.robot.motionprofiling.*;
 import edu.wpi.first.wpilibj.Compressor;
@@ -90,12 +97,18 @@ public class Robot extends TimedRobot
     chooser.setDefaultOption("Default Auto", new MotionTest());
     chooser.setDefaultOption("Motion Config Auto", new ConfigMotion());
     chooser.setDefaultOption("CenterRightHatch", new CenterRightHatch());
+    chooser.setDefaultOption("RightHatchOne", new RightHatchOne());
+    chooser.setDefaultOption("RightRocketOne", new RightRocketOne());
+chooser.setDefaultOption("LeftHatchOne",new LeftHatchOne());
+chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
+
     chooser.setDefaultOption("Circle", new Circle());
 
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
     SmartDashboard.putData("Game Piece", gamePieceChooser);
     Robot.elevator.gamePieceType = GamePieceType.NONE;
+    rioDuino.updateMode(Mode.PULSEGREEN);
   }
 
   /**
@@ -124,6 +137,7 @@ public class Robot extends TimedRobot
   public void disabledInit()
   {
     c.start();
+    c.stop();
   }
 
   @Override
@@ -207,6 +221,7 @@ public class Robot extends TimedRobot
   public void teleopInit()
   {
     c.start();
+   c.stop();//remove
 
     /**
      * This is here to make sure that we are not left in motion magic mode.
