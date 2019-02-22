@@ -20,8 +20,8 @@ import frc.robot.autongroups.Circle;
 
 import frc.robot.autongroups.MotionTest;
 import frc.robot.autongroups.RightHatchOne;
-import frc.robot.autongroups.RightRocketOne;
-
+import frc.robot.autongroups.RightRocketRear;
+import frc.robot.autongroups.RightRocketRear;
 import frc.robot.autongroups.LeftHatchOne;
 import frc.robot.autongroups.LeftRocketOne;
 
@@ -98,7 +98,7 @@ public class Robot extends TimedRobot
     chooser.setDefaultOption("Motion Config Auto", new ConfigMotion());
     chooser.setDefaultOption("CenterRightHatch", new CenterRightHatch());
     chooser.setDefaultOption("RightHatchOne", new RightHatchOne());
-    chooser.setDefaultOption("RightRocketOne", new RightRocketOne());
+    chooser.setDefaultOption("RightRocketRear", new RightRocketRear());
 chooser.setDefaultOption("LeftHatchOne",new LeftHatchOne());
 chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
 

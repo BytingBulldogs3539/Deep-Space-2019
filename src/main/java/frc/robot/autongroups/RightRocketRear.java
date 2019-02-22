@@ -13,15 +13,15 @@ import frc.robot.motionprofiling.MotionProfiling;
 import frc.robot.motionprofiling.TestProfile;
 import frc.robot.commands.*;
 
-public class RightRocketOne extends MotionCommandGroup
+public class RightRocketRear extends MotionCommandGroup
 {
 
-  public RightRocketOne()
+  public RightRocketRear()
   {
-    addSequential(new AutonDrivePath("RightRocketOne.json", true));
-    addMotionProfile("RightRocketOne.json");
-    addSequential(new TurretPositionCommand(90));
-    addSequential(new AutonWait(.5));
+    addSequential(new AutonDrivePath("RightRocketRear.json", true));
+    addMotionProfile("RightRocketRear.json");
+//addSequential(new TurretPositionCommand(90));
+   // addSequential(new AutonWait(.5));
 
     // //addSequential(new PanelPlacementCommand(false));
     // addSequential(new AutonWait(.2));

@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import frc.robot.motionprofiling.PlotThread;
-
+import frc.robot.utilities.*;
 
 /**
  * Three stage cascading elevator
@@ -22,7 +22,7 @@ public class Elevator extends Subsystem
   // Declare talons
   TalonSRX master, slave;
 
-  public GamePieceType gamePieceType=GamePieceType.HATCH;
+  public GamePieceType gamePieceType = GamePieceType.HATCH;
 
   /**
    * Defines the set of levels that the elevator will lift to.
@@ -56,7 +56,7 @@ public class Elevator extends Subsystem
     Middle,
     /** The intake contains neither a Hatch or a Cargo */
     Low,
-    
+
     Home
   }
 
@@ -116,7 +116,7 @@ public class Elevator extends Subsystem
 
     /* Set Motion Magic gains in slot 0 - see documentation */
     master.selectProfileSlot(0, 0);
-    
+
     master.config_kF(0, RobotMap.elevatorGains.f, RobotMap.timeoutMs); // F
     master.config_kP(0, RobotMap.elevatorGains.p, RobotMap.timeoutMs); // P
     master.config_kI(0, RobotMap.elevatorGains.i, RobotMap.timeoutMs); // I
@@ -126,7 +126,7 @@ public class Elevator extends Subsystem
     master.configMotionCruiseVelocity(7000, RobotMap.timeoutMs);
     master.configMotionAcceleration(2000, RobotMap.timeoutMs);
 
-    //TODO: config the scurve strength
+    // TODO: config the scurve strength
     master.configMotionSCurveStrength(2);
 
     /* Zero the sensor */
@@ -134,8 +134,7 @@ public class Elevator extends Subsystem
     master.configClearPositionOnLimitR(true, 10);
     master.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
     master.configForwardLimitSwitchSource(RemoteLimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, RobotMap.elevatorSlave, 10);
-    master.configForwardSoftLimitEnable(false);// removed 
-    
+    master.configForwardSoftLimitEnable(false);// removed
 
   }
 
@@ -149,9 +148,10 @@ public class Elevator extends Subsystem
   public void setHeightInches(double inches)
   {
     // TODO: This may need to be changed.
-    double encoderTicks = (inches-(9)) * RobotMap.InchesToElevatorEncMultiplier;
+    double encoderTicks = (inches - (9)) * RobotMap.InchesToElevatorEncMultiplier;
     master.set(ControlMode.MotionMagic, encoderTicks);
     System.out.println("set" + encoderTicks);
+
   }
 
   /**
@@ -166,13 +166,13 @@ public class Elevator extends Subsystem
     switch (height)
     {
     case High:
-      setHeightInches(RobotMap.cargoHigh+RobotMap.cargoHighOffset);
+      setHeightInches(RobotMap.cargoHigh + RobotMap.cargoHighOffset);
       break;
     case Middle:
-      setHeightInches(RobotMap.cargoMiddle+RobotMap.cargoMiddleOffset);
+      setHeightInches(RobotMap.cargoMiddle + RobotMap.cargoMiddleOffset);
       break;
     case Low:
-      setHeightInches(RobotMap.cargoLow+RobotMap.cargoLowOffset);
+      setHeightInches(RobotMap.cargoLow + RobotMap.cargoLowOffset);
       break;
     case Home:
       setHeightInches(RobotMap.home);
@@ -185,13 +185,13 @@ public class Elevator extends Subsystem
     switch (height)
     {
     case High:
-      setHeightInches(RobotMap.hatchHigh+RobotMap.hatchHighOffset);
+      setHeightInches(RobotMap.hatchHigh + RobotMap.hatchHighOffset);
       break;
     case Middle:
-      setHeightInches(RobotMap.hatchMiddle+RobotMap.hatchMiddleOffset);
+      setHeightInches(RobotMap.hatchMiddle + RobotMap.hatchMiddleOffset);
       break;
     case Low:
-      setHeightInches(RobotMap.hatchLow+RobotMap.hatchLowOffset);
+      setHeightInches(RobotMap.hatchLow + RobotMap.hatchLowOffset);
       break;
     case Home:
       setHeightInches(RobotMap.home);
@@ -207,6 +207,12 @@ public class Elevator extends Subsystem
   public void neutralOutput()
   {
     master.neutralOutput();
+  }
+
+  public boolean finished()
+  {
+    return Tolerant.withinTolerance(master.getSelectedSensorPosition(0), master.getActiveTrajectoryPosition(), 100);
+
   }
 
   // TODO create a method to return the limit switch states.

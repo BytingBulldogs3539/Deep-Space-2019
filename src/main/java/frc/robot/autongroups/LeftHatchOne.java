@@ -21,7 +21,7 @@ public class LeftHatchOne extends MotionCommandGroup
   {
     addSequential(new AutonDrivePath("LeftHatchOne.json", true));
     addMotionProfile("LeftHatchOne.json");
-    addSequential(new TurretPositionCommand(90));
+    //addSequential(new TurretPositionCommand(90));
 
     // Add Commands here:
     // e.g. addSequential(new Command1());
