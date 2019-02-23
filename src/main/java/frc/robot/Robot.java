@@ -20,6 +20,7 @@ import frc.robot.autongroups.Circle;
 
 import frc.robot.autongroups.MotionTest;
 import frc.robot.autongroups.RightHatchOne;
+import frc.robot.autongroups.LeftRocketJump;
 import frc.robot.autongroups.RightRocketRear;
 import frc.robot.autongroups.RightRocketRear;
 import frc.robot.autongroups.LeftHatchOne;
@@ -81,7 +82,7 @@ public class Robot extends TimedRobot
     verticate = new Verticate();
     c = new Compressor(RobotMap.pcm);
 
-    // byteVision = new ByteVision();
+    byteVision = new ByteVision();
 
     oi = new OI();
 
@@ -99,6 +100,8 @@ public class Robot extends TimedRobot
     chooser.setDefaultOption("CenterRightHatch", new CenterRightHatch());
     chooser.setDefaultOption("RightHatchOne", new RightHatchOne());
     chooser.setDefaultOption("RightRocketRear", new RightRocketRear());
+    chooser.setDefaultOption("LeftRocketJump", new LeftRocketJump());
+
 chooser.setDefaultOption("LeftHatchOne",new LeftHatchOne());
 chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
 
@@ -124,7 +127,7 @@ chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
   public void robotPeriodic()
   {
     // rioDuino.updateMode(Mode.PULSERED);
-    // System.out.println("INTAKE" + byteVision.getDataIntake() + "End Intake");
+    System.out.println("INTAKE " + byteVision.getDataIntake() + " End Intake");
     // System.out.println("Turret" + byteVision.getDataTurret() + "End Turret");
   }
 

@@ -36,6 +36,7 @@ public class OI
 
     driver.buttonA.whenReleased(new ClimbArmCommand(0));
 
+    driver.buttonX.toggleWhenActive(new AutoTurretCommand());
 
     driver.buttonB.whenPressed(new ClimbCommand(-.95));
     driver.buttonB.whenReleased(new ClimbCommand(0));
@@ -46,7 +47,7 @@ public class OI
 
 
     
-    driver.buttonTR.whenActive(new VisionControlCommand());
+    driver.buttonTR.toggleWhenPressed(new VisionControlCommand());
 
     /* Operator */
 

@@ -39,7 +39,7 @@ public abstract class MotionCommandGroup extends CommandGroup
             System.out.println("Add thread");
             eventThread = new Thread(() ->
             {
-                while (!this.isFinished() && !this.eventThread.isInterrupted())
+                while (true)
                 {
                     try
                     {

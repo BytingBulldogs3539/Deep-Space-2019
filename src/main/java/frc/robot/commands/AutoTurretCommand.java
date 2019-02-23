@@ -16,7 +16,7 @@ public class AutoTurretCommand extends PIDCommand
 
   public AutoTurretCommand()
   {
-    super(0.0, 0.0, 0.0);
+    super(0.0025, 0.0, 0.0);
 
     requires(Robot.turret);
   }
@@ -25,7 +25,7 @@ public class AutoTurretCommand extends PIDCommand
   @Override
   protected void initialize()
   {
-    this.getPIDController().setOutputRange(-1, 1);
+    this.getPIDController().setOutputRange(-.3, .3);
     this.getPIDController().setSetpoint(target);
     this.getPIDController().setAbsoluteTolerance(1);
     this.getPIDController().enable();
@@ -37,13 +37,14 @@ public class AutoTurretCommand extends PIDCommand
   @Override
   protected void execute()
   {
+    System.out.println("Running");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished()
   {
-    return getPIDController().onTarget() || isTimedOut();
+    return false;//getPIDController().onTarget() || isTimedOut();
   }
 
   // Called once after isFinished returns true
@@ -63,12 +64,12 @@ public class AutoTurretCommand extends PIDCommand
 
   protected double returnPIDInput()
   {
-    return Robot.byteVision.getPixeloffset();
+    return Robot.byteVision.getDataIntake();
   }
 
   @Override
   protected void usePIDOutput(double output)
   {
-    Robot.turret.setSpeed(output);
+    Robot.turret.setSpeed(-output);
   }
 }

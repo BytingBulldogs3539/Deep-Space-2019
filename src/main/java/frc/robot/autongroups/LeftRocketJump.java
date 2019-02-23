@@ -14,14 +14,14 @@ import frc.robot.motionprofiling.TestProfile;
 import frc.robot.commands.*;
 import frc.robot.*;
 
-public class RightRocketRear extends MotionCommandGroup
+public class LeftRocketJump extends MotionCommandGroup
 {
 
-  public RightRocketRear()
+  public LeftRocketJump()
   {
-    addSequential(new AutonDrivePath("RightRocketRear.json", true));
-    addMotionProfile("RightRocketRear.json");
-    setOnEvent("RightRocketRear.json", "T90", new TurretPositionCommand(90),Robot.drivetrain.fr);
+    addSequential(new AutonDrivePath("LeftRocketJump.json", true));
+    addMotionProfile("LeftRocketJump.json");
+    setOnEvent("LeftRocketJump.json", "T90", new TurretPositionCommand(90),Robot.drivetrain.fr);
 //addSequential(new TurretPositionCommand(90));
    // addSequential(new AutonWait(.5));
 

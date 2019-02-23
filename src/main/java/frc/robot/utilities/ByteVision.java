@@ -23,12 +23,13 @@ public class ByteVision
 
     SerialPort visionPortIntake;
     SerialPort visionPortTurret;
+    double lastValue = 0.0;
 
     public ByteVision()
     {
         try
         {
-            visionPortIntake = new SerialPort(115200, SerialPort.Port.kUSB2);
+            visionPortIntake = new SerialPort(115200, SerialPort.Port.kUSB);
 
         }
         catch (Exception e)
@@ -42,18 +43,45 @@ public class ByteVision
         }
         catch (Exception e)
         {
-            DriverStation.reportError("ERROR: Vision tracking intake camera", e.getStackTrace());
+            DriverStation.reportError("ERROR: Vision tracking turret camera", e.getStackTrace());
         }
     }
 
-    public String getDataIntake()
+    public double getDataIntake()
     {
         if (visionPortIntake != null)
         {
-            return visionPortIntake.readString();
+            try
+            {
+                lastValue = Double.parseDouble(visionPortIntake.readString());
+                return lastValue;
+            }
+            catch(Exception e)
+            {
+                return lastValue;
+            }
         }
-        return "";
+        return 0.0;
     }
+
+    // {
+    //     if (visionPortIntake != null)
+    //     {
+    //         if(visionPortIntake.readString()!=null&&!visionPortIntake.readString().equals(" ")&&!visionPortIntake.readString().equals(""))
+    //         {
+    //             try
+    //             {
+    //                 lastvalue = Double.parseDouble(visionPortIntake.readString());
+    //             }
+    //             catch(Exception e)
+    //             {
+    //                 return 0.0;
+    //             }
+    //         }   
+    //         return lastvalue;
+    //     }
+    //     return 0;
+    // }
 
     public int getPixeloffset()
     {
