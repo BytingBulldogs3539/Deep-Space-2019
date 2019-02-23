@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import frc.robot.motionprofiling.PlotThread;
+import frc.robot.utilities.*;
 
 /**
  * Active lazy susan
@@ -76,16 +77,18 @@ public class Turret extends Subsystem
     // TODO: config the scurve strength
     master.configMotionSCurveStrength(2);
 
-    //PlotThread test = new PlotThread(master);
+    // PlotThread test = new PlotThread(master);
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
   }
 
-  /** Rotates the turret to an angle respects soft limits, counter clockwise is negative
+  /**
+   * Rotates the turret to an angle respects soft limits, counter clockwise is
+   * negative
    * 
    * 
    * 
-   * */
+   */
   public void setPosition(double degrees)
   {
     double currentPosition = getAngle();
@@ -118,6 +121,12 @@ public class Turret extends Subsystem
     double degrees = irotations / RobotMap.turretGearRatio * 360.0;
 
     return degrees;
+  }
+
+  public boolean finished()
+  {
+    return Tolerant.withinTolerance(master.getSelectedSensorPosition(0), master.getActiveTrajectoryPosition(), 100);
+
   }
 
   /* Sets the speed of the turret motor */
