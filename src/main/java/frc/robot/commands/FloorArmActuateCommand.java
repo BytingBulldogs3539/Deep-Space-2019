@@ -27,6 +27,6 @@ public class FloorArmActuateCommand extends InstantCommand
   @Override
   protected void initialize()
   {
-    Robot.manipulator.floorIntakeSetPosition(shouldActive);
+   // Robot.manipulator.floorIntakeSetPosition(shouldActive);
   }
 }

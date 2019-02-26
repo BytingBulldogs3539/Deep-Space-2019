@@ -51,8 +51,8 @@ public class OI
 
     /* Operator */
 
-    operator.buttonBL.whenPressed(new PanelArmActuateCommand(false));
-    operator.buttonBL.whenReleased(new PanelArmActuateCommand(true));
+    // operator.buttonBL.whenPressed(new PanelArmActuateCommand(false));
+    // operator.buttonBL.whenReleased(new PanelArmActuateCommand(true));
 
     operator.buttonBR.whenPressed(new CargoArmActuateCommand(true));
     operator.buttonBR.whenReleased(new CargoArmActuateCommand(false));

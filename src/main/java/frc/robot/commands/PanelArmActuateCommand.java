@@ -27,6 +27,6 @@ public class PanelArmActuateCommand extends InstantCommand
   @Override
   protected void initialize()
   {
-    Robot.manipulator.panelIntakeSetPosition(shouldActive);
+  //  Robot.manipulator.panelIntakeSetPosition(shouldActive);
   }
 }
