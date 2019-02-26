@@ -83,14 +83,15 @@ public class RobotMap
 
     /* Manipulator ------------------------------------------------------------ */
 
-    public static final int panelIntakeOn = 6;
-    public static final int panelIntakeOff = 1;
-    public static final int cargoIntakeOn = 3;
-    public static final int cargoIntakeOff = 4;
-    public static final int placementOn = 7;
-    public static final int placementOff = 0;
-    public static final int floorIntakeOn = 5;
-    public static final int floorIntakeOff = 2;
+    // public static final int panelIntakeOn = 3;//6
+    // public static final int panelIntakeOff = 2;//1
+    //TODO I am told these are the values TEST
+    public static final int cargoIntakeOn = 4;//3
+    public static final int cargoIntakeOff = 5;//4
+    public static final int placementOn = 3;//7
+    public static final int placementOff = 2;//0
+    // public static final int floorIntakeOn = 5;
+    // public static final int floorIntakeOff = 2;
 
     // List of TalonSRX CAN ID numbers
     public static final int manipulatorMaster = 7;

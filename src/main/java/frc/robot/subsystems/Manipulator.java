@@ -47,22 +47,24 @@ public class Manipulator extends Subsystem
     master.setNeutralMode(NeutralMode.Brake);
 
     
-    floorIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.floorIntakeOn, RobotMap.floorIntakeOff, true);
+  //  floorIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.floorIntakeOn, RobotMap.floorIntakeOff, true);
 
-    panelIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.panelIntakeOn, RobotMap.panelIntakeOff, true);
+  //  panelIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.panelIntakeOn, RobotMap.panelIntakeOff, true);
     cargoIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.cargoIntakeOn, RobotMap.cargoIntakeOff, false);
-    placementSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.placementOn, RobotMap.placementOff, true);
+   placementSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.placementOn, RobotMap.placementOff, true);
   }
 
   // Grabs hatch panel from floor; not necessary for feeder station
-  public void panelIntakeSetPosition(boolean shouldActive)
-  {
-    panelIntakeSolenoid.setPosition(shouldActive);
-  }
-  public void floorIntakeSetPosition(boolean shouldActive)
-  {
-    floorIntakeSolenoid.setPosition(shouldActive);
-  }
+
+  // public void panelIntakeSetPosition(boolean shouldActive)
+  // {
+  //   panelIntakeSolenoid.setPosition(shouldActive);
+  // }
+  
+  // public void floorIntakeSetPosition(boolean shouldActive)
+  // {
+  //   floorIntakeSolenoid.setPosition(shouldActive);
+  // }
 
   // Actuates intake arm over bumper to grab cargo
   public void cargoIntakeSetPosition(boolean shouldActive)
