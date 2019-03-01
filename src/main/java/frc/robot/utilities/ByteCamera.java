@@ -23,7 +23,9 @@ public class ByteCamera
         // that they won't have a camera if they don't fix it.
         try
         {
-            camera = new UsbCamera(label, port);
+            //camera = new UsbCamera(label, port);
+            camera = CameraServer.getInstance().startAutomaticCapture(label,port);
+
             camera.setResolution(360, 360);
             camera.setFPS(20);
             camera.setExposureManual(3);

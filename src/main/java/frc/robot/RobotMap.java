@@ -60,8 +60,8 @@ public class RobotMap
     public static double home = 0.0;
     // List of heights that the elevator can go to (in inches) while holding a cargo
     // TODO: Change these when we get the robot.
-    public static double hatchHigh = 0.0;
-    public static double hatchMiddle = 35.0;
+    public static double hatchHigh = 67.0;
+    public static double hatchMiddle = 37.0;
     public static double hatchLow = 15.0;
 
     public static double cargoHighOffset = 0.0;
@@ -88,8 +88,8 @@ public class RobotMap
     //TODO I am told these are the values TEST
     public static final int cargoIntakeOn = 4;//3
     public static final int cargoIntakeOff = 5;//4
-    public static final int placementOn = 3;//7
-    public static final int placementOff = 2;//0
+    public static final int placementOn = 2;//7
+    public static final int placementOff = 3;//0
     // public static final int floorIntakeOn = 5;
     // public static final int floorIntakeOff = 2;
 
@@ -108,7 +108,7 @@ public class RobotMap
     // Gear ratios for lazy suzan
     public static final double turretGearRatio = 3.83;
 
-    // A speed multiplier for manual take over of the turret.
+    // A speed mjkultiplier for manual take over of the turret.
     public static final double turretSpeedMultipier = .5;
 
     /* Verticate ------------------------------------------------------------ */

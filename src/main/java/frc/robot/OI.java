@@ -36,10 +36,14 @@ public class OI
 
     driver.buttonA.whenReleased(new ClimbArmCommand(0));
 
+    
+    operator.buttonBL.whenPressed(new ManualLimitSwitchCommand());
+
+
     driver.buttonX.toggleWhenActive(new AutoTurretCommand());
 
-    driver.buttonB.whenPressed(new ClimbCommand(-.95));
-    driver.buttonB.whenReleased(new ClimbCommand(0));
+    driver.buttonB.whenPressed(new ClimbArmCommand(-.95));
+    driver.buttonB.whenReleased(new ClimbArmCommand(0));
 
     driver.buttonBL.whenPressed(new ClimbWheelCommand(.5));
     driver.buttonBL.whenReleased(new ClimbWheelCommand(0));

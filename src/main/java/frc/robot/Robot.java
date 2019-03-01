@@ -37,6 +37,8 @@ import frc.robot.subsystems.RioDuino.Mode;
 import frc.robot.subsystems.Verticate;
 import frc.robot.motionprofiling.*;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.*;
 
 import frc.robot.utilities.*;
 
@@ -127,7 +129,7 @@ chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
   public void robotPeriodic()
   {
     // rioDuino.updateMode(Mode.PULSERED);
-    System.out.println("INTAKE " + byteVision.getDataIntake() + " End Intake");
+    //System.out.println("INTAKE " + byteVision.getDataIntake() + " End Intake");
     // System.out.println("Turret" + byteVision.getDataTurret() + "End Turret");
   }
 
@@ -140,7 +142,7 @@ chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
   public void disabledInit()
   {
     c.start();
-    c.stop();
+    //c.stop();
   }
 
   @Override
@@ -224,7 +226,7 @@ chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
   public void teleopInit()
   {
     c.start();
-   c.stop();//remove
+   //c.stop();//remove
 
     /**
      * This is here to make sure that we are not left in motion magic mode.
