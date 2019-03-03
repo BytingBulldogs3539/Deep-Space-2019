@@ -31,16 +31,18 @@ public class DriveCommand extends Command
   @Override
   protected void execute()
   {
-  if(Robot.oi.driver.buttonBR.get()){
-      Robot.drivetrain.driveArcade((-Math.atan((Robot.oi.driver.getLeftStickY()) / Math.atan(1)*.5)), (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1)*.5));
-    
-  }
-  else
-  {
-    Robot.drivetrain.driveArcade(-Math.atan(Robot.oi.driver.getLeftStickY()) / Math.atan(1), (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1)));
+    if (Robot.oi.driver.buttonBR.get())
+    {
+      Robot.drivetrain.driveArcade((-Math.atan((Robot.oi.driver.getLeftStickY()) / Math.atan(1) * .4)), (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1) * .8));
 
+    }
+    else
+    {
+      Robot.drivetrain.driveArcade(-Math.atan(Robot.oi.driver.getLeftStickY()) / Math.atan(1), (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1)));
+
+    }
   }
-  }
+
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished()
