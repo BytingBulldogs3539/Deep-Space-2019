@@ -98,16 +98,16 @@ public class Robot extends TimedRobot
     gamePieceChooser.addOption("Cargo", GamePieceType.CARGO);
 
     chooser.setDefaultOption("Default Auto", new MotionTest());
-    chooser.setDefaultOption("Motion Config Auto", new ConfigMotion());
-    chooser.setDefaultOption("CenterRightHatch", new CenterRightHatch());
-    chooser.setDefaultOption("RightHatchOne", new RightHatchOne());
-    chooser.setDefaultOption("RightRocketRear", new RightRocketRear());
-    chooser.setDefaultOption("LeftRocketJump", new LeftRocketJump());
+    chooser.addOption("Motion Config Auto", new ConfigMotion());
+    chooser.addOption("CenterRightHatch", new CenterRightHatch());
+    chooser.addOption("RightHatchOne", new RightHatchOne());
+    chooser.addOption("RightRocketRear", new RightRocketRear());
+    chooser.addOption("LeftRocketJump", new LeftRocketJump());
 
-chooser.setDefaultOption("LeftHatchOne",new LeftHatchOne());
-chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
+    chooser.addOption("LeftHatchOne", new LeftHatchOne());
+    chooser.addOption("LeftRocketOne", new LeftRocketOne());
 
-    chooser.setDefaultOption("Circle", new Circle());
+    chooser.addOption("Circle", new Circle());
 
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
@@ -129,7 +129,7 @@ chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
   public void robotPeriodic()
   {
     // rioDuino.updateMode(Mode.PULSERED);
-    //System.out.println("INTAKE " + byteVision.getDataIntake() + " End Intake");
+    // System.out.println("INTAKE " + byteVision.getDataIntake() + " End Intake");
     // System.out.println("Turret" + byteVision.getDataTurret() + "End Turret");
   }
 
@@ -142,7 +142,7 @@ chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
   public void disabledInit()
   {
     c.start();
-    //c.stop();
+    // c.stop();
   }
 
   @Override
@@ -150,7 +150,7 @@ chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
   {
     Scheduler.getInstance().run();
 
-    if (autonomousCommand != chooser.getSelected())
+    if (autonomousCommand != chooser.getSelected() && chooser.getSelected() != null)
     {
       autonomousCommand = chooser.getSelected();
       for (String fileName : autonomousCommand.motionProfileList)
@@ -226,7 +226,7 @@ chooser.setDefaultOption("LeftRocketOne", new LeftRocketOne());
   public void teleopInit()
   {
     c.start();
-   //c.stop();//remove
+    // c.stop();//remove
 
     /**
      * This is here to make sure that we are not left in motion magic mode.
