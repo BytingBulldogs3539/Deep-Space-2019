@@ -14,10 +14,22 @@ public class TurretPositionCommand extends Command
 {
 
   private double degrees = 0;
+  private double leftOffset = 0;
+  private double rightOffset = 0;
 
   public TurretPositionCommand(double degrees)
   {
     this.degrees = degrees;
+    this.leftOffset = 0;
+    this.rightOffset = 0;
+    requires(Robot.turret);
+  }
+
+  public TurretPositionCommand(double degrees, double leftOffset, double rightOffset)
+  {
+    this.degrees = degrees;
+    this.leftOffset = leftOffset;
+    this.rightOffset = rightOffset;
     requires(Robot.turret);
   }
 
@@ -25,8 +37,14 @@ public class TurretPositionCommand extends Command
   @Override
   protected void initialize()
   {
-    System.out.println("HEY");
-    Robot.turret.setPosition(degrees);
+    if(Robot.turret.getAngle() < degrees)
+    {
+      Robot.turret.setPosition(degrees + rightOffset);
+    }
+    else
+    {
+      Robot.turret.setPosition(degrees + leftOffset);
+    }
   }
 
   // Called repeatedly when this Command is scheduled to run

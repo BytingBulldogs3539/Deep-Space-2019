@@ -55,14 +55,14 @@ public class RobotMap
     // TODO: Change these when we get the robot.
 
     public static double cargoHigh = 74.0;
-    public static double cargoMiddle = 48.0;
-    public static double cargoLow = 20.0;
+    public static double cargoMiddle = 50.0;
+    public static double cargoLow = 22.0;
     public static double home = 0.0;
     // List of heights that the elevator can go to (in inches) while holding a cargo
     // TODO: Change these when we get the robot.
     public static double hatchHigh = 67.0;
-    public static double hatchMiddle = 37.0;
-    public static double hatchLow = 15.0;
+    public static double hatchMiddle = 39.0;
+    public static double hatchLow = 16.0;
 
     public static double cargoHighOffset = 0.0;
     public static double cargoMiddleOffset = 0.0;
@@ -142,7 +142,7 @@ public class RobotMap
     // Tuned
     public static Gains elevatorGains = new Gains(.6, 0.00005, 0.0, .7, 400, 1.00);
     // Tuned
-    public static Gains turretGains = new Gains(1.8, 0.001, 0.0, .4, 400, 1.00);
+    public static Gains turretGains = new Gains(2.8, 0.001, 0.0, .3, 400, 1.00);
     // NOT Tuned
     public static Gains TurnPid = new Gains(.1, 0.0, 0.0, 0.0, 0.0, 0.0);
     // SEMI Tuned

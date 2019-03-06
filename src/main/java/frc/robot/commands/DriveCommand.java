@@ -33,12 +33,12 @@ public class DriveCommand extends Command
   {
     if (Robot.oi.driver.buttonBR.get())
     {
-      Robot.drivetrain.driveArcade((-Math.atan((Robot.oi.driver.getLeftStickY()) / Math.atan(1) * .4)), (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1) * .8));
+      Robot.drivetrain.driveArcade((Math.atan((Robot.oi.driver.getLeftStickY()) / Math.atan(1) * .3)), (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1) * .6));
 
     }
     else
     {
-      Robot.drivetrain.driveArcade(-Math.atan(Robot.oi.driver.getLeftStickY()) / Math.atan(1), (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1)));
+      Robot.drivetrain.driveArcade(Math.atan(Robot.oi.driver.getLeftStickY()) / Math.atan(1), (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1)));
 
     }
   }
