@@ -24,7 +24,7 @@ import frc.robot.autongroups.LeftRocketJump;
 import frc.robot.autongroups.RightRocketRear;
 import frc.robot.autongroups.RightRocketRear;
 import frc.robot.autongroups.LeftHatchOne;
-import frc.robot.autongroups.LeftRocketOne;
+import frc.robot.autongroups.LeftRocketRear;
 
 import frc.robot.motionprofiling.MotionProfiling;
 import frc.robot.subsystems.DriveTrain;
@@ -105,14 +105,18 @@ public class Robot extends TimedRobot
     chooser.addOption("LeftRocketJump", new LeftRocketJump());
 
     chooser.addOption("LeftHatchOne", new LeftHatchOne());
-    chooser.addOption("LeftRocketOne", new LeftRocketOne());
+    chooser.addOption("LeftRocketRear", new LeftRocketRear());
 
     chooser.addOption("Circle", new Circle());
 
     // chooser.addOption("My Auto", new MyAutoCommand());
+    
     SmartDashboard.putData("Auto mode", chooser);
     SmartDashboard.putData("Game Piece", gamePieceChooser);
-    Robot.elevator.gamePieceType = GamePieceType.NONE;
+    Robot.elevator.gamePieceType = GamePieceType.HATCH;
+    gamePieceChooser.setDefaultOption("Game Piece Auto", GamePieceType.HATCH);
+    gamePieceChooser.setDefaultOption("Game Piece Auto", GamePieceType.HATCH);
+
     rioDuino.updateMode(Mode.PULSEGREEN);
   }
 

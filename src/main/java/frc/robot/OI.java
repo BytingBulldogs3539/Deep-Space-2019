@@ -32,9 +32,9 @@ public class OI
     /* Driver */
     driver.buttonY.whenPressed(new ManualLimitSwitchCommand());
 
-    driver.buttonA.whenPressed(new ClimbArmCommand(.95));
+    //driver.buttonA.whenPressed(new ClimbArmCommand(.95));
 
-    driver.buttonA.whenReleased(new ClimbArmCommand(0));
+   // driver.buttonA.whenReleased(new ClimbArmCommand(0));
 
     
 
@@ -50,7 +50,7 @@ public class OI
 
 
     
-    driver.buttonTR.toggleWhenPressed(new VisionControlCommand());
+    //driver.buttonTR.toggleWhenPressed(new VisionControlCommand());
 
     /* Operator */
 
@@ -79,7 +79,8 @@ public class OI
 
 
     operator.buttonLS.toggleWhenActive(new ElevatorTakeoverCommand());
-    operator.buttonRS.toggleWhenActive(new TurretTakeoverCommand());
+    
+    operator.buttonRX.toggleWhenPressed(new TurretTakeoverCommand());
 
     // Turret Controls
     operator.buttonPadDownLeft.whenPressed(new TurretPositionCommand(-135));

@@ -31,15 +31,22 @@ public class DriveCommand extends Command
   @Override
   protected void execute()
   {
-    if (Robot.oi.driver.buttonBR.get())
-    {
-      Robot.drivetrain.driveArcade((Math.atan((Robot.oi.driver.getLeftStickY()) / Math.atan(1) * .3)), (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1) * .6));
+    //double triggers = Robot.oi.driver.getRightTrigger()- Robot.oi.driver.getLeftTrigger();
+    double speed = (Math.atan(Robot.oi.driver.getLeftStickY()) / Math.atan(1));
+    //double speed = Robot.oi.driver.getRightTrigger()- Robot.oi.driver.getLeftTrigger();;
 
+    double turn = (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1));
+   // double turn = (Math.tan(Robot.oi.driver.getLeftStickX()) / Math.tan(1));
+
+    if (!Robot.oi.driver.buttonBR.get())//buttonBR
+    {
+      //Robot.drivetrain.driveArcade(( (Robot.oi.driver.getRightTrigger()- Robot.oi.driver.getLeftTrigger())*.5),  turn* .6);
+      Robot.drivetrain.driveArcade(speed*.5,turn*.6);
     }
     else
     {
-      Robot.drivetrain.driveArcade(Math.atan(Robot.oi.driver.getLeftStickY()) / Math.atan(1), (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1)));
-
+    //Robot.drivetrain.driveArcade((Robot.oi.driver.getRightTrigger()- Robot.oi.driver.getLeftTrigger()), turn*.6);
+      Robot.drivetrain.driveArcade(speed, turn*.75);
     }
   }
 

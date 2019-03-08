@@ -66,8 +66,8 @@ public class DriveTrain extends Subsystem
     basicTalonConfig.nominalOutputReverse = 0.0;
     basicTalonConfig.peakOutputForward = 1.0;
     basicTalonConfig.peakOutputReverse = -1.0;
-    basicTalonConfig.continuousCurrentLimit = 37;
-    basicTalonConfig.peakCurrentLimit = 50;
+    basicTalonConfig.continuousCurrentLimit = 20;//37
+    basicTalonConfig.peakCurrentLimit = 30;
     basicTalonConfig.peakCurrentDuration = 100;
     basicTalonConfig.voltageCompSaturation = RobotMap.voltageCompSaturation;
 
