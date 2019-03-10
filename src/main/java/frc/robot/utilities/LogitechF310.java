@@ -77,7 +77,7 @@ public class LogitechF310 extends Joystick
 	// Cannot be used in tandem with default IntakeCommand
 	// public TriggerButton buttonTL = new TriggerButton(this, LEFT_TRIGGER);
 	// public TriggerButton buttonTR = new TriggerButton(this, RIGHT_TRIGGER);
-	public TriggerButton buttonRX = new TriggerButton(this,X_AxisR);
+	//public TriggerButton buttonRX = new TriggerButton(this,X_AxisR);
 
 	/**
 	 * refers to the <b>Start</b> button on the controller

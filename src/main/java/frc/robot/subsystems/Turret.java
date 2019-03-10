@@ -89,6 +89,10 @@ public class Turret extends Subsystem
    * 
    * 
    */
+  public void zero(){
+    master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
+
+  }
   public void setPosition(double degrees)
   {
     double currentPosition = getAngle();

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.autongroups.CenterLeftHatch;
 import frc.robot.autongroups.CenterRightHatch;
 import frc.robot.autongroups.ConfigMotion;
 import frc.robot.autongroups.Circle;
@@ -100,6 +101,7 @@ public class Robot extends TimedRobot
     chooser.setDefaultOption("Default Auto", new MotionTest());
     chooser.addOption("Motion Config Auto", new ConfigMotion());
     chooser.addOption("CenterRightHatch", new CenterRightHatch());
+    chooser.addOption("CenterLeftHatch",new CenterLeftHatch());
     chooser.addOption("RightHatchOne", new RightHatchOne());
     chooser.addOption("RightRocketRear", new RightRocketRear());
     chooser.addOption("LeftRocketJump", new LeftRocketJump());

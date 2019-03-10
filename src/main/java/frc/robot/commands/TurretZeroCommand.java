@@ -9,23 +9,30 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
-public class TurretTakeoverCommand extends Command
+public class TurretZeroCommand extends Command
 {
-  public TurretTakeoverCommand()
+
+  private double degrees = 0;
+  private double leftOffset = 0;
+  private double rightOffset = 0;
+
+  public TurretZeroCommand()
   {
+    this.degrees = degrees;
+    this.leftOffset = 0;
+    this.rightOffset = 0;
     requires(Robot.turret);
   }
+
+  
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize()
   {
-    SmartDashboard.putBoolean("Is TurretTakeover", true);
-
+    Robot.turret.zero();
+   Robot.turret.setSpeed(0);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -33,28 +40,19 @@ public class TurretTakeoverCommand extends Command
   protected void execute()
   {
 
-    // get the left stick x value and set to the motor speed maybe with a
-    // multiplier.
-
-    //if (Robot.oi.operator.)
-
-    Robot.turret.setSpeed(Math.tan(Robot.oi.operator.getRightStickX()) / Math.tan(1) * RobotMap.turretSpeedMultipier);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished()
   {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end()
   {
-    Robot.turret.neutralOutput();
-    SmartDashboard.putBoolean("Is TurretTakeover", false);
-
   }
 
   // Called when another command which requires one or more of the same
@@ -62,6 +60,5 @@ public class TurretTakeoverCommand extends Command
   @Override
   protected void interrupted()
   {
-    end();
   }
 }
