@@ -112,7 +112,7 @@ public class Robot extends TimedRobot
     chooser.addOption("Circle", new Circle());
 
     // chooser.addOption("My Auto", new MyAutoCommand());
-    
+
     SmartDashboard.putData("Auto mode", chooser);
     SmartDashboard.putData("Game Piece", gamePieceChooser);
     Robot.elevator.gamePieceType = GamePieceType.HATCH;

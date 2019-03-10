@@ -32,9 +32,9 @@ public class OI
     /* Driver */
     driver.buttonY.whenPressed(new ManualLimitSwitchCommand());
 
-    //driver.buttonA.whenPressed(new ClimbArmCommand(.95));
+    driver.buttonA.whenPressed(new ClimbArmCommand(.95));
 
-   // driver.buttonA.whenReleased(new ClimbArmCommand(0));
+    driver.buttonA.whenReleased(new ClimbArmCommand(0));
 
     
 
@@ -65,16 +65,15 @@ public class OI
     operator.buttonBL.whenPressed(new PanelPlacementCommand(false));
     operator.buttonBL.whenReleased(new PanelPlacementCommand(true));
     
-    operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Home));
-    operator.buttonA.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
+    operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Home,false));
+    operator.buttonA.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low,false));
     //operator.buttonA.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
 
-    operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
+    operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle,false));
     //operator.buttonB.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
 
-    operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
+    operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High,false));
     //operator.buttonY.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
-
 
 
 
@@ -83,15 +82,15 @@ public class OI
     operator.buttonRS.toggleWhenPressed(new TurretTakeoverCommand());
 
     // Turret Controls
-    operator.buttonPadDownLeft.whenPressed(new TurretPositionCommand(-135));
-    operator.buttonPadLeft.whenPressed(new TurretPositionCommand(-90));
-    operator.buttonPadUpLeft.whenPressed(new TurretPositionCommand(-45));
-    operator.buttonPadUp.whenPressed(new TurretPositionCommand(0));
-    operator.buttonPadUpRight.whenPressed(new TurretPositionCommand(45));
-    operator.buttonPadRight.whenPressed(new TurretPositionCommand(90));
-    operator.buttonPadDownRight.whenPressed(new TurretPositionCommand(135));
+    operator.buttonPadDownLeft.whenPressed(new TurretPositionCommand(-135,false));
+    operator.buttonPadLeft.whenPressed(new TurretPositionCommand(-90,false));
+    operator.buttonPadUpLeft.whenPressed(new TurretPositionCommand(-45,false));
+    operator.buttonPadUp.whenPressed(new TurretPositionCommand(0,false));
+    operator.buttonPadUpRight.whenPressed(new TurretPositionCommand(45,false));
+    operator.buttonPadRight.whenPressed(new TurretPositionCommand(90,false));
+    operator.buttonPadDownRight.whenPressed(new TurretPositionCommand(135,false));
     // This will be changed to -180 if the angle was previously negative:
-    operator.buttonPadDown.whenPressed(new TurretPositionCommand(180));
+    operator.buttonPadDown.whenPressed(new TurretPositionCommand(180,false));
 
     /* Limit Switches */
     //  cargoLimitSwitch.whenPressed(new LimitSwitchCommand());

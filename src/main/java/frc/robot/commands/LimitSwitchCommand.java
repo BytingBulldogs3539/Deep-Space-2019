@@ -14,7 +14,6 @@ import frc.robot.RobotMap;
 import frc.robot.subsystems.Elevator.GamePieceType;
 import frc.robot.subsystems.RioDuino.Mode;
 
-
 /**
  * Add your docs here.
  */
