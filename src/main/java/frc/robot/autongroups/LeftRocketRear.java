@@ -14,25 +14,22 @@ import frc.robot.motionprofiling.TestProfile;
 import frc.robot.commands.*;
 import frc.robot.subsystems.Elevator.ElevatorHeight;
 
-
 public class LeftRocketRear extends MotionCommandGroup
 {
 
   public LeftRocketRear()
   {
 
-    addSequential(new TurretPositionCommand(-90));
+    addSequential(new TurretPositionCommand(-90, true));
     addSequential(new AutonDrivePath("LeftRocketRear.json", true));
     addMotionProfile("LeftRocketRear.json");
-    addSequential(new ElevatorPositionCommand(ElevatorHeight.High));
-    addSequential(new AutonWait(2));
+    addSequential(new ElevatorPositionCommand(ElevatorHeight.High, true));
 
     addSequential(new PanelPlacementCommand(false));
     addSequential(new AutonWait(1));
     addSequential(new PanelPlacementCommand(true));
 
-
-  //  addSedquential(new ElevatorPositionCommand(ElevatorHeight.Middle));
+    // addSedquential(new ElevatorPositionCommand(ElevatorHeight.Middle));
 
     // addSequential(new AutonWait(.2));
     // addSequential(new PanelArmActuateCommand(false));

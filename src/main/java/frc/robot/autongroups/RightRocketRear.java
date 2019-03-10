@@ -19,14 +19,15 @@ public class RightRocketRear extends MotionCommandGroup
 
   public RightRocketRear()
   {
-    //addSequential(new AutonDrivePath("RightRocketRear.json", true));
-    //addMotionProfile("RightRocketRear.json");
-    addSequential(new TurretPositionCommandFin(90));
+    // addSequential(new AutonDrivePath("RightRocketRear.json", true));
+    // addMotionProfile("RightRocketRear.json");
+    addSequential(new TurretPositionCommand(90, true));
     addSequential(new AutonDrivePath("RightRocketRear.json", true));
 
-   // setOnEvent("RightRocketRear.json", "T90", new TurretPositionCommandFin(90),Robot.drivetrain.fr);
-//addSequential(new TurretPositionCommand(90));
-   // addSequential(new AutonWait(.5));
+    // setOnEvent("RightRocketRear.json", "T90", new
+    // TurretPositionCommandFin(90),Robot.drivetrain.fr);
+    // addSequential(new TurretPositionCommand(90));
+    // addSequential(new AutonWait(.5));
 
     // //addSequential(new PanelPlacementCommand(false));
     // addSequential(new AutonWait(.2));

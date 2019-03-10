@@ -125,8 +125,8 @@ public class Turret extends Subsystem
 
   public boolean finished()
   {
-    return Tolerant.withinTolerance(master.getSelectedSensorPosition(0), master.getActiveTrajectoryPosition(), 100);
 
+    return Tolerant.withinTolerance(master.getSelectedSensorPosition(0), master.getActiveTrajectoryPosition(), 100);
   }
 
   /* Sets the speed of the turret motor */

@@ -21,7 +21,7 @@ public class LeftRocketJump extends MotionCommandGroup
   {
     addSequential(new AutonDrivePath("LeftRocketJump.json", true));
     addMotionProfile("LeftRocketJump.json");
-    setOnEvent("LeftRocketJump.json", "T90", new TurretPositionCommand(90),Robot.drivetrain.fr);
+    setOnEvent("LeftRocketJump.json", "T90", new TurretPositionCommand(90,true),Robot.drivetrain.fr);
 //addSequential(new TurretPositionCommand(90));
    // addSequential(new AutonWait(.5));
 

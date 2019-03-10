@@ -214,6 +214,7 @@ public class Elevator extends Subsystem
     return Tolerant.withinTolerance(master.getSelectedSensorPosition(0), master.getActiveTrajectoryPosition(), 100);
 
   }
+  
 
   // TODO create a method to return the limit switch states.
 

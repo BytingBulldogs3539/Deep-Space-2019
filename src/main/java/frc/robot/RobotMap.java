@@ -71,7 +71,7 @@ public class RobotMap
     // TODO: Change these when we get the robot.
     public static double hatchHighOffset = 0.0;
     public static double hatchMiddleOffset = 0.0;
-    public static double hatchLowOffset= 0.0;
+    public static double hatchLowOffset = 0.0;
 
     // List of TalonSRX CAN ID numbers
     public static final int elevatorMaster = 6;
@@ -79,17 +79,17 @@ public class RobotMap
 
     public static final double elevatorSpeedMultiplier = .5;
 
-    public static final double  InchesToElevatorEncMultiplier = 320;
+    public static final double InchesToElevatorEncMultiplier = 320;
 
     /* Manipulator ------------------------------------------------------------ */
 
     // public static final int panelIntakeOn = 3;//6
     // public static final int panelIntakeOff = 2;//1
-    //TODO I am told these are the values TEST
-    public static final int cargoIntakeOn = 4;//3
-    public static final int cargoIntakeOff = 5;//4
-    public static final int placementOn = 2;//7
-    public static final int placementOff = 3;//0
+    // TODO I am told these are the values TEST
+    public static final int cargoIntakeOn = 4;// 3
+    public static final int cargoIntakeOff = 5;// 4
+    public static final int placementOn = 2;// 7
+    public static final int placementOff = 3;// 0
     // public static final int floorIntakeOn = 5;
     // public static final int floorIntakeOff = 2;
 
@@ -148,7 +148,8 @@ public class RobotMap
     // SEMI Tuned
     public final static Gains gains_MotProf = new Gains(0.3, 0.00005, 0.001, .16, 400, 1.00);
     // SEMI Tuned
-   // public final static Gains gains_MotProfAngle = new Gains(0, 0.0, 0, 0, 400, 1.00);
+    // public final static Gains gains_MotProfAngle = new Gains(0, 0.0, 0, 0, 400,
+    // 1.00);
 
     public final static Gains gains_MotProfAngle = new Gains(1.6, 0.0, 0, .16, 500, 1.00);
 }

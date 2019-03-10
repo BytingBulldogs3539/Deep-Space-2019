@@ -32,12 +32,9 @@ public class OI
     /* Driver */
     driver.buttonY.whenPressed(new ManualLimitSwitchCommand());
 
-    //driver.buttonA.whenPressed(new ClimbArmCommand(.95));
+    // driver.buttonA.whenPressed(new ClimbArmCommand(.95));
 
-   // driver.buttonA.whenReleased(new ClimbArmCommand(0));
-
-    
-
+    // driver.buttonA.whenReleased(new ClimbArmCommand(0));
 
     driver.buttonX.toggleWhenActive(new AutoTurretCommand());
 
@@ -47,10 +44,7 @@ public class OI
     driver.buttonBL.whenPressed(new ClimbWheelCommand(.5));
     driver.buttonBL.whenReleased(new ClimbWheelCommand(0));
 
-
-
-    
-    //driver.buttonTR.toggleWhenPressed(new VisionControlCommand());
+    // driver.buttonTR.toggleWhenPressed(new VisionControlCommand());
 
     /* Operator */
 
@@ -61,44 +55,43 @@ public class OI
     operator.buttonBR.whenReleased(new CargoArmActuateCommand(false));
     operator.buttonSELECT.whenPressed(new ManualLimitSwitchCommand());
 
-
     operator.buttonBL.whenPressed(new PanelPlacementCommand(false));
     operator.buttonBL.whenReleased(new PanelPlacementCommand(true));
-    
-    operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Home));
-    operator.buttonA.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low));
-    //operator.buttonA.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
 
-    operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle));
-    //operator.buttonB.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
+    operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Home, false));
+    operator.buttonA.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low, false));
+    // operator.buttonA.whenReleased(new
+    // ElevatorPositionCommand(ElevatorHeight.Home));
 
-    operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High));
-    //operator.buttonY.whenReleased(new ElevatorPositionCommand(ElevatorHeight.Home));
+    operator.buttonB.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Middle, false));
+    // operator.buttonB.whenReleased(new
+    // ElevatorPositionCommand(ElevatorHeight.Home));
 
-
-
+    operator.buttonY.whenPressed(new ElevatorPositionCommand(ElevatorHeight.High, false));
+    // operator.buttonY.whenReleased(new
+    // ElevatorPositionCommand(ElevatorHeight.Home));
 
     operator.buttonLS.toggleWhenActive(new ElevatorTakeoverCommand());
-    
+
     operator.buttonRX.toggleWhenPressed(new TurretTakeoverCommand());
 
     // Turret Controls
-    operator.buttonPadDownLeft.whenPressed(new TurretPositionCommand(-135));
-    operator.buttonPadLeft.whenPressed(new TurretPositionCommand(-90));
-    operator.buttonPadUpLeft.whenPressed(new TurretPositionCommand(-45));
-    operator.buttonPadUp.whenPressed(new TurretPositionCommand(0));
-    operator.buttonPadUpRight.whenPressed(new TurretPositionCommand(45));
-    operator.buttonPadRight.whenPressed(new TurretPositionCommand(90));
-    operator.buttonPadDownRight.whenPressed(new TurretPositionCommand(135));
+    operator.buttonPadDownLeft.whenPressed(new TurretPositionCommand(-135, false));
+    operator.buttonPadLeft.whenPressed(new TurretPositionCommand(-90, false));
+    operator.buttonPadUpLeft.whenPressed(new TurretPositionCommand(-45, false));
+    operator.buttonPadUp.whenPressed(new TurretPositionCommand(0, false));
+    operator.buttonPadUpRight.whenPressed(new TurretPositionCommand(45, false));
+    operator.buttonPadRight.whenPressed(new TurretPositionCommand(90, false));
+    operator.buttonPadDownRight.whenPressed(new TurretPositionCommand(135, false));
     // This will be changed to -180 if the angle was previously negative:
-    operator.buttonPadDown.whenPressed(new TurretPositionCommand(180));
+    operator.buttonPadDown.whenPressed(new TurretPositionCommand(180, false));
 
     /* Limit Switches */
-    //  cargoLimitSwitch.whenPressed(new LimitSwitchCommand());
-    //  cargoLimitSwitch.whenReleased(new LimitSwitchCommand());
+    // cargoLimitSwitch.whenPressed(new LimitSwitchCommand());
+    // cargoLimitSwitch.whenReleased(new LimitSwitchCommand());
     cargoLimitSwitch.whenReleased(new CargoArmActuateCommand(false));
 
-    //  panelLimitSwitch.whenPressed(new LimitSwitchCommand());
-    //  panelLimitSwitch.whenReleased(new LimitSwitchCommand());
+    // panelLimitSwitch.whenPressed(new LimitSwitchCommand());
+    // panelLimitSwitch.whenReleased(new LimitSwitchCommand());
   }
 }

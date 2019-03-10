@@ -16,12 +16,14 @@ public class TurretPositionCommand extends Command
   private double degrees = 0;
   private double leftOffset = 0;
   private double rightOffset = 0;
+  private boolean useIsFinish;
 
-  public TurretPositionCommand(double degrees)
+  public TurretPositionCommand(double degrees, boolean useIsFinish)
   {
     this.degrees = degrees;
     this.leftOffset = 0;
     this.rightOffset = 0;
+    this.useIsFinish = useIsFinish;
     requires(Robot.turret);
   }
 
@@ -37,7 +39,7 @@ public class TurretPositionCommand extends Command
   @Override
   protected void initialize()
   {
-    if(Robot.turret.getAngle() < degrees)
+    if (Robot.turret.getAngle() < degrees)
     {
       Robot.turret.setPosition(degrees + rightOffset);
     }
@@ -58,7 +60,10 @@ public class TurretPositionCommand extends Command
   @Override
   protected boolean isFinished()
   {
-    return true;
+    if (useIsFinish)
+      return Robot.turret.finished();
+    else
+      return true;
   }
 
   // Called once after isFinished returns true

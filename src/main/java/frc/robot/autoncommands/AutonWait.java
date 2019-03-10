@@ -9,9 +9,6 @@ package frc.robot.autoncommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-
-import edu.wpi.first.wpilibj.command.Command;
-
 public class AutonWait extends Command
 {
 	double seconds;
