@@ -54,15 +54,15 @@ public class RobotMap
     // List of heights that the elevator can go to (in inches) while holding a cargo
     // TODO: Change these when we get the robot.
 
-    public static double cargoHigh = 76.0;
-    public static double cargoMiddle = 51.0;
-    public static double cargoLow = 22.0;
+    public static double cargoHigh = 73.0;//76
+    public static double cargoMiddle = 47.0;//51
+    public static double cargoLow = 20.0;//22
     public static double home = 0.0;
     // List of heights that the elevator can go to (in inches) while holding a cargo
     // TODO: Change these when we get the robot.
-    public static double hatchHigh = 67.0;
-    public static double hatchMiddle = 41.0;
-    public static double hatchLow = 16.0;
+    public static double hatchHigh = 63.0;//67
+    public static double hatchMiddle = 37.0;//41
+    public static double hatchLow = 11.0;//16
 
     public static double cargoHighOffset = 0.0;
     public static double cargoMiddleOffset = 0.0;
@@ -112,9 +112,9 @@ public class RobotMap
     public static final double turretSpeedMultipier = .3;
 
     /* Verticate ------------------------------------------------------------ */
-    public static final int verticateArm = 4;
+    
     public static final int verticateMaster = 8;
-    public static final int verticateWheel = 13;
+    public static final int verticateSlave = 13;
 
     /* Motion Profile
      * ------------------------------------------------------------ */

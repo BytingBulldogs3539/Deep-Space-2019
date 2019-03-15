@@ -29,7 +29,7 @@ public class ClimbCommand extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.verticate.climb(Speed);
+    Robot.verticate.climb(-Speed);
 
   }
 

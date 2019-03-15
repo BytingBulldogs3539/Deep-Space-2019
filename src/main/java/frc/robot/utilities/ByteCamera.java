@@ -30,8 +30,8 @@ public class ByteCamera
             camera.setFPS(20);
             camera.setExposureManual(3);
             camera.setBrightness(50);
-            CameraServer.getInstance().addCamera(camera);
-
+           // CameraServer.getInstance().addCamera(camera);
+             
         }
         catch (Exception e)
         {

@@ -179,7 +179,6 @@ public class DriveTrain extends Subsystem
 
     br.follow(fr);
 
-    PlotThread test = new PlotThread(fr);
 
 
     
