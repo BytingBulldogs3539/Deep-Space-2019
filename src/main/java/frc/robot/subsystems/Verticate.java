@@ -6,6 +6,8 @@ import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
@@ -47,10 +49,11 @@ public class Verticate extends Subsystem
     master.configAllSettings(basicTalonConfig);
     slave.configAllSettings(basicTalonConfig);
     slave.follow(master);
-    // master.setNeutralMode(NeutralMode.Brake);
-    // slave.setNeuralMode(NeutralMode.Brake);
+     master.setNeutralMode(NeutralMode.Brake);
+     slave.setNeutralMode(NeutralMode.Brake);
+     
 
-   // master.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
+    master.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
   //  master.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, RobotMap.verticateSlave, 10);
     
   }
@@ -70,6 +73,10 @@ public class Verticate extends Subsystem
   {
     master.set(ControlMode.PercentOutput,speed);
     slave.set(ControlMode.PercentOutput,speed);
+  }
+  public void neutralOutput()
+  {
+    master.neutralOutput();
   }
  
 }
