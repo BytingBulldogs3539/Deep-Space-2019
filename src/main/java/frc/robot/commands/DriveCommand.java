@@ -38,7 +38,27 @@ public class DriveCommand extends Command
     double turn = (Math.tan(Robot.oi.driver.getRightStickX()) / Math.tan(1));
    // double turn = (Math.tan(Robot.oi.driver.getLeftStickX()) / Math.tan(1));
 
-    if (!Robot.oi.driver.buttonBR.get())//buttonBR
+    
+    if(Robot.oi.driver.buttonBL.get())
+    {
+      double vision = Robot.byteVision.getDataIntake()*1.5;
+      double turnspeed = turn;
+      double modifiedTurnSpeed=0;
+      double danModifieder = .6;
+      double visionModifieder = .4;
+
+      if (vision>1)
+        vision=1;
+
+      if (vision<-1)
+        vision=-1;
+
+      modifiedTurnSpeed =  (turnspeed * danModifieder) + (vision * visionModifieder);
+      System.out.println(vision);
+      
+      Robot.drivetrain.driveArcade(speed*.5,modifiedTurnSpeed);
+    }
+    else if (!Robot.oi.driver.buttonBR.get())//buttonBR
     {
       //Robot.drivetrain.driveArcade(( (Robot.oi.driver.getRightTrigger()- Robot.oi.driver.getLeftTrigger())*.5),  turn* .6);
       Robot.drivetrain.driveArcade(speed*.5,turn*.6);

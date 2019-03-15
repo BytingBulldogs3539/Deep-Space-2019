@@ -3,12 +3,11 @@ package frc.robot.utilities;
 import edu.wpi.cscore.*;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.cscore.VideoSource;
 
 public class ByteCamera
 {
     private UsbCamera camera;
-    VideoSource cam = new VideoSource(5);
+  
 
     /**
      * Allows us to create a camera object witshout causing any errors any long code

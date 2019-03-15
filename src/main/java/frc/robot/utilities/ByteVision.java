@@ -24,6 +24,7 @@ public class ByteVision
     SerialPort visionPortIntake;
     SerialPort visionPortTurret;
     double lastValue = 0.0;
+    int counter=0;
 
     public ByteVision()
     {
@@ -51,14 +52,20 @@ public class ByteVision
     {
         if (visionPortIntake != null)
         {
+            
             try
             {
+                counter=0;
                 lastValue = Double.parseDouble(visionPortIntake.readString());
                 return lastValue;
             }
             catch(Exception e)
             {
-                return lastValue;
+                counter++;
+                if(counter<25)
+                    return lastValue;
+                return 0.0;
+
             }
         }
         return 0.0;

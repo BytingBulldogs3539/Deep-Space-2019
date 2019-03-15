@@ -15,14 +15,13 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 public class Verticate extends Subsystem
 {
   // Declare Talons
-  TalonSRX master, arm, wheel;
+  TalonSRX master, slave;
 
   public Verticate()
   {
     // Initiation of Verticate Talons
     master = new TalonSRX(RobotMap.verticateMaster);
-    arm = new TalonSRX(RobotMap.verticateArm);
-    wheel = new TalonSRX(RobotMap.verticateWheel);
+    slave = new TalonSRX(RobotMap.verticateSlave);
 
     /* Slaves will imitate all commands sent to masters e.g set() but not
      * configurations */
@@ -46,9 +45,13 @@ public class Verticate extends Subsystem
     basicTalonConfig.voltageCompSaturation = RobotMap.voltageCompSaturation;
 
     master.configAllSettings(basicTalonConfig);
-    wheel.configAllSettings(basicTalonConfig);
-    arm.configAllSettings(basicTalonConfig);
+    slave.configAllSettings(basicTalonConfig);
+    slave.follow(master);
+    // master.setNeutralMode(NeutralMode.Brake);
+    // slave.setNeuralMode(NeutralMode.Brake);
 
+   // master.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
+  //  master.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, RobotMap.verticateSlave, 10);
     
   }
 
@@ -62,19 +65,12 @@ public class Verticate extends Subsystem
   public void initDefaultCommand()
   {
   }
-  public void climbArm(double speed)
-  {
-    arm.set(ControlMode.PercentOutput,speed);
-
-
-  }
+  
   public void climb(double speed)
   {
     master.set(ControlMode.PercentOutput,speed);
+    slave.set(ControlMode.PercentOutput,speed);
   }
-  public void wheel(double speed)
-  {
-    wheel.set(ControlMode.PercentOutput,speed);
-
-  }
+ 
 }
+
