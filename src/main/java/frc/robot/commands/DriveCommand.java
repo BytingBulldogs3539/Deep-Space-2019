@@ -42,11 +42,14 @@ public class DriveCommand extends Command
     {
       //Robot.drivetrain.driveArcade(( (Robot.oi.driver.getRightTrigger()- Robot.oi.driver.getLeftTrigger())*.5),  turn* .6);
       Robot.drivetrain.driveArcade(speed*.5,turn*.6);
+      Robot.drivetrain.turboCurrent(20, 30);
+
     }
     else
     {
     //Robot.drivetrain.driveArcade((Robot.oi.driver.getRightTrigger()- Robot.oi.driver.getLeftTrigger()), turn*.6);
       Robot.drivetrain.driveArcade(speed, turn*.75);
+      Robot.drivetrain.turboCurrent(50, 39);
     }
   }
 

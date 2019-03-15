@@ -201,10 +201,27 @@ public class DriveTrain extends Subsystem
     fl.follow(fr, FollowerType.AuxOutput1);
   }
 
-  /**
+ 
+  public void turboCurrent(int peakAmps,int amps){
+    fr.configContinuousCurrentLimit(amps);
+    mr.configContinuousCurrentLimit(amps);
+    br.configContinuousCurrentLimit(amps);
+    fl.configContinuousCurrentLimit(amps);
+    ml.configContinuousCurrentLimit(amps);
+    bl.configContinuousCurrentLimit(amps);
+
+    fr.configPeakCurrentLimit(peakAmps);
+    mr.configPeakCurrentLimit(peakAmps);
+    br.configPeakCurrentLimit(peakAmps);
+    fl.configPeakCurrentLimit(peakAmps);
+    ml.configPeakCurrentLimit(peakAmps);
+    bl.configPeakCurrentLimit(peakAmps);
+
+
+  }
+   /**
    * Sets our master talons to a disabled state so they do nothing.
    */
-  
   public void neutralOutput()
   {
     fr.neutralOutput();

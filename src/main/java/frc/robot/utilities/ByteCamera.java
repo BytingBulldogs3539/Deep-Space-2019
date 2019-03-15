@@ -3,13 +3,15 @@ package frc.robot.utilities;
 import edu.wpi.cscore.*;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.cscore.VideoSource;
 
 public class ByteCamera
 {
     private UsbCamera camera;
+    VideoSource cam = new VideoSource(5);
 
     /**
-     * Allows us to create a camera object without causing any errors any long code
+     * Allows us to create a camera object witshout causing any errors any long code
      * in Robot.
      * 
      * @param label
@@ -31,6 +33,7 @@ public class ByteCamera
             camera.setExposureManual(3);
             camera.setBrightness(50);
             CameraServer.getInstance().addCamera(camera);
+            
 
         }
         catch (Exception e)
