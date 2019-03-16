@@ -41,7 +41,7 @@ public class DriveCommand extends Command
     
     if(Robot.oi.driver.buttonBL.get())
     {
-      double vision = Robot.byteVision.getDataIntake()*1.5;
+      double vision = Robot.byteVision.getDataIntake()*1.2;
       double turnspeed = turn;
       double modifiedTurnSpeed=0;
       double danModifieder = .6;
