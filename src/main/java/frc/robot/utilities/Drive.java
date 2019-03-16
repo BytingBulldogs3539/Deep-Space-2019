@@ -10,6 +10,8 @@ package frc.robot.utilities;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import frc.robot.RobotMap;
+
 public final class Drive
 {
 	TalonSRX talon1, talon2, talon3, talon4, talon5, talon6;
@@ -165,24 +167,26 @@ public final class Drive
 	{
 		if (driveMode == DriveMode.TWO)
 		{
-			talon1.set(ControlMode.PercentOutput, right);
-			talon2.set(ControlMode.PercentOutput, left);
+			// talon1.set(ControlMode.PercentOutput, right);
+			// talon2.set(ControlMode.PercentOutput, left);
+			talon1.set(ControlMode.Velocity, right*RobotMap.maxSpeed);
+			talon2.set(ControlMode.Velocity, left*RobotMap.maxSpeed);
 		}
 		if (driveMode == DriveMode.FOUR)
 		{
-			talon1.set(ControlMode.PercentOutput, right);
-			talon2.set(ControlMode.PercentOutput, right);
-			talon3.set(ControlMode.PercentOutput, left);
-			talon4.set(ControlMode.PercentOutput, left);
+			talon1.set(ControlMode.Velocity, right*RobotMap.maxSpeed);
+			talon2.set(ControlMode.Velocity, right*RobotMap.maxSpeed);
+			talon3.set(ControlMode.Velocity, left*RobotMap.maxSpeed);
+			talon4.set(ControlMode.Velocity, left*RobotMap.maxSpeed);
 		}
 		if (driveMode == DriveMode.SIX)
 		{
-			talon1.set(ControlMode.PercentOutput, right);
-			talon2.set(ControlMode.PercentOutput, right);
-			talon3.set(ControlMode.PercentOutput, right);
-			talon4.set(ControlMode.PercentOutput, left);
-			talon5.set(ControlMode.PercentOutput, left);
-			talon6.set(ControlMode.PercentOutput, left);
+			talon1.set(ControlMode.Velocity, right*RobotMap.maxSpeed);
+			talon2.set(ControlMode.Velocity, right*RobotMap.maxSpeed);
+			talon3.set(ControlMode.Velocity, right*RobotMap.maxSpeed);
+			talon4.set(ControlMode.Velocity, left*RobotMap.maxSpeed);
+			talon5.set(ControlMode.Velocity, left*RobotMap.maxSpeed);
+			talon6.set(ControlMode.Velocity, left*RobotMap.maxSpeed);
 		}
 	}
 

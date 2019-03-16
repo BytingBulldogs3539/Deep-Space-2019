@@ -101,6 +101,8 @@ public class DriveTrain extends Subsystem
     bl.setInverted(true);
 
     
+
+    
     
 
 
@@ -151,7 +153,8 @@ public class DriveTrain extends Subsystem
 
 
     // Apply the configuration to the right master talon
-    fr.configAllSettings(MotionConfig);
+    //fr.configAllSettings(MotionConfig);
+    fr.configAllSettings(basicTalonConfig);
 
     /* speed up the target polling for PID[0] and PID-aux[1] */
     fr.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, 10); /* plotthread is polling aux-pid-sensor-pos */
@@ -178,7 +181,17 @@ public class DriveTrain extends Subsystem
     mr.follow(fr);
 
     br.follow(fr);
+    
 
+    fr.config_kP(0, RobotMap.gains_Drive.p);
+    fr.config_kI(0, RobotMap.gains_Drive.i);
+    fr.config_kD(0, RobotMap.gains_Drive.d);
+    fr.config_kF(0, RobotMap.gains_Drive.f);
+
+    fl.config_kP(0, RobotMap.gains_Drive.p);
+    fl.config_kI(0, RobotMap.gains_Drive.i);
+    fl.config_kD(0, RobotMap.gains_Drive.d);
+    fl.config_kF(0, RobotMap.gains_Drive.f);
 
 
     

@@ -139,6 +139,7 @@ public class RobotMap
      * kP kI kD kF Iz PeakOut
      */
     // TODO: Tune for robot.
+    public static double maxSpeed = 4000;
     // Tuned
     public static Gains elevatorGains = new Gains(.6, 0.00005, 0.0, .7, 400, 1.00);
     // Tuned
@@ -152,4 +153,7 @@ public class RobotMap
     // 1.00);
 
     public final static Gains gains_MotProfAngle = new Gains(1.6, 0.0, 0, .16, 500, 1.00);
+
+    public final static Gains gains_Drive = new Gains(.1, 0.0, 0, 0, 500, 1.00);
+
 }
