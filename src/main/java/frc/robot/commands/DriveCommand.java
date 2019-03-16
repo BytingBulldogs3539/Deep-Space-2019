@@ -61,7 +61,7 @@ public class DriveCommand extends Command
     else if (!Robot.oi.driver.buttonBR.get())//buttonBR
     {
       //Robot.drivetrain.driveArcade(( (Robot.oi.driver.getRightTrigger()- Robot.oi.driver.getLeftTrigger())*.5),  turn* .6);
-      Robot.drivetrain.driveArcade(speed*.5,turn*.6);
+      Robot.drivetrain.driveArcade(speed*.55,turn*.4);
       Robot.drivetrain.turboCurrent(20, 30);
 
     }

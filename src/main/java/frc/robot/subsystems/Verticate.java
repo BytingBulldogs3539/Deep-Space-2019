@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 
 /**
  * Comprised of two 90 degree elbows and two curved legs
@@ -53,9 +54,11 @@ public class Verticate extends Subsystem
      slave.setNeutralMode(NeutralMode.Brake);
      
 
-    master.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
-  //  master.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, RobotMap.verticateSlave, 10);
     
+    
+    master.configForwardLimitSwitchSource(RemoteLimitSwitchSource.RemoteTalonSRX,LimitSwitchNormal.NormallyOpen,RobotMap.verticateSlave,10);
+     master.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteTalonSRX,LimitSwitchNormal.NormallyOpen,RobotMap.verticateSlave,10);
+
   }
 
   // TODO: Create buttons in OI to control manually
@@ -72,7 +75,7 @@ public class Verticate extends Subsystem
   public void climb(double speed)
   {
     master.set(ControlMode.PercentOutput,speed);
-    slave.set(ControlMode.PercentOutput,speed);
+    //slave.set(ControlMode.PercentOutput,speed);
   }
   public void neutralOutput()
   {

@@ -31,7 +31,8 @@ public class ClimbMan extends Command
   {
     // get the right stick y value and set to the motor speed maybe with a
     // multiplier.
-    Robot.verticate.climb(Robot.oi.driver.getRightTrigger()- Robot.oi.driver.getLeftTrigger());
+  //  Robot.verticate.climb(Robot.oi.driver.getRightTrigger()- Robot.oi.driver.getLeftTrigger());
+    Robot.verticate.climb(Robot.oi.driver.getLeftTrigger()-Robot.oi.driver.getRightTrigger());
   }
 
   // Make this return true when this Command no longer needs to run execute()
