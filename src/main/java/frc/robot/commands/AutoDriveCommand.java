@@ -7,54 +7,56 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
-public class TurretTakeoverCommand extends Command
+public class AutoDriveCommand extends PIDCommand
 {
-  public TurretTakeoverCommand()
+  private double target = 0;
+  private double vision = 0;
+
+  public AutoDriveCommand()
   {
+    super(.7, 0.0, 0.0);
     requires(Robot.turret);
+
   }
 
-  // Called just before this Command runs th
+  // Called just before this Command runs the first time
   @Override
   protected void initialize()
   {
-    SmartDashboard.putBoolean("Is TurretTakeover", true);
+    this.getPIDController().reset();
+
+    this.getPIDController().setOutputRange(-.5, .5);
+    this.getPIDController().setSetpoint(target);
+    this.getPIDController().enable();
+    System.out.println("init run");
 
   }
+
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute()
   {
-
-    // get the left stick x value and set to the motor speed maybe with a
-    // multiplier.
-
-    //if (Robot.oi.operator.)
-
-    Robot.turret.setSpeed(Math.tan(Robot.oi.operator.getRightStickX()) / Math.tan(1) * RobotMap.turretSpeedMultipier);
+    
+    System.out.println("Running"+ vision);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished()
   {
-    return false;
+    return false;//!Robot.oi.driver.buttonBL.get();// getPIDController().onTarget() || isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end()
   {
-    Robot.turret.neutralOutput();
-    SmartDashboard.putBoolean("Is TurretTakeover", false);
-
+    this.getPIDController().reset();
+    this.getPIDController().disable();
   }
 
   // Called when another command which requires one or more of the same
@@ -63,5 +65,22 @@ public class TurretTakeoverCommand extends Command
   protected void interrupted()
   {
     end();
+  }
+
+  protected double returnPIDInput()
+  {
+    vision = Robot.byteVision.getDataIntake();
+    return vision;
+  }
+
+  @Override
+  protected void usePIDOutput(double output)
+  {
+    double speed = (Math.atan(Robot.oi.driver.getLeftStickY()) / Math.atan(1));
+
+   // Robot.drivetrain.driveArcade(speed*.2, -output);
+    Robot.turret.setSpeed(-output);
+
+    System.out.println("output" + output);
   }
 }

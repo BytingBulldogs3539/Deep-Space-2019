@@ -8,32 +8,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
-import frc.robot.subsystems.Elevator.GamePieceType;
-import frc.robot.subsystems.RioDuino.Mode;
 
-/**
- * Add your docs here.
- */
-public class LimitSwitchCommand extends InstantCommand
+public class HatchExtendActuateCommand extends InstantCommand
 {
+  boolean shouldActive;
+
   /**
-   * Run this command to update the status of all of the lights
+   * @param shouldActive
+   *                       actuates solenoid. true = down; false = up
    */
-  public LimitSwitchCommand()
+  public HatchExtendActuateCommand(boolean shouldActive)
   {
-    super();
-    requires(Robot.manipulator);
+    this.shouldActive = shouldActive;
   }
 
-  // Called once when the command executes
+  // Called just before this Command runs the first time
   @Override
   protected void initialize()
   {
-
-
+    Robot.manipulator.HatchSetPosition(shouldActive);
   }
-
 }

@@ -77,7 +77,7 @@ public class RobotMap
     public static final int elevatorMaster = 6;
     public static final int elevatorSlave = 5;
 
-    public static final double elevatorSpeedMultiplier = .5;
+    public static final double elevatorSpeedMultiplier = .75;
 
     public static final double InchesToElevatorEncMultiplier = 320;
 
@@ -86,12 +86,14 @@ public class RobotMap
     // public static final int panelIntakeOn = 3;//6
     // public static final int panelIntakeOff = 2;//1
     // TODO I am told these are the values TEST
-    public static final int cargoIntakeOn = 4;// 3
-    public static final int cargoIntakeOff = 5;// 4
-    public static final int placementOn = 2;// 7
-    public static final int placementOff = 3;// 0
-    // public static final int floorIntakeOn = 5;
-    // public static final int floorIntakeOff = 2;
+    public static final int cargoIntakeOn = 3;// 4
+    public static final int cargoIntakeOff = 4;//5
+    public static final int placementOn = 0;// 2
+    public static final int placementOff = 7;// 3
+    public static final int hatchInOn = 2;//cominig out of carrage
+    public static final int hatchInOff =5 ;
+    public static final int hatchExtendOn = 1;
+    public static final int hatchExtendOff = 6;
 
     // List of TalonSRX CAN ID numbers
     public static final int manipulatorMaster = 7;
@@ -139,11 +141,11 @@ public class RobotMap
      * kP kI kD kF Iz PeakOut
      */
     // TODO: Tune for robot.
-    public static double maxSpeed = 4000;
+    public static double maxSpeed = 9000;
     // Tuned
     public static Gains elevatorGains = new Gains(.6, 0.00005, 0.0, .7, 400, 1.00);
     // Tuned
-    public static Gains turretGains = new Gains(2.8, 0.001, 0.0, .3, 400, 1.00);
+    public static Gains turretGains = new Gains(1.2, 0.0001, 0.0, 0, 400, 1.00);
     // NOT Tuned
     public static Gains TurnPid = new Gains(.1, 0.0, 0.0, 0.0, 0.0, 0.0);
     // SEMI Tuned
@@ -154,6 +156,7 @@ public class RobotMap
 
     public final static Gains gains_MotProfAngle = new Gains(1.6, 0.0, 0, .16, 500, 1.00);
 
-    public final static Gains gains_Drive = new Gains(.1, 0.0, 0, 0, 500, 1.00);
+    public final static Gains gains_Drive = new Gains(.12, 0.0, 0, .16, 500, 1.00);
+    public final static Gains gains_Drivel = new Gains(.1, 0.0, 0, .16, 500, 1.00);
 
 }
