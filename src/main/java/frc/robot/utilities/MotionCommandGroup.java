@@ -51,7 +51,7 @@ public abstract class MotionCommandGroup extends CommandGroup
                     }
                     System.out.println("Running");
                     int traj = _talon.getActiveTrajectoryPosition();
-                    if (!Robot.MotionBuffers.containsKey(fileName))
+                    /*if (!Robot.MotionBuffers.containsKey(fileName))
                     {
                         return;
                     }
@@ -72,12 +72,12 @@ public abstract class MotionCommandGroup extends CommandGroup
                             }
 
                         }
-                    }
+                    }*/
 
                 }
             });
             System.out.println("START THREAD!");
-            eventThread.start();
+            //eventThread.start();
         }
     }
 

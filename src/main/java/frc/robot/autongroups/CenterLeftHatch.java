@@ -11,14 +11,16 @@ import frc.robot.utilities.*;
 import frc.robot.autoncommands.*;
 import frc.robot.motionprofiling.MotionProfiling;
 import frc.robot.motionprofiling.TestProfile;
+import frc.robot.commands.*;
 
 public class CenterLeftHatch extends MotionCommandGroup
 {
 
   public CenterLeftHatch()
   {
-    addSequential(new AutonDrivePath("CenterLeftHatch.json", true));
-    addMotionProfile("CenterLeftHatch.json");
+    addSequential(new AutoDriveCommand() );
+   // addSequential(new AutonDrivePath("CenterLeftHatch.json", true));
+    //addMotionProfile("CenterLeftHatch.json");
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

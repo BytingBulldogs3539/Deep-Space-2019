@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.DriveCommand;
 
@@ -31,6 +32,7 @@ public class DriveTrain extends Subsystem
   public TalonSRX fr, fl, mr, ml, br, bl;
   PigeonIMU pigeon;
   Drive drive;
+  //PowerDistributionPanel pdp;
 
   public DriveTrain()
   {
@@ -44,6 +46,7 @@ public class DriveTrain extends Subsystem
     br = new TalonSRX(RobotMap.BRTalon);
     bl = new TalonSRX(RobotMap.BLTalon);
     pigeon = new PigeonIMU(mr);
+    //pdp = new PowerDistributionPanel(30);
 
     // We only use two motor drive train because the rest of the motors follow our
     // "master talons"
@@ -51,7 +54,7 @@ public class DriveTrain extends Subsystem
 
  
 
-    // TODO: Think about adding a incase if pigeon is not plugged in or not
+    // TODO: Think about adding a case for if pigeon is not plugged in
     // responding.
     if (pigeon.getState() != PigeonState.Ready && pigeon.getState() != PigeonState.Initializing)
     {
@@ -84,8 +87,7 @@ public class DriveTrain extends Subsystem
     fl.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     fr.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
-    fl.setSensorPhase(true);
-    fr.setSensorPhase(false);
+
 
 
 
@@ -100,56 +102,56 @@ public class DriveTrain extends Subsystem
     ml.setInverted(false);
     bl.setInverted(true);
 
-    
+    //SmartDashboard.putData(pdp);
 
     
     
 
 
-    /* --- config the motion profiling specific settings --- */
+    // /* --- config the motion profiling specific settings --- */
 
-    TalonSRXConfiguration MotionConfig = new TalonSRXConfiguration();
+    // TalonSRXConfiguration MotionConfig = new TalonSRXConfiguration();
 
-    MotionConfig.nominalOutputForward = 0.0;
-    MotionConfig.nominalOutputReverse = 0.0;
-    MotionConfig.peakOutputForward = 1.0;
-    MotionConfig.peakOutputReverse = -1.0;
-    MotionConfig.continuousCurrentLimit = 37;
-    MotionConfig.peakCurrentLimit = 50;
-    MotionConfig.peakCurrentDuration = 100;
-    MotionConfig.voltageCompSaturation = RobotMap.voltageCompSaturation;
+    // MotionConfig.nominalOutputForward = 0.0;
+    // MotionConfig.nominalOutputReverse = 0.0;
+    // MotionConfig.peakOutputForward = 1.0;
+    // MotionConfig.peakOutputReverse = -1.0;
+    // MotionConfig.continuousCurrentLimit = 37;
+    // MotionConfig.peakCurrentLimit = 50;
+    // MotionConfig.peakCurrentDuration = 100;
+    // MotionConfig.voltageCompSaturation = RobotMap.voltageCompSaturation;
 
-    /* remote 0 will capture Pigeon IMU */
-    MotionConfig.remoteFilter0.remoteSensorDeviceID = pigeon.getDeviceID();
-    MotionConfig.remoteFilter0.remoteSensorSource = RemoteSensorSource.GadgeteerPigeon_Yaw;
-    /* remote 1 will capture the quad encoder on left talon */
-    MotionConfig.remoteFilter1.remoteSensorDeviceID = fl.getDeviceID();
-    MotionConfig.remoteFilter1.remoteSensorSource = RemoteSensorSource.TalonSRX_SelectedSensor;
-    /* drive-position is our local quad minus left-talon's selected sens. depending
-     * on sensor orientation, it could be the sum instead */
+    // /* remote 0 will capture Pigeon IMU */
+    // MotionConfig.remoteFilter0.remoteSensorDeviceID = pigeon.getDeviceID();
+    // MotionConfig.remoteFilter0.remoteSensorSource = RemoteSensorSource.GadgeteerPigeon_Yaw;
+    // /* remote 1 will capture the quad encoder on left talon */
+    // MotionConfig.remoteFilter1.remoteSensorDeviceID = fl.getDeviceID();
+    // MotionConfig.remoteFilter1.remoteSensorSource = RemoteSensorSource.TalonSRX_SelectedSensor;
+    // /* drive-position is our local quad minus left-talon's selected sens. depending
+    //  * on sensor orientation, it could be the sum instead */
 
-    MotionConfig.sum0Term = FeedbackDevice.QuadEncoder;
-    MotionConfig.sum1Term = FeedbackDevice.RemoteSensor1;
+    // MotionConfig.sum0Term = FeedbackDevice.QuadEncoder;
+    // MotionConfig.sum1Term = FeedbackDevice.RemoteSensor1;
 
-    MotionConfig.primaryPID.selectedFeedbackSensor = FeedbackDevice.SensorSum;
-    MotionConfig.primaryPID.selectedFeedbackCoefficient = 0.5; /* divide by 2 so we servo sensor-average, intead of sum */
-    /* turn position will come from the pigeon */
-    MotionConfig.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.RemoteSensor0;
-    /* rest of the configs */
-    MotionConfig.neutralDeadband = RobotMap.neutralDeadband; /* 0.1 % super small for best low-speed control */
-    MotionConfig.slot0.kF = RobotMap.gains_MotProf.f;
-    MotionConfig.slot0.kP = RobotMap.gains_MotProf.p;
-    MotionConfig.slot0.kI = RobotMap.gains_MotProf.i;
-    MotionConfig.slot0.kD = RobotMap.gains_MotProf.d;
-    MotionConfig.slot0.integralZone = (int) RobotMap.gains_MotProf.iZone;
-    MotionConfig.slot0.closedLoopPeakOutput = RobotMap.gains_MotProf.peakOutput;
+    // MotionConfig.primaryPID.selectedFeedbackSensor = FeedbackDevice.SensorSum;
+    // MotionConfig.primaryPID.selectedFeedbackCoefficient = 0.5; /* divide by 2 so we servo sensor-average, intead of sum */
+    // /* turn position will come from the pigeon */
+    // MotionConfig.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.RemoteSensor0;
+    // /* rest of the configs */
+    // MotionConfig.neutralDeadband = RobotMap.neutralDeadband; /* 0.1 % super small for best low-speed control */
+    // MotionConfig.slot0.kF = RobotMap.gains_MotProf.f;
+    // MotionConfig.slot0.kP = RobotMap.gains_MotProf.p;
+    // MotionConfig.slot0.kI = RobotMap.gains_MotProf.i;
+    // MotionConfig.slot0.kD = RobotMap.gains_MotProf.d;
+    // MotionConfig.slot0.integralZone = (int) RobotMap.gains_MotProf.iZone;
+    // MotionConfig.slot0.closedLoopPeakOutput = RobotMap.gains_MotProf.peakOutput;
 
-    MotionConfig.slot1.kF = RobotMap.gains_MotProfAngle.f;
-    MotionConfig.slot1.kP = RobotMap.gains_MotProfAngle.p;
-    MotionConfig.slot1.kI = RobotMap.gains_MotProfAngle.i;
-    MotionConfig.slot1.kD = RobotMap.gains_MotProfAngle.d;
-    MotionConfig.slot1.integralZone = (int) RobotMap.gains_MotProfAngle.iZone;
-    MotionConfig.slot1.closedLoopPeakOutput = RobotMap.gains_MotProfAngle.peakOutput;
+    // MotionConfig.slot1.kF = RobotMap.gains_MotProfAngle.f;
+    // MotionConfig.slot1.kP = RobotMap.gains_MotProfAngle.p;
+    // MotionConfig.slot1.kI = RobotMap.gains_MotProfAngle.i;
+    // MotionConfig.slot1.kD = RobotMap.gains_MotProfAngle.d;
+    // MotionConfig.slot1.integralZone = (int) RobotMap.gains_MotProfAngle.iZone;
+    // MotionConfig.slot1.closedLoopPeakOutput = RobotMap.gains_MotProfAngle.peakOutput;
 
 
     // Apply the configuration to the right master talon
@@ -188,13 +190,14 @@ public class DriveTrain extends Subsystem
     fr.config_kD(0, RobotMap.gains_Drive.d);
     fr.config_kF(0, RobotMap.gains_Drive.f);
 
-    fl.config_kP(0, RobotMap.gains_Drive.p);
-    fl.config_kI(0, RobotMap.gains_Drive.i);
-    fl.config_kD(0, RobotMap.gains_Drive.d);
-    fl.config_kF(0, RobotMap.gains_Drive.f);
+    fl.config_kP(0, RobotMap.gains_Drivel.p);
+    fl.config_kI(0, RobotMap.gains_Drivel.i);
+    fl.config_kD(0, RobotMap.gains_Drivel.d);
+    fl.config_kF(0, RobotMap.gains_Drivel.f);
 
 
-    
+    fl.setSensorPhase(false);
+    fr.setSensorPhase(false);
     // Set our back and middle motors to follow our master front talons.
 
 

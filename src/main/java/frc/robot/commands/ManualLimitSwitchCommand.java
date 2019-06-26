@@ -29,7 +29,7 @@ public class ManualLimitSwitchCommand extends InstantCommand
     {
       Robot.elevator.gamePieceType = GamePieceType.HATCH;
       SmartDashboard.putBoolean("Is Cargo Mode", false);
-      Robot.rioDuino.updateMode(Mode.YELLOW);
+      //Robot.rioDuino.updateMode(Mode.YELLOW);
       System.out.println("YELLOW");
 
     }
@@ -38,7 +38,7 @@ public class ManualLimitSwitchCommand extends InstantCommand
       Robot.elevator.gamePieceType = GamePieceType.HATCH;
       SmartDashboard.putBoolean("Is Cargo Mode", false);
 
-      Robot.rioDuino.updateMode(Mode.YELLOW);
+      //Robot.rioDuino.updateMode(Mode.YELLOW);
       System.out.println("YELLOW");
 
     }
@@ -47,14 +47,14 @@ public class ManualLimitSwitchCommand extends InstantCommand
       Robot.elevator.gamePieceType = GamePieceType.CARGO;
       SmartDashboard.putBoolean("Is Cargo Mode", true);
 
-      Robot.rioDuino.updateMode(Mode.ORANGE);
+      //Robot.rioDuino.updateMode(Mode.ORANGE);
       System.out.println("ORANGE");
     }
     else if (Robot.elevator.gamePieceType == GamePieceType.CARGO)
     {
       Robot.elevator.gamePieceType = GamePieceType.HATCH;
       SmartDashboard.putBoolean("Is Cargo Mode", false);
-      Robot.rioDuino.updateMode(Mode.YELLOW);
+      //Robot.rioDuino.updateMode(Mode.YELLOW);
       System.out.println("YELLOW");
 
     }

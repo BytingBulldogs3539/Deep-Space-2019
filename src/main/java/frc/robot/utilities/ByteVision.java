@@ -22,7 +22,6 @@ public class ByteVision
     // auton.
 
     SerialPort visionPortIntake;
-    SerialPort visionPortTurret;
     double lastValue = 0.0;
     int counter=0;
 
@@ -37,15 +36,6 @@ public class ByteVision
         {
             DriverStation.reportError("ERROR: Vision tracking intake camera", e.getStackTrace());
         }
-
-        try
-        {
-            visionPortTurret = new SerialPort(115200, SerialPort.Port.kUSB1);
-        }
-        catch (Exception e)
-        {
-            DriverStation.reportError("ERROR: Vision tracking turret camera", e.getStackTrace());
-        }
     }
 
     public double getDataIntake()
@@ -56,52 +46,51 @@ public class ByteVision
             try
             {
                 counter=0;
-                lastValue = Double.parseDouble(visionPortIntake.readString());
+                //System.out.println("BEFORE: "+ visionPortIntake.readString());
+                String vision = visionPortIntake.readString();
+                System.out.println("BEFORE: "+ vision);
+
+                if(vision.contains(","))
+                {
+                    String[] visionsplit = vision.split(",");
+                    System.out.println("Count: "+ visionsplit.length);
+                    vision = visionsplit[visionsplit.length-2];
+                    vision.replace(",", "");
+                    vision.replace(" ", "");
+                    
+                }
+                System.out.println("After: "+vision);
+                lastValue = Double.parseDouble(vision);
                 return lastValue;
             }
             catch(Exception e)
             {
+                DriverStation.reportError("ERROR: Vision tracking intake camera not found", e.getStackTrace());
+
                 counter++;
                 if(counter<25)
+                {
+
                     return lastValue;
+                }
+
                 return 0.0;
 
             }
         }
         return 0.0;
     }
+    
+    public String getDataIntakeSTR() {
+        if (visionPortIntake != null) {
+            return visionPortIntake.readString();
+        }
+        return "";
+    }
 
-    // {
-    //     if (visionPortIntake != null)
-    //     {
-    //         if(visionPortIntake.readString()!=null&&!visionPortIntake.readString().equals(" ")&&!visionPortIntake.readString().equals(""))
-    //         {
-    //             try
-    //             {
-    //                 lastvalue = Double.parseDouble(visionPortIntake.readString());
-    //             }
-    //             catch(Exception e)
-    //             {
-    //                 return 0.0;
-    //             }
-    //         }   
-    //         return lastvalue;
-    //     }
-    //     return 0;
-    // }
 
     public int getPixeloffset()
     {
         return 3539;// TODO: return Pixel offset
-    }
-
-    public String getDataTurret()
-    {
-        if (visionPortIntake != null)
-        {
-            return visionPortTurret.readString();
-        }
-        return "";
-
     }
 }

@@ -16,7 +16,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
  */
 public class Manipulator extends Subsystem
 {
-  private ByteDoubleSolenoid panelIntakeSolenoid, cargoIntakeSolenoid, placementSolenoid,floorIntakeSolenoid;
+  private ByteDoubleSolenoid  cargoIntakeSolenoid, placementSolenoid,extensionSolenoid,hatchSolenoid;
   private TalonSRX master;
 
   public Manipulator()
@@ -48,23 +48,23 @@ public class Manipulator extends Subsystem
 
     
   //  floorIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.floorIntakeOn, RobotMap.floorIntakeOff, true);
+    hatchSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.hatchInOn, RobotMap.hatchInOff, true);
 
-  //  panelIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.panelIntakeOn, RobotMap.panelIntakeOff, true);
     cargoIntakeSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.cargoIntakeOn, RobotMap.cargoIntakeOff, false);
-   placementSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.placementOn, RobotMap.placementOff, true);
+    placementSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.placementOn, RobotMap.placementOff, true);
+    extensionSolenoid = new ByteDoubleSolenoid(RobotMap.pcm, RobotMap.hatchExtendOn, RobotMap.hatchExtendOff, true);
   }
 
-  // Grabs hatch panel from floor; not necessary for feeder station
-
-  // public void panelIntakeSetPosition(boolean shouldActive)
-  // {
-  //   panelIntakeSolenoid.setPosition(shouldActive);
-  // }
+   public void HatchSetPosition(boolean shouldActive)
+   {
+     hatchSolenoid.setPosition(shouldActive); // exends hatch mechanism 
   
-  // public void floorIntakeSetPosition(boolean shouldActive)
-  // {
-  //   floorIntakeSolenoid.setPosition(shouldActive);
-  // }
+    }
+  
+   public void ExtensionSetPosition(boolean shouldActive)
+   {
+     extensionSolenoid.setPosition(shouldActive);//extends distance of hatch mechanism
+   }
 
   // Actuates intake arm over bumper to grab cargo
   public void cargoIntakeSetPosition(boolean shouldActive)
