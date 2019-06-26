@@ -9,6 +9,8 @@ package frc.robot.autongroups;
 
 import frc.robot.utilities.*;
 import frc.robot.autoncommands.*;
+import frc.robot.motionprofiling.MotionProfiling;
+import frc.robot.motionprofiling.TestProfile;
 
 public class CenterLeftHatch extends MotionCommandGroup
 {
