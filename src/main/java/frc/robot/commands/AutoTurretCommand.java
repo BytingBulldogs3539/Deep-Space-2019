@@ -13,10 +13,11 @@ import frc.robot.Robot;
 public class AutoTurretCommand extends PIDCommand
 {
   private double target = 0;
+  private double vision = 0;
 
   public AutoTurretCommand()
   {
-    super(0.0025, 0.0, 0.0);
+    super(0.025, 0.0, 0.0);
 
     requires(Robot.turret);
   }
@@ -44,7 +45,7 @@ public class AutoTurretCommand extends PIDCommand
   @Override
   protected boolean isFinished()
   {
-    return false;//getPIDController().onTarget() || isTimedOut();
+    return !Robot.oi.driver.buttonX.get();//getPIDController().onTarget() || isTimedOut();
   }
 
   // Called once after isFinished returns true
@@ -62,11 +63,10 @@ public class AutoTurretCommand extends PIDCommand
   {
   }
 
-  protected double returnPIDInput()
-  {
+  protected double returnPIDInput() {
     return Robot.byteVision.getDataIntake();
-  }
 
+  }
   @Override
   protected void usePIDOutput(double output)
   {

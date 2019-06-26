@@ -7,13 +7,13 @@ DriveTrain
 
 Elevator 
 
-Turret seperate from elevator  
+turret seperate from elevator  
 
-Manipulator 
+manipulator 
 
 Climb
 
-Subsystems 
+subsystems 
 
 
 

@@ -28,7 +28,7 @@ public class AutonDrivePath extends Command
     requires(Robot.drivetrain);
     this.fileName = fileName;
     this.useIsFinished = useIsFinished;
-    buffer = Robot.MotionBuffers.get(fileName);
+    //buffer = Robot.MotionBuffers.get(fileName);
   }
 
   public AutonDrivePath(BufferedTrajectoryPointStream buffer, boolean useIsFinished)

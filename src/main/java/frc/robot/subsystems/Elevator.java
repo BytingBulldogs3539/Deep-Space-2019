@@ -127,7 +127,7 @@ public class Elevator extends Subsystem
     master.configMotionAcceleration(2000, RobotMap.timeoutMs);
 
     // TODO: config the scurve strength
-    master.configMotionSCurveStrength(2);
+    master.configMotionSCurveStrength(0);//was 2
 
     /* Zero the sensor */
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
@@ -150,7 +150,7 @@ public class Elevator extends Subsystem
     // TODO: This may need to be changed.
     double encoderTicks = (inches - (9)) * RobotMap.InchesToElevatorEncMultiplier;
     master.set(ControlMode.MotionMagic, encoderTicks);
-    System.out.println("set" + encoderTicks);
+    //System.out.println("set" + encoderTicks);
 
   }
 
