@@ -32,6 +32,29 @@ public abstract class MotionCommandGroup extends CommandGroup
         motionProfileList.add(fileName);
     }
 
+    @Override
+    public void initialize()
+    {
+
+    }
+
+    @Override
+    public void end()
+    {
+
+    }
+
+    @Override
+    public void interrupt()
+    {
+
+    }
+
+    private void startScaning()
+    {
+
+    }
+
     public void setOnEvent(String fileName, String eventName, final Command command, TalonSRX _talon)
     {
         if (eventThread == null)
@@ -39,7 +62,7 @@ public abstract class MotionCommandGroup extends CommandGroup
             System.out.println("Add thread");
             eventThread = new Thread(() ->
             {
-                while (true)
+                while (this.isRunning())
                 {
                     try
                     {
