@@ -20,7 +20,7 @@ public class TurretTakeoverCommand extends Command
     requires(Robot.turret);
   }
 
-  // Called just before this Command runs th
+  // Called just before this Command runs the first time
   @Override
   protected void initialize()
   {

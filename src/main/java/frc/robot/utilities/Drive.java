@@ -168,28 +168,10 @@ public final class Drive
 		if (driveMode == DriveMode.TWO)
 		{
 			// talon1.set(ControlMode.PercentOutput, right);
-			//talon2.set(ControlMode.PercentOutput, left);
-
-			if(right == 0)
-			{
-				talon1.set(ControlMode.PercentOutput, 0);
-			}
-			else
-			{
-				talon1.set(ControlMode.Velocity, right * RobotMap.maxSpeed);
-
-			}
-			if (left == 0) {
-				talon2.set(ControlMode.PercentOutput, 0);
-			}
-			else
-			{
-				talon2.set(ControlMode.Velocity, left * RobotMap.maxSpeed);
-			}
-			System.out.println("left "+left+ " right "+right);
-
+			// talon2.set(ControlMode.PercentOutput, left);
+			talon1.set(ControlMode.Velocity, right*RobotMap.maxSpeed);
+			talon2.set(ControlMode.Velocity, left*RobotMap.maxSpeed);
 		}
-
 		if (driveMode == DriveMode.FOUR)
 		{
 			talon1.set(ControlMode.Velocity, right*RobotMap.maxSpeed);

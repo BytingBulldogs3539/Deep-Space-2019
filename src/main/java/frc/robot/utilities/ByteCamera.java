@@ -30,7 +30,7 @@ public class ByteCamera
             camera.setResolution(360, 360);
             camera.setFPS(20);
             camera.setExposureManual(3);
-            camera.setBrightness(10);
+            camera.setBrightness(50);
             CameraServer.getInstance().addCamera(camera);
             
 

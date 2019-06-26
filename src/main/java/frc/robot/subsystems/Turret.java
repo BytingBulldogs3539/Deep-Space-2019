@@ -7,7 +7,6 @@ import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import frc.robot.motionprofiling.PlotThread;
 import frc.robot.utilities.*;
@@ -49,12 +48,10 @@ public class Turret extends Subsystem
     // Constants.kPIDLoopIdx
     // timeoutMs
     master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.timeoutMs);
-    master.configRemoteFeedbackFilter(RobotMap.MRTalon, RemoteSensorSource.GadgeteerPigeon_Yaw, 0);
-    master.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor0);
 
     /* Sets phase of sensor so forward/reverse on sensor is synced with
      * forward/reverse on talon */
-    master.setSensorPhase(false);
+    master.setSensorPhase(true);
     master.setInverted(true);
 
     /* Make our motor not want to turn. */
@@ -78,7 +75,7 @@ public class Turret extends Subsystem
     master.configMotionAcceleration(1200, RobotMap.timeoutMs);
 
     // TODO: config the scurve strength
-    master.configMotionSCurveStrength(0);//was 2 
+    master.configMotionSCurveStrength(2);
 
     // PlotThread test = new PlotThread(master);
     /* Zero the sensor */

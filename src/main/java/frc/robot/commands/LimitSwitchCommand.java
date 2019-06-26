@@ -33,6 +33,43 @@ public class LimitSwitchCommand extends InstantCommand
   protected void initialize()
   {
 
+    System.out.println("limit pressed");
+    if (RobotMap.useLimitSwitches)
+    {
+      if (Robot.oi.cargoLimitSwitch.get() && Robot.oi.panelLimitSwitch.get())
+      {
+        Robot.elevator.gamePieceType = GamePieceType.BOTH;
+        SmartDashboard.putBoolean("Is Cargo Mode", false);
+        Robot.rioDuino.updateMode(Mode.RED);
+        System.out.println("RED");
+      }
+      else if (Robot.oi.cargoLimitSwitch.get())
+      {
+        Robot.elevator.gamePieceType = GamePieceType.CARGO;
+        Robot.manipulator.cargoIntakeSetPosition(false);
+        SmartDashboard.putBoolean("Is Cargo Mode", true);
+
+        Robot.rioDuino.updateMode(Mode.ORANGE);
+        System.out.println("ORANGE");
+
+      }
+      else if (Robot.oi.panelLimitSwitch.get())
+      {
+        Robot.elevator.gamePieceType = GamePieceType.HATCH;
+        SmartDashboard.putBoolean("Is Cargo Mode", false);
+
+        Robot.rioDuino.updateMode(Mode.YELLOW);
+        System.out.println("YELLOW");
+
+      }
+      else
+      {
+        Robot.elevator.gamePieceType = GamePieceType.NONE;
+        SmartDashboard.putBoolean("Is Cargo Mode", false);
+        Robot.rioDuino.updateMode(Mode.GREEN);
+        System.out.println("Green");
+      }
+    }
 
   }
 

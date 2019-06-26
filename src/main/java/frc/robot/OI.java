@@ -36,23 +36,10 @@ public class OI
     
 
 
-    driver.buttonX.whenPressed(new AutoTurretCommand());
+    driver.buttonX.toggleWhenActive(new AutoTurretCommand());
 
 driver.buttonB.whenPressed(new ClimbMan());
-driver.buttonBL.whenPressed(new AutoDriveCommand());
-driver.buttonBL.whenReleased(new DriveCommand());
-//new hatch panel
 
-driver.buttonPadUp.whenPressed(new HatchExtendActuateCommand(false));
-driver.buttonPadDown.whenPressed(new HatchExtendActuateCommand(true));
-
-     operator.buttonBL.whenPressed(new PanelPlacementCommand(false));
-     operator.buttonBL.whenReleased(new PanelPlacementCommand(true));
-        // operator.buttonBL.whenPressed(new HatchSolenoidsCommand(false));
-      //   operator.buttonBL.whenReleased(new HatchSolenoidsCommand(true));
-
-        operator.buttonRY.whenPressed(new ExtensionActuateCommand(false));
-        operator.buttonRY.whenReleased(new ExtensionActuateCommand(true));
 
     // driver.buttonTR.whenPressed(new ClimbCommand(.5));
     //  driver.buttonTR.whenReleased(new ClimbCommand(0));
@@ -75,7 +62,8 @@ driver.buttonPadDown.whenPressed(new HatchExtendActuateCommand(true));
     operator.buttonSELECT.whenPressed(new ManualLimitSwitchCommand());
 
 
-   
+    operator.buttonBL.whenPressed(new PanelPlacementCommand(false));
+    operator.buttonBL.whenReleased(new PanelPlacementCommand(true));
     
     operator.buttonX.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Home,false));
     operator.buttonA.whenPressed(new ElevatorPositionCommand(ElevatorHeight.Low,false));
@@ -108,9 +96,9 @@ driver.buttonPadDown.whenPressed(new HatchExtendActuateCommand(true));
     /* Limit Switches */
     //  cargoLimitSwitch.whenPressed(new LimitSwitchCommand());
     //  cargoLimitSwitch.whenReleased(new LimitSwitchCommand());
+    cargoLimitSwitch.whenReleased(new CargoArmActuateCommand(false));
 
-      panelLimitSwitch.whenReleased(new HatchSolenoidsCommand(true));
-      panelLimitSwitch.whenPressed(new LimitSwitchCommand());
-      //panelLimitSwitch.whenReleased(new LimitSwitchCommand());
+    //  panelLimitSwitch.whenPressed(new LimitSwitchCommand());
+    //  panelLimitSwitch.whenReleased(new LimitSwitchCommand());
   }
 }
