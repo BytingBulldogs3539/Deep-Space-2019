@@ -48,7 +48,7 @@ public class DriveCommand extends Command {
         Robot.drivetrain.driveArcade(speed * .45, turn *.20);
       }
       else{
-        Robot.drivetrain.driveArcade(speed *.3, turn * .3);
+        Robot.drivetrain.driveArcade(speed *.45, turn * .3);
         Robot.drivetrain.turboCurrent(30, 20);
       }
     
