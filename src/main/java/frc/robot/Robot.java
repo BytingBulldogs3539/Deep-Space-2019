@@ -93,7 +93,7 @@ public class Robot extends TimedRobot
     // TODO: test to make sure that both the front and the back camera are always
     // the front and back camera.
     fCamera = new ByteCamera("Front", 0);
-    bCamera = new ByteCamera("Back", 1);
+   // bCamera = new ByteCamera("Back", 1);
 
     gamePieceChooser.addOption("Hatch", GamePieceType.HATCH);
     gamePieceChooser.addOption("Cargo", GamePieceType.CARGO);
@@ -156,16 +156,16 @@ public class Robot extends TimedRobot
   {
     Scheduler.getInstance().run();
 
-    if (autonomousCommand != chooser.getSelected() && chooser.getSelected() != null)
-    {
-      autonomousCommand = chooser.getSelected();
-      for (String fileName : autonomousCommand.motionProfileList)
-      {
-        System.out.println("Load File");
-        Robot.MotionBuffers.put(fileName, MotionProfiling.initBuffer(fileName));
+    // if (autonomousCommand != chooser.getSelected() && chooser.getSelected() != null)
+    // {
+    //   autonomousCommand = chooser.getSelected();
+    //   for (String fileName : autonomousCommand.motionProfileList)
+    //   {
+    //     System.out.println("Load File");
+    //     Robot.MotionBuffers.put(fileName, MotionProfiling.initBuffer(fileName));
 
-      }
-    }
+    //   }
+    // }
   }
 
   /**

@@ -186,7 +186,7 @@ public final class Drive
 			{
 				talon2.set(ControlMode.Velocity, left * RobotMap.maxSpeed);
 			}
-			System.out.println("left "+left+ " right "+right);
+			//System.out.println("left "+left+ " right "+right);
 
 		}
 

@@ -49,12 +49,12 @@ public class Turret extends Subsystem
     // Constants.kPIDLoopIdx
     // timeoutMs
     master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.timeoutMs);
-    master.configRemoteFeedbackFilter(RobotMap.MRTalon, RemoteSensorSource.GadgeteerPigeon_Yaw, 0);
-    master.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor0);
+    //master.configRemoteFeedbackFilter(RobotMap.MRTalon, RemoteSensorSource.GadgeteerPigeon_Yaw, 0);
+    //master.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor0);
 
     /* Sets phase of sensor so forward/reverse on sensor is synced with
      * forward/reverse on talon */
-    master.setSensorPhase(false);
+    master.setSensorPhase(true);
     master.setInverted(true);
 
     /* Make our motor not want to turn. */
