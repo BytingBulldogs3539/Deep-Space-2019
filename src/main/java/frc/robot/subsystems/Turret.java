@@ -49,8 +49,14 @@ public class Turret extends Subsystem
     // Constants.kPIDLoopIdx
     // timeoutMs
     master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.timeoutMs);
+<<<<<<< HEAD
     //master.configRemoteFeedbackFilter(RobotMap.MRTalon, RemoteSensorSource.GadgeteerPigeon_Yaw, 0);
     //master.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor0);
+=======
+    // master.configRemoteFeedbackFilter(RobotMap.MRTalon,
+    // RemoteSensorSource.GadgeteerPigeon_Yaw, 0);
+    // master.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor0);
+>>>>>>> fe5d7fc6b71c317e0483b136266d34d5ed5e2e64
 
     /* Sets phase of sensor so forward/reverse on sensor is synced with
      * forward/reverse on talon */
@@ -78,7 +84,7 @@ public class Turret extends Subsystem
     master.configMotionAcceleration(1200, RobotMap.timeoutMs);
 
     // TODO: config the scurve strength
-    master.configMotionSCurveStrength(0);//was 2 
+    master.configMotionSCurveStrength(0);// was 2
 
     // PlotThread test = new PlotThread(master);
     /* Zero the sensor */
@@ -92,10 +98,12 @@ public class Turret extends Subsystem
    * 
    * 
    */
-  public void zero(){
+  public void zero()
+  {
     master.setSelectedSensorPosition(0, 0, RobotMap.timeoutMs);
 
   }
+
   public void setPosition(double degrees)
   {
     double currentPosition = getAngle();
