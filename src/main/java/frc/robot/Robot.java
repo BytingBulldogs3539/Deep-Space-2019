@@ -194,23 +194,24 @@ public class Robot extends TimedRobot
 
     // TODO: Think about changing this to not recreate the object on init and add a
     // button to refresh the command instead.
-    try
-    {
-      autonomousCommand = autonomousCommand.getClass().newInstance();
-    }
-    catch (InstantiationException e)
-    {
-      e.printStackTrace();
-    }
-    catch (IllegalAccessException e)
-    {
-      e.printStackTrace();
-    }
+    // try
+    // {
+    //   autonomousCommand = autonomousCommand.getClass().newInstance();
+    // }
+    // catch (InstantiationException e)
+    // {
+    //   e.printStackTrace();
+    // }
+    // catch (IllegalAccessException e)
+    // {
+    //   e.printStackTrace();
+    // }
 
-    if (autonomousCommand != null)
-    {
-      autonomousCommand.start();
-    }
+    
+    // if (autonomousCommand != null)
+    // {
+    //   autonomousCommand.start();
+    // }
   }
 
   /**
